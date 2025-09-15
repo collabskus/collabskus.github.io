@@ -1,11 +1,11 @@
 ﻿@inherits LayoutComponentBase
-
+@inject PortfolioSettings Settings
 <div class="portfolio-layout">
     <header class="portfolio-header">
         <nav class="navbar">
             <div class="nav-container">
                 <a href="" class="nav-brand">
-                    <span class="brand-text">Your Name</span>
+                    <span class="brand-text">@Settings.FullName</span>
                 </a>
 
                 <button class="nav-toggle" @onclick="ToggleNavMenu" aria-label="Toggle navigation">
@@ -54,7 +54,7 @@
     <footer class="portfolio-footer">
         <div class="footer-container">
             <div class="footer-content">
-                <p>&copy; 2025 Your Name. All rights reserved.</p>
+                <p>&copy; 2025 @Settings.FullName. All rights reserved.</p>
                 <div class="social-links">
                     <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
