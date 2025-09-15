@@ -1,0 +1,207 @@
+﻿@page "/projects"
+
+<PageTitle>Projects - Your Name</PageTitle>
+
+<section class="section">
+    <div class="container">
+        <h1 style="text-align: center; margin-bottom: 1rem;">My Projects</h1>
+        <p style="text-align: center; font-size: 1.125rem; color: #4a5568; max-width: 600px; margin: 0 auto 3rem;">
+            A collection of projects showcasing my expertise in software development,
+            system administration, and infrastructure management.
+        </p>
+
+        <div class="grid grid-2">
+            @foreach (var project in projects)
+            {
+                <div class="card" style="display: flex; flex-direction: column;">
+                    <div style="flex: 1;">
+                        <h3 class="card-title">@project.Title</h3>
+                        <p class="card-description">@project.Description</p>
+
+                        <div style="margin: 1.5rem 0;">
+                            <h4 style="font-size: 0.875rem; text-transform: uppercase; color: #718096; margin-bottom: 0.5rem;">
+                                Key Features
+                            </h4>
+                            <ul style="list-style: none; padding: 0;">
+                                @foreach (var feature in project.Features)
+                                {
+                                    <li style="padding: 0.25rem 0; color: #4a5568;">
+                                        ✓ @feature
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="skills-container">
+                            @foreach (var tech in project.Technologies)
+                            {
+                                <span class="skill-tag">@tech</span>
+                            }
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(project.GithubUrl) || !string.IsNullOrEmpty(project.LiveUrl))
+                        {
+                            <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                                @if (!string.IsNullOrEmpty(project.GithubUrl))
+                                {
+                                    <a href="@project.GithubUrl" target="_blank" class="btn btn-secondary"
+                                       style="font-size: 0.875rem; padding: 0.5rem 1rem;">
+                                        View Code
+                                    </a>
+                                }
+                                @if (!string.IsNullOrEmpty(project.LiveUrl))
+                                {
+                                    <a href="@project.LiveUrl" target="_blank" class="btn btn-primary"
+                                       style="font-size: 0.875rem; padding: 0.5rem 1rem;">
+                                        Live Demo
+                                    </a>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section" style="background: #f7fafc;">
+    <div class="container">
+        <h2 style="text-align: center; margin-bottom: 3rem;">Open Source Contributions</h2>
+
+        <div class="grid grid-3">
+            <div class="card">
+                <h3 class="card-title">🔧 Tool Development</h3>
+                <p class="card-description">
+                    Created service-ping (sping) utility for monitoring service availability.
+                    Contributed to various open-source system administration tools and utilities.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">📚 Documentation</h3>
+                <p class="card-description">
+                    Regular contributions to technical documentation, including setup guides,
+                    API documentation, and troubleshooting resources for various projects.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">🐛 Bug Fixes</h3>
+                <p class="card-description">
+                    Active in identifying and fixing bugs in open-source projects,
+                    with focus on performance improvements and edge case handling.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    private class Project
+    {
+        public string Title { get; set; } = "";
+        public string Description { get; set; } = "";
+        public List<string> Features { get; set; } = new();
+        public List<string> Technologies { get; set; } = new();
+        public string? GithubUrl { get; set; }
+        public string? LiveUrl { get; set; }
+    }
+
+    private List<Project> projects = new()
+    {
+        new Project
+        {
+            Title = "Multi-Server Surveillance System",
+            Description = "Enterprise-grade distributed camera surveillance system deployed across multiple geographic locations with real-time monitoring and recording capabilities.",
+            Features = new()
+            {
+                "RTSP stream processing with FFmpeg",
+                "H.264/HEVC encoding optimization",
+                "Multi-server synchronization",
+                "Automated backup and archival",
+                "Real-time alerting system"
+            },
+            Technologies = new() { "FFmpeg", "Linux", "C#", "PowerShell", "Docker" },
+            GithubUrl = "https://github.com/yourusername/project"
+        },
+        new Project
+        {
+            Title = "High-Performance TSP Solver",
+            Description = "Advanced implementation of Traveling Salesman Problem solver using dynamic programming with bitmask optimization and branch-and-bound algorithms.",
+            Features = new()
+            {
+                "Bitmask dynamic programming",
+                "Branch-and-bound optimization",
+                "Multi-threaded processing",
+                "Memory-efficient design",
+                "Benchmarking suite"
+            },
+            Technologies = new() { "C#", ".NET", "Algorithms", "Parallel Processing" },
+            GithubUrl = "https://github.com/yourusername/tsp-solver"
+        },
+        new Project
+        {
+            Title = "Infrastructure Automation Suite",
+            Description = "Comprehensive PowerShell automation framework for system monitoring, maintenance, and deployment across heterogeneous environments.",
+            Features = new()
+            {
+                "Automated system monitoring",
+                "Service health checks",
+                "Log aggregation and analysis",
+                "Deployment automation",
+                "Performance metrics collection"
+            },
+            Technologies = new() { "PowerShell", "GitHub Actions", "CI/CD", "Monitoring" },
+            GithubUrl = "https://github.com/yourusername/automation-suite"
+        },
+        new Project
+        {
+            Title = "Blazor Portfolio Website",
+            Description = "Modern, responsive portfolio website built with Blazor WebAssembly, featuring dynamic content and optimized for performance.",
+            Features = new()
+            {
+                "Responsive design",
+                "Progressive Web App",
+                "GitHub Pages deployment",
+                "AOT compilation",
+                "Service worker caching"
+            },
+            Technologies = new() { "Blazor", "C#", ".NET", "WebAssembly", "CSS" },
+            GithubUrl = "https://github.com/yourusername/portfolio",
+            LiveUrl = "https://yourusername.github.io"
+        },
+        new Project
+        {
+            Title = "Container Orchestration Platform",
+            Description = "Custom container orchestration solution using Podman for managing microservices across multiple hosts with automatic scaling.",
+            Features = new()
+            {
+                "Container lifecycle management",
+                "Auto-scaling capabilities",
+                "Health monitoring",
+                "Network mesh configuration",
+                "Resource optimization"
+            },
+            Technologies = new() { "Podman", "Linux", "Rust", "Networking" },
+            GithubUrl = "https://github.com/yourusername/orchestration"
+        },
+        new Project
+        {
+            Title = "Network Monitoring Dashboard",
+            Description = "Real-time network monitoring dashboard with visual analytics for tracking performance metrics and identifying bottlenecks.",
+            Features = new()
+            {
+                "Real-time metrics visualization",
+                "Anomaly detection",
+                "Historical data analysis",
+                "Alert management",
+                "Custom reporting"
+            },
+            Technologies = new() { "JavaScript", "TypeScript", "D3.js", "WebSockets" },
+            GithubUrl = "https://github.com/yourusername/network-monitor"
+        }
+    };
+}
