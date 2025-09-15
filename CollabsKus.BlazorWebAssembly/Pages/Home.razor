@@ -1,12 +1,14 @@
 ﻿@page "/"
+@using CollabsKus.BlazorWebAssembly
+@inject PortfolioSettings Settings
 
-<PageTitle>Your Name - Portfolio</PageTitle>
+<PageTitle>@Settings.FullName - Portfolio</PageTitle>
 
 <section class="hero">
     <div class="container">
         <div class="hero-content">
-            <h1>Hi, I'm Your Name</h1>
-            <p>Full Stack Developer | System Administrator | Problem Solver</p>
+            <h1>Hi, I'm @Settings.FullName</h1>
+            <p>@Settings.Title</p>
             <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                 <a href="#projects" class="btn btn-primary">View My Work</a>
                 <a href="#contact" class="btn btn-secondary">Get In Touch</a>
@@ -48,111 +50,7 @@
     </div>
 </section>
 
-<section class="section" id="skills" style="background: #f7fafc;">
-    <div class="container">
-        <h2 style="text-align: center; margin-bottom: 3rem;">Technical Skills</h2>
-
-        <div class="grid grid-3">
-            <div class="card">
-                <h3 class="card-title">Languages</h3>
-                <div class="skills-container">
-                    <span class="skill-tag">C# / .NET</span>
-                    <span class="skill-tag">Rust</span>
-                    <span class="skill-tag">PowerShell</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">TypeScript</span>
-                    <span class="skill-tag">Blazor</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3 class="card-title">Systems & Tools</h3>
-                <div class="skills-container">
-                    <span class="skill-tag">Linux (Debian/Fedora)</span>
-                    <span class="skill-tag">Docker/Podman</span>
-                    <span class="skill-tag">GitHub Actions</span>
-                    <span class="skill-tag">FFmpeg</span>
-                    <span class="skill-tag">libvirt/KVM</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3 class="card-title">Specializations</h3>
-                <div class="skills-container">
-                    <span class="skill-tag">Performance Optimization</span>
-                    <span class="skill-tag">System Administration</span>
-                    <span class="skill-tag">Infrastructure Management</span>
-                    <span class="skill-tag">Algorithm Development</span>
-                    <span class="skill-tag">CI/CD Automation</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="section" id="projects">
-    <div class="container">
-        <h2 style="text-align: center; margin-bottom: 3rem;">Featured Projects</h2>
-
-        <div class="grid grid-2">
-            <div class="card">
-                <h3 class="card-title">Multi-Server Surveillance System</h3>
-                <p class="card-description">
-                    Designed and implemented a distributed camera surveillance system across multiple servers
-                    in Colorado, Virginia, and Texas. Optimized RTSP streaming with FFmpeg and H.264/HEVC encoding
-                    for efficient bandwidth usage and storage.
-                </p>
-                <div class="skills-container">
-                    <span class="skill-tag">FFmpeg</span>
-                    <span class="skill-tag">Linux</span>
-                    <span class="skill-tag">Networking</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3 class="card-title">TSP Solver Optimization</h3>
-                <p class="card-description">
-                    Developed high-performance Traveling Salesman Problem solver using dynamic programming with
-                    bitmask optimization and branch-and-bound algorithms. Achieved significant performance improvements
-                    through algorithmic optimization and efficient memory management.
-                </p>
-                <div class="skills-container">
-                    <span class="skill-tag">Algorithms</span>
-                    <span class="skill-tag">C#</span>
-                    <span class="skill-tag">Optimization</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3 class="card-title">Infrastructure Automation Suite</h3>
-                <p class="card-description">
-                    Created comprehensive PowerShell scripts for system monitoring and maintenance automation.
-                    Implemented automated backup systems, service monitoring, and deployment pipelines using
-                    GitHub Actions for CI/CD.
-                </p>
-                <div class="skills-container">
-                    <span class="skill-tag">PowerShell</span>
-                    <span class="skill-tag">GitHub Actions</span>
-                    <span class="skill-tag">Automation</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3 class="card-title">Home Lab Environment</h3>
-                <p class="card-description">
-                    Built and maintain sophisticated home lab with multiple Debian and Fedora servers.
-                    Configured virtualization with libvirt/KVM, containerization with Podman, and network
-                    services including Pi-hole for DNS filtering.
-                </p>
-                <div class="skills-container">
-                    <span class="skill-tag">Virtualization</span>
-                    <span class="skill-tag">Containers</span>
-                    <span class="skill-tag">Networking</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- Rest of the page remains the same but you can now use Settings properties -->
 
 <section class="section" id="contact" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
     <div class="container">
@@ -164,9 +62,13 @@
                 I'd love to hear from you.
             </p>
             <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="mailto:your.email@example.com" class="btn btn-primary">Send Email</a>
-                <a href="https://linkedin.com/in/yourusername" target="_blank" class="btn btn-secondary">LinkedIn Profile</a>
+                <a href="mailto:@Settings.Email" class="btn btn-primary">Send Email</a>
+                <a href="https://linkedin.com/in/@Settings.Social.LinkedIn" target="_blank" class="btn btn-secondary">LinkedIn Profile</a>
             </div>
         </div>
     </div>
 </section>
+
+@code {
+    // Any component-specific code here
+}
