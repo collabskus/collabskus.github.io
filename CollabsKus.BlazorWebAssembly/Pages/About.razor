@@ -1,6 +1,6 @@
 ﻿@page "/about"
-
-<PageTitle>About - Your Name</PageTitle>
+@inject PortfolioSettings Settings
+<PageTitle>About - @Settings.FullName</PageTitle>
 
 <section class="section">
     <div class="container">
