@@ -2,13 +2,13 @@
 @using CollabsKus.BlazorWebAssembly
 @inject PortfolioSettings Settings
 
-<PageTitle>@Settings.FullName - Portfolio</PageTitle>
+<PageTitle>@PortfolioConfig.FullName - Portfolio</PageTitle>
 
 <section class="hero">
     <div class="container">
         <div class="hero-content">
-            <h1>Hi, I'm @Settings.FullName</h1>
-            <p>@Settings.Title</p>
+            <h1>Hi, I'm @PortfolioConfig.FullName</h1>
+            <p>@PortfolioConfig.Title</p>
             <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                 <a href="#projects" class="btn btn-primary">View My Work</a>
                 <a href="#contact" class="btn btn-secondary">Get In Touch</a>
