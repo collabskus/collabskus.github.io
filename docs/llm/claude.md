@@ -348,3 +348,15 @@ The .NET 10 build system will automatically inject everything needed during `dot
 **Your workflow is fine** - the problem is 100% in the index.html file!
 
 
+Can you please not give me false hope? 
+This still does not work. 
+I have updated the project files again. 
+I have also added a actions.txt with the logs from github actions. 
+Ask me if you need more information. 
+Do NOT send me on a wild goose chase. 
+If you don't know how to solve this, say YOU DON"T KNOW. 
+Don't tell me something will fix the problem if you don't know it will fix the problem. 
+What is wrong with you? 
+Read every single file in the project files line by line and word by word. 
+Understand them. 
+They are there for a purpose. 
