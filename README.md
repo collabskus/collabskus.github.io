@@ -162,3 +162,88 @@ Navigate to `https://localhost:7212` or the port shown in console.
 - [Blazor Documentation](https://learn.microsoft.com/en-us/aspnet/core/blazor/)
 - [Scoped CSS](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation)
 - [Dependency Injection](https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/dependency-injection)
+
+# Blazor WebAssembly GitHub Pages Deployment Fix
+
+## The Problem
+
+You're getting a 404 error for `_framework/blazor.webassembly.js` because the base path in your `index.html` doesn't match your GitHub Pages deployment structure.
+
+## The Solution
+
+I've updated your GitHub Actions workflow to automatically detect whether you're deploying to:
+- **User/Organization site** (`https://username.github.io`) → uses base path `/`
+- **Project site** (`https://username.github.io/repo-name`) → uses base path `/repo-name/`
+
+## Files to Update
+
+### 1. `.github/workflows/deploy.yml`
+Replace your current workflow with the new one that includes base path detection.
+
+### 2. `CollabsKus.BlazorWebAssembly/wwwroot/index.html`
+No changes needed - the workflow will update it automatically during build.
+
+## What Changed in the Workflow
+
+**New step added:**
+```yaml
+- name: Determine base path for GitHub Pages
+  id: basepath
+  run: |
+    # Automatically detects if user/org site or project site
+    # Sets the correct base path accordingly
+```
+
+**Updated step:**
+```yaml
+- name: Update base tag in index.html
+  run: |
+    BASE_PATH="${{ steps.basepath.outputs.base_path }}"
+    sed -i "s|<base href=\"/\" />|<base href=\"$BASE_PATH\" />|g" publish/wwwroot/index.html
+```
+
+## How to Deploy
+
+1. Copy the new `deploy.yml` to `.github/workflows/deploy.yml` in your repository
+2. Commit and push to your `main` or `master` branch
+3. GitHub Actions will automatically:
+   - Detect your repository type
+   - Set the correct base path
+   - Build and deploy your Blazor app
+
+## Verify the Fix
+
+After deployment, check your GitHub Actions logs. You should see:
+```
+This is a [user/organization/project] site, using base path: [/repo-name/ or /]
+Setting base href to: [path]
+```
+
+Then visit your site - all the `_framework` files should load correctly!
+
+## Repository Name Detection
+
+The workflow checks:
+- If repo name = `{username}.github.io` → User site (base path: `/`)
+- Otherwise → Project site (base path: `/repo-name/`)
+
+## Still Having Issues?
+
+If you're still seeing 404 errors after deploying:
+
+1. **Check the workflow logs** to see what base path was set
+2. **Verify in GitHub Pages settings** that source is set to "GitHub Actions"
+3. **Check the deployed `index.html`** - the base tag should match your URL structure
+4. **Clear your browser cache** - old cached versions might be interfering
+
+## Manual Override (if needed)
+
+If you need to manually set the base path, modify the workflow's "Determine base path" step:
+
+```yaml
+- name: Determine base path for GitHub Pages
+  id: basepath
+  run: |
+    # Force specific base path
+    echo "base_path=/my-custom-path/" >> $GITHUB_OUTPUT
+```
