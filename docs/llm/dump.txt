@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 02/08/2026 11:38:07
+Generated: 02/08/2026 11:43:41
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -653,8 +653,8 @@ MODIFIED: 02/08/2026 15:46:02
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\CollabsKus.BlazorWebAssembly.csproj
-SIZE: 0.87 KB
-MODIFIED: 02/08/2026 11:38:04
+SIZE: 0.78 KB
+MODIFIED: 02/08/2026 11:43:37
 ================================================================================
 
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
@@ -675,10 +675,6 @@ MODIFIED: 02/08/2026 11:38:04
   <ItemGroup>
     <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
   </ItemGroup>
-
-  <PropertyGroup>
-    <FingerprintAssets>false</FingerprintAssets>
-  </PropertyGroup>
 
 </Project>
 
@@ -1969,7 +1965,7 @@ async function onFetch(event) {
 
 
 ===============================================================================
-EXPORT COMPLETED: 02/08/2026 11:38:08
+EXPORT COMPLETED: 02/08/2026 11:43:41
 Total Files Exported: 32
 Output File: .\docs\llm\dump.txt
 ===============================================================================
