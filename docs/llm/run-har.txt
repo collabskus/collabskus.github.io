@@ -1,0 +1,1195 @@
+{
+  "log": {
+    "version": "1.2",
+    "creator": {
+      "name": "Firefox",
+      "version": "148.0"
+    },
+    "browser": {
+      "name": "Firefox",
+      "version": "148.0"
+    },
+    "pages": [
+      {
+        "id": "page_1",
+        "pageTimings": {
+          "onContentLoad": 85,
+          "onLoad": 87
+        },
+        "startedDateTime": "2026-02-08T15:08:09.865-05:00",
+        "title": "https://collabskus.github.io/"
+      }
+    ],
+    "entries": [
+      {
+        "startedDateTime": "2026-02-08T15:08:09.865-05:00",
+        "request": {
+          "bodySize": 0,
+          "method": "GET",
+          "url": "https://collabskus.github.io/",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Host",
+              "value": "collabskus.github.io"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0"
+            },
+            {
+              "name": "Accept",
+              "value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "Referer",
+              "value": "https://github.com/"
+            },
+            {
+              "name": "Upgrade-Insecure-Requests",
+              "value": "1"
+            },
+            {
+              "name": "Sec-Fetch-Dest",
+              "value": "document"
+            },
+            {
+              "name": "Sec-Fetch-Mode",
+              "value": "navigate"
+            },
+            {
+              "name": "Sec-Fetch-Site",
+              "value": "cross-site"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookies": [],
+          "queryString": [],
+          "headersSize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "server",
+              "value": "GitHub.com"
+            },
+            {
+              "name": "content-type",
+              "value": "text/html; charset=utf-8"
+            },
+            {
+              "name": "x-origin-cache",
+              "value": "HIT"
+            },
+            {
+              "name": "last-modified",
+              "value": "Sun, 08 Feb 2026 19:56:35 GMT"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=31556952"
+            },
+            {
+              "name": "etag",
+              "value": "W/\"6988ea73-a64\""
+            },
+            {
+              "name": "expires",
+              "value": "Sun, 08 Feb 2026 20:16:21 GMT"
+            },
+            {
+              "name": "cache-control",
+              "value": "max-age=600"
+            },
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "x-proxy-cache",
+              "value": "MISS"
+            },
+            {
+              "name": "x-github-request-id",
+              "value": "A9EE:2D75A4:24AA2E3:2879313:6988ECBD"
+            },
+            {
+              "name": "accept-ranges",
+              "value": "bytes"
+            },
+            {
+              "name": "age",
+              "value": "0"
+            },
+            {
+              "name": "date",
+              "value": "Sun, 08 Feb 2026 20:06:21 GMT"
+            },
+            {
+              "name": "via",
+              "value": "1.1 varnish"
+            },
+            {
+              "name": "x-served-by",
+              "value": "cache-iad-kiad7000089-IAD"
+            },
+            {
+              "name": "x-cache",
+              "value": "MISS"
+            },
+            {
+              "name": "x-cache-hits",
+              "value": "0"
+            },
+            {
+              "name": "x-timer",
+              "value": "S1770581181.405867,VS0,VE77"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "name": "x-fastly-request-id",
+              "value": "f7a8f2aa95672a016c898e59514657659ea59e1f"
+            },
+            {
+              "name": "content-length",
+              "value": "1042"
+            },
+            {
+              "name": "X-Firefox-Spdy",
+              "value": "h2"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "mimeType": "text/html; charset=utf-8",
+            "size": 2660,
+            "text": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <title>Kathmandu Calendar & Time</title>\n    <base href=\"/\" />\n    <link href=\"_framework/dotnet.8o4x4gvazt.js\" rel=\"preload\" as=\"script\" fetchpriority=\"high\" crossorigin=\"anonymous\" integrity=\"sha256-GDYf1Drqk0rLm8gPoS9kGwwm4aVJOLPZ7zIsGe/66j0=\" />\n    <link rel=\"stylesheet\" href=\"css/app.css\" />\n    <link rel=\"icon\" type=\"image/png\" href=\"favicon.png\" />\n    <link href=\"CollabsKus.BlazorWebAssembly.styles.css\" rel=\"stylesheet\" />\n    <link href=\"manifest.webmanifest\" rel=\"manifest\" />\n    <link rel=\"apple-touch-icon\" sizes=\"512x512\" href=\"icon-512.png\" />\n    <link rel=\"apple-touch-icon\" sizes=\"192x192\" href=\"icon-192.png\" />\n    <script type=\"importmap\">{\n  \"imports\": {\n    \"./_framework/blazor.webassembly.js\": \"./_framework/blazor.webassembly.66stpp682q.js\",\n    \"./_framework/dotnet.js\": \"./_framework/dotnet.8o4x4gvazt.js\",\n    \"./_framework/dotnet.native.js\": \"./_framework/dotnet.native.pfhp029mhg.js\",\n    \"./_framework/dotnet.runtime.js\": \"./_framework/dotnet.runtime.2tx45g8lli.js\"\n  },\n  \"scopes\": {},\n  \"integrity\": {\n    \"./_framework/blazor.webassembly.66stpp682q.js\": \"sha256-3lCWrko3zwspV40aQhs2S/IMkRSarnHRKIdkHhuXIBA=\",\n    \"./_framework/blazor.webassembly.js\": \"sha256-3lCWrko3zwspV40aQhs2S/IMkRSarnHRKIdkHhuXIBA=\",\n    \"./_framework/dotnet.8o4x4gvazt.js\": \"sha256-GDYf1Drqk0rLm8gPoS9kGwwm4aVJOLPZ7zIsGe/66j0=\",\n    \"./_framework/dotnet.js\": \"sha256-GDYf1Drqk0rLm8gPoS9kGwwm4aVJOLPZ7zIsGe/66j0=\",\n    \"./_framework/dotnet.native.js\": \"sha256-hXypU9abvf5FBbVNBG9txpDEDEGgvb97fGlmmVEJoVY=\",\n    \"./_framework/dotnet.native.pfhp029mhg.js\": \"sha256-hXypU9abvf5FBbVNBG9txpDEDEGgvb97fGlmmVEJoVY=\",\n    \"./_framework/dotnet.runtime.2tx45g8lli.js\": \"sha256-2lZh9yO0fnzm3Xt7yV+Kox3DH3nK7L8hDhm84VT1xco=\",\n    \"./_framework/dotnet.runtime.js\": \"sha256-2lZh9yO0fnzm3Xt7yV+Kox3DH3nK7L8hDhm84VT1xco=\"\n  }\n}</script>\n    <!-- DEBUG MARKER -->\n    <meta name=\"build\" content=\"GH_PAGES_DEBUG_V1\" />\n</head>\n\n<body>\n    <div id=\"app\">\n        <svg class=\"loading-progress\">\n            <circle r=\"40%\" cx=\"50%\" cy=\"50%\" />\n            <circle r=\"40%\" cx=\"50%\" cy=\"50%\" />\n        </svg>\n        <div class=\"loading-progress-text\"></div>\n    </div>\n\n    <div id=\"blazor-error-ui\">\n        An unhandled error has occurred.\n        <a href=\".\" class=\"reload\">Reload</a>\n        <a class=\"dismiss\">🗙</a>\n    </div>\n    <script src=\"_framework/blazor.webassembly.js\"></script>\n    <script>navigator.serviceWorker.register('service-worker.js', { updateViaCache: 'none' });</script>\n</body>\n\n</html>\n"
+          },
+          "redirectURL": "",
+          "headersSize": 0,
+          "bodySize": 2660
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 0,
+          "dns": 0,
+          "connect": 0,
+          "ssl": 0,
+          "send": 0,
+          "wait": 0,
+          "receive": 0
+        },
+        "time": 0,
+        "_securityState": "secure",
+        "pageref": "page_1"
+      },
+      {
+        "startedDateTime": "2026-02-08T15:08:09.874-05:00",
+        "request": {
+          "bodySize": 0,
+          "method": "GET",
+          "url": "https://collabskus.github.io/css/app.css",
+          "httpVersion": "HTTP/2",
+          "headers": [
+            {
+              "name": "Host",
+              "value": "collabskus.github.io"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0"
+            },
+            {
+              "name": "Accept",
+              "value": "text/css,*/*;q=0.1"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, br, zstd"
+            }
+          ],
+          "cookies": [],
+          "queryString": [],
+          "headersSize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/2",
+          "headers": [
+            {
+              "name": "server",
+              "value": "GitHub.com"
+            },
+            {
+              "name": "content-type",
+              "value": "text/css; charset=utf-8"
+            },
+            {
+              "name": "last-modified",
+              "value": "Sun, 08 Feb 2026 19:56:35 GMT"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=31556952"
+            },
+            {
+              "name": "etag",
+              "value": "W/\"6988ea73-670\""
+            },
+            {
+              "name": "expires",
+              "value": "Sun, 08 Feb 2026 20:16:15 GMT"
+            },
+            {
+              "name": "cache-control",
+              "value": "max-age=600"
+            },
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "x-proxy-cache",
+              "value": "MISS"
+            },
+            {
+              "name": "x-github-request-id",
+              "value": "5A86:183D31:2872E39:2D8A34A:6988ECB7"
+            },
+            {
+              "name": "accept-ranges",
+              "value": "bytes"
+            },
+            {
+              "name": "age",
+              "value": "0"
+            },
+            {
+              "name": "date",
+              "value": "Sun, 08 Feb 2026 20:08:02 GMT"
+            },
+            {
+              "name": "via",
+              "value": "1.1 varnish"
+            },
+            {
+              "name": "x-served-by",
+              "value": "cache-iad-kiad7000080-IAD"
+            },
+            {
+              "name": "x-cache",
+              "value": "HIT"
+            },
+            {
+              "name": "x-cache-hits",
+              "value": "0"
+            },
+            {
+              "name": "x-timer",
+              "value": "S1770581283.572796,VS0,VE17"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "name": "x-fastly-request-id",
+              "value": "bb1bc23692dcec5306c1d463ebd31dba7d1c2130"
+            },
+            {
+              "name": "content-length",
+              "value": "752"
+            },
+            {
+              "name": "X-Firefox-Spdy",
+              "value": "h2"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "mimeType": "text/css",
+            "size": 752,
+            "text": ""
+          },
+          "redirectURL": "",
+          "headersSize": 0,
+          "bodySize": 0
+        },
+        "cache": {},
+        "timings": {},
+        "time": 0,
+        "pageref": "page_1"
+      },
+      {
+        "startedDateTime": "2026-02-08T15:08:09.875-05:00",
+        "request": {
+          "bodySize": 0,
+          "method": "GET",
+          "url": "https://collabskus.github.io/CollabsKus.BlazorWebAssembly.styles.css",
+          "httpVersion": "HTTP/2",
+          "headers": [
+            {
+              "name": "Host",
+              "value": "collabskus.github.io"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0"
+            },
+            {
+              "name": "Accept",
+              "value": "text/css,*/*;q=0.1"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, br, zstd"
+            }
+          ],
+          "cookies": [],
+          "queryString": [],
+          "headersSize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/2",
+          "headers": [
+            {
+              "name": "server",
+              "value": "GitHub.com"
+            },
+            {
+              "name": "content-type",
+              "value": "text/css; charset=utf-8"
+            },
+            {
+              "name": "last-modified",
+              "value": "Sun, 08 Feb 2026 19:56:35 GMT"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=31556952"
+            },
+            {
+              "name": "etag",
+              "value": "W/\"6988ea73-1473\""
+            },
+            {
+              "name": "expires",
+              "value": "Sun, 08 Feb 2026 20:16:15 GMT"
+            },
+            {
+              "name": "cache-control",
+              "value": "max-age=600"
+            },
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "x-proxy-cache",
+              "value": "MISS"
+            },
+            {
+              "name": "x-github-request-id",
+              "value": "8F56:1E0431:710513:7E5A94:6988ECB6"
+            },
+            {
+              "name": "accept-ranges",
+              "value": "bytes"
+            },
+            {
+              "name": "age",
+              "value": "0"
+            },
+            {
+              "name": "date",
+              "value": "Sun, 08 Feb 2026 20:08:02 GMT"
+            },
+            {
+              "name": "via",
+              "value": "1.1 varnish"
+            },
+            {
+              "name": "x-served-by",
+              "value": "cache-iad-kiad7000080-IAD"
+            },
+            {
+              "name": "x-cache",
+              "value": "HIT"
+            },
+            {
+              "name": "x-cache-hits",
+              "value": "0"
+            },
+            {
+              "name": "x-timer",
+              "value": "S1770581283.573006,VS0,VE17"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "name": "x-fastly-request-id",
+              "value": "c40e33064b60be1a37e44f1efa23b2eb58c5e1e3"
+            },
+            {
+              "name": "content-length",
+              "value": "1212"
+            },
+            {
+              "name": "X-Firefox-Spdy",
+              "value": "h2"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "mimeType": "text/css",
+            "size": 1212,
+            "text": ""
+          },
+          "redirectURL": "",
+          "headersSize": 0,
+          "bodySize": 0
+        },
+        "cache": {},
+        "timings": {},
+        "time": 0,
+        "pageref": "page_1"
+      },
+      {
+        "startedDateTime": "2026-02-08T15:08:09.903-05:00",
+        "request": {
+          "bodySize": 0,
+          "method": "GET",
+          "url": "https://collabskus.github.io/_framework/dotnet.8o4x4gvazt.js",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Host",
+              "value": "collabskus.github.io"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0"
+            },
+            {
+              "name": "Accept",
+              "value": "*/*"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "Referer",
+              "value": "https://collabskus.github.io/"
+            },
+            {
+              "name": "Sec-Fetch-Dest",
+              "value": "script"
+            },
+            {
+              "name": "Sec-Fetch-Mode",
+              "value": "cors"
+            },
+            {
+              "name": "Sec-Fetch-Site",
+              "value": "same-origin"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookies": [],
+          "queryString": [],
+          "headersSize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "server",
+              "value": "GitHub.com"
+            },
+            {
+              "name": "content-type",
+              "value": "application/javascript; charset=utf-8"
+            },
+            {
+              "name": "last-modified",
+              "value": "Sun, 08 Feb 2026 19:56:35 GMT"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=31556952"
+            },
+            {
+              "name": "etag",
+              "value": "W/\"6988ea73-c466\""
+            },
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "x-proxy-cache",
+              "value": "MISS"
+            },
+            {
+              "name": "x-github-request-id",
+              "value": "921E:1B6C:1816DB:19E2C9:6988ECB7"
+            },
+            {
+              "name": "accept-ranges",
+              "value": "bytes"
+            },
+            {
+              "name": "content-length",
+              "value": "15226"
+            },
+            {
+              "name": "date",
+              "value": "Sun, 08 Feb 2026 20:06:21 GMT"
+            },
+            {
+              "name": "via",
+              "value": "1.1 varnish"
+            },
+            {
+              "name": "cache-control",
+              "value": "max-age=600"
+            },
+            {
+              "name": "expires",
+              "value": "Sun, 08 Feb 2026 20:16:15 GMT"
+            },
+            {
+              "name": "age",
+              "value": "6"
+            },
+            {
+              "name": "x-served-by",
+              "value": "cache-iad-kiad7000089-IAD"
+            },
+            {
+              "name": "x-cache",
+              "value": "HIT"
+            },
+            {
+              "name": "x-cache-hits",
+              "value": "1"
+            },
+            {
+              "name": "x-timer",
+              "value": "S1770581181.361730,VS0,VE25"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "name": "x-fastly-request-id",
+              "value": "253157fe8628159d29065d6a0d758ffe393d909c"
+            },
+            {
+              "name": "X-Firefox-Spdy",
+              "value": "h2"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "mimeType": "application/javascript; charset=utf-8",
+            "size": 50278,
+            "text": "//! Licensed to the .NET Foundation under one or more agreements.\n//! The .NET Foundation licenses this file to you under the MIT license.\n\nvar e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,4,1,96,0,0,3,2,1,0,10,8,1,6,0,6,64,25,11,11])),o=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,96,0,1,123,3,2,1,0,10,15,1,13,0,65,1,253,15,65,2,253,15,253,128,2,11])),n=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,96,0,1,123,3,2,1,0,10,10,1,8,0,65,0,253,15,253,98,11])),r=Symbol.for(\"wasm promise_control\");function i(e,t){let o=null;const n=new Promise((function(n,r){o={isDone:!1,promise:null,resolve:t=>{o.isDone||(o.isDone=!0,n(t),e&&e())},reject:e=>{o.isDone||(o.isDone=!0,r(e),t&&t())}}}));o.promise=n;const i=n;return i[r]=o,{promise:i,promise_control:o}}function s(e){return e[r]}function a(e){e&&function(e){return void 0!==e[r]}(e)||Be(!1,\"Promise is not controllable\")}const l=\"__mono_message__\",c=[\"debug\",\"log\",\"trace\",\"warn\",\"info\",\"error\"],d=\"MONO_WASM: \";let u,f,m,g,p,h;function w(e){g=e}function b(e){if(Pe.diagnosticTracing){const t=\"function\"==typeof e?e():e;console.debug(d+t)}}function y(e,...t){console.info(d+e,...t)}function v(e,...t){console.info(e,...t)}function E(e,...t){console.warn(d+e,...t)}function _(e,...t){if(t&&t.length>0&&t[0]&&\"object\"==typeof t[0]){if(t[0].silent)return;if(t[0].toString)return void console.error(d+e,t[0].toString())}console.error(d+e,...t)}function x(e,t,o){return function(...n){try{let r=n[0];if(void 0===r)r=\"undefined\";else if(null===r)r=\"null\";else if(\"function\"==typeof r)r=r.toString();else if(\"string\"!=typeof r)try{r=JSON.stringify(r)}catch(e){r=r.toString()}t(o?JSON.stringify({method:e,payload:r,arguments:n.slice(1)}):[e+r,...n.slice(1)])}catch(e){m.error(`proxyConsole failed: ${e}`)}}}function j(e,t,o){f=t,g=e,m={...t};const n=`${o}/console`.replace(\"https://\",\"wss://\").replace(\"http://\",\"ws://\");u=new WebSocket(n),u.addEventListener(\"error\",A),u.addEventListener(\"close\",S),function(){for(const e of c)f[e]=x(`console.${e}`,T,!0)}()}function R(e){let t=30;const o=()=>{u?0==u.bufferedAmount||0==t?(e&&v(e),function(){for(const e of c)f[e]=x(`console.${e}`,m.log,!1)}(),u.removeEventListener(\"error\",A),u.removeEventListener(\"close\",S),u.close(1e3,e),u=void 0):(t--,globalThis.setTimeout(o,100)):e&&m&&m.log(e)};o()}function T(e){u&&u.readyState===WebSocket.OPEN?u.send(e):m.log(e)}function A(e){m.error(`[${g}] proxy console websocket error: ${e}`,e)}function S(e){m.debug(`[${g}] proxy console websocket closed: ${e}`,e)}function D(){Pe.preferredIcuAsset=O(Pe.config);let e=\"invariant\"==Pe.config.globalizationMode;if(!e)if(Pe.preferredIcuAsset)Pe.diagnosticTracing&&b(\"ICU data archive(s) available, disabling invariant mode\");else{if(\"custom\"===Pe.config.globalizationMode||\"all\"===Pe.config.globalizationMode||\"sharded\"===Pe.config.globalizationMode){const e=\"invariant globalization mode is inactive and no ICU data archives are available\";throw _(`ERROR: ${e}`),new Error(e)}Pe.diagnosticTracing&&b(\"ICU data archive(s) not available, using invariant globalization mode\"),e=!0,Pe.preferredIcuAsset=null}const t=\"DOTNET_SYSTEM_GLOBALIZATION_INVARIANT\",o=Pe.config.environmentVariables;if(void 0===o[t]&&e&&(o[t]=\"1\"),void 0===o.TZ)try{const e=Intl.DateTimeFormat().resolvedOptions().timeZone||null;e&&(o.TZ=e)}catch(e){y(\"failed to detect timezone, will fallback to UTC\")}}function O(e){var t;if((null===(t=e.resources)||void 0===t?void 0:t.icu)&&\"invariant\"!=e.globalizationMode){const t=e.applicationCulture||(ke?globalThis.navigator&&globalThis.navigator.languages&&globalThis.navigator.languages[0]:Intl.DateTimeFormat().resolvedOptions().locale),o=e.resources.icu;let n=null;if(\"custom\"===e.globalizationMode){if(o.length>=1)return o[0].name}else t&&\"all\"!==e.globalizationMode?\"sharded\"===e.globalizationMode&&(n=function(e){const t=e.split(\"-\")[0];return\"en\"===t||[\"fr\",\"fr-FR\",\"it\",\"it-IT\",\"de\",\"de-DE\",\"es\",\"es-ES\"].includes(e)?\"icudt_EFIGS.dat\":[\"zh\",\"ko\",\"ja\"].includes(t)?\"icudt_CJK.dat\":\"icudt_no_CJK.dat\"}(t)):n=\"icudt.dat\";if(n)for(let e=0;e<o.length;e++){const t=o[e];if(t.virtualPath===n)return t.name}}return e.globalizationMode=\"invariant\",null}(new Date).valueOf();const C=class{constructor(e){this.url=e}toString(){return this.url}};async function k(e,t){try{const o=\"function\"==typeof globalThis.fetch;if(Se){const n=e.startsWith(\"file://\");if(!n&&o)return globalThis.fetch(e,t||{credentials:\"same-origin\"});p||(h=Ne.require(\"url\"),p=Ne.require(\"fs\")),n&&(e=h.fileURLToPath(e));const r=await p.promises.readFile(e);return{ok:!0,headers:{length:0,get:()=>null},url:e,arrayBuffer:()=>r,json:()=>JSON.parse(r),text:()=>{throw new Error(\"NotImplementedException\")}}}if(o)return globalThis.fetch(e,t||{credentials:\"same-origin\"});if(\"function\"==typeof read)return{ok:!0,url:e,headers:{length:0,get:()=>null},arrayBuffer:()=>new Uint8Array(read(e,\"binary\")),json:()=>JSON.parse(read(e,\"utf8\")),text:()=>read(e,\"utf8\")}}catch(t){return{ok:!1,url:e,status:500,headers:{length:0,get:()=>null},statusText:\"ERR28: \"+t,arrayBuffer:()=>{throw t},json:()=>{throw t},text:()=>{throw t}}}throw new Error(\"No fetch implementation available\")}function I(e){return\"string\"!=typeof e&&Be(!1,\"url must be a string\"),!M(e)&&0!==e.indexOf(\"./\")&&0!==e.indexOf(\"../\")&&globalThis.URL&&globalThis.document&&globalThis.document.baseURI&&(e=new URL(e,globalThis.document.baseURI).toString()),e}const U=/^[a-zA-Z][a-zA-Z\\d+\\-.]*?:\\/\\//,P=/[a-zA-Z]:[\\\\/]/;function M(e){return Se||Ie?e.startsWith(\"/\")||e.startsWith(\"\\\\\")||-1!==e.indexOf(\"///\")||P.test(e):U.test(e)}let L,N=0;const $=[],z=[],W=new Map,F={\"js-module-threads\":!0,\"js-module-runtime\":!0,\"js-module-dotnet\":!0,\"js-module-native\":!0,\"js-module-diagnostics\":!0},B={...F,\"js-module-library-initializer\":!0},V={...F,dotnetwasm:!0,heap:!0,manifest:!0},q={...B,manifest:!0},H={...B,dotnetwasm:!0},J={dotnetwasm:!0,symbols:!0},Z={...B,dotnetwasm:!0,symbols:!0},Q={symbols:!0};function G(e){return!(\"icu\"==e.behavior&&e.name!=Pe.preferredIcuAsset)}function K(e,t,o){null!=t||(t=[]),Be(1==t.length,`Expect to have one ${o} asset in resources`);const n=t[0];return n.behavior=o,X(n),e.push(n),n}function X(e){V[e.behavior]&&W.set(e.behavior,e)}function Y(e){Be(V[e],`Unknown single asset behavior ${e}`);const t=W.get(e);if(t&&!t.resolvedUrl)if(t.resolvedUrl=Pe.locateFile(t.name),F[t.behavior]){const e=ge(t);e?(\"string\"!=typeof e&&Be(!1,\"loadBootResource response for 'dotnetjs' type should be a URL string\"),t.resolvedUrl=e):t.resolvedUrl=ce(t.resolvedUrl,t.behavior)}else if(\"dotnetwasm\"!==t.behavior)throw new Error(`Unknown single asset behavior ${e}`);return t}function ee(e){const t=Y(e);return Be(t,`Single asset for ${e} not found`),t}let te=!1;async function oe(){if(!te){te=!0,Pe.diagnosticTracing&&b(\"mono_download_assets\");try{const e=[],t=[],o=(e,t)=>{!Z[e.behavior]&&G(e)&&Pe.expected_instantiated_assets_count++,!H[e.behavior]&&G(e)&&(Pe.expected_downloaded_assets_count++,t.push(se(e)))};for(const t of $)o(t,e);for(const e of z)o(e,t);Pe.allDownloadsQueued.promise_control.resolve(),Promise.all([...e,...t]).then((()=>{Pe.allDownloadsFinished.promise_control.resolve()})).catch((e=>{throw Pe.err(\"Error in mono_download_assets: \"+e),Xe(1,e),e})),await Pe.runtimeModuleLoaded.promise;const n=async e=>{const t=await e;if(t.buffer){if(!Z[t.behavior]){t.buffer&&\"object\"==typeof t.buffer||Be(!1,\"asset buffer must be array-like or buffer-like or promise of these\"),\"string\"!=typeof t.resolvedUrl&&Be(!1,\"resolvedUrl must be string\");const e=t.resolvedUrl,o=await t.buffer,n=new Uint8Array(o);pe(t),await Ue.beforeOnRuntimeInitialized.promise,Ue.instantiate_asset(t,e,n)}}else J[t.behavior]?(\"symbols\"===t.behavior&&(await Ue.instantiate_symbols_asset(t),pe(t)),J[t.behavior]&&++Pe.actual_downloaded_assets_count):(t.isOptional||Be(!1,\"Expected asset to have the downloaded buffer\"),!H[t.behavior]&&G(t)&&Pe.expected_downloaded_assets_count--,!Z[t.behavior]&&G(t)&&Pe.expected_instantiated_assets_count--)},r=[],i=[];for(const t of e)r.push(n(t));for(const e of t)i.push(n(e));Promise.all(r).then((()=>{Ce||Ue.coreAssetsInMemory.promise_control.resolve()})).catch((e=>{throw Pe.err(\"Error in mono_download_assets: \"+e),Xe(1,e),e})),Promise.all(i).then((async()=>{Ce||(await Ue.coreAssetsInMemory.promise,Ue.allAssetsInMemory.promise_control.resolve())})).catch((e=>{throw Pe.err(\"Error in mono_download_assets: \"+e),Xe(1,e),e}))}catch(e){throw Pe.err(\"Error in mono_download_assets: \"+e),e}}}let ne=!1;function re(){if(ne)return;ne=!0;const e=Pe.config,t=[];if(e.assets)for(const t of e.assets)\"object\"!=typeof t&&Be(!1,`asset must be object, it was ${typeof t} : ${t}`),\"string\"!=typeof t.behavior&&Be(!1,\"asset behavior must be known string\"),\"string\"!=typeof t.name&&Be(!1,\"asset name must be string\"),t.resolvedUrl&&\"string\"!=typeof t.resolvedUrl&&Be(!1,\"asset resolvedUrl could be string\"),t.hash&&\"string\"!=typeof t.hash&&Be(!1,\"asset resolvedUrl could be string\"),t.pendingDownload&&\"object\"!=typeof t.pendingDownload&&Be(!1,\"asset pendingDownload could be object\"),t.isCore?$.push(t):z.push(t),X(t);else if(e.resources){const o=e.resources;o.wasmNative||Be(!1,\"resources.wasmNative must be defined\"),o.jsModuleNative||Be(!1,\"resources.jsModuleNative must be defined\"),o.jsModuleRuntime||Be(!1,\"resources.jsModuleRuntime must be defined\"),K(z,o.wasmNative,\"dotnetwasm\"),K(t,o.jsModuleNative,\"js-module-native\"),K(t,o.jsModuleRuntime,\"js-module-runtime\"),o.jsModuleDiagnostics&&K(t,o.jsModuleDiagnostics,\"js-module-diagnostics\");const n=(e,t,o)=>{const n=e;n.behavior=t,o?(n.isCore=!0,$.push(n)):z.push(n)};if(o.coreAssembly)for(let e=0;e<o.coreAssembly.length;e++)n(o.coreAssembly[e],\"assembly\",!0);if(o.assembly)for(let e=0;e<o.assembly.length;e++)n(o.assembly[e],\"assembly\",!o.coreAssembly);if(0!=e.debugLevel&&Pe.isDebuggingSupported()){if(o.corePdb)for(let e=0;e<o.corePdb.length;e++)n(o.corePdb[e],\"pdb\",!0);if(o.pdb)for(let e=0;e<o.pdb.length;e++)n(o.pdb[e],\"pdb\",!o.corePdb)}if(e.loadAllSatelliteResources&&o.satelliteResources)for(const e in o.satelliteResources)for(let t=0;t<o.satelliteResources[e].length;t++){const r=o.satelliteResources[e][t];r.culture=e,n(r,\"resource\",!o.coreAssembly)}if(o.coreVfs)for(let e=0;e<o.coreVfs.length;e++)n(o.coreVfs[e],\"vfs\",!0);if(o.vfs)for(let e=0;e<o.vfs.length;e++)n(o.vfs[e],\"vfs\",!o.coreVfs);const r=O(e);if(r&&o.icu)for(let e=0;e<o.icu.length;e++){const t=o.icu[e];t.name===r&&n(t,\"icu\",!1)}if(o.wasmSymbols)for(let e=0;e<o.wasmSymbols.length;e++)n(o.wasmSymbols[e],\"symbols\",!1)}if(e.appsettings)for(let t=0;t<e.appsettings.length;t++){const o=e.appsettings[t],n=he(o);\"appsettings.json\"!==n&&n!==`appsettings.${e.applicationEnvironment}.json`||z.push({name:o,behavior:\"vfs\",cache:\"no-cache\",useCredentials:!0})}e.assets=[...$,...z,...t]}async function ie(e){const t=await se(e);return await t.pendingDownloadInternal.response,t.buffer}async function se(e){try{return await ae(e)}catch(t){if(!Pe.enableDownloadRetry)throw t;if(Ie||Se)throw t;if(e.pendingDownload&&e.pendingDownloadInternal==e.pendingDownload)throw t;if(e.resolvedUrl&&-1!=e.resolvedUrl.indexOf(\"file://\"))throw t;if(t&&404==t.status)throw t;e.pendingDownloadInternal=void 0,await Pe.allDownloadsQueued.promise;try{return Pe.diagnosticTracing&&b(`Retrying download '${e.name}'`),await ae(e)}catch(t){return e.pendingDownloadInternal=void 0,await new Promise((e=>globalThis.setTimeout(e,100))),Pe.diagnosticTracing&&b(`Retrying download (2) '${e.name}' after delay`),await ae(e)}}}async function ae(e){for(;L;)await L.promise;try{++N,N==Pe.maxParallelDownloads&&(Pe.diagnosticTracing&&b(\"Throttling further parallel downloads\"),L=i());const t=await async function(e){if(e.pendingDownload&&(e.pendingDownloadInternal=e.pendingDownload),e.pendingDownloadInternal&&e.pendingDownloadInternal.response)return e.pendingDownloadInternal.response;if(e.buffer){const t=await e.buffer;return e.resolvedUrl||(e.resolvedUrl=\"undefined://\"+e.name),e.pendingDownloadInternal={url:e.resolvedUrl,name:e.name,response:Promise.resolve({ok:!0,arrayBuffer:()=>t,json:()=>JSON.parse(new TextDecoder(\"utf-8\").decode(t)),text:()=>{throw new Error(\"NotImplementedException\")},headers:{get:()=>{}}})},e.pendingDownloadInternal.response}const t=e.loadRemote&&Pe.config.remoteSources?Pe.config.remoteSources:[\"\"];let o;for(let n of t){n=n.trim(),\"./\"===n&&(n=\"\");const t=le(e,n);e.name===t?Pe.diagnosticTracing&&b(`Attempting to download '${t}'`):Pe.diagnosticTracing&&b(`Attempting to download '${t}' for ${e.name}`);try{e.resolvedUrl=t;const n=fe(e);if(e.pendingDownloadInternal=n,o=await n.response,!o||!o.ok)continue;return o}catch(e){o||(o={ok:!1,url:t,status:0,statusText:\"\"+e});continue}}const n=e.isOptional||e.name.match(/\\.pdb$/)&&Pe.config.ignorePdbLoadErrors;if(o||Be(!1,`Response undefined ${e.name}`),!n){const t=new Error(`download '${o.url}' for ${e.name} failed ${o.status} ${o.statusText}`);throw t.status=o.status,t}y(`optional download '${o.url}' for ${e.name} failed ${o.status} ${o.statusText}`)}(e);return t?(J[e.behavior]||(e.buffer=await t.arrayBuffer(),++Pe.actual_downloaded_assets_count),e):e}finally{if(--N,L&&N==Pe.maxParallelDownloads-1){Pe.diagnosticTracing&&b(\"Resuming more parallel downloads\");const e=L;L=void 0,e.promise_control.resolve()}}}function le(e,t){let o;return null==t&&Be(!1,`sourcePrefix must be provided for ${e.name}`),e.resolvedUrl?o=e.resolvedUrl:(o=\"\"===t?\"assembly\"===e.behavior||\"pdb\"===e.behavior?e.name:\"resource\"===e.behavior&&e.culture&&\"\"!==e.culture?`${e.culture}/${e.name}`:e.name:t+e.name,o=ce(Pe.locateFile(o),e.behavior)),o&&\"string\"==typeof o||Be(!1,\"attemptUrl need to be path or url string\"),o}function ce(e,t){return Pe.modulesUniqueQuery&&q[t]&&(e+=Pe.modulesUniqueQuery),e}let de=0;const ue=new Set;function fe(e){try{e.resolvedUrl||Be(!1,\"Request's resolvedUrl must be set\");const t=function(e){let t=e.resolvedUrl;if(Pe.loadBootResource){const o=ge(e);if(o instanceof Promise)return o;\"string\"==typeof o&&(t=o)}const o={};return e.cache?o.cache=e.cache:Pe.config.disableNoCacheFetch||(o.cache=\"no-cache\"),e.useCredentials?o.credentials=\"include\":!Pe.config.disableIntegrityCheck&&e.hash&&(o.integrity=e.hash),Pe.fetch_like(t,o)}(e),o={name:e.name,url:e.resolvedUrl,response:t};return ue.add(e.name),o.response.then((()=>{\"assembly\"==e.behavior&&Pe.loadedAssemblies.push(e.name),de++,Pe.onDownloadResourceProgress&&Pe.onDownloadResourceProgress(de,ue.size)})),o}catch(t){const o={ok:!1,url:e.resolvedUrl,status:500,statusText:\"ERR29: \"+t,arrayBuffer:()=>{throw t},json:()=>{throw t}};return{name:e.name,url:e.resolvedUrl,response:Promise.resolve(o)}}}const me={resource:\"assembly\",assembly:\"assembly\",pdb:\"pdb\",icu:\"globalization\",vfs:\"configuration\",manifest:\"manifest\",dotnetwasm:\"dotnetwasm\",\"js-module-dotnet\":\"dotnetjs\",\"js-module-native\":\"dotnetjs\",\"js-module-runtime\":\"dotnetjs\",\"js-module-threads\":\"dotnetjs\"};function ge(e){var t;if(Pe.loadBootResource){const o=null!==(t=e.hash)&&void 0!==t?t:\"\",n=e.resolvedUrl,r=me[e.behavior];if(r){const t=Pe.loadBootResource(r,e.name,n,o,e.behavior);return\"string\"==typeof t?I(t):t}}}function pe(e){e.pendingDownloadInternal=null,e.pendingDownload=null,e.buffer=null,e.moduleExports=null}function he(e){let t=e.lastIndexOf(\"/\");return t>=0&&t++,e.substring(t)}async function we(e){e&&await Promise.all((null!=e?e:[]).map((e=>async function(e){try{const t=e.name;if(!e.moduleExports){const o=ce(Pe.locateFile(t),\"js-module-library-initializer\");Pe.diagnosticTracing&&b(`Attempting to import '${o}' for ${e}`),e.moduleExports=await import(/*! webpackIgnore: true */o)}Pe.libraryInitializers.push({scriptName:t,exports:e.moduleExports})}catch(t){E(`Failed to import library initializer '${e}': ${t}`)}}(e))))}async function be(e,t){if(!Pe.libraryInitializers)return;const o=[];for(let n=0;n<Pe.libraryInitializers.length;n++){const r=Pe.libraryInitializers[n];r.exports[e]&&o.push(ye(r.scriptName,e,(()=>r.exports[e](...t))))}await Promise.all(o)}async function ye(e,t,o){try{await o()}catch(o){throw E(`Failed to invoke '${t}' on library initializer '${e}': ${o}`),Xe(1,o),o}}function ve(e,t){if(e===t)return e;const o={...t};return void 0!==o.assets&&o.assets!==e.assets&&(o.assets=[...e.assets||[],...o.assets||[]]),void 0!==o.resources&&(o.resources=_e(e.resources||{assembly:[],jsModuleNative:[],jsModuleRuntime:[],wasmNative:[]},o.resources)),void 0!==o.environmentVariables&&(o.environmentVariables={...e.environmentVariables||{},...o.environmentVariables||{}}),void 0!==o.runtimeOptions&&o.runtimeOptions!==e.runtimeOptions&&(o.runtimeOptions=[...e.runtimeOptions||[],...o.runtimeOptions||[]]),Object.assign(e,o)}function Ee(e,t){if(e===t)return e;const o={...t};return o.config&&(e.config||(e.config={}),o.config=ve(e.config,o.config)),Object.assign(e,o)}function _e(e,t){if(e===t)return e;const o={...t};return void 0!==o.coreAssembly&&(o.coreAssembly=[...e.coreAssembly||[],...o.coreAssembly||[]]),void 0!==o.assembly&&(o.assembly=[...e.assembly||[],...o.assembly||[]]),void 0!==o.lazyAssembly&&(o.lazyAssembly=[...e.lazyAssembly||[],...o.lazyAssembly||[]]),void 0!==o.corePdb&&(o.corePdb=[...e.corePdb||[],...o.corePdb||[]]),void 0!==o.pdb&&(o.pdb=[...e.pdb||[],...o.pdb||[]]),void 0!==o.jsModuleWorker&&(o.jsModuleWorker=[...e.jsModuleWorker||[],...o.jsModuleWorker||[]]),void 0!==o.jsModuleNative&&(o.jsModuleNative=[...e.jsModuleNative||[],...o.jsModuleNative||[]]),void 0!==o.jsModuleDiagnostics&&(o.jsModuleDiagnostics=[...e.jsModuleDiagnostics||[],...o.jsModuleDiagnostics||[]]),void 0!==o.jsModuleRuntime&&(o.jsModuleRuntime=[...e.jsModuleRuntime||[],...o.jsModuleRuntime||[]]),void 0!==o.wasmSymbols&&(o.wasmSymbols=[...e.wasmSymbols||[],...o.wasmSymbols||[]]),void 0!==o.wasmNative&&(o.wasmNative=[...e.wasmNative||[],...o.wasmNative||[]]),void 0!==o.icu&&(o.icu=[...e.icu||[],...o.icu||[]]),void 0!==o.satelliteResources&&(o.satelliteResources=function(e,t){if(e===t)return e;for(const o in t)e[o]=[...e[o]||[],...t[o]||[]];return e}(e.satelliteResources||{},o.satelliteResources||{})),void 0!==o.modulesAfterConfigLoaded&&(o.modulesAfterConfigLoaded=[...e.modulesAfterConfigLoaded||[],...o.modulesAfterConfigLoaded||[]]),void 0!==o.modulesAfterRuntimeReady&&(o.modulesAfterRuntimeReady=[...e.modulesAfterRuntimeReady||[],...o.modulesAfterRuntimeReady||[]]),void 0!==o.extensions&&(o.extensions={...e.extensions||{},...o.extensions||{}}),void 0!==o.vfs&&(o.vfs=[...e.vfs||[],...o.vfs||[]]),Object.assign(e,o)}function xe(){const e=Pe.config;if(e.environmentVariables=e.environmentVariables||{},e.runtimeOptions=e.runtimeOptions||[],e.resources=e.resources||{assembly:[],jsModuleNative:[],jsModuleWorker:[],jsModuleRuntime:[],wasmNative:[],vfs:[],satelliteResources:{}},e.assets){Pe.diagnosticTracing&&b(\"config.assets is deprecated, use config.resources instead\");for(const t of e.assets){const o={};switch(t.behavior){case\"assembly\":o.assembly=[t];break;case\"pdb\":o.pdb=[t];break;case\"resource\":o.satelliteResources={},o.satelliteResources[t.culture]=[t];break;case\"icu\":o.icu=[t];break;case\"symbols\":o.wasmSymbols=[t];break;case\"vfs\":o.vfs=[t];break;case\"dotnetwasm\":o.wasmNative=[t];break;case\"js-module-threads\":o.jsModuleWorker=[t];break;case\"js-module-runtime\":o.jsModuleRuntime=[t];break;case\"js-module-native\":o.jsModuleNative=[t];break;case\"js-module-diagnostics\":o.jsModuleDiagnostics=[t];break;case\"js-module-dotnet\":break;default:throw new Error(`Unexpected behavior ${t.behavior} of asset ${t.name}`)}_e(e.resources,o)}}e.debugLevel,e.applicationEnvironment||(e.applicationEnvironment=\"Production\"),e.applicationCulture&&(e.environmentVariables.LANG=`${e.applicationCulture}.UTF-8`),Ue.diagnosticTracing=Pe.diagnosticTracing=!!e.diagnosticTracing,Ue.waitForDebugger=e.waitForDebugger,Pe.maxParallelDownloads=e.maxParallelDownloads||Pe.maxParallelDownloads,Pe.enableDownloadRetry=void 0!==e.enableDownloadRetry?e.enableDownloadRetry:Pe.enableDownloadRetry}let je=!1;async function Re(e){var t;if(je)return void await Pe.afterConfigLoaded.promise;let o;try{if(e.configSrc||Pe.config&&0!==Object.keys(Pe.config).length&&(Pe.config.assets||Pe.config.resources)||(e.configSrc=\"dotnet.boot.js\"),o=e.configSrc,je=!0,o&&(Pe.diagnosticTracing&&b(\"mono_wasm_load_config\"),await async function(e){const t=e.configSrc,o=Pe.locateFile(t);let n=null;void 0!==Pe.loadBootResource&&(n=Pe.loadBootResource(\"manifest\",t,o,\"\",\"manifest\"));let r,i=null;if(n)if(\"string\"==typeof n)n.includes(\".json\")?(i=await s(I(n)),r=await Ae(i)):r=(await import(I(n))).config;else{const e=await n;\"function\"==typeof e.json?(i=e,r=await Ae(i)):r=e.config}else o.includes(\".json\")?(i=await s(ce(o,\"manifest\")),r=await Ae(i)):r=(await import(ce(o,\"manifest\"))).config;function s(e){return Pe.fetch_like(e,{method:\"GET\",credentials:\"include\",cache:\"no-cache\"})}Pe.config.applicationEnvironment&&(r.applicationEnvironment=Pe.config.applicationEnvironment),ve(Pe.config,r)}(e)),xe(),await we(null===(t=Pe.config.resources)||void 0===t?void 0:t.modulesAfterConfigLoaded),await be(\"onRuntimeConfigLoaded\",[Pe.config]),e.onConfigLoaded)try{await e.onConfigLoaded(Pe.config,Le),xe()}catch(e){throw _(\"onConfigLoaded() failed\",e),e}xe(),Pe.afterConfigLoaded.promise_control.resolve(Pe.config)}catch(t){const n=`Failed to load config file ${o} ${t} ${null==t?void 0:t.stack}`;throw Pe.config=e.config=Object.assign(Pe.config,{message:n,error:t,isError:!0}),Xe(1,new Error(n)),t}}function Te(){return!!globalThis.navigator&&(Pe.isChromium||Pe.isFirefox)}async function Ae(e){const t=Pe.config,o=await e.json();t.applicationEnvironment||o.applicationEnvironment||(o.applicationEnvironment=e.headers.get(\"Blazor-Environment\")||e.headers.get(\"DotNet-Environment\")||void 0),o.environmentVariables||(o.environmentVariables={});const n=e.headers.get(\"DOTNET-MODIFIABLE-ASSEMBLIES\");n&&(o.environmentVariables.DOTNET_MODIFIABLE_ASSEMBLIES=n);const r=e.headers.get(\"ASPNETCORE-BROWSER-TOOLS\");return r&&(o.environmentVariables.__ASPNETCORE_BROWSER_TOOLS=r),o}\"function\"!=typeof importScripts||globalThis.onmessage||(globalThis.dotnetSidecar=!0);const Se=\"object\"==typeof process&&\"object\"==typeof process.versions&&\"string\"==typeof process.versions.node,De=\"function\"==typeof importScripts,Oe=De&&\"undefined\"!=typeof dotnetSidecar,Ce=De&&!Oe,ke=\"object\"==typeof window||De&&!Se,Ie=!ke&&!Se;let Ue={},Pe={},Me={},Le={},Ne={},$e=!1;const ze={},We={config:ze},Fe={mono:{},binding:{},internal:Ne,module:We,loaderHelpers:Pe,runtimeHelpers:Ue,diagnosticHelpers:Me,api:Le};function Be(e,t){if(e)return;const o=\"Assert failed: \"+(\"function\"==typeof t?t():t),n=new Error(o);_(o,n),Ue.nativeAbort(n)}function Ve(){return void 0!==Pe.exitCode}function qe(){return Ue.runtimeReady&&!Ve()}function He(){Ve()&&Be(!1,`.NET runtime already exited with ${Pe.exitCode} ${Pe.exitReason}. You can use runtime.runMain() which doesn't exit the runtime.`),Ue.runtimeReady||Be(!1,\".NET runtime didn't start yet. Please call dotnet.create() first.\")}function Je(){ke&&(globalThis.addEventListener(\"unhandledrejection\",et),globalThis.addEventListener(\"error\",tt))}let Ze,Qe;function Ge(e){Qe&&Qe(e),Xe(e,Pe.exitReason)}function Ke(e){Ze&&Ze(e||Pe.exitReason),Xe(1,e||Pe.exitReason)}function Xe(t,o){var n,r;const i=o&&\"object\"==typeof o;t=i&&\"number\"==typeof o.status?o.status:void 0===t?-1:t;const s=i&&\"string\"==typeof o.message?o.message:\"\"+o;(o=i?o:Ue.ExitStatus?function(e,t){const o=new Ue.ExitStatus(e);return o.message=t,o.toString=()=>t,o}(t,s):new Error(\"Exit with code \"+t+\" \"+s)).status=t,o.message||(o.message=s);const a=\"\"+(o.stack||(new Error).stack);try{Object.defineProperty(o,\"stack\",{get:()=>a})}catch(e){}const l=!!o.silent;if(o.silent=!0,Ve())Pe.diagnosticTracing&&b(\"mono_exit called after exit\");else{try{We.onAbort==Ke&&(We.onAbort=Ze),We.onExit==Ge&&(We.onExit=Qe),ke&&(globalThis.removeEventListener(\"unhandledrejection\",et),globalThis.removeEventListener(\"error\",tt)),Ue.runtimeReady?(Ue.jiterpreter_dump_stats&&Ue.jiterpreter_dump_stats(!1),0===t&&(null===(n=Pe.config)||void 0===n?void 0:n.interopCleanupOnExit)&&Ue.forceDisposeProxies(!0,!0),e&&0!==t&&(null===(r=Pe.config)||void 0===r||r.dumpThreadsOnNonZeroExit)):(Pe.diagnosticTracing&&b(`abort_startup, reason: ${o}`),function(e){Pe.allDownloadsQueued.promise_control.reject(e),Pe.allDownloadsFinished.promise_control.reject(e),Pe.afterConfigLoaded.promise_control.reject(e),Pe.wasmCompilePromise.promise_control.reject(e),Pe.runtimeModuleLoaded.promise_control.reject(e),Ue.dotnetReady&&(Ue.dotnetReady.promise_control.reject(e),Ue.afterInstantiateWasm.promise_control.reject(e),Ue.beforePreInit.promise_control.reject(e),Ue.afterPreInit.promise_control.reject(e),Ue.afterPreRun.promise_control.reject(e),Ue.beforeOnRuntimeInitialized.promise_control.reject(e),Ue.afterOnRuntimeInitialized.promise_control.reject(e),Ue.afterPostRun.promise_control.reject(e))}(o))}catch(e){E(\"mono_exit A failed\",e)}try{l||(function(e,t){if(0!==e&&t){const e=Ue.ExitStatus&&t instanceof Ue.ExitStatus?b:_;\"string\"==typeof t?e(t):(void 0===t.stack&&(t.stack=(new Error).stack+\"\"),t.message?e(Ue.stringify_as_error_with_stack?Ue.stringify_as_error_with_stack(t.message+\"\\n\"+t.stack):t.message+\"\\n\"+t.stack):e(JSON.stringify(t)))}!Ce&&Pe.config&&(Pe.config.logExitCode?Pe.config.forwardConsoleLogsToWS?R(\"WASM EXIT \"+e):v(\"WASM EXIT \"+e):Pe.config.forwardConsoleLogsToWS&&R())}(t,o),function(e){if(ke&&!Ce&&Pe.config&&Pe.config.appendElementOnExit&&document){const t=document.createElement(\"label\");t.id=\"tests_done\",0!==e&&(t.style.background=\"red\"),t.innerHTML=\"\"+e,document.body.appendChild(t)}}(t))}catch(e){E(\"mono_exit B failed\",e)}Pe.exitCode=t,Pe.exitReason||(Pe.exitReason=o),!Ce&&Ue.runtimeReady&&We.runtimeKeepalivePop()}if(Pe.config&&Pe.config.asyncFlushOnExit&&0===t)throw(async()=>{try{await async function(){try{const e=await import(/*! webpackIgnore: true */\"process\"),t=e=>new Promise(((t,o)=>{e.on(\"error\",o),e.end(\"\",\"utf8\",t)})),o=t(e.stderr),n=t(e.stdout);let r;const i=new Promise((e=>{r=setTimeout((()=>e(\"timeout\")),1e3)}));await Promise.race([Promise.all([n,o]),i]),clearTimeout(r)}catch(e){_(`flushing std* streams failed: ${e}`)}}()}finally{Ye(t,o)}})(),o;Ye(t,o)}function Ye(e,t){if(Ue.runtimeReady&&Ue.nativeExit)try{Ue.nativeExit(e)}catch(e){!Ue.ExitStatus||e instanceof Ue.ExitStatus||E(\"set_exit_code_and_quit_now failed: \"+e.toString())}if(0!==e||!ke)throw Se&&Ne.process?Ne.process.exit(e):Ue.quit&&Ue.quit(e,t),t}function et(e){ot(e,e.reason,\"rejection\")}function tt(e){ot(e,e.error,\"error\")}function ot(e,t,o){e.preventDefault();try{t||(t=new Error(\"Unhandled \"+o)),void 0===t.stack&&(t.stack=(new Error).stack),t.stack=t.stack+\"\",t.silent||(_(\"Unhandled error:\",t),Xe(1,t))}catch(e){}}!function(e){if($e)throw new Error(\"Loader module already loaded\");$e=!0,Ue=e.runtimeHelpers,Pe=e.loaderHelpers,Me=e.diagnosticHelpers,Le=e.api,Ne=e.internal,Object.assign(Le,{INTERNAL:Ne,invokeLibraryInitializers:be}),Object.assign(e.module,{config:ve(ze,{environmentVariables:{}})});const r={mono_wasm_bindings_is_ready:!1,config:e.module.config,diagnosticTracing:!1,nativeAbort:e=>{throw e||new Error(\"abort\")},nativeExit:e=>{throw new Error(\"exit:\"+e)}},l={gitHash:\"44525024595742ebe09023abe709df51de65009b\",config:e.module.config,diagnosticTracing:!1,maxParallelDownloads:16,enableDownloadRetry:!0,_loaded_files:[],loadedFiles:[],loadedAssemblies:[],libraryInitializers:[],workerNextNumber:1,actual_downloaded_assets_count:0,actual_instantiated_assets_count:0,expected_downloaded_assets_count:0,expected_instantiated_assets_count:0,afterConfigLoaded:i(),allDownloadsQueued:i(),allDownloadsFinished:i(),wasmCompilePromise:i(),runtimeModuleLoaded:i(),loadingWorkers:i(),is_exited:Ve,is_runtime_running:qe,assert_runtime_running:He,mono_exit:Xe,createPromiseController:i,getPromiseController:s,assertIsControllablePromise:a,mono_download_assets:oe,resolve_single_asset_path:ee,setup_proxy_console:j,set_thread_prefix:w,installUnhandledErrorHandler:Je,retrieve_asset_download:ie,invokeLibraryInitializers:be,isDebuggingSupported:Te,exceptions:t,simd:n,relaxedSimd:o};Object.assign(Ue,r),Object.assign(Pe,l)}(Fe);let nt,rt,it,st=!1,at=!1;async function lt(e){if(!at){if(at=!0,ke&&Pe.config.forwardConsoleLogsToWS&&void 0!==globalThis.WebSocket&&j(\"main\",globalThis.console,globalThis.location.origin),We||Be(!1,\"Null moduleConfig\"),Pe.config||Be(!1,\"Null moduleConfig.config\"),\"function\"==typeof e){const t=e(Fe.api);if(t.ready)throw new Error(\"Module.ready couldn't be redefined.\");Object.assign(We,t),Ee(We,t)}else{if(\"object\"!=typeof e)throw new Error(\"Can't use moduleFactory callback of createDotnetRuntime function.\");Ee(We,e)}await async function(e){if(Se){const e=await import(/*! webpackIgnore: true */\"process\"),t=14;if(e.versions.node.split(\".\")[0]<t)throw new Error(`NodeJS at '${e.execPath}' has too low version '${e.versions.node}', please use at least ${t}. See also https://aka.ms/dotnet-wasm-features`)}const t=/*! webpackIgnore: true */import.meta.url,o=t.indexOf(\"?\");var n;if(o>0&&(Pe.modulesUniqueQuery=t.substring(o)),Pe.scriptUrl=t.replace(/\\\\/g,\"/\").replace(/[?#].*/,\"\"),Pe.scriptDirectory=(n=Pe.scriptUrl).slice(0,n.lastIndexOf(\"/\"))+\"/\",Pe.locateFile=e=>\"URL\"in globalThis&&globalThis.URL!==C?new URL(e,Pe.scriptDirectory).toString():M(e)?e:Pe.scriptDirectory+e,Pe.fetch_like=k,Pe.out=console.log,Pe.err=console.error,Pe.onDownloadResourceProgress=e.onDownloadResourceProgress,ke&&globalThis.navigator){const e=globalThis.navigator,t=e.userAgentData&&e.userAgentData.brands;t&&t.length>0?Pe.isChromium=t.some((e=>\"Google Chrome\"===e.brand||\"Microsoft Edge\"===e.brand||\"Chromium\"===e.brand)):e.userAgent&&(Pe.isChromium=e.userAgent.includes(\"Chrome\"),Pe.isFirefox=e.userAgent.includes(\"Firefox\"))}Ne.require=Se?await import(/*! webpackIgnore: true */\"module\").then((e=>e.createRequire(/*! webpackIgnore: true */import.meta.url))):Promise.resolve((()=>{throw new Error(\"require not supported\")})),void 0===globalThis.URL&&(globalThis.URL=C)}(We)}}async function ct(e){return await lt(e),Ze=We.onAbort,Qe=We.onExit,We.onAbort=Ke,We.onExit=Ge,We.ENVIRONMENT_IS_PTHREAD?async function(){(function(){const e=new MessageChannel,t=e.port1,o=e.port2;t.addEventListener(\"message\",(e=>{var n,r;n=JSON.parse(e.data.config),r=JSON.parse(e.data.monoThreadInfo),st?Pe.diagnosticTracing&&b(\"mono config already received\"):(ve(Pe.config,n),Ue.monoThreadInfo=r,xe(),Pe.diagnosticTracing&&b(\"mono config received\"),st=!0,Pe.afterConfigLoaded.promise_control.resolve(Pe.config),ke&&n.forwardConsoleLogsToWS&&void 0!==globalThis.WebSocket&&Pe.setup_proxy_console(\"worker-idle\",console,globalThis.location.origin)),t.close(),o.close()}),{once:!0}),t.start(),self.postMessage({[l]:{monoCmd:\"preload\",port:o}},[o])})(),await Pe.afterConfigLoaded.promise,function(){const e=Pe.config;e.assets||Be(!1,\"config.assets must be defined\");for(const t of e.assets)X(t),Q[t.behavior]&&z.push(t)}(),setTimeout((async()=>{try{await oe()}catch(e){Xe(1,e)}}),0);const e=dt(),t=await Promise.all(e);return await ut(t),We}():async function(){var e;await Re(We),re();const t=dt();(async function(){try{const e=ee(\"dotnetwasm\");await se(e),e&&e.pendingDownloadInternal&&e.pendingDownloadInternal.response||Be(!1,\"Can't load dotnet.native.wasm\");const t=await e.pendingDownloadInternal.response,o=t.headers&&t.headers.get?t.headers.get(\"Content-Type\"):void 0;let n;if(\"function\"==typeof WebAssembly.compileStreaming&&\"application/wasm\"===o)n=await WebAssembly.compileStreaming(t);else{ke&&\"application/wasm\"!==o&&E('WebAssembly resource does not have the expected content type \"application/wasm\", so falling back to slower ArrayBuffer instantiation.');const e=await t.arrayBuffer();Pe.diagnosticTracing&&b(\"instantiate_wasm_module buffered\"),n=Ie?await Promise.resolve(new WebAssembly.Module(e)):await WebAssembly.compile(e)}e.pendingDownloadInternal=null,e.pendingDownload=null,e.buffer=null,e.moduleExports=null,Pe.wasmCompilePromise.promise_control.resolve(n)}catch(e){Pe.wasmCompilePromise.promise_control.reject(e)}})(),setTimeout((async()=>{try{D(),await oe()}catch(e){Xe(1,e)}}),0);const o=await Promise.all(t);return await ut(o),await Ue.dotnetReady.promise,await we(null===(e=Pe.config.resources)||void 0===e?void 0:e.modulesAfterRuntimeReady),await be(\"onRuntimeReady\",[Fe.api]),Le}()}function dt(){const e=ee(\"js-module-runtime\"),t=ee(\"js-module-native\");if(nt&&rt)return[nt,rt,it];\"object\"==typeof e.moduleExports?nt=e.moduleExports:(Pe.diagnosticTracing&&b(`Attempting to import '${e.resolvedUrl}' for ${e.name}`),nt=import(/*! webpackIgnore: true */e.resolvedUrl)),\"object\"==typeof t.moduleExports?rt=t.moduleExports:(Pe.diagnosticTracing&&b(`Attempting to import '${t.resolvedUrl}' for ${t.name}`),rt=import(/*! webpackIgnore: true */t.resolvedUrl));const o=Y(\"js-module-diagnostics\");return o&&(\"object\"==typeof o.moduleExports?it=o.moduleExports:(Pe.diagnosticTracing&&b(`Attempting to import '${o.resolvedUrl}' for ${o.name}`),it=import(/*! webpackIgnore: true */o.resolvedUrl))),[nt,rt,it]}async function ut(e){const{initializeExports:t,initializeReplacements:o,configureRuntimeStartup:n,configureEmscriptenStartup:r,configureWorkerStartup:i,setRuntimeGlobals:s,passEmscriptenInternals:a}=e[0],{default:l}=e[1],c=e[2];s(Fe),t(Fe),c&&c.setRuntimeGlobals(Fe),await n(We),Pe.runtimeModuleLoaded.promise_control.resolve(),l((e=>(Object.assign(We,{ready:e.ready,__dotnet_runtime:{initializeReplacements:o,configureEmscriptenStartup:r,configureWorkerStartup:i,passEmscriptenInternals:a}}),We))).catch((e=>{if(e.message&&e.message.toLowerCase().includes(\"out of memory\"))throw new Error(\".NET runtime has failed to start, because too much memory was requested. Please decrease the memory by adjusting EmccMaximumHeapSize. See also https://aka.ms/dotnet-wasm-features\");throw e}))}const ft=new class{withModuleConfig(e){try{return Ee(We,e),this}catch(e){throw Xe(1,e),e}}withOnConfigLoaded(e){try{return Ee(We,{onConfigLoaded:e}),this}catch(e){throw Xe(1,e),e}}withConsoleForwarding(){try{return ve(ze,{forwardConsoleLogsToWS:!0}),this}catch(e){throw Xe(1,e),e}}withExitOnUnhandledError(){try{return ve(ze,{exitOnUnhandledError:!0}),Je(),this}catch(e){throw Xe(1,e),e}}withAsyncFlushOnExit(){try{return ve(ze,{asyncFlushOnExit:!0}),this}catch(e){throw Xe(1,e),e}}withExitCodeLogging(){try{return ve(ze,{logExitCode:!0}),this}catch(e){throw Xe(1,e),e}}withElementOnExit(){try{return ve(ze,{appendElementOnExit:!0}),this}catch(e){throw Xe(1,e),e}}withInteropCleanupOnExit(){try{return ve(ze,{interopCleanupOnExit:!0}),this}catch(e){throw Xe(1,e),e}}withDumpThreadsOnNonZeroExit(){try{return ve(ze,{dumpThreadsOnNonZeroExit:!0}),this}catch(e){throw Xe(1,e),e}}withWaitingForDebugger(e){try{return ve(ze,{waitForDebugger:e}),this}catch(e){throw Xe(1,e),e}}withInterpreterPgo(e,t){try{return ve(ze,{interpreterPgo:e,interpreterPgoSaveDelay:t}),ze.runtimeOptions?ze.runtimeOptions.push(\"--interp-pgo-recording\"):ze.runtimeOptions=[\"--interp-pgo-recording\"],this}catch(e){throw Xe(1,e),e}}withConfig(e){try{return ve(ze,e),this}catch(e){throw Xe(1,e),e}}withConfigSrc(e){try{return e&&\"string\"==typeof e||Be(!1,\"must be file path or URL\"),Ee(We,{configSrc:e}),this}catch(e){throw Xe(1,e),e}}withVirtualWorkingDirectory(e){try{return e&&\"string\"==typeof e||Be(!1,\"must be directory path\"),ve(ze,{virtualWorkingDirectory:e}),this}catch(e){throw Xe(1,e),e}}withEnvironmentVariable(e,t){try{const o={};return o[e]=t,ve(ze,{environmentVariables:o}),this}catch(e){throw Xe(1,e),e}}withEnvironmentVariables(e){try{return e&&\"object\"==typeof e||Be(!1,\"must be dictionary object\"),ve(ze,{environmentVariables:e}),this}catch(e){throw Xe(1,e),e}}withDiagnosticTracing(e){try{return\"boolean\"!=typeof e&&Be(!1,\"must be boolean\"),ve(ze,{diagnosticTracing:e}),this}catch(e){throw Xe(1,e),e}}withDebugging(e){try{return null!=e&&\"number\"==typeof e||Be(!1,\"must be number\"),ve(ze,{debugLevel:e}),this}catch(e){throw Xe(1,e),e}}withApplicationArguments(...e){try{return e&&Array.isArray(e)||Be(!1,\"must be array of strings\"),ve(ze,{applicationArguments:e}),this}catch(e){throw Xe(1,e),e}}withRuntimeOptions(e){try{return e&&Array.isArray(e)||Be(!1,\"must be array of strings\"),ze.runtimeOptions?ze.runtimeOptions.push(...e):ze.runtimeOptions=e,this}catch(e){throw Xe(1,e),e}}withMainAssembly(e){try{return ve(ze,{mainAssemblyName:e}),this}catch(e){throw Xe(1,e),e}}withApplicationArgumentsFromQuery(){try{if(!globalThis.window)throw new Error(\"Missing window to the query parameters from\");if(void 0===globalThis.URLSearchParams)throw new Error(\"URLSearchParams is supported\");const e=new URLSearchParams(globalThis.window.location.search).getAll(\"arg\");return this.withApplicationArguments(...e)}catch(e){throw Xe(1,e),e}}withApplicationEnvironment(e){try{return ve(ze,{applicationEnvironment:e}),this}catch(e){throw Xe(1,e),e}}withApplicationCulture(e){try{return ve(ze,{applicationCulture:e}),this}catch(e){throw Xe(1,e),e}}withResourceLoader(e){try{return Pe.loadBootResource=e,this}catch(e){throw Xe(1,e),e}}async download(){try{await async function(){lt(We),await Re(We),re(),D(),oe(),await Pe.allDownloadsFinished.promise}()}catch(e){throw Xe(1,e),e}}async create(){try{return this.instance||(this.instance=await async function(){return await ct(We),Fe.api}()),this.instance}catch(e){throw Xe(1,e),e}}async run(){try{return We.config||Be(!1,\"Null moduleConfig.config\"),this.instance||await this.create(),this.instance.runMainAndExit()}catch(e){throw Xe(1,e),e}}},mt=Xe,gt=ct;Ie||\"function\"==typeof globalThis.URL||Be(!1,\"This browser/engine doesn't support URL API. Please use a modern version. See also https://aka.ms/dotnet-wasm-features\"),\"function\"!=typeof globalThis.BigInt64Array&&Be(!1,\"This browser/engine doesn't support BigInt64Array API. Please use a modern version. See also https://aka.ms/dotnet-wasm-features\"),ft.withConfig(/*json-start*/{\n  \"mainAssemblyName\": \"CollabsKus.BlazorWebAssembly\",\n  \"resources\": {\n    \"hash\": \"sha256-ZvFW6n7Opt44nEvgbbwCW8zyQjqkLLNQDJqAqmOQjxo=\",\n    \"jsModuleNative\": [\n      {\n        \"name\": \"dotnet.native.pfhp029mhg.js\"\n      }\n    ],\n    \"jsModuleRuntime\": [\n      {\n        \"name\": \"dotnet.runtime.2tx45g8lli.js\"\n      }\n    ],\n    \"wasmNative\": [\n      {\n        \"name\": \"dotnet.native.36aiz9mj2c.wasm\",\n        \"integrity\": \"sha256-++q5YvBIRJ8lQKhQ2TPsdU3VLMqIxsQAtEOFK0aOvhE=\",\n        \"cache\": \"force-cache\"\n      }\n    ],\n    \"icu\": [\n      {\n        \"virtualPath\": \"icudt_CJK.dat\",\n        \"name\": \"icudt_CJK.tjcz0u77k5.dat\",\n        \"integrity\": \"sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"icudt_EFIGS.dat\",\n        \"name\": \"icudt_EFIGS.tptq2av103.dat\",\n        \"integrity\": \"sha256-8fItetYY8kQ0ww6oxwTLiT3oXlBwHKumbeP2pRF4yTc=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"icudt_no_CJK.dat\",\n        \"name\": \"icudt_no_CJK.lfu7j35m59.dat\",\n        \"integrity\": \"sha256-L7sV7NEYP37/Qr2FPCePo5cJqRgTXRwGHuwF5Q+0Nfs=\",\n        \"cache\": \"force-cache\"\n      }\n    ],\n    \"coreAssembly\": [\n      {\n        \"virtualPath\": \"System.Runtime.InteropServices.JavaScript.wasm\",\n        \"name\": \"System.Runtime.InteropServices.JavaScript.yzg2xf6fe9.wasm\",\n        \"integrity\": \"sha256-jj+hXeHxXtNJ/yFTBFkWF83+YlrVlIlndehUiym2PoQ=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.Private.CoreLib.wasm\",\n        \"name\": \"System.Private.CoreLib.los8m7ngps.wasm\",\n        \"integrity\": \"sha256-y/pzphQ78HTOMeCtzmR5Q1w1VJ6t4JKVrQfeJsqKm0U=\",\n        \"cache\": \"force-cache\"\n      }\n    ],\n    \"assembly\": [\n      {\n        \"virtualPath\": \"Microsoft.AspNetCore.Components.wasm\",\n        \"name\": \"Microsoft.AspNetCore.Components.np8aqanvrk.wasm\",\n        \"integrity\": \"sha256-ZcM0QvEG4vSStXzdmLSqlnR7BeJz/UKPhcnn7o0NEwo=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"Microsoft.AspNetCore.Components.Web.wasm\",\n        \"name\": \"Microsoft.AspNetCore.Components.Web.6avfxro9u7.wasm\",\n        \"integrity\": \"sha256-4uZDg8mXVF/KhvuvAuH2Kgpw+3NjVgAPZD1G9scIBiw=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"Microsoft.AspNetCore.Components.WebAssembly.wasm\",\n        \"name\": \"Microsoft.AspNetCore.Components.WebAssembly.58wgnqu1mi.wasm\",\n        \"integrity\": \"sha256-27kRe5fIcpy7UrkWBK3TWlnYdtwAWOJnhJPWKkGnpI0=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"Microsoft.Extensions.Configuration.wasm\",\n        \"name\": \"Microsoft.Extensions.Configuration.33kpvunugc.wasm\",\n        \"integrity\": \"sha256-EScOvyLYbGHyXzhFvrjRm2JZrZ6rIDhmUXRvPgDTopY=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"Microsoft.Extensions.Configuration.Abstractions.wasm\",\n        \"name\": \"Microsoft.Extensions.Configuration.Abstractions.vydvg25cgq.wasm\",\n        \"integrity\": \"sha256-if+LK/X2QiubYZTpryZvRrMyTu2U2TFOuAkbwh3zGOA=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"Microsoft.Extensions.Configuration.Json.wasm\",\n        \"name\": \"Microsoft.Extensions.Configuration.Json.dsinhvif0g.wasm\",\n        \"integrity\": \"sha256-I9RchUtUIR389BC9FoYb+kicxmt1RhJha7WRlbfEbBQ=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"Microsoft.Extensions.DependencyInjection.wasm\",\n        \"name\": \"Microsoft.Extensions.DependencyInjection.3snpc8ocur.wasm\",\n        \"integrity\": \"sha256-o3DZ22g4zto3RmLtosapeKSFHJzL3VXoNJfcMmtGWGk=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"Microsoft.Extensions.DependencyInjection.Abstractions.wasm\",\n        \"name\": \"Microsoft.Extensions.DependencyInjection.Abstractions.u692jfxsqg.wasm\",\n        \"integrity\": \"sha256-BjqCOOi1R9gKKmHKdo9n2qGes9dnCHPPAdEtMR3fweM=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"Microsoft.Extensions.Logging.wasm\",\n        \"name\": \"Microsoft.Extensions.Logging.efb40z18hz.wasm\",\n        \"integrity\": \"sha256-2o41anbTbxpSDCdgiXgltHqZusjWuT1+M9amuIjDsAM=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"Microsoft.Extensions.Logging.Abstractions.wasm\",\n        \"name\": \"Microsoft.Extensions.Logging.Abstractions.3z07kbhr47.wasm\",\n        \"integrity\": \"sha256-r3ALIvSOk0g4dgtBLA1dskSc4tr0FbV4GBi9KLaLyhQ=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"Microsoft.Extensions.Options.wasm\",\n        \"name\": \"Microsoft.Extensions.Options.hpxn5zhjfy.wasm\",\n        \"integrity\": \"sha256-ZWvLi4uD1DhpugB3wdKLcFn2yjTRZKmZhg7SRHhNgxE=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"Microsoft.Extensions.Primitives.wasm\",\n        \"name\": \"Microsoft.Extensions.Primitives.cpcl4kfg57.wasm\",\n        \"integrity\": \"sha256-kHdBFA5OWOMEPY2Az5SW/Fua4Wmqv8F6pKmiIpg6VSE=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"Microsoft.JSInterop.wasm\",\n        \"name\": \"Microsoft.JSInterop.betqyv1awt.wasm\",\n        \"integrity\": \"sha256-rRq61G5+VpvRhc2RdIUOJdMTUibtZislv30ocJcRdV0=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"Microsoft.JSInterop.WebAssembly.wasm\",\n        \"name\": \"Microsoft.JSInterop.WebAssembly.58jjh3bwur.wasm\",\n        \"integrity\": \"sha256-FTVJx7gilBV/VWu+ibz7K8ueo7JUXPGj94aH0rf2FXQ=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.Collections.Concurrent.wasm\",\n        \"name\": \"System.Collections.Concurrent.0u78ckf640.wasm\",\n        \"integrity\": \"sha256-qKVZ042E50xBcV3ggaHXb2KZtWW96xdU+lcNmqUzw6o=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.Collections.Immutable.wasm\",\n        \"name\": \"System.Collections.Immutable.q6k5qdu67c.wasm\",\n        \"integrity\": \"sha256-cgMZBT1i/bRYFDDMml6KDHkxsTvWgPi2gBFFCHMDWE4=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.Collections.wasm\",\n        \"name\": \"System.Collections.abh2czpft7.wasm\",\n        \"integrity\": \"sha256-2vPegxaq3QyxmGnyMmVOwBDCC0MaJ3+QdAdzEG7O7Rs=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.ComponentModel.wasm\",\n        \"name\": \"System.ComponentModel.zvpmoupymb.wasm\",\n        \"integrity\": \"sha256-j4xVR2d1tpwZrUoag5ugeqAMDDfGXlE9q1rpeRzeLQY=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.Console.wasm\",\n        \"name\": \"System.Console.4xbni2kq7l.wasm\",\n        \"integrity\": \"sha256-6AnyLxWZDomxYGjL7oey+e9wYELwNH4b+VvbA5hrK/Q=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.Diagnostics.DiagnosticSource.wasm\",\n        \"name\": \"System.Diagnostics.DiagnosticSource.ojhazo1uyi.wasm\",\n        \"integrity\": \"sha256-rJVTcydznDq5HMdT7Z67I3xbhQMfUlB/S4Pev2arlb4=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.IO.Pipelines.wasm\",\n        \"name\": \"System.IO.Pipelines.5ujx8ulk75.wasm\",\n        \"integrity\": \"sha256-U40nDmWhvki2ysl5ZN4nXTJ/25f2Owz3e9BIBOqLS1Y=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.Linq.wasm\",\n        \"name\": \"System.Linq.orou8bexs1.wasm\",\n        \"integrity\": \"sha256-5AzxOuFCKahKyHJ9zaeClnHoWR3Msgj2cwUgnn3Md+w=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.Memory.wasm\",\n        \"name\": \"System.Memory.j3p0152ymq.wasm\",\n        \"integrity\": \"sha256-8QuQlI+GDyWHcN0FjzMvQGAyvJDUV+uMf2ELfyaLsdI=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.Net.Http.Json.wasm\",\n        \"name\": \"System.Net.Http.Json.ejqnth2elm.wasm\",\n        \"integrity\": \"sha256-5lhQJk4oa1fl7yXO9Fyhr27dWjxyjJ1bn4LPf4GnL7E=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.Net.Http.wasm\",\n        \"name\": \"System.Net.Http.3wcjbw877p.wasm\",\n        \"integrity\": \"sha256-A3MTl2Yd3qosOAVew1YEBmDEvVo++g6ZDVjsuGIcU4s=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.Net.Primitives.wasm\",\n        \"name\": \"System.Net.Primitives.aficcbn7zu.wasm\",\n        \"integrity\": \"sha256-RrAqmAHohERJK6ltedHgbZj7mMAwwgWxs4hS92FGJDM=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.Private.Uri.wasm\",\n        \"name\": \"System.Private.Uri.mh816ehudy.wasm\",\n        \"integrity\": \"sha256-xtCfvp5+/WjCB+6HZLeWXYbWwYIGz455OUI2WKeexQc=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.Runtime.wasm\",\n        \"name\": \"System.Runtime.59wbxfx06s.wasm\",\n        \"integrity\": \"sha256-CeXMRzj/JuUbBLosJ8d/Y7plrgwHwgA4B2qBuofLbVc=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.Security.Cryptography.wasm\",\n        \"name\": \"System.Security.Cryptography.js9a235qw5.wasm\",\n        \"integrity\": \"sha256-E04MD5+M8yUnUB3bCz1aqecOvGzLKoWYaMzJ+vxfHro=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.Text.Encodings.Web.wasm\",\n        \"name\": \"System.Text.Encodings.Web.jv9o5ubi8o.wasm\",\n        \"integrity\": \"sha256-AStx9ITudnmvak7QX2Usaqhtssxn7aZew6RkmrmlGyQ=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.Text.Json.wasm\",\n        \"name\": \"System.Text.Json.9yuw0a5jqp.wasm\",\n        \"integrity\": \"sha256-sdyZ9ljCAig+/DT3X1ADtWjDuOM9YQ+4m7M36Wx7gt8=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"System.Text.RegularExpressions.wasm\",\n        \"name\": \"System.Text.RegularExpressions.2d455bbq8f.wasm\",\n        \"integrity\": \"sha256-VgY1lDP3aBBNSxOfQNYIJ/TzmvcdDCYDUcUTJTMZNiQ=\",\n        \"cache\": \"force-cache\"\n      },\n      {\n        \"virtualPath\": \"CollabsKus.BlazorWebAssembly.wasm\",\n        \"name\": \"CollabsKus.BlazorWebAssembly.kinapbhykw.wasm\",\n        \"integrity\": \"sha256-dBXqiMeYX9HoW1OTtYBVun1VjsC2RABPh8P3XKIR/nA=\",\n        \"cache\": \"force-cache\"\n      }\n    ]\n  },\n  \"debugLevel\": 0,\n  \"linkerEnabled\": true,\n  \"appsettings\": [\n    \"../appsettings.json\"\n  ],\n  \"globalizationMode\": \"sharded\",\n  \"extensions\": {\n    \"blazor\": {}\n  },\n  \"runtimeConfig\": {\n    \"runtimeOptions\": {\n      \"configProperties\": {\n        \"Microsoft.AspNetCore.Components.Routing.RegexConstraintSupport\": false,\n        \"Microsoft.Extensions.DependencyInjection.VerifyOpenGenericServiceTrimmability\": true,\n        \"System.ComponentModel.DefaultValueAttribute.IsSupported\": false,\n        \"System.ComponentModel.Design.IDesignerHost.IsSupported\": false,\n        \"System.ComponentModel.TypeConverter.EnableUnsafeBinaryFormatterInDesigntimeLicenseContextSerialization\": false,\n        \"System.ComponentModel.TypeDescriptor.IsComObjectDescriptorSupported\": false,\n        \"System.Data.DataSet.XmlSerializationIsSupported\": false,\n        \"System.Diagnostics.Debugger.IsSupported\": false,\n        \"System.Diagnostics.Metrics.Meter.IsSupported\": false,\n        \"System.Diagnostics.Tracing.EventSource.IsSupported\": false,\n        \"System.GC.Server\": true,\n        \"System.Globalization.Invariant\": false,\n        \"System.TimeZoneInfo.Invariant\": false,\n        \"System.Linq.Enumerable.IsSizeOptimized\": true,\n        \"System.Net.Http.EnableActivityPropagation\": false,\n        \"System.Net.Http.WasmEnableStreamingResponse\": true,\n        \"System.Net.SocketsHttpHandler.Http3Support\": false,\n        \"System.Reflection.Metadata.MetadataUpdater.IsSupported\": false,\n        \"System.Resources.ResourceManager.AllowCustomResourceTypes\": false,\n        \"System.Resources.UseSystemResourceKeys\": true,\n        \"System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported\": true,\n        \"System.Runtime.InteropServices.BuiltInComInterop.IsSupported\": false,\n        \"System.Runtime.InteropServices.EnableConsumingManagedCodeFromNativeHosting\": false,\n        \"System.Runtime.InteropServices.EnableCppCLIHostActivation\": false,\n        \"System.Runtime.InteropServices.Marshalling.EnableGeneratedComInterfaceComImportInterop\": false,\n        \"System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization\": false,\n        \"System.StartupHookProvider.IsSupported\": false,\n        \"System.Text.Encoding.EnableUnsafeUTF7Encoding\": false,\n        \"System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault\": true,\n        \"System.Threading.Thread.EnableAutoreleasePool\": false,\n        \"Microsoft.AspNetCore.Components.Endpoints.NavigationManager.DisableThrowNavigationException\": false\n      }\n    }\n  }\n}/*json-end*/);export{gt as default,ft as dotnet,mt as exit};\n"
+          },
+          "redirectURL": "",
+          "headersSize": 0,
+          "bodySize": 0
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 0,
+          "dns": 0,
+          "connect": 0,
+          "ssl": 0,
+          "send": 0,
+          "wait": 0,
+          "receive": 0
+        },
+        "time": 0,
+        "_securityState": "secure",
+        "pageref": "page_1"
+      },
+      {
+        "startedDateTime": "2026-02-08T15:08:09.949-05:00",
+        "request": {
+          "bodySize": 0,
+          "method": "GET",
+          "url": "https://collabskus.github.io/_framework/blazor.webassembly.js",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Host",
+              "value": "collabskus.github.io"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0"
+            },
+            {
+              "name": "Accept",
+              "value": "*/*"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "Referer",
+              "value": "https://collabskus.github.io/"
+            },
+            {
+              "name": "Sec-Fetch-Dest",
+              "value": "script"
+            },
+            {
+              "name": "Sec-Fetch-Mode",
+              "value": "no-cors"
+            },
+            {
+              "name": "Sec-Fetch-Site",
+              "value": "same-origin"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookies": [],
+          "queryString": [],
+          "headersSize": 0
+        },
+        "response": {
+          "status": 404,
+          "statusText": "",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "server",
+              "value": "GitHub.com"
+            },
+            {
+              "name": "content-type",
+              "value": "text/html; charset=utf-8"
+            },
+            {
+              "name": "x-origin-cache",
+              "value": "HIT"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=31556952"
+            },
+            {
+              "name": "etag",
+              "value": "W/\"64d39a40-24a3\""
+            },
+            {
+              "name": "content-security-policy",
+              "value": "default-src 'none'; style-src 'unsafe-inline'; img-src data:; connect-src 'self'"
+            },
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "x-proxy-cache",
+              "value": "MISS"
+            },
+            {
+              "name": "x-github-request-id",
+              "value": "EA9E:14657D:23181D1:25AA65C:6988ECB7"
+            },
+            {
+              "name": "accept-ranges",
+              "value": "bytes"
+            },
+            {
+              "name": "date",
+              "value": "Sun, 08 Feb 2026 20:08:09 GMT"
+            },
+            {
+              "name": "via",
+              "value": "1.1 varnish"
+            },
+            {
+              "name": "age",
+              "value": "114"
+            },
+            {
+              "name": "x-served-by",
+              "value": "cache-iad-kiad7000080-IAD"
+            },
+            {
+              "name": "x-cache",
+              "value": "HIT"
+            },
+            {
+              "name": "x-cache-hits",
+              "value": "1"
+            },
+            {
+              "name": "x-timer",
+              "value": "S1770581290.612595,VS0,VE4"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "name": "x-fastly-request-id",
+              "value": "a08ff800ec14e68e525ebab708a952c98506021d"
+            },
+            {
+              "name": "content-length",
+              "value": "5254"
+            },
+            {
+              "name": "X-Firefox-Spdy",
+              "value": "h2"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "mimeType": "text/html; charset=utf-8",
+            "size": 9379,
+            "text": "<!DOCTYPE html>\n<html>\n  <head>\n    <meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\">\n    <meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; style-src 'unsafe-inline'; img-src data:; connect-src 'self'\">\n    <title>Page not found &middot; GitHub Pages</title>\n    <style type=\"text/css\" media=\"screen\">\n      body {\n        background-color: #f1f1f1;\n        margin: 0;\n        font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n      }\n\n      .container { margin: 50px auto 40px auto; width: 600px; text-align: center; }\n\n      a { color: #4183c4; text-decoration: none; }\n      a:hover { text-decoration: underline; }\n\n      h1 { width: 800px; position:relative; left: -100px; letter-spacing: -1px; line-height: 60px; font-size: 60px; font-weight: 100; margin: 0px 0 50px 0; text-shadow: 0 1px 0 #fff; }\n      p { color: rgba(0, 0, 0, 0.5); margin: 20px 0; line-height: 1.6; }\n\n      ul { list-style: none; margin: 25px 0; padding: 0; }\n      li { display: table-cell; font-weight: bold; width: 1%; }\n\n      .logo { display: inline-block; margin-top: 35px; }\n      .logo-img-2x { display: none; }\n      @media\n      only screen and (-webkit-min-device-pixel-ratio: 2),\n      only screen and (   min--moz-device-pixel-ratio: 2),\n      only screen and (     -o-min-device-pixel-ratio: 2/1),\n      only screen and (        min-device-pixel-ratio: 2),\n      only screen and (                min-resolution: 192dpi),\n      only screen and (                min-resolution: 2dppx) {\n        .logo-img-1x { display: none; }\n        .logo-img-2x { display: inline-block; }\n      }\n\n      #suggestions {\n        margin-top: 35px;\n        color: #ccc;\n      }\n      #suggestions a {\n        color: #666666;\n        font-weight: 200;\n        font-size: 14px;\n        margin: 0 10px;\n      }\n\n    </style>\n  </head>\n  <body>\n\n    <div class=\"container\">\n\n      <h1>404</h1>\n      <p><strong>File not found</strong></p>\n\n      <p>\n        The site configured at this address does not\n        contain the requested file.\n      </p>\n\n      <p>\n        If this is your site, make sure that the filename case matches the URL\n        as well as any file permissions.<br>\n        For root URLs (like <code>http://example.com/</code>) you must provide an\n        <code>index.html</code> file.\n      </p>\n\n      <p>\n        <a href=\"https://help.github.com/pages/\">Read the full documentation</a>\n        for more information about using <strong>GitHub Pages</strong>.\n      </p>\n\n      <div id=\"suggestions\">\n        <a href=\"https://githubstatus.com\">GitHub Status</a> &mdash;\n        <a href=\"https://twitter.com/githubstatus\">@githubstatus</a>\n      </div>\n\n      <a href=\"/\" class=\"logo logo-img-1x\">\n        <img width=\"32\" height=\"32\" title=\"\" alt=\"\" src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpFMTZCRDY3REIzRjAxMUUyQUQzREIxQzRENUFFNUM5NiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpFMTZCRDY3RUIzRjAxMUUyQUQzREIxQzRENUFFNUM5NiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkUxNkJENjdCQjNGMDExRTJBRDNEQjFDNEQ1QUU1Qzk2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkUxNkJENjdDQjNGMDExRTJBRDNEQjFDNEQ1QUU1Qzk2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+SM9MCAAAA+5JREFUeNrEV11Ik1EY3s4+ddOp29Q5b0opCgKFsoKoi5Kg6CIhuwi6zLJLoYLopq4qsKKgi4i6CYIoU/q5iDAKs6syoS76IRWtyJ+p7cdt7sf1PGOD+e0c3dygAx/67ZzzPM95/877GYdHRg3ZjMXFxepQKNS6sLCwJxqNNuFpiMfjVs4ZjUa/pmmjeD6VlJS8NpvNT4QQ7mxwjSsJiEQim/1+/9lgMHgIr5ohuxG1WCw9Vqv1clFR0dCqBODElV6v90ogEDjGdYbVjXhpaendioqK07CIR7ZAqE49PT09BPL2PMgTByQGsYiZlQD4uMXtdr+JxWINhgINYhGT2MsKgMrm2dnZXgRXhaHAg5jEJodUAHxux4LudHJE9RdEdA+i3Juz7bGHe4mhE9FNrgwBCLirMFV9Okh5eflFh8PR5nK5nDabrR2BNJlKO0T35+Li4n4+/J+/JQCxhmu5h3uJoXNHPbmWZAHMshWB8l5/ipqammaAf0zPDDx1ONV3vurdidqwAQL+pEc8sLcAe1CCvQ3YHxIW8Pl85xSWNC1hADDIv0rIE/o4J0k3kww4xSlwIhcq3EFFOm7KN/hUGOQkt0CFa5WpNJlMvxBEz/IVQAxg/ZRZl9wiHA63yDYieM7DnLP5CiAGsC7I5sgtYKJGWe2A8seFqgFJrJjEPY1Cn3pJ8/9W1e5VWsFDTEmFrBcoDhZJEQkXuhICMyKpjhahqN21hRYATKfUOlDmkygrR4o4C0VOLGJKrOITKB4jijzdXygBKixyC5TDQdnk/Pz8qRw6oOWGlsTKGOQW6OH6FBWsyePxdOXLTgxiyebILZCjz+GLgMIKnXNzc49YMlcRdHXcSwxFVgTInQhC9G33UhNoJLuqq6t345p9y3eUy8OTk5PjAHuI9uo4b07FBaOhsu0A4Unc+T1TU1Nj3KsSSE5yJ65jqF2DDd8QqWYmAZrIM2VlZTdnZmb6AbpdV9V6ec9znf5Q7HjYumdRE0JOp3MjitO4SFa+cZz8Umqe3TCbSLvdfkR/kWDdNQl5InuTcysOcpFT35ZrbBxx4p3JAHlZVVW1D/634VRt+FvLBgK/v5LV9WS+10xMTEwtRw7XvqOL+e2Q8V3AYIOIAXQ26/heWVnZCVfcyKHg2CBgTpmPmjYM8l24GyaUHyaIh7XwfR9ErE8qHoDfn2LTNAVC0HX6MFcBIP8Bi+6F6cdW/DICkANRfx99fEYFQ7Nph5i/uQiA214gno7K+guhaiKg9gC62+M8eR7XsBsYJ4ilam60Fb7r7uAj8wFyuwM1oIOWgfmDy6RXEEQzJMPe23DXrVS7rtyD3Df8z/FPgAEAzWU5Ku59ZAUAAAAASUVORK5CYII=\">\n      </a>\n\n      <a href=\"/\" class=\"logo logo-img-2x\">\n        <img width=\"32\" height=\"32\" title=\"\" alt=\"\" src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpEQUM1QkUxRUI0MUMxMUUyQUQzREIxQzRENUFFNUM5NiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpEQUM1QkUxRkI0MUMxMUUyQUQzREIxQzRENUFFNUM5NiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkUxNkJENjdGQjNGMDExRTJBRDNEQjFDNEQ1QUU1Qzk2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkUxNkJENjgwQjNGMDExRTJBRDNEQjFDNEQ1QUU1Qzk2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+hfPRaQAAB6lJREFUeNrsW2mM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\">\n      </a>\n    </div>\n  </body>\n</html>\n"
+          },
+          "redirectURL": "",
+          "headersSize": 0,
+          "bodySize": 9379
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 0,
+          "dns": 0,
+          "connect": 0,
+          "ssl": 0,
+          "send": 0,
+          "wait": 0,
+          "receive": 0
+        },
+        "time": 0,
+        "_securityState": "secure",
+        "pageref": "page_1"
+      },
+      {
+        "startedDateTime": "2026-02-08T15:08:10.013-05:00",
+        "request": {
+          "bodySize": 0,
+          "method": "GET",
+          "url": "https://collabskus.github.io/icon-512.png",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Host",
+              "value": "collabskus.github.io"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0"
+            },
+            {
+              "name": "Accept",
+              "value": "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "Referer",
+              "value": "https://collabskus.github.io/"
+            },
+            {
+              "name": "Sec-Fetch-Dest",
+              "value": "image"
+            },
+            {
+              "name": "Sec-Fetch-Mode",
+              "value": "no-cors"
+            },
+            {
+              "name": "Sec-Fetch-Site",
+              "value": "same-origin"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookies": [],
+          "queryString": [],
+          "headersSize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "server",
+              "value": "GitHub.com"
+            },
+            {
+              "name": "content-type",
+              "value": "image/png"
+            },
+            {
+              "name": "x-origin-cache",
+              "value": "HIT"
+            },
+            {
+              "name": "last-modified",
+              "value": "Sun, 08 Feb 2026 19:56:35 GMT"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=31556952"
+            },
+            {
+              "name": "etag",
+              "value": "\"6988ea73-18a7\""
+            },
+            {
+              "name": "x-proxy-cache",
+              "value": "MISS"
+            },
+            {
+              "name": "x-github-request-id",
+              "value": "F534:1D22D0:2562314:2A7D21F:6988ECB7"
+            },
+            {
+              "name": "accept-ranges",
+              "value": "bytes"
+            },
+            {
+              "name": "content-length",
+              "value": "6311"
+            },
+            {
+              "name": "date",
+              "value": "Sun, 08 Feb 2026 20:06:21 GMT"
+            },
+            {
+              "name": "via",
+              "value": "1.1 varnish"
+            },
+            {
+              "name": "cache-control",
+              "value": "max-age=600"
+            },
+            {
+              "name": "expires",
+              "value": "Sun, 08 Feb 2026 20:16:15 GMT"
+            },
+            {
+              "name": "age",
+              "value": "6"
+            },
+            {
+              "name": "x-served-by",
+              "value": "cache-iad-kiad7000089-IAD"
+            },
+            {
+              "name": "x-cache",
+              "value": "HIT"
+            },
+            {
+              "name": "x-cache-hits",
+              "value": "1"
+            },
+            {
+              "name": "x-timer",
+              "value": "S1770581181.361561,VS0,VE24"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "name": "x-fastly-request-id",
+              "value": "aedd518a88b6e18faf18dc13ab75192a7974cba1"
+            },
+            {
+              "name": "X-Firefox-Spdy",
+              "value": "h2"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "mimeType": "image/png",
+            "size": 6311,
+            "encoding": "base64",
+            "text": "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"
+          },
+          "redirectURL": "",
+          "headersSize": 0,
+          "bodySize": 0
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 0,
+          "dns": 0,
+          "connect": 0,
+          "ssl": 0,
+          "send": 0,
+          "wait": 0,
+          "receive": 0
+        },
+        "time": 0,
+        "_securityState": "secure",
+        "pageref": "page_1"
+      },
+      {
+        "startedDateTime": "2026-02-08T15:08:10.014-05:00",
+        "request": {
+          "bodySize": 0,
+          "method": "GET",
+          "url": "https://collabskus.github.io/favicon.png",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Host",
+              "value": "collabskus.github.io"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0"
+            },
+            {
+              "name": "Accept",
+              "value": "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "Referer",
+              "value": "https://collabskus.github.io/"
+            },
+            {
+              "name": "Sec-Fetch-Dest",
+              "value": "image"
+            },
+            {
+              "name": "Sec-Fetch-Mode",
+              "value": "no-cors"
+            },
+            {
+              "name": "Sec-Fetch-Site",
+              "value": "same-origin"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookies": [],
+          "queryString": [],
+          "headersSize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "server",
+              "value": "GitHub.com"
+            },
+            {
+              "name": "content-type",
+              "value": "image/png"
+            },
+            {
+              "name": "last-modified",
+              "value": "Sun, 08 Feb 2026 19:56:35 GMT"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=31556952"
+            },
+            {
+              "name": "etag",
+              "value": "\"6988ea73-47c\""
+            },
+            {
+              "name": "x-proxy-cache",
+              "value": "MISS"
+            },
+            {
+              "name": "x-github-request-id",
+              "value": "AF3A:1B2DFC:24F184E:28C131B:6988ECB7"
+            },
+            {
+              "name": "accept-ranges",
+              "value": "bytes"
+            },
+            {
+              "name": "content-length",
+              "value": "1148"
+            },
+            {
+              "name": "date",
+              "value": "Sun, 08 Feb 2026 20:06:21 GMT"
+            },
+            {
+              "name": "via",
+              "value": "1.1 varnish"
+            },
+            {
+              "name": "cache-control",
+              "value": "max-age=600"
+            },
+            {
+              "name": "expires",
+              "value": "Sun, 08 Feb 2026 20:16:15 GMT"
+            },
+            {
+              "name": "age",
+              "value": "6"
+            },
+            {
+              "name": "x-served-by",
+              "value": "cache-iad-kiad7000089-IAD"
+            },
+            {
+              "name": "x-cache",
+              "value": "HIT"
+            },
+            {
+              "name": "x-cache-hits",
+              "value": "1"
+            },
+            {
+              "name": "x-timer",
+              "value": "S1770581181.361590,VS0,VE24"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "name": "x-fastly-request-id",
+              "value": "43c537c8c9a5136d9df3f991372e0e5edf9e434f"
+            },
+            {
+              "name": "X-Firefox-Spdy",
+              "value": "h2"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "mimeType": "image/png",
+            "size": 1148,
+            "encoding": "base64",
+            "text": "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEQ0lEQVR4XsVWTWxMURQ+XgaqagiFRkwjQcRCoxIrdKkJDFY0RRdUbEotREOMaFiAsWtZgEAkpEGiK6YsqZBIRRFGiqCio+0U8Jzv5n7JzctkzDTwJSd59+fdc853fu4d4vu+/E+E5B9hYGCgVAcnVXpU4gUFBQnMe39JWVQlprLFmY6rLFJZrnKTawjBn1a+XgcnnKkalTEqRzBo2vNeNu0uxmdKpdT7kxSrtFD53UQ/l2BQDINLxz7K7Wu98qh9AMOwSjSUR/wgFZIZZZZaSff+lNOHP0j3628yr6JQLO2S7Pwql49/FKDtWp/MKi+QbAZAKWjbYj2ISA64pd7By+4332XlhrECUHlj7WshwAANz2gAEsTSFqZXyc4v5qB+/SZcBTg03cc1kYVLiwRoPZ+CUe6aMdAiEgp6bbN1HS29fv6TtLf1Sz6YNXeE+bfRshEEnRpZ5LEKhAYkEDMsIltdxSNHeRKZMcz1ml4NCvvOTjHnhRzlcSrfq/F6+eSrAOWLCqVy9WgmDcFYGnof3fss+YLOeFY5srvOVQ6Ptx6YKPUHJ8r4kqFy5tAHJBLFjIGdzSXYh/2Db8W2RWq8U1DOg2GlUdR6ISVBwGvMgyE0FuxvqOrKOUcs2jzrfeS9JgvrtLp+HJTDU6MkG5AnYK14csj8lwPccN73bJ3Lrau9AozXgxavDjO2nDM0n70zjSLHb5TK1OkmjmAN+/Gf2fsbsEEBCY/dja2zUpUjF1C/VL4fGTtzuFFCuaue71LaqRBMgUX8/xv6mYApvRFb8HeEXpCeDqeprNo4Vvr1u2FNF+d4kCxcUmSoZ623qxM4PBvAkpt3HpuCWx6ocQJKEJ4cah5dEg5k8570g944DTDU/W2gTGtjEzjEg+QFDSBtQmOKS0ICMDfQ14N1Tk/RIwj8RzaDqNVSRbgUD1R5jPOeayG7Gw/nHV6oa6hz1DxoxGHIDYRqrZZetRWEC70kk3JSz6ojJJ1OJ1T8xs3P/RWzH/oN1U99jA9vT2JspC7a6SeffcK8ke63fWa9an6H33rxLef8M/FX2E9x1yE9KmW4e1wZopO4eo/gLm/WCwjY2TRZwzJcdlR1McNZkmCKFZMV6BGbNOYsOZS7Un9fCCcELcx2KOC7Dag/OAkHufd4VuU0EpTvPzeFMQd6qDwIz2bjKRX0dCpie0WzwesGB2dVukAdQLc8emWqzNNcwR2CZmUxxrw1guCr2C7CkDBDwcSs3maSixWCt17GauAbAUmIhsT/LFag60kQrAJd7LEtOQVloBBA84ExdcteGo+Sj78I4VZJk92jtyH2oGKgnLGvofJMCL6IorZFhuFtc+wdL6Sckq5yTdj1OqkSZexzMYBGlFkj5pB2UNrR/lmbzA8h2IRKNcvLKwqZcMQelbhlVvIxIPgyhkQkNyRhOIRtFhisAQSfa5QgoAgUJ4JU52XA/8QvRgye1rf4g4QAAAAASUVORK5CYII="
+          },
+          "redirectURL": "",
+          "headersSize": 0,
+          "bodySize": 0
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 0,
+          "dns": 0,
+          "connect": 0,
+          "ssl": 0,
+          "send": 0,
+          "wait": 0,
+          "receive": 0
+        },
+        "time": 0,
+        "_securityState": "secure",
+        "pageref": "page_1"
+      }
+    ]
+  }
+}
