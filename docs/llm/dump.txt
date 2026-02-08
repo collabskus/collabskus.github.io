@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 02/08/2026 14:46:48
+Generated: 02/08/2026 14:54:51
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -159,8 +159,8 @@ MODIFIED: 02/08/2026 10:21:22
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\.github\workflows\deploy.yml
-SIZE: 1.75 KB
-MODIFIED: 02/08/2026 11:56:37
+SIZE: 2.49 KB
+MODIFIED: 02/08/2026 14:54:01
 ================================================================================
 
 name: Build and Deploy Blazor WASM to GitHub Pages
@@ -191,11 +191,6 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      - name: Show directory tree (DEBUG)
-        run: |
-          pwd
-          ls -R
-        
       - name: Install dotnet workload install wasm-tools
         run: dotnet workload install wasm-tools
 
@@ -205,28 +200,39 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
-      - name: Show directory tree (DEBUG)
-        run: |
-          pwd
-          ls -R
-
       - name: Publish
         run: |
           dotnet publish CollabsKus.BlazorWebAssembly/CollabsKus.BlazorWebAssembly.csproj \
             -c Release \
-            -o publish
+            -o publish \
+            -p:GHPages=true
 
-      - name: Show directory tree (DEBUG)
+      - name: Determine base path for GitHub Pages
+        id: basepath
         run: |
-          pwd
-          ls -R
+          # Check if this is a user/org site (repo name matches username.github.io)
+          REPO_NAME="${{ github.event.repository.name }}"
+          REPO_OWNER="${{ github.repository_owner }}"
+          
+          if [[ "$REPO_NAME" == "$REPO_OWNER.github.io" ]] || [[ "$REPO_NAME" == "github.io" ]]; then
+            # User/org site - use root path
+            echo "base_path=/" >> $GITHUB_OUTPUT
+            echo "This is a user/organization site, using base path: /"
+          else
+            # Project site - use repo name as base path
+            echo "base_path=/$REPO_NAME/" >> $GITHUB_OUTPUT
+            echo "This is a project site, using base path: /$REPO_NAME/"
+          fi
 
-      - name: DEBUG publish output
+      - name: Update base tag in index.html
         run: |
-          echo "===== PUBLISH OUTPUT TREE ====="
-          ls -R publish
-          echo "===== WWWROOT TREE ====="
-          ls -R publish/wwwroot
+          BASE_PATH="${{ steps.basepath.outputs.base_path }}"
+          echo "Setting base href to: $BASE_PATH"
+          sed -i "s|<base href=\"/\" />|<base href=\"$BASE_PATH\" />|g" publish/wwwroot/index.html
+          
+          # Verify the change
+          echo "Updated index.html base tag:"
+          grep "<base href=" publish/wwwroot/index.html
 
       - name: Add .nojekyll
         run: touch publish/wwwroot/.nojekyll
@@ -1978,7 +1984,7 @@ async function onFetch(event) {
 
 
 ===============================================================================
-EXPORT COMPLETED: 02/08/2026 14:46:48
+EXPORT COMPLETED: 02/08/2026 14:54:51
 Total Files Exported: 32
 Output File: .\docs\llm\dump.txt
 ===============================================================================
