@@ -247,3 +247,127 @@ If you need to manually set the base path, modify the workflow's "Determine base
     # Force specific base path
     echo "base_path=/my-custom-path/" >> $GITHUB_OUTPUT
 ```
+
+# 🔥 CRITICAL FIX NEEDED - Blazor Import Map Issue
+
+## The REAL Problem
+
+Looking at your HAR file, I found the actual issue:
+
+1. ✅ The page loads: `https://collabskus.github.io/`
+2. ❌ **404 ERROR**: `https://collabskus.github.io/_framework/blazor.webassembly.js`
+3. ✅ But this works: `https://collabskus.github.io/_framework/dotnet.8o4x4gvazt.js`
+
+**Root Cause**: Your `index.html` has an import map that references `_framework/blazor.webassembly.js`, but that file doesn't exist! Only the hashed version `blazor.webassembly.66stpp682q.js` exists.
+
+This is NOT a base path issue - it's a Blazor build/publish issue.
+
+## The Import Map Problem
+
+In your HTML (from the HAR):
+```html
+<script type="importmap">{
+  "imports": {
+    "./_framework/blazor.webassembly.js": "./_framework/blazor.webassembly.66stpp682q.js",
+    ...
+  }
+}
+```
+
+The browser tries to load `_framework/blazor.webassembly.js` which **doesn't exist**.
+
+## Solutions (Try in Order)
+
+### Solution 1: Remove -p:GHPages=true flag
+
+The `-p:GHPages=true` flag might be causing issues with file naming. Try building without it:
+
+```yaml
+- name: Publish
+  run: |
+    dotnet publish CollabsKus.BlazorWebAssembly/CollabsKus.BlazorWebAssembly.csproj \
+      -c Release \
+      -o publish \
+      --no-build
+```
+
+### Solution 2: Check Your .csproj Settings
+
+Make sure your `.csproj` file doesn't have conflicting settings:
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <!-- Make sure these are set correctly -->
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+    <!-- DON'T set StaticWebAssetBasePath unless you need it -->
+  </PropertyGroup>
+</Project>
+```
+
+### Solution 3: Verify Build Output
+
+Add this step to your workflow to see what's actually being published:
+
+```yaml
+- name: Inspect published files
+  run: |
+    echo "=== Published files ==="
+    ls -la publish/wwwroot/_framework/
+    echo ""
+    echo "=== Looking for blazor files ==="
+    find publish/wwwroot -name "*blazor*" -type f
+```
+
+### Solution 4: Use Proper Publish Command
+
+Make sure you're using the correct publish sequence:
+
+```yaml
+- name: Restore
+  run: dotnet restore CollabsKus.BlazorWebAssembly/CollabsKus.BlazorWebAssembly.csproj
+
+- name: Build
+  run: dotnet build CollabsKus.BlazorWebAssembly/CollabsKus.BlazorWebAssembly.csproj --configuration Release --no-restore
+
+- name: Publish
+  run: dotnet publish CollabsKus.BlazorWebAssembly/CollabsKus.BlazorWebAssembly.csproj -c Release -o publish --no-build
+```
+
+## What to Check
+
+1. **GitHub Actions Logs**: Look for warnings about file generation
+2. **Build Artifacts**: Download the artifact from GitHub Actions and check if `blazor.webassembly.js` exists
+3. **Import Map**: Check if the import map is being generated correctly
+
+## The Working Workflow
+
+I've created `deploy-fixed.yml` with:
+- ✅ Proper restore → build → publish sequence  
+- ✅ Removed the `-p:GHPages=true` flag
+- ✅ Added inspection step to debug file generation
+- ✅ Correct base path handling
+
+## Quick Test
+
+To test if this is the issue, try building locally:
+
+```bash
+cd CollabsKus.BlazorWebAssembly
+dotnet publish -c Release -o ../test-output
+ls -la ../test-output/wwwroot/_framework/ | grep blazor
+```
+
+You should see BOTH:
+- `blazor.webassembly.js` (without hash)
+- `blazor.webassembly.XXXXX.js` (with hash)
+
+If you only see the hashed version, that's your problem!
+
+## Next Steps
+
+1. Replace `.github/workflows/deploy.yml` with `deploy-fixed.yml`
+2. Push and watch the "Inspect published files" step
+3. Check if both hashed and unhashed `blazor.webassembly.js` files exist
+4. If the unhashed file is missing, we need to fix the build configuration
