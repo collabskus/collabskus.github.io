@@ -50,8 +50,8 @@ jobs:
           echo "===== WWWROOT TREE ====="
           ls -R publish/wwwroot
 
-      # - name: Add .nojekyll
-      #   run: touch publish/wwwroot/.nojekyll
+      - name: Add .nojekyll
+        run: touch publish/wwwroot/.nojekyll
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
