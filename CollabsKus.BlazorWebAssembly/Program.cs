@@ -8,15 +8,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-// Option 1: Register settings as a singleton service
-builder.Services.AddSingleton<PortfolioSettings>(sp =>
-{
-    // You could load this from appsettings.json
-    var settings = builder.Configuration.GetSection("Portfolio").Get<PortfolioSettings>()
-                   ?? new PortfolioSettings();
-    return settings;
-});
-
 // Option 2: Create a cascading parameter for the whole app
 // This makes the config available to all components
 
