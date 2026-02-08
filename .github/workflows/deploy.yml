@@ -30,6 +30,9 @@ jobs:
         run: |
           pwd
           ls -R
+        
+      - name: Install dotnet workload install wasm-tools
+        run: dotnet workload install wasm-tools
 
       - name: Restore
         run: dotnet restore
@@ -37,11 +40,21 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
+      - name: Show directory tree (DEBUG)
+        run: |
+          pwd
+          ls -R
+
       - name: Publish
         run: |
           dotnet publish CollabsKus.BlazorWebAssembly/CollabsKus.BlazorWebAssembly.csproj \
             -c Release \
             -o publish
+
+      - name: Show directory tree (DEBUG)
+        run: |
+          pwd
+          ls -R
 
       - name: DEBUG publish output
         run: |
