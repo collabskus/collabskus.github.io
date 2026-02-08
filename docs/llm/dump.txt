@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 02/08/2026 15:37:30
+Generated: 02/08/2026 15:42:20
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -1866,8 +1866,8 @@ body {
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\wwwroot\index.html
-SIZE: 1.33 KB
-MODIFIED: 02/08/2026 11:29:45
+SIZE: 1.01 KB
+MODIFIED: 02/08/2026 15:42:00
 ================================================================================
 
 <!DOCTYPE html>
@@ -1878,16 +1878,12 @@ MODIFIED: 02/08/2026 11:29:45
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kathmandu Calendar & Time</title>
     <base href="/" />
-    <link rel="preload" id="webassembly" />
     <link rel="stylesheet" href="css/app.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
     <link href="CollabsKus.BlazorWebAssembly.styles.css" rel="stylesheet" />
     <link href="manifest.webmanifest" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
-    <script type="importmap"></script>
-    <!-- DEBUG MARKER -->
-    <meta name="build" content="GH_PAGES_DEBUG_V1" />
 </head>
 
 <body>
@@ -1904,8 +1900,6 @@ MODIFIED: 02/08/2026 11:29:45
         <a href="." class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-    <script src="_framework/blazor.webassembly.js"></script>
-    <script>navigator.serviceWorker.register('service-worker.js', { updateViaCache: 'none' });</script>
 </body>
 
 </html>
@@ -1990,7 +1984,7 @@ async function onFetch(event) {
 
 
 ===============================================================================
-EXPORT COMPLETED: 02/08/2026 15:37:30
+EXPORT COMPLETED: 02/08/2026 15:42:20
 Total Files Exported: 32
 Output File: .\docs\llm\dump.txt
 ===============================================================================

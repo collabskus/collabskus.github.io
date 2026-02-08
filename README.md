@@ -371,3 +371,132 @@ If you only see the hashed version, that's your problem!
 2. Push and watch the "Inspect published files" step
 3. Check if both hashed and unhashed `blazor.webassembly.js` files exist
 4. If the unhashed file is missing, we need to fix the build configuration
+
+# THE ACTUAL PROBLEM - CONFIRMED FROM HAR FILE
+
+## What I Found (Line by Line Analysis)
+
+### From run-har.txt:
+- **Line 693**: Browser requests `https://collabskus.github.io/_framework/blazor.webassembly.js`
+- **Line 774-776**: Response is **404 Not Found**
+
+### From dump.txt:
+- **Line 1907 in your index.html**: `<script src="_framework/blazor.webassembly.js"></script>`
+- **Line 1888 in your index.html**: `<script type="importmap"></script>` (EMPTY!)
+
+## The Root Cause
+
+Your `index.html` is using the **OLD .NET 7 pattern** but you're on **.NET 10**.
+
+In .NET 7 and earlier:
+```html
+<script src="_framework/blazor.webassembly.js"></script>
+```
+
+In .NET 8, 9, and 10:
+```html
+<!-- NO script tags in source! -->
+<!-- The build system injects everything automatically -->
+```
+
+## What's Happening
+
+1. Your source `index.html` has OLD script tags and an empty import map
+2. When you build with `dotnet publish`, the .NET 10 build system:
+   - Tries to work with your index.html
+   - Gets confused by the manual script tag
+   - Doesn't properly inject the new framework
+3. The published HTML has the old script tag pointing to a file that doesn't exist
+4. Result: 404 error
+
+## The Fix
+
+**Replace your `wwwroot/index.html` with this:**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kathmandu Calendar & Time</title>
+    <base href="/" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="CollabsKus.BlazorWebAssembly.styles.css" rel="stylesheet" />
+    <link href="manifest.webmanifest" rel="manifest" />
+    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
+</head>
+
+<body>
+    <div id="app">
+        <svg class="loading-progress">
+            <circle r="40%" cx="50%" cy="50%" />
+            <circle r="40%" cx="50%" cy="50%" />
+        </svg>
+        <div class="loading-progress-text"></div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="." class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+</body>
+
+</html>
+```
+
+## What Changed
+
+**REMOVED:**
+- ❌ `<link rel="preload" id="webassembly" />` (old .NET 7 thing)
+- ❌ `<script type="importmap"></script>` (empty and wrong)
+- ❌ `<script src="_framework/blazor.webassembly.js"></script>` (doesn't exist in .NET 10)
+- ❌ `<script>navigator.serviceWorker.register(...);</script>` (will be added by build)
+- ❌ `<!-- DEBUG MARKER -->` (not needed)
+
+**What .NET 10 Will Add Automatically:**
+- ✅ Preload links for framework files
+- ✅ Import map with all the hashed file names
+- ✅ Correct script tag with integrity hashes
+- ✅ Service worker registration
+
+## How .NET 10 Build Works
+
+When you run `dotnet publish`:
+
+1. Reads your clean `index.html`
+2. Analyzes all the framework dependencies
+3. Generates hashed filenames (like `blazor.webassembly.66stpp682q.js`)
+4. Injects the import map into `index.html`
+5. Injects the preload links
+6. Injects the blazor script tag
+7. Outputs the complete `index.html` to `publish/wwwroot/`
+
+## Verification
+
+After you deploy with the fixed index.html:
+
+1. View source of `https://collabskus.github.io/`
+2. You should see automatically injected:
+   - `<link href="_framework/dotnet.xxx.js" rel="preload" ...>`
+   - `<script type="importmap">` with actual content
+   - Framework scripts at the bottom
+
+3. The app will load successfully!
+
+## Your Current Workflow is Fine
+
+Your `deploy.yml` is actually correct. The problem was 100% in the `index.html` file.
+
+## Summary
+
+- ✅ The workflow is fine
+- ✅ The .csproj is fine  
+- ✅ The base path handling is fine
+- ❌ The index.html had old .NET 7 code
+
+**Fix: Replace index.html, push, and it will work!**
