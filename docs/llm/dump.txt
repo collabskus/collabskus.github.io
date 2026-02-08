@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 02/08/2026 11:15:39
+Generated: 02/08/2026 11:25:35
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -159,11 +159,11 @@ MODIFIED: 02/08/2026 10:21:22
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\.github\workflows\deploy.yml
-SIZE: 1.32 KB
-MODIFIED: 02/08/2026 11:14:37
+SIZE: 1.74 KB
+MODIFIED: 02/08/2026 11:25:28
 ================================================================================
 
-name: Deploy Blazor WASM to GitHub Pages
+name: Build and Deploy Blazor WASM to GitHub Pages
 
 on:
   push:
@@ -176,11 +176,12 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -190,6 +191,11 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
+      - name: Show directory tree (DEBUG)
+        run: |
+          pwd
+          ls -R
+
       - name: Restore
         run: dotnet restore
 
@@ -197,20 +203,32 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Publish
-        run: dotnet publish CollabsKus.BlazorWebAssembly/CollabsKus.BlazorWebAssembly.csproj -c Release -o release
+        run: |
+          dotnet publish CollabsKus.BlazorWebAssembly/CollabsKus.BlazorWebAssembly.csproj \
+            -c Release \
+            -o publish
 
-      # IMPORTANT: Set correct base href for GitHub Pages
+      - name: DEBUG publish output
+        run: |
+          echo "===== PUBLISH OUTPUT TREE ====="
+          ls -R publish
+          echo "===== WWWROOT TREE ====="
+          ls -R publish/wwwroot
+
+      # Force correct base path
       - name: Fix base href
         run: |
-          sed -i 's|<base href="/" />|<base href="/collabskus.github.io/" />|g' release/wwwroot/index.html
+          sed -i 's|<base href="/" />|<base href="/collabskus.github.io/" />|g' publish/wwwroot/index.html
+          echo "===== INDEX.HTML AFTER PATCH ====="
+          cat publish/wwwroot/index.html
 
       - name: Add .nojekyll
-        run: touch release/wwwroot/.nojekyll
+        run: touch publish/wwwroot/.nojekyll
 
-      - name: Upload artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: release/wwwroot
+          path: publish/wwwroot
 
   deploy:
     needs: build
@@ -218,11 +236,11 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
 
 
 
@@ -1830,8 +1848,8 @@ body {
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\wwwroot\index.html
-SIZE: 1.27 KB
-MODIFIED: 02/08/2026 11:15:34
+SIZE: 1.38 KB
+MODIFIED: 02/08/2026 11:25:20
 ================================================================================
 
 <!DOCTYPE html>
@@ -1841,6 +1859,8 @@ MODIFIED: 02/08/2026 11:15:34
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kathmandu Calendar & Time</title>
+
+    <!-- MUST MATCH REPO NAME -->
     <base href="/collabskus.github.io/" />
     <link rel="preload" id="webassembly" />
     <link rel="stylesheet" href="css/app.css" />
@@ -1850,6 +1870,8 @@ MODIFIED: 02/08/2026 11:15:34
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
     <script type="importmap"></script>
+    <!-- DEBUG MARKER -->
+    <meta name="build" content="GH_PAGES_DEBUG_V1" />
 </head>
 
 <body>
@@ -1952,7 +1974,7 @@ async function onFetch(event) {
 
 
 ===============================================================================
-EXPORT COMPLETED: 02/08/2026 11:15:39
+EXPORT COMPLETED: 02/08/2026 11:25:35
 Total Files Exported: 32
 Output File: .\docs\llm\dump.txt
 ===============================================================================
