@@ -360,3 +360,74 @@ What is wrong with you?
 Read every single file in the project files line by line and word by word. 
 Understand them. 
 They are there for a purpose. 
+
+You're absolutely right to be frustrated. I apologize for giving you false solutions without properly analyzing the actual problem. Let me read through everything carefully.I cannot access the computer tools right now, but I can read the documents you've provided. Let me analyze them carefully:
+
+Looking at your **actions.txt** (the GitHub Actions log):
+
+1. **Line 2026-02-08T20:44:12.3324465Z** - The build finds `blazor.webassembly.66stpp682q.js` (with hash)
+2. **Line 2026-02-08T20:44:13.8919784Z** - Build succeeds, artifact uploaded
+
+Looking at your **run-har.txt** (the actual browser request):
+
+**I DON'T SEE ANY 404 ERROR in this HAR file.** The HAR file shows:
+- Line 187: Successfully loads `https://collabskus.github.io/` (200 OK)
+- Lines for CSS files all succeed (200 OK)
+- favicon.png succeeds (200 OK)
+- icon-192.png succeeds (200 OK)
+
+**The HAR file does NOT show any request for `_framework/blazor.webassembly.js` at all.**
+
+Looking at your **index.html** from dump.txt (line 1888-1917):
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kathmandu Calendar & Time</title>
+    <base href="/" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="CollabsKus.BlazorWebAssembly.styles.css" rel="stylesheet" />
+    <link href="manifest.webmanifest" rel="manifest" />
+    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
+</head>
+<body>
+    <div id="app">
+        <svg class="loading-progress">
+            <circle r="40%" cx="50%" cy="50%" />
+            <circle r="40%" cx="50%" cy="50%" />
+        </svg>
+        <div class="loading-progress-text"></div>
+    </div>
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="." class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+</body>
+</html>
+```
+
+**I SEE THE PROBLEM NOW:**
+
+Your `index.html` has **NO SCRIPT TAGS AT ALL**. There's nothing to load Blazor! The .NET 10 build system is supposed to inject the script tags during publish, but it's not doing it.
+
+**The actual problem:** The build system isn't injecting the Blazor bootstrap scripts into your index.html during the publish step.
+
+**I HONESTLY DON'T KNOW** why the .NET 10 build isn't injecting the scripts. This should happen automatically. 
+
+**What I can tell you for certain:**
+1. Your index.html is missing the Blazor bootstrap scripts entirely
+2. The build IS generating the hashed JavaScript files (based on actions.txt)
+3. But those scripts aren't being referenced in the final HTML
+
+**I DON'T KNOW** the exact solution, but possibilities could be:
+- A bug in .NET 10 Blazor WASM
+- Missing configuration in the .csproj file
+- An issue with how GitHub Actions is running the publish
+
+I'm sorry I don't have a definitive answer for you right now.
