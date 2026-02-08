@@ -1,98 +1,164 @@
-﻿# CollabsKus.BlazorWebAssembly
+# Kathmandu Calendar & Time - Blazor WebAssembly
 
-A personal portfolio website built with Blazor WebAssembly and .NET 10, featuring automatic deployment to GitHub Pages.
+A beautiful, responsive Blazor WebAssembly application that displays the current time and calendar for Kathmandu, Nepal, including moon phase information.
 
-## 🚧 Work in Progress
+## 🏗️ Project Structure
 
-This repository is currently under active development. Features and documentation may be incomplete or subject to change.
-
-## 🤖 AI-Assisted Development
-
-This project includes code generated and assisted by large language models (LLMs) such as Claude. While all code has been reviewed and tested, please be aware that some portions were created with AI assistance.
-
-## Features
-
-- **Modern Blazor WASM**: Built with .NET 10.0 RC and the latest Blazor WebAssembly features
-- **Progressive Web App**: Includes service worker for offline functionality
-- **Responsive Design**: Mobile-first responsive layout
-- **Automatic Deployment**: GitHub Actions workflow for continuous deployment to GitHub Pages
-- **Performance Optimized**: Efficient bundle size and loading times
-
-## Tech Stack
-
-- .NET 10.0 (Release Candidate)
-- Blazor WebAssembly
-- C# with nullable reference types enabled
-- Service Worker for PWA functionality
-- GitHub Actions for CI/CD
-
-## Getting Started
-
-### Prerequisites
-
-- .NET 10.0 SDK or later
-- Modern web browser with WebAssembly support
-
-### Local Development
-
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd CollabsKus.BlazorWebAssembly
-   ```
-
-2. Restore dependencies:
-   ```bash
-   dotnet restore
-   ```
-
-3. Run the application:
-   ```bash
-   dotnet run
-   ```
-
-4. Open your browser and navigate to `https://localhost:5001` (or the URL shown in the console)
-
-### Building for Production
-
-```bash
-dotnet publish -c Release -o ./publish
+```
+CollabsKus.BlazorWebAssembly/
+├── Components/              # Reusable UI components
+│   ├── CalendarGrid.razor   # Displays the Nepali calendar grid
+│   ├── DateCards.razor      # Shows Bikram Sambat and Gregorian dates
+│   ├── MoonDisplay.razor    # Displays current moon phase
+│   └── TimeDisplay.razor    # Shows current time in English and Nepali
+├── Layout/
+│   └── MainLayout.razor     # Main layout wrapper
+├── Models/                  # Data models
+│   ├── CalendarResponse.cs  # Calendar API response model
+│   ├── MoonPhase.cs        # Moon phase data model
+│   └── TimeResponse.cs     # Time API response model
+├── Pages/
+│   └── Home.razor          # Main home page
+├── Services/               # Business logic services
+│   ├── ApiLoggerService.cs # Logs API requests to Cloudflare Workers
+│   ├── KathmanduCalendarService.cs # Handles calendar/time API calls
+│   └── MoonPhaseService.cs # Calculates moon phases
+├── wwwroot/
+│   ├── css/
+│   │   └── app.css        # Global styles
+│   └── index.html         # Main HTML entry point
+├── App.razor              # Root component
+├── Program.cs             # Application entry point
+└── _Imports.razor         # Global using statements
 ```
 
-## Deployment
+## 🎨 Architecture Decisions
 
-The project is configured for automatic deployment to GitHub Pages using GitHub Actions. The workflow:
+### Component-Based Design
+Each UI element is a separate component with its own scoped CSS:
+- **TimeDisplay**: Real-time clock with Nepali numerals
+- **DateCards**: Bikram Sambat and Gregorian dates
+- **MoonDisplay**: Current moon phase with icon
+- **CalendarGrid**: Full month calendar with today highlighted
 
-1. Triggers on pushes to `main` or `master` branches
-2. Builds the project using .NET 10.0
-3. Publishes the Blazor WASM output
-4. Deploys to GitHub Pages
+### Service Layer
+Business logic is separated into services:
+- **KathmanduCalendarService**: Manages API calls with intelligent caching
+  - Calendar data cached for 1 hour
+  - Time data cached for 5 minutes
+  - Calculates server time offset for accurate local time
+- **MoonPhaseService**: Client-side moon phase calculation using astronomical algorithms
+- **ApiLoggerService**: Logs all API requests to Cloudflare Workers (non-blocking)
 
-### Manual Deployment Setup
+### State Management
+- Component state managed in `Home.razor`
+- Timers for:
+  - Clock updates (every 1 second)
+  - Time API refresh (every 1 hour)
+  - Calendar API refresh (every 24 hours)
 
-1. Enable GitHub Pages in your repository settings
-2. Set the source to "GitHub Actions"
-3. Push to your main branch to trigger the deployment
+### CSS Strategy
+- **Global styles** in `wwwroot/css/app.css` for body, page layout
+- **Scoped CSS** for each component (automatic isolation)
+- **No external dependencies** - all CSS written from scratch
+- **Responsive design** with mobile-first breakpoints
 
-## Configuration
+## 🚀 How It Works
 
-The portfolio settings can be configured through the `PortfolioSettings` class and dependency injection. Update your personal information, social links, and other details in the configuration.
+### Data Flow
+1. **Initial Load**:
+   - Home page fetches calendar and time data
+   - Calculates initial moon phase
+   - Starts three timers
 
-## Project Structure
+2. **Real-time Updates**:
+   - Clock timer updates every second (local calculation)
+   - Time API refreshes hourly to prevent drift
+   - Calendar API refreshes daily
 
-- `Pages/` - Blazor pages and components
-- `wwwroot/` - Static assets and service worker
-- `CollabsKus.BlazorWebAssembly.csproj` - Project file with package references
-- `.github/workflows/` - GitHub Actions deployment workflow
+3. **Caching Strategy**:
+   - Services cache API responses in memory
+   - Cached responses logged with `fromCache: true`
+   - Fresh API calls logged with `fromCache: false`
 
-## Contributing
+4. **Error Handling**:
+   - API failures don't crash the app
+   - Logging failures are silent (non-critical)
+   - User sees friendly error messages
 
-As this is a personal portfolio project, contributions are not expected. However, if you notice any issues or have suggestions, feel free to open an issue.
+### API Integration
+- **Calendar API**: `https://calendar.bloggernepal.com/api/today`
+- **Time API**: `https://calendar.bloggernepal.com/api/time`
+- **Logger API**: `https://my-api.2w7sp317.workers.dev/ui/create`
 
-## License
+### Moon Phase Calculation
+Uses Julian Day Number algorithm:
+- Calculates days since known new moon (Jan 6, 2000)
+- Determines current lunar age
+- Computes illumination percentage
+- Maps to appropriate phase icon
 
-AGPL
+## 🎓 Learning Points
 
-## Contact
+### Blazor Concepts Demonstrated
+1. **Component Composition**: Building complex UIs from small components
+2. **Dependency Injection**: Services injected into components
+3. **Lifecycle Methods**: `OnInitializedAsync` for data loading
+4. **Scoped CSS**: Component-specific styling
+5. **Parameter Binding**: Passing data between components
+6. **Timer Management**: Background tasks with proper disposal
+7. **Error Boundaries**: Graceful error handling
 
-collabs kus at gmail dot com
+### Best Practices
+- ✅ Separation of concerns (UI, logic, data)
+- ✅ Single responsibility principle
+- ✅ Async/await for API calls
+- ✅ Proper resource disposal (IDisposable)
+- ✅ Responsive design
+- ✅ No JavaScript (pure C#)
+- ✅ No external dependencies
+
+## 🔧 Configuration
+
+The app is configured for GitHub Pages deployment at `https://collabskus.github.io`.
+
+### Base Path
+The `<base href="/" />` in `index.html` is set for root domain deployment.
+
+### Service Worker
+Configured for offline support with automatic updates.
+
+## 📦 Deployment
+
+GitHub Actions automatically builds and deploys on push to main/master:
+1. Builds the Blazor WASM project
+2. Publishes to `release/wwwroot`
+3. Uploads to GitHub Pages
+4. Deploys to production
+
+## 🎯 Features
+
+- ✨ Real-time clock synchronized with Kathmandu time
+- 📅 Bikram Sambat (Nepali) calendar
+- 🌍 Gregorian calendar
+- 🌙 Accurate moon phase calculation
+- 📱 Fully responsive (desktop, tablet, mobile)
+- 🎨 Beautiful gradient background with glassmorphism
+- 📊 API request logging
+- ⚡ Intelligent caching
+- 🔄 Automatic refresh intervals
+- 💪 No external dependencies
+
+## 🧪 Testing Locally
+
+```bash
+dotnet run --project CollabsKus.BlazorWebAssembly
+```
+
+Navigate to `https://localhost:7212` or the port shown in console.
+
+## 📚 Additional Resources
+
+- [Blazor Documentation](https://learn.microsoft.com/en-us/aspnet/core/blazor/)
+- [Scoped CSS](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation)
+- [Dependency Injection](https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/dependency-injection)
