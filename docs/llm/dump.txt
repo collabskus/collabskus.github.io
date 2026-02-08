@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 02/08/2026 11:49:37
+Generated: 02/08/2026 11:59:34
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -159,8 +159,8 @@ MODIFIED: 02/08/2026 10:21:22
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\.github\workflows\deploy.yml
-SIZE: 1.47 KB
-MODIFIED: 02/08/2026 11:45:23
+SIZE: 1.75 KB
+MODIFIED: 02/08/2026 11:56:37
 ================================================================================
 
 name: Build and Deploy Blazor WASM to GitHub Pages
@@ -195,6 +195,9 @@ jobs:
         run: |
           pwd
           ls -R
+        
+      - name: Install dotnet workload install wasm-tools
+        run: dotnet workload install wasm-tools
 
       - name: Restore
         run: dotnet restore
@@ -202,11 +205,21 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
+      - name: Show directory tree (DEBUG)
+        run: |
+          pwd
+          ls -R
+
       - name: Publish
         run: |
           dotnet publish CollabsKus.BlazorWebAssembly/CollabsKus.BlazorWebAssembly.csproj \
             -c Release \
             -o publish
+
+      - name: Show directory tree (DEBUG)
+        run: |
+          pwd
+          ls -R
 
       - name: DEBUG publish output
         run: |
@@ -1965,7 +1978,7 @@ async function onFetch(event) {
 
 
 ===============================================================================
-EXPORT COMPLETED: 02/08/2026 11:49:37
+EXPORT COMPLETED: 02/08/2026 11:59:35
 Total Files Exported: 32
 Output File: .\docs\llm\dump.txt
 ===============================================================================
