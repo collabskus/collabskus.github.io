@@ -13,7 +13,8 @@ public class MoonPhaseService
         new("Full Moon", "🌕", 12.91963, 16.61096),
         new("Waning Gibbous", "🌖", 16.61096, 20.30228),
         new("Last Quarter", "🌗", 20.30228, 23.99361),
-        new("Waning Crescent", "🌘", 23.99361, 29.53059)
+        new("Waning Crescent", "🌘", 23.99361, 27.69134)
+        // New Moon wraps around from 27.69134 to 29.53059 and back to 0-1.84566
     };
 
     public MoonPhase CalculateMoonPhase(DateTime date)
@@ -58,6 +59,13 @@ public class MoonPhaseService
 
     private MoonPhaseDefinition GetMoonPhaseName(double age)
     {
+        // New Moon spans the end and beginning of the cycle
+        // Check if it's in the wrap-around range (27.69134 to 29.53059)
+        if (age >= 27.69134)
+        {
+            return _phaseDefinitions[0]; // New Moon
+        }
+
         foreach (var phase in _phaseDefinitions)
         {
             if (age >= phase.Min && age < phase.Max)
@@ -65,7 +73,8 @@ public class MoonPhaseService
                 return phase;
             }
         }
-        return _phaseDefinitions[0];
+
+        return _phaseDefinitions[0]; // Default to New Moon
     }
 
     private record MoonPhaseDefinition(string Name, string Icon, double Min, double Max);

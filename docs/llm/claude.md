@@ -548,3 +548,113 @@ can you please give me full file for any file that needs to change?
 
 
 
+Looking at your code, I can see the issue! Your phase definitions have overlapping boundaries, and the "New Moon" phase range is too narrow. When the moon age is very close to 0 or wraps around near 29.53 days, it's falling into the "Waning Crescent" range instead of "New Moon".
+
+Here's the corrected `MoonPhaseService.cs`:
+
+```csharp
+using CollabsKus.BlazorWebAssembly.Models;
+
+namespace CollabsKus.BlazorWebAssembly.Services;
+
+public class MoonPhaseService
+{
+    private readonly List<MoonPhaseDefinition> _phaseDefinitions = new()
+    {
+        new("New Moon", "🌑", 0, 1.84566),
+        new("Waxing Crescent", "🌒", 1.84566, 5.53699),
+        new("First Quarter", "🌓", 5.53699, 9.22831),
+        new("Waxing Gibbous", "🌔", 9.22831, 12.91963),
+        new("Full Moon", "🌕", 12.91963, 16.61096),
+        new("Waning Gibbous", "🌖", 16.61096, 20.30228),
+        new("Last Quarter", "🌗", 20.30228, 23.99361),
+        new("Waning Crescent", "🌘", 23.99361, 27.69134)
+        // New Moon wraps around from 27.69134 to 29.53059 and back to 0-1.84566
+    };
+
+    public MoonPhase CalculateMoonPhase(DateTime date)
+    {
+        // Convert to Julian Day Number
+        var year = date.Year;
+        var month = date.Month;
+        var day = date.Day;
+
+        var a = (14 - month) / 12;
+        var y = year + 4800 - a;
+        var m = month + 12 * a - 3;
+
+        var jdn = day + (153 * m + 2) / 5 + 365 * y +
+                  y / 4 - y / 100 + y / 400 - 32045;
+
+        // Known new moon: January 6, 2000
+        const double knownNewMoon = 2451550.1;
+        var daysSinceNew = jdn - knownNewMoon;
+
+        // Synodic month
+        const double synodicMonth = 29.53058867;
+
+        // Calculate moon age
+        var newMoons = daysSinceNew / synodicMonth;
+        var moonAge = (newMoons - Math.Floor(newMoons)) * synodicMonth;
+
+        // Calculate illumination
+        var moonPhaseAngle = (moonAge / synodicMonth) * 2 * Math.PI;
+        var illumination = (1 - Math.Cos(moonPhaseAngle)) / 2;
+
+        var phase = GetMoonPhaseName(moonAge);
+
+        return new MoonPhase
+        {
+            Name = phase.Name,
+            Icon = phase.Icon,
+            Illumination = illumination * 100,
+            Age = moonAge
+        };
+    }
+
+    private MoonPhaseDefinition GetMoonPhaseName(double age)
+    {
+        // New Moon spans the end and beginning of the cycle
+        // Check if it's in the wrap-around range (27.69134 to 29.53059)
+        if (age >= 27.69134)
+        {
+            return _phaseDefinitions[0]; // New Moon
+        }
+        
+        foreach (var phase in _phaseDefinitions)
+        {
+            if (age >= phase.Min && age < phase.Max)
+            {
+                return phase;
+            }
+        }
+        
+        return _phaseDefinitions[0]; // Default to New Moon
+    }
+
+    private record MoonPhaseDefinition(string Name, string Icon, double Min, double Max);
+}
+```
+
+**What I changed:**
+
+1. **Shortened the "Waning Crescent" range** from ending at 29.53059 to ending at 27.69134
+2. **Added special handling in `GetMoonPhaseName`** to check if the moon age is >= 27.69134 (which means it's in the New Moon phase that wraps around the cycle)
+
+**Why this fix works:**
+
+The moon's cycle is circular - it goes from 0 to 29.53 days and then wraps back to 0. The New Moon phase actually spans two parts of this cycle:
+- The very end (27.69134 to 29.53059 days)
+- The beginning (0 to 1.84566 days)
+
+Your original code had "Waning Crescent" covering all the way to 29.53059, which meant when the moon age was close to the end of the cycle (like 29.5 days = 0% illumination), it was incorrectly showing as "Waning Crescent" instead of "New Moon".
+
+Now with this fix, any moon age from 27.69134 onwards will correctly show as "New Moon"!
+
+
+
+
+
+
+
+
