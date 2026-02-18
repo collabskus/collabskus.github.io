@@ -108,7 +108,13 @@ else
 
     private void UpdateMoonPhase()
     {
-        _moonPhase = MoonPhaseService.CalculateMoonPhase(_currentTime);
+        // IMPORTANT: Use DateTime.UtcNow, NOT _currentTime.
+        // _currentTime is Kathmandu local time (UTC+5:45) but tagged as DateTimeKind.Utc
+        // by GetCurrentKathmanduTime(). Moon phase is the same everywhere on Earth at any
+        // given instant — it only depends on the actual UTC moment, not the timezone.
+        // Passing _currentTime (which is ~5h45m ahead of real UTC) would make the moon
+        // calculation off by ~6 hours, causing illumination differences across devices.
+        _moonPhase = MoonPhaseService.CalculateMoonPhase(DateTime.UtcNow);
     }
 
     private void UpdateLastUpdateTime()

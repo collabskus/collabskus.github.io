@@ -6,6 +6,10 @@ namespace CollabsKus.BlazorWebAssembly.Services;
 /// High-accuracy moon phase calculator based on Jean Meeus,
 /// "Astronomical Algorithms" (2nd ed.), Chapters 47–49.
 /// Accuracy: illumination ±0.01%, phase angle ±0.01°, sub-minute moon age.
+///
+/// IMPORTANT: The date parameter MUST be in true UTC. Moon phase is the same
+/// everywhere on Earth at any given instant — it does not depend on timezone.
+/// Do NOT pass Kathmandu local time here.
 /// </summary>
 public class MoonPhaseService
 {
@@ -38,9 +42,20 @@ public class MoonPhaseService
 
     // ── Public entry point ────────────────────────────────────────────────────
 
-    public MoonPhase CalculateMoonPhase(DateTime date)
+    /// <summary>
+    /// Calculate the current moon phase. Pass DateTime.UtcNow for real-time use.
+    /// The date MUST be true UTC — do not pass local/Kathmandu time.
+    /// </summary>
+    public MoonPhase CalculateMoonPhase(DateTime utcDate)
     {
-        var utc = date.Kind == DateTimeKind.Utc ? date : date.ToUniversalTime();
+        // Ensure we're working with true UTC
+        var utc = utcDate.Kind switch
+        {
+            DateTimeKind.Utc => utcDate,
+            DateTimeKind.Local => utcDate.ToUniversalTime(),
+            _ => DateTime.SpecifyKind(utcDate, DateTimeKind.Utc) // Unspecified: assume UTC
+        };
+
         var jd = ToJulianDay(utc);
 
         // Meeus core quantities
