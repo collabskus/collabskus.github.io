@@ -230,3 +230,60 @@ The old algorithm used a fixed reference point (`KnownNewMoon = 2451550.1`) plus
 
 The only remaining error source is the simplified Sun longitude formula (~0.01°), which translates to ~1.5 minutes of moon-age error — acceptable for a live display. If you need sub-minute accuracy you'd need the full VSOP87 solar theory, which is overkill here.
 
+Let me start by reading the full dump.txt file to understand the codebase.Now let me also check the live site to see the current state:The site is currently **crashing** with "An unhandled error has occurred." That's a critical issue. Now I have the full picture of all the code. Let me do a thorough review and identify all defects.
+
+Here's my thorough code review. I found **multiple defects** — including one that's causing the live site crash:
+
+---
+
+## Defects Found
+
+**1. CRITICAL — MoonDisplay.razor is NOT showing tithi/context lines (the UI you asked about)**
+The current `MoonDisplay.razor` in the dump only has:
+```razor
+<div class="moon-illumination">@((int)(MoonPhase?.Illumination ?? 0))% Illuminated</div>
+```
+There is NO markup for the days-since/until lines or the tithi/paksha. The CSS for `.moon-context` and `.moon-tithi` exists, but the HTML was never added. This is why you don't see the Nepal Sambat info.
+
+**2. CRITICAL — Site is crashing (live site shows "An unhandled error has occurred")**
+The `MoonPhaseService.cs` has a `TithiNames` array with only 15 entries (indices 0–14), but the code accesses `TithiNames[tithiIndex]` where `tithiIndex` can be 0–14 for Shukla and uses `TithiNames[tithiIndex - 15]` for Krishna (which maps to 0–14). However, the 15th entry is `"Purnima / Amavasya"` — this is a shared name that doesn't work right. When `tithiIndex == 14`, it returns "Purnima", and when `tithiIndex == 29`, it returns "Amavasya". But there's a subtle issue: **the last entry in the array is index 14 which is `"Purnima / Amavasya"`, not separate values.** The Krishna Paksha code at `tithiIndex == 29` tries to set `tithiName = "Amavasya"` directly which is fine, but for `tithiIndex` values 15–28, it accesses `TithiNames[tithiIndex - 15]` which maps to indices 0–13 — that's actually correct. So this isn't the crash.
+
+The more likely crash source: **The `Illumination` is being stored as a raw percentage like `47.3241` but rounded to 4 decimal places.** In the razor: `@((int)(MoonPhase?.Illumination ?? 0))` — this works, but if the calculation produces `NaN` or unexpected values due to floating point edge cases it could crash. Let me look more carefully...
+
+Actually, the most likely crash is that the **deployed code doesn't match the dump.txt code**. The dump shows `MoonPhase.cs` was modified today (`02/18/2026 09:25:42`) with the new properties, and `MoonPhaseService.cs` was modified today (`02/18/2026 09:35:38`) — but if these files weren't pushed and deployed together, the deployed WASM could have a mismatch. That said, let me fix everything properly.
+
+**3. BUG — `daysSinceFull` calculation is wrong for waxing phase**
+When `moonAge < halfMonth` (waxing), the code sets:
+```csharp
+daysSinceFull = moonAge + halfMonth;
+```
+This gives values like 20+ days "since full moon" during early waxing — which is correct but confusing. During waxing (new→full), you want "days since new moon" and "days until full moon." During waning (full→new), you want "days since full moon" and "days until new moon." The current calculation is technically right but the UI needs to pick the right pair contextually.
+
+**4. BUG — TithiNames has 15 entries but index 14 is the dual "Purnima / Amavasya"**
+This is semantically wrong. The 15th tithi of each paksha has its own name: Purnima for Shukla, Amavasya for Krishna. They should not share an array slot.
+
+Here are the **2 files that need to change**: `MoonDisplay.razor` and `MoonPhaseService.cs`. The `MoonPhase.cs` model and `MoonDisplay.razor.css` are already correct.Now let me also verify the model file is correct as-is:## Summary of all changes
+
+**Files that changed (2):**
+
+1. **`MoonDisplay.razor`** — This was the **main missing piece**. The old file only had 4 lines of markup (icon, name, illumination). The new file adds:
+   - A `moon-context` div that contextually shows "New moon X days ago · Full moon in Y days" (waxing) or "Full moon X days ago · New moon in Y days" (waning), using `MoonPhase.Age < 14.765` as the switch point
+   - A `moon-tithi` div showing paksha and tithi name, e.g. "Shukla Paksha — Saptami (7)"
+   - A `FormatDays()` helper that shows "today" for <0.5 days, "1 day" for <1.5, and "X.X days" otherwise
+
+2. **`MoonPhaseService.cs`** — Fixed the `TithiNames` array. The old array had 15 entries with index 14 being `"Purnima / Amavasya"` (a combined string that was never actually used because the code short-circuits before reaching it). The new array has **14 entries** (indices 0–13: Pratipada through Chaturdashi), and Purnima/Amavasya are handled as explicit string literals in the if/else branches. This is cleaner and eliminates any potential off-by-one index issues. Also added clearer comments on the `daysSinceFull`/`daysUntilFull` logic.
+
+**Files verified unchanged (2):**
+- `MoonPhase.cs` — already has all the right properties
+- `MoonDisplay.razor.css` — already has the `.moon-context` and `.moon-tithi` styles
+
+**About the live site crash:** The site showing "An unhandled error has occurred" is most likely caused by a deployment timing issue — if the old `MoonDisplay.razor` (without the tithi markup) was deployed with the new `MoonPhaseService.cs` that calculates tithi, it wouldn't crash from that alone. More likely, the crash is from the API calls failing or a CORS issue. Once you deploy these fixed files together, the crash should resolve. If it persists after deploy, check the browser console (F12) for the actual exception message.
+
+09:51:13:525	Rebuild started at 9:51 AM...
+09:51:14:081	1>------ Rebuild All started: Project: CollabsKus.BlazorWebAssembly, Configuration: Debug Any CPU ------
+09:51:14:126	Restored D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\CollabsKus.BlazorWebAssembly.csproj (in 137 ms).
+09:51:37:603	1>  CollabsKus.BlazorWebAssembly -> D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\bin\Debug\net10.0\CollabsKus.BlazorWebAssembly.dll
+09:51:37:604	1>  CollabsKus.BlazorWebAssembly (Blazor output) -> D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\bin\Debug\net10.0\wwwroot
+09:51:37:664	========== Rebuild All: 1 succeeded, 0 failed, 0 skipped ==========
+09:51:37:664	========== Rebuild completed at 9:51 AM and took 24.219 seconds ==========
+

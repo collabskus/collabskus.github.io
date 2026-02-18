@@ -1,0 +1,13 @@
+if any file needs changing, always return the FULL file so it is easy to copy paste. 
+Please read the FULL dump.txt in its entirety for each prompt. 
+Do not skim it. 
+Do not search for keywords in it. 
+Do not retrieve parts from it. 
+It isn't that big. 
+Read the whole thing. 
+And please generate FULL files for any file that needs to change 
+Please do not hallucinate. 
+Take some more time up front to save time and effort for the humans. 
+When in doubt, use your best judgment. 
+Use best engineering practices
+within the limits of this project. 

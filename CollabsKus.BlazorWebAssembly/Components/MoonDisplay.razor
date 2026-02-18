@@ -5,9 +5,44 @@
     <div class="moon-icon">@MoonPhase?.Icon</div>
     <div class="moon-phase-name">@MoonPhase?.Name</div>
     <div class="moon-illumination">@((int)(MoonPhase?.Illumination ?? 0))% Illuminated</div>
+
+    @if (MoonPhase != null)
+    {
+        <div class="moon-context">
+            @if (MoonPhase.Age < 14.765)
+            {
+                // Waxing half: show "since new moon" and "until full moon"
+                <span>New moon @FormatDays(MoonPhase.DaysSinceNewMoon) ago</span>
+                <span> · </span>
+                <span>Full moon in @FormatDays(MoonPhase.DaysUntilFullMoon)</span>
+            }
+            else
+            {
+                // Waning half: show "since full moon" and "until new moon"
+                <span>Full moon @FormatDays(MoonPhase.DaysSinceFullMoon) ago</span>
+                <span> · </span>
+                <span>New moon in @FormatDays(MoonPhase.DaysUntilNewMoon)</span>
+            }
+        </div>
+
+        <div class="moon-tithi">
+            <span class="tithi-paksha">@MoonPhase.Paksha</span>
+            <span> — </span>
+            <span class="tithi-name">@MoonPhase.TithiName (@MoonPhase.TithiNumber)</span>
+        </div>
+    }
 </div>
 
 @code {
     [Parameter]
     public MoonPhase? MoonPhase { get; set; }
+
+    private string FormatDays(double days)
+    {
+        if (days < 0.5)
+            return "today";
+        if (days < 1.5)
+            return "1 day";
+        return $"{days:F1} days";
+    }
 }

@@ -27,12 +27,13 @@ public class MoonPhaseService
         ("New Moon",        "🌑", 337.5,  360.0),
     };
 
+    // Tithi names: indices 0–13 are the first 14 tithis of each paksha.
+    // The 15th tithi (index 14) is handled separately: Purnima for Shukla, Amavasya for Krishna.
     private static readonly string[] TithiNames =
     {
         "Pratipada", "Dwitiya",    "Tritiya",    "Chaturthi", "Panchami",
         "Shashthi",  "Saptami",    "Ashtami",    "Navami",    "Dashami",
-        "Ekadashi",  "Dwadashi",   "Trayodashi", "Chaturdashi",
-        "Purnima / Amavasya"
+        "Ekadashi",  "Dwadashi",   "Trayodashi", "Chaturdashi"
     };
 
     // ── Public entry point ────────────────────────────────────────────────────
@@ -88,7 +89,7 @@ public class MoonPhaseService
         // ── Apparent geocentric longitude of Moon (°) ─────────────────────────
         var moonLon = NormDeg(L0 + dL / 1000000.0);
 
-        // ── Apparent geocentric longitude of Sun (°) ─────────────────────────
+        // ── Apparent geocentric longitude of Sun (°) ──────────────────────────
         var sunLon = SunApparentLongitude(T);
 
         // ── Ecliptic longitude difference → phase angle 0–360° ───────────────
@@ -105,19 +106,33 @@ public class MoonPhaseService
         var (phaseName, phaseIcon) = GetPhase(elongation);
 
         // ── Days until/since key events ───────────────────────────────────────
+        var halfMonth = SynodicMonth / 2.0;
+
         var daysSinceNew = moonAge;
         var daysUntilNew = SynodicMonth - moonAge;
-        var halfMonth = SynodicMonth / 2.0;
-        var daysSinceFull = moonAge >= halfMonth
-                          ? moonAge - halfMonth
-                          : moonAge + halfMonth;          // previous full moon
-        var daysUntilFull = moonAge < halfMonth
-                          ? halfMonth - moonAge
-                          : SynodicMonth - moonAge + halfMonth;
+
+        // Days since/until full moon:
+        // Full moon occurs at moonAge ≈ halfMonth (elongation 180°)
+        double daysSinceFull;
+        double daysUntilFull;
+
+        if (moonAge >= halfMonth)
+        {
+            // Waning: we've passed full moon this cycle
+            daysSinceFull = moonAge - halfMonth;
+            daysUntilFull = SynodicMonth - moonAge + halfMonth;
+        }
+        else
+        {
+            // Waxing: full moon hasn't happened yet this cycle
+            // "since full" = time since LAST cycle's full moon
+            daysSinceFull = moonAge + halfMonth;
+            daysUntilFull = halfMonth - moonAge;
+        }
 
         // ── Tithi (Hindu lunar day, 1–30) ─────────────────────────────────────
-        // Each tithi = 12° of elongation
-        var tithiRaw = elongation / 12.0;           // 0–30
+        // Each tithi = 12° of elongation (360° / 30 = 12°)
+        var tithiRaw = elongation / 12.0;             // 0–30
         var tithiIndex = Math.Min((int)tithiRaw, 29); // 0-based, 0–29
 
         string paksha;
@@ -126,15 +141,25 @@ public class MoonPhaseService
 
         if (tithiIndex < 15)
         {
+            // Shukla Paksha (bright/waxing fortnight): tithis 1–15
             paksha = "Shukla Paksha";
             tithiNumber = tithiIndex + 1;
-            tithiName = tithiIndex == 14 ? "Purnima" : TithiNames[tithiIndex];
+
+            if (tithiIndex == 14)
+                tithiName = "Purnima";         // 15th tithi = Full Moon
+            else
+                tithiName = TithiNames[tithiIndex]; // indices 0–13
         }
         else
         {
+            // Krishna Paksha (dark/waning fortnight): tithis 1–15
             paksha = "Krishna Paksha";
-            tithiNumber = tithiIndex - 14;
-            tithiName = tithiIndex == 29 ? "Amavasya" : TithiNames[tithiIndex - 15];
+            tithiNumber = tithiIndex - 14;     // maps 15→1, 16→2, ..., 29→15
+
+            if (tithiIndex == 29)
+                tithiName = "Amavasya";        // 15th tithi = New Moon
+            else
+                tithiName = TithiNames[tithiIndex - 15]; // indices 0–13
         }
 
         return new MoonPhase
@@ -182,7 +207,7 @@ public class MoonPhaseService
     }
 
     /// <summary>
-    /// Longitude perturbation sum (Meeus Table 47.A — 60 principal terms).
+    /// Longitude perturbation sum (Meeus Table 47.A – 60 principal terms).
     /// Returns correction in units of 1e-6 degrees.
     /// </summary>
     private static double LongitudeCorrections(double D, double M, double Mm, double F, double E)

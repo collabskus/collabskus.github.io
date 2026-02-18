@@ -18,6 +18,6 @@ public class MoonPhase
     public int TithiNumber { get; set; }
     // TithiName: Nepali/Sanskrit name e.g. "Pratipada", "Purnima", "Amavasya"
     public string TithiName { get; set; } = string.Empty;
-    // Paksha: "Shukla" (waxing/bright) or "Krishna" (waning/dark)
+    // Paksha: "Shukla Paksha" (waxing/bright) or "Krishna Paksha" (waning/dark)
     public string Paksha { get; set; } = string.Empty;
 }
