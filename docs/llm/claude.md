@@ -161,3 +161,26 @@ I have updated the dump.txt with the latest code
 please read it thoroughly line by line and word by word 
 think carefully and return me full files for all files that need to change 
 
+The file got truncated. Let me find the relevant sections.Good. I have everything I need. Now let me check the Home.razor to understand how everything connects:Now I have a complete picture. Let me build the solution. The plan:
+
+1. **`MoonPhase.cs`** — add `DaysUntilNewMoon`, `DaysUntilFullMoon`, `DaysSinceNewMoon`, `DaysSinceFullMoon`, and `TithiName` + `TithiNumber`
+2. **`MoonPhaseService.cs`** — calculate all those new fields + Tithi
+3. **`MoonDisplay.razor`** — show the new countdown/context line and Tithi
+4. **`MoonDisplay.razor.css`** — add styling for new elements
+
+**On Nepal Sambat / Tithi:** Yes, the lunar fortnight concept is central to Nepal Sambat and the Hindu calendar. The lunar month is divided into 30 **Tithis** (lunar days) — 15 in the waxing half (*Shukla Paksha*, bright fortnight) numbered Pratipada through Purnima, and 15 in the waning half (*Krishna Paksha*, dark fortnight) numbered Pratipada through Amavasya. This maps directly onto moon age.Four files to replace. Here's what changed and why:
+
+**`MoonPhase.cs`** — added 6 new properties: `DaysSinceNewMoon`, `DaysSinceFullMoon`, `DaysUntilNewMoon`, `DaysUntilFullMoon`, `TithiNumber`, `TithiName`, and `Paksha`.
+
+**`MoonPhaseService.cs`** — the main work happens here. The service now calculates:
+- Days since/until new moon from `moonAge` directly
+- Days since/until full moon by comparing `moonAge` to the half-synodic point (~14.765 days)
+- **Tithi** by dividing the 29.53-day cycle into 30 equal tithis (~0.984 days each). Tithis 1–15 are **Shukla Paksha** (waxing/bright fortnight), tithis 16–30 are **Krishna Paksha** (waning/dark fortnight). The 15th tithi of Shukla is **Purnima** (full moon) and the 15th of Krishna is **Amavasya** (new moon).
+
+**`MoonDisplay.razor`** — shows two new lines below the illumination:
+- The context line switches based on which half of the cycle you're in. Before full moon: *"New moon 3.2d ago · Full moon in 11.5d"*. After full moon: *"Full moon 2.1d ago · New moon in 13.4d"*. If either event is today it says "today" instead of a number.
+- The tithi line: e.g. *"Shukla Paksha — Saptami (7)"*
+
+**`MoonDisplay.razor.css`** — added styles for `.moon-context` and `.moon-tithi` / sub-spans.
+
+No changes needed to `Home.razor`, `Program.cs`, or any other file.
