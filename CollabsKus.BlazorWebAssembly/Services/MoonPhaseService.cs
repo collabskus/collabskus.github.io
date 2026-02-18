@@ -6,97 +6,70 @@ public class MoonPhaseService
 {
     private readonly List<MoonPhaseDefinition> _phaseDefinitions = new()
     {
-        new("New Moon", "🌑", 0, 1.84566),
-        new("Waxing Crescent", "🌒", 1.84566, 5.53699),
-        new("First Quarter", "🌓", 5.53699, 9.22831),
-        new("Waxing Gibbous", "🌔", 9.22831, 12.91963),
-        new("Full Moon", "🌕", 12.91963, 16.61096),
-        new("Waning Gibbous", "🌖", 16.61096, 20.30228),
-        new("Last Quarter", "🌗", 20.30228, 23.99361),
-        new("Waning Crescent", "🌘", 23.99361, 27.69134)
+        new("New Moon",              "🌑", 0.0,      1.0),
+        new("Waxing Crescent",       "🌒", 1.0,      7.38),
+        new("First Quarter",         "🌓", 7.38,     8.38),
+        new("Waxing Gibbous",        "🌔", 8.38,     14.77),
+        new("Full Moon",             "🌕", 14.77,    15.77),
+        new("Waning Gibbous",        "🌖", 15.77,    22.15),
+        new("Last Quarter",          "🌗", 22.15,    23.15),
+        new("Waning Crescent",       "🌘", 23.15,    28.53),
     };
 
     public MoonPhase CalculateMoonPhase(DateTime date)
     {
-        // Convert DateTime to UTC if it's not already
         var utcDate = date.Kind == DateTimeKind.Utc ? date : date.ToUniversalTime();
 
-        // Convert to Julian Day Number WITH time component
         var year = utcDate.Year;
         var month = utcDate.Month;
         var day = utcDate.Day;
-
-        // Calculate fractional day (time of day as fraction)
         var hour = utcDate.Hour;
         var minute = utcDate.Minute;
         var second = utcDate.Second;
+
         var fractionalDay = day + (hour / 24.0) + (minute / 1440.0) + (second / 86400.0);
 
-        var a = (14 - month) / 12;
+        var a = (14 - month) / 12;          // integer floor — intentional
         var y = year + 4800 - a;
         var m = month + 12 * a - 3;
 
-        var jdn = fractionalDay + (153 * m + 2) / 5 + 365 * y +
+        // Fix: use 5.0 to avoid integer division truncation
+        var jdn = fractionalDay + (153 * m + 2) / 5.0 + 365.0 * y +
                   y / 4 - y / 100 + y / 400 - 32045;
 
-        // Known new moon: January 6, 2000 at 18:14 UTC
         const double knownNewMoon = 2451550.1;
-        var daysSinceNew = jdn - knownNewMoon;
-
-        // Synodic month (average lunar cycle length)
         const double synodicMonth = 29.53058867;
 
-        // Calculate moon age (days into current lunar cycle)
+        var daysSinceNew = jdn - knownNewMoon;
         var newMoons = daysSinceNew / synodicMonth;
         var moonAge = (newMoons - Math.Floor(newMoons)) * synodicMonth;
 
-        // Ensure moonAge is in valid range [0, synodicMonth)
-        if (moonAge < 0)
-        {
-            moonAge += synodicMonth;
-        }
-        else if (moonAge >= synodicMonth)
-        {
-            moonAge -= synodicMonth;
-        }
+        if (moonAge < 0) moonAge += synodicMonth;
+        else if (moonAge >= synodicMonth) moonAge -= synodicMonth;
 
-        // Calculate illumination
         var moonPhaseAngle = (moonAge / synodicMonth) * 2 * Math.PI;
-        var illumination = (1 - Math.Cos(moonPhaseAngle)) / 2;
+        var illumination = Math.Max(0, Math.Min(1, (1 - Math.Cos(moonPhaseAngle)) / 2));
 
-        // Clamp illumination to [0, 1] to handle floating-point precision issues
-        illumination = Math.Max(0, Math.Min(1, illumination));
-
-        var phase = GetMoonPhaseName(moonAge);
+        var phase = GetMoonPhase(moonAge, synodicMonth);
 
         return new MoonPhase
         {
             Name = phase.Name,
             Icon = phase.Icon,
-            Illumination = Math.Round(illumination * 100, 2), // Round to 2 decimal places
+            Illumination = Math.Round(illumination * 100, 2),
             Age = moonAge
         };
     }
 
-    private MoonPhaseDefinition GetMoonPhaseName(double age)
+    private MoonPhaseDefinition GetMoonPhase(double age, double synodicMonth)
     {
-        // New Moon spans the end and beginning of the cycle
-        // Age >= 27.69134 days means we're in the New Moon phase (end of cycle)
-        if (age >= 27.69134)
-        {
-            return _phaseDefinitions[0]; // New Moon
-        }
+        if (age >= 28.53)
+            return _phaseDefinitions[0]; // New Moon (end of cycle wraps back)
 
-        // Check all other phases
         foreach (var phase in _phaseDefinitions)
-        {
             if (age >= phase.Min && age < phase.Max)
-            {
                 return phase;
-            }
-        }
 
-        // Fallback to New Moon (this handles age 0 to 1.84566)
         return _phaseDefinitions[0];
     }
 
