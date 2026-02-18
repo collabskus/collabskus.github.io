@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 02/18/2026 08:08:09
+Generated: 02/18/2026 08:08:31
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -2849,8 +2849,8 @@ public class KathmanduCalendarService
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\MoonPhaseService.cs
-SIZE: 3.45 KB
-MODIFIED: 02/16/2026 11:16:44
+SIZE: 3.53 KB
+MODIFIED: 02/18/2026 08:08:28
 ================================================================================
 
 using CollabsKus.BlazorWebAssembly.Models;
@@ -3178,7 +3178,7 @@ async function onFetch(event) {
 
 
 ===============================================================================
-EXPORT COMPLETED: 02/18/2026 08:08:13
+EXPORT COMPLETED: 02/18/2026 08:08:34
 Total Files Exported: 32
 Output File: .\docs\llm\dump.txt
 ===============================================================================
