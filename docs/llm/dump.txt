@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 02/18/2026 09:36:35
+Generated: 02/18/2026 09:53:16
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -256,10 +256,10 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |           \---_framework
 |   |   |                   blazor.webassembly.js
 |   |   |                   blazor.webassembly.js.gz
-|   |   |                   CollabsKus.BlazorWebAssembly.cr79nzlw48.pdb
-|   |   |                   CollabsKus.BlazorWebAssembly.cr79nzlw48.pdb.gz
-|   |   |                   CollabsKus.BlazorWebAssembly.d61p5gjcuz.wasm
-|   |   |                   CollabsKus.BlazorWebAssembly.d61p5gjcuz.wasm.gz
+|   |   |                   CollabsKus.BlazorWebAssembly.mh9ctqcow8.wasm
+|   |   |                   CollabsKus.BlazorWebAssembly.mh9ctqcow8.wasm.gz
+|   |   |                   CollabsKus.BlazorWebAssembly.qlpjacq0wd.pdb
+|   |   |                   CollabsKus.BlazorWebAssembly.qlpjacq0wd.pdb.gz
 |   |   |                   dotnet.js
 |   |   |                   dotnet.js.gz
 |   |   |                   dotnet.js.map
@@ -757,7 +757,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       2mau3pzxk9-{0}-wt1enrrig6-wt1enrrig6.gz
 |   |   |       |       2zxgs4tsnx-{0}-clxrybe26z-clxrybe26z.gz
 |   |   |       |       3eoqy7gj56-{0}-5quh18s9mm-5quh18s9mm.gz
-|   |   |       |       3fggfcmk2o-{0}-i9mx3y5gy7-i9mx3y5gy7.gz
+|   |   |       |       3fggfcmk2o-{0}-9sl9hfcmoh-9sl9hfcmoh.gz
 |   |   |       |       3p6j8oeurv-{0}-9gnjjozbtj-9gnjjozbtj.gz
 |   |   |       |       3rlo0yi078-{0}-66stpp682q-66stpp682q.gz
 |   |   |       |       3uswc3e8aj-{0}-83r2do0ftq-83r2do0ftq.gz
@@ -817,7 +817,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       d3xctdbsm8-{0}-cc45vjr1b8-cc45vjr1b8.gz
 |   |   |       |       d4e2tqfm2s-{0}-st22xvului-st22xvului.gz
 |   |   |       |       d88qnt9z0r-{0}-5s8pq7f6mj-5s8pq7f6mj.gz
-|   |   |       |       dfreyn5klh-{0}-brjllm9coq-brjllm9coq.gz
+|   |   |       |       dfreyn5klh-{0}-3whoftt379-3whoftt379.gz
 |   |   |       |       dkj70biooi-{0}-xn7u9hqdzp-xn7u9hqdzp.gz
 |   |   |       |       dmdeonll3k-{0}-qra57zb5iw-qra57zb5iw.gz
 |   |   |       |       dt9uy83tyq-{0}-16sllnulcp-16sllnulcp.gz
@@ -856,7 +856,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       kz9p261qc5-{0}-qpf1k0onwr-qpf1k0onwr.gz
 |   |   |       |       l7rbbbd4fi-{0}-sf458cz82b-sf458cz82b.gz
 |   |   |       |       lbxpns34i1-{0}-ij454jqrom-ij454jqrom.gz
-|   |   |       |       lh59ob944f-{0}-d61p5gjcuz-d61p5gjcuz.gz
+|   |   |       |       lh59ob944f-{0}-mh9ctqcow8-mh9ctqcow8.gz
 |   |   |       |       lj3msr1lhw-{0}-ed335v31ay-ed335v31ay.gz
 |   |   |       |       ljeibr96ow-{0}-ul94u1ukws-ul94u1ukws.gz
 |   |   |       |       lm00a84zr9-{0}-4myqtalz7l-4myqtalz7l.gz
@@ -872,7 +872,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       n35jvnr825-{0}-ok1w9bwh9p-ok1w9bwh9p.gz
 |   |   |       |       nb5ocalx9l-{0}-sg5289qtzr-sg5289qtzr.gz
 |   |   |       |       nhzrlx2glb-{0}-ul68gvf84n-ul68gvf84n.gz
-|   |   |       |       njnlmbjta1-{0}-fxlumcxv3r-fxlumcxv3r.gz
+|   |   |       |       njnlmbjta1-{0}-zftrv9nrnc-zftrv9nrnc.gz
 |   |   |       |       nl1aipmkh9-{0}-xxpmmmbzoi-xxpmmmbzoi.gz
 |   |   |       |       nu8bj35gu6-{0}-ljs5h1hf84-ljs5h1hf84.gz
 |   |   |       |       nwswlbpy0n-{0}-bln3oou6sh-bln3oou6sh.gz
@@ -887,13 +887,13 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       pdaotioiej-{0}-c97596j8dp-c97596j8dp.gz
 |   |   |       |       pehuqocd4z-{0}-0q8h4ozt6q-0q8h4ozt6q.gz
 |   |   |       |       pq1zwub8zu-{0}-n949pn5bqf-n949pn5bqf.gz
-|   |   |       |       prwyqf4e4y-{0}-fxlumcxv3r-fxlumcxv3r.gz
+|   |   |       |       prwyqf4e4y-{0}-zftrv9nrnc-zftrv9nrnc.gz
 |   |   |       |       pwmpgrqg76-{0}-i26u5a9fau-i26u5a9fau.gz
 |   |   |       |       px0hxgqwjv-{0}-8br0rpc5j3-8br0rpc5j3.gz
 |   |   |       |       pzqxcw519k-{0}-xq74p7yimf-xq74p7yimf.gz
 |   |   |       |       q3154k5biw-{0}-b22pm24uac-b22pm24uac.gz
 |   |   |       |       q4p940erp4-{0}-befq3iek54-befq3iek54.gz
-|   |   |       |       qapwvyh3s0-{0}-7znnkmc3rv-7znnkmc3rv.gz
+|   |   |       |       qapwvyh3s0-{0}-e7w1likw36-e7w1likw36.gz
 |   |   |       |       qitdg1tdwz-{0}-uakrztahlf-uakrztahlf.gz
 |   |   |       |       qm96gcrzfw-{0}-67mulskwi0-67mulskwi0.gz
 |   |   |       |       qp8xb91mke-{0}-wnrh6t4f3i-wnrh6t4f3i.gz
@@ -938,7 +938,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       w3jaqn3h4o-{0}-78lrbgxr1f-78lrbgxr1f.gz
 |   |   |       |       w3ur6j80u7-{0}-j3u8ouhzz6-j3u8ouhzz6.gz
 |   |   |       |       wuimozunwv-{0}-piem9h0tr4-piem9h0tr4.gz
-|   |   |       |       x3ikudnee4-{0}-cr79nzlw48-cr79nzlw48.gz
+|   |   |       |       x3ikudnee4-{0}-qlpjacq0wd-qlpjacq0wd.gz
 |   |   |       |       x54bdp6f69-{0}-nc02rhe1iy-nc02rhe1iy.gz
 |   |   |       |       x57r4b36iz-{0}-lfu7j35m59-lfu7j35m59.gz
 |   |   |       |       xf1qqu3s0v-{0}-xfor6r3ecm-xfor6r3ecm.gz
@@ -1240,6 +1240,7 @@ D:\DEV\PERSONAL\COLLABSKUS
     \---llm
             claude.md
             dump.txt
+            instructions.txt
             
 
 
@@ -2057,8 +2058,8 @@ MODIFIED: 02/08/2026 15:46:02
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Components\MoonDisplay.razor
-SIZE: 0.38 KB
-MODIFIED: 02/08/2026 15:46:02
+SIZE: 1.54 KB
+MODIFIED: 02/18/2026 09:50:07
 ================================================================================
 
 @using CollabsKus.BlazorWebAssembly.Models
@@ -2068,11 +2069,46 @@ MODIFIED: 02/08/2026 15:46:02
     <div class="moon-icon">@MoonPhase?.Icon</div>
     <div class="moon-phase-name">@MoonPhase?.Name</div>
     <div class="moon-illumination">@((int)(MoonPhase?.Illumination ?? 0))% Illuminated</div>
+
+    @if (MoonPhase != null)
+    {
+        <div class="moon-context">
+            @if (MoonPhase.Age < 14.765)
+            {
+                // Waxing half: show "since new moon" and "until full moon"
+                <span>New moon @FormatDays(MoonPhase.DaysSinceNewMoon) ago</span>
+                <span> · </span>
+                <span>Full moon in @FormatDays(MoonPhase.DaysUntilFullMoon)</span>
+            }
+            else
+            {
+                // Waning half: show "since full moon" and "until new moon"
+                <span>Full moon @FormatDays(MoonPhase.DaysSinceFullMoon) ago</span>
+                <span> · </span>
+                <span>New moon in @FormatDays(MoonPhase.DaysUntilNewMoon)</span>
+            }
+        </div>
+
+        <div class="moon-tithi">
+            <span class="tithi-paksha">@MoonPhase.Paksha</span>
+            <span> — </span>
+            <span class="tithi-name">@MoonPhase.TithiName (@MoonPhase.TithiNumber)</span>
+        </div>
+    }
 </div>
 
 @code {
     [Parameter]
     public MoonPhase? MoonPhase { get; set; }
+
+    private string FormatDays(double days)
+    {
+        if (days < 0.5)
+            return "today";
+        if (days < 1.5)
+            return "1 day";
+        return $"{days:F1} days";
+    }
 }
 
 
@@ -2080,7 +2116,7 @@ MODIFIED: 02/08/2026 15:46:02
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Components\MoonDisplay.razor.css
 SIZE: 0.91 KB
-MODIFIED: 02/18/2026 09:26:17
+MODIFIED: 02/18/2026 09:50:55
 ================================================================================
 
 .moon-display {
@@ -2140,7 +2176,6 @@ MODIFIED: 02/18/2026 09:26:17
 .tithi-name {
     font-weight: 300;
 }
-
 
 
 
@@ -2335,8 +2370,8 @@ public class CalendarDay
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Models\MoonPhase.cs
-SIZE: 0.87 KB
-MODIFIED: 02/18/2026 09:25:42
+SIZE: 0.89 KB
+MODIFIED: 02/18/2026 09:50:40
 ================================================================================
 
 namespace CollabsKus.BlazorWebAssembly.Models;
@@ -2359,7 +2394,7 @@ public class MoonPhase
     public int TithiNumber { get; set; }
     // TithiName: Nepali/Sanskrit name e.g. "Pratipada", "Purnima", "Amavasya"
     public string TithiName { get; set; } = string.Empty;
-    // Paksha: "Shukla" (waxing/bright) or "Krishna" (waning/dark)
+    // Paksha: "Shukla Paksha" (waxing/bright) or "Krishna Paksha" (waning/dark)
     public string Paksha { get; set; } = string.Empty;
 }
 
@@ -2887,8 +2922,8 @@ public class KathmanduCalendarService
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\MoonPhaseService.cs
-SIZE: 11.87 KB
-MODIFIED: 02/18/2026 09:35:38
+SIZE: 12.74 KB
+MODIFIED: 02/18/2026 09:50:27
 ================================================================================
 
 using CollabsKus.BlazorWebAssembly.Models;
@@ -2920,12 +2955,13 @@ public class MoonPhaseService
         ("New Moon",        "🌑", 337.5,  360.0),
     };
 
+    // Tithi names: indices 0–13 are the first 14 tithis of each paksha.
+    // The 15th tithi (index 14) is handled separately: Purnima for Shukla, Amavasya for Krishna.
     private static readonly string[] TithiNames =
     {
         "Pratipada", "Dwitiya",    "Tritiya",    "Chaturthi", "Panchami",
         "Shashthi",  "Saptami",    "Ashtami",    "Navami",    "Dashami",
-        "Ekadashi",  "Dwadashi",   "Trayodashi", "Chaturdashi",
-        "Purnima / Amavasya"
+        "Ekadashi",  "Dwadashi",   "Trayodashi", "Chaturdashi"
     };
 
     // ── Public entry point ────────────────────────────────────────────────────
@@ -2981,7 +3017,7 @@ public class MoonPhaseService
         // ── Apparent geocentric longitude of Moon (°) ─────────────────────────
         var moonLon = NormDeg(L0 + dL / 1000000.0);
 
-        // ── Apparent geocentric longitude of Sun (°) ─────────────────────────
+        // ── Apparent geocentric longitude of Sun (°) ──────────────────────────
         var sunLon = SunApparentLongitude(T);
 
         // ── Ecliptic longitude difference → phase angle 0–360° ───────────────
@@ -2998,19 +3034,33 @@ public class MoonPhaseService
         var (phaseName, phaseIcon) = GetPhase(elongation);
 
         // ── Days until/since key events ───────────────────────────────────────
+        var halfMonth = SynodicMonth / 2.0;
+
         var daysSinceNew = moonAge;
         var daysUntilNew = SynodicMonth - moonAge;
-        var halfMonth = SynodicMonth / 2.0;
-        var daysSinceFull = moonAge >= halfMonth
-                          ? moonAge - halfMonth
-                          : moonAge + halfMonth;          // previous full moon
-        var daysUntilFull = moonAge < halfMonth
-                          ? halfMonth - moonAge
-                          : SynodicMonth - moonAge + halfMonth;
+
+        // Days since/until full moon:
+        // Full moon occurs at moonAge ≈ halfMonth (elongation 180°)
+        double daysSinceFull;
+        double daysUntilFull;
+
+        if (moonAge >= halfMonth)
+        {
+            // Waning: we've passed full moon this cycle
+            daysSinceFull = moonAge - halfMonth;
+            daysUntilFull = SynodicMonth - moonAge + halfMonth;
+        }
+        else
+        {
+            // Waxing: full moon hasn't happened yet this cycle
+            // "since full" = time since LAST cycle's full moon
+            daysSinceFull = moonAge + halfMonth;
+            daysUntilFull = halfMonth - moonAge;
+        }
 
         // ── Tithi (Hindu lunar day, 1–30) ─────────────────────────────────────
-        // Each tithi = 12° of elongation
-        var tithiRaw = elongation / 12.0;           // 0–30
+        // Each tithi = 12° of elongation (360° / 30 = 12°)
+        var tithiRaw = elongation / 12.0;             // 0–30
         var tithiIndex = Math.Min((int)tithiRaw, 29); // 0-based, 0–29
 
         string paksha;
@@ -3019,15 +3069,25 @@ public class MoonPhaseService
 
         if (tithiIndex < 15)
         {
+            // Shukla Paksha (bright/waxing fortnight): tithis 1–15
             paksha = "Shukla Paksha";
             tithiNumber = tithiIndex + 1;
-            tithiName = tithiIndex == 14 ? "Purnima" : TithiNames[tithiIndex];
+
+            if (tithiIndex == 14)
+                tithiName = "Purnima";         // 15th tithi = Full Moon
+            else
+                tithiName = TithiNames[tithiIndex]; // indices 0–13
         }
         else
         {
+            // Krishna Paksha (dark/waning fortnight): tithis 1–15
             paksha = "Krishna Paksha";
-            tithiNumber = tithiIndex - 14;
-            tithiName = tithiIndex == 29 ? "Amavasya" : TithiNames[tithiIndex - 15];
+            tithiNumber = tithiIndex - 14;     // maps 15→1, 16→2, ..., 29→15
+
+            if (tithiIndex == 29)
+                tithiName = "Amavasya";        // 15th tithi = New Moon
+            else
+                tithiName = TithiNames[tithiIndex - 15]; // indices 0–13
         }
 
         return new MoonPhase
@@ -3075,7 +3135,7 @@ public class MoonPhaseService
     }
 
     /// <summary>
-    /// Longitude perturbation sum (Meeus Table 47.A — 60 principal terms).
+    /// Longitude perturbation sum (Meeus Table 47.A – 60 principal terms).
     /// Returns correction in units of 1e-6 degrees.
     /// </summary>
     private static double LongitudeCorrections(double D, double M, double Mm, double F, double E)
@@ -3405,7 +3465,7 @@ async function onFetch(event) {
 
 
 ===============================================================================
-EXPORT COMPLETED: 02/18/2026 09:36:37
+EXPORT COMPLETED: 02/18/2026 09:53:19
 Total Files Exported: 32
 Output File: .\docs\llm\dump.txt
 ===============================================================================
