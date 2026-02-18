@@ -59,6 +59,7 @@ else
             _clockTimer = new System.Threading.Timer(async _ =>
             {
                 _currentTime = CalendarService.GetCurrentKathmanduTime();
+                UpdateMoonPhase();
                 await InvokeAsync(StateHasChanged);
             }, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
 

@@ -184,3 +184,49 @@ The file got truncated. Let me find the relevant sections.Good. I have everythin
 **`MoonDisplay.razor.css`** — added styles for `.moon-context` and `.moon-tithi` / sub-spans.
 
 No changes needed to `Home.razor`, `Program.cs`, or any other file.
+
+I have a clear picture of both issues. Let me break them down and give you the fixes.
+
+---
+
+## Problem 1: Razor out of sync with MoonPhaseService
+
+**Root cause:** The `_clockTimer` updates `_currentTime` and calls `StateHasChanged`, but it **never calls `UpdateMoonPhase()`**. So the clock ticks every second, but `_moonPhase` only gets recalculated when `LoadTimeDataAsync()` fires (every hour). The display shows stale moon data.
+
+**Fix in `Home.razor`** — update the clock timer callback:
+
+```csharp
+_clockTimer = new System.Threading.Timer(async _ =>
+{
+    _currentTime = CalendarService.GetCurrentKathmanduTime();
+    UpdateMoonPhase(); // ← ADD THIS
+    await InvokeAsync(StateHasChanged);
+}, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+```
+
+---
+
+## Problem 2: More accurate & granular moon phase calculation
+
+Your current `CalculateMoonAge` uses a simplified Julian Day Number formula with a fixed reference point (`KnownNewMoon = 2451550.1`). This drifts by minutes over years because it ignores lunar perturbations (elliptical orbit, solar gravity, etc.). The best approach without an external API is the **Jean Meeus algorithm** from *Astronomical Algorithms*, which adds the major perturbation corrections and is accurate to within ~1 minute.
+
+Here's a fully rewritten `MoonPhaseService.cs`:Now fix the `Home.razor` clock timer to also recalculate moon phase every tick:---
+
+## Summary of what changed and why
+
+**Problem 1 — Razor out of sync**
+
+The clock timer called `StateHasChanged` every second but never called `UpdateMoonPhase()`. So `_moonPhase` was only refreshed by `LoadTimeDataAsync()` (hourly). Adding `UpdateMoonPhase()` into the clock tick fixes it with one line.
+
+**Problem 2 — Accuracy & granularity**
+
+The old algorithm used a fixed reference point (`KnownNewMoon = 2451550.1`) plus a raw JDN formula. This ignores lunar perturbations and drifts by several minutes per year. The new service:
+
+- Uses the **Meeus Table 47.A** perturbation series (60 principal terms). This is the same algorithm used by most astronomy software and is accurate to ~10 arc-seconds / a few seconds of time.
+- Computes the true **ecliptic longitude difference** between Moon and Sun instead of a simple linear age. This is the physically correct definition of phase.
+- Includes **milliseconds** in the Julian Day calculation, so it's precise to the sub-second level (which matters since you call it every second from the clock timer).
+- Phase boundaries are now defined by elongation angle (every 45°), which is the astronomically correct definition — not arbitrary day ranges that drift.
+- Tithi is now computed from 12° increments of elongation (the correct definition: each tithi = 12° of elongation difference), not time-based fractions.
+
+The only remaining error source is the simplified Sun longitude formula (~0.01°), which translates to ~1.5 minutes of moon-age error — acceptable for a live display. If you need sub-minute accuracy you'd need the full VSOP87 solar theory, which is overkill here.
+
