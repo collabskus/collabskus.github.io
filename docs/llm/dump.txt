@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 02/18/2026 10:01:39
+Generated: 02/18/2026 10:09:57
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -2438,8 +2438,8 @@ public class TimeResponse
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Pages\Home.razor
-SIZE: 3.47 KB
-MODIFIED: 02/18/2026 09:36:30
+SIZE: 3.97 KB
+MODIFIED: 02/18/2026 10:09:35
 ================================================================================
 
 @page "/"
@@ -2552,7 +2552,13 @@ else
 
     private void UpdateMoonPhase()
     {
-        _moonPhase = MoonPhaseService.CalculateMoonPhase(_currentTime);
+        // IMPORTANT: Use DateTime.UtcNow, NOT _currentTime.
+        // _currentTime is Kathmandu local time (UTC+5:45) but tagged as DateTimeKind.Utc
+        // by GetCurrentKathmanduTime(). Moon phase is the same everywhere on Earth at any
+        // given instant — it only depends on the actual UTC moment, not the timezone.
+        // Passing _currentTime (which is ~5h45m ahead of real UTC) would make the moon
+        // calculation off by ~6 hours, causing illumination differences across devices.
+        _moonPhase = MoonPhaseService.CalculateMoonPhase(DateTime.UtcNow);
     }
 
     private void UpdateLastUpdateTime()
@@ -2922,8 +2928,8 @@ public class KathmanduCalendarService
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\MoonPhaseService.cs
-SIZE: 12.74 KB
-MODIFIED: 02/18/2026 09:50:27
+SIZE: 13.35 KB
+MODIFIED: 02/18/2026 10:09:14
 ================================================================================
 
 using CollabsKus.BlazorWebAssembly.Models;
@@ -2934,6 +2940,10 @@ namespace CollabsKus.BlazorWebAssembly.Services;
 /// High-accuracy moon phase calculator based on Jean Meeus,
 /// "Astronomical Algorithms" (2nd ed.), Chapters 47–49.
 /// Accuracy: illumination ±0.01%, phase angle ±0.01°, sub-minute moon age.
+///
+/// IMPORTANT: The date parameter MUST be in true UTC. Moon phase is the same
+/// everywhere on Earth at any given instant — it does not depend on timezone.
+/// Do NOT pass Kathmandu local time here.
 /// </summary>
 public class MoonPhaseService
 {
@@ -2966,9 +2976,20 @@ public class MoonPhaseService
 
     // ── Public entry point ────────────────────────────────────────────────────
 
-    public MoonPhase CalculateMoonPhase(DateTime date)
+    /// <summary>
+    /// Calculate the current moon phase. Pass DateTime.UtcNow for real-time use.
+    /// The date MUST be true UTC — do not pass local/Kathmandu time.
+    /// </summary>
+    public MoonPhase CalculateMoonPhase(DateTime utcDate)
     {
-        var utc = date.Kind == DateTimeKind.Utc ? date : date.ToUniversalTime();
+        // Ensure we're working with true UTC
+        var utc = utcDate.Kind switch
+        {
+            DateTimeKind.Utc => utcDate,
+            DateTimeKind.Local => utcDate.ToUniversalTime(),
+            _ => DateTime.SpecifyKind(utcDate, DateTimeKind.Utc) // Unspecified: assume UTC
+        };
+
         var jd = ToJulianDay(utc);
 
         // Meeus core quantities
@@ -3465,7 +3486,7 @@ async function onFetch(event) {
 
 
 ===============================================================================
-EXPORT COMPLETED: 02/18/2026 10:01:56
+EXPORT COMPLETED: 02/18/2026 10:09:59
 Total Files Exported: 32
 Output File: .\docs\llm\dump.txt
 ===============================================================================
