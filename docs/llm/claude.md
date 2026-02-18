@@ -149,4 +149,15 @@ public class MoonPhaseService
 - **`/ 5.0`** instead of `/ 5` — fixes the integer division bug that could cause age to be off
 - **Phase boundaries tightened** — New Moon is now only 1 day wide (not 1.84 days), Quarter moons are 1 day wide, and the full/crescent phases get the remaining time
 - **Wrap boundary updated** — was `27.69134`, now `28.53` to match the new Last Quarter end
-- 
+
+This is good progress 
+but I also need another line that says 
+n days until the next new moon and x days since the last full moon 
+or n days until the next full moon and y days since the last new moon
+depending on which is closest 
+in Nepal Sambat, we have these concepts with fifteen days or something like that, right? 
+can you add that too? 
+I have updated the dump.txt with the latest code 
+please read it thoroughly line by line and word by word 
+think carefully and return me full files for all files that need to change 
+
