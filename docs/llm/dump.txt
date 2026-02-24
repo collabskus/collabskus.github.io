@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 02/24/2026 09:15:31
+Generated: 02/24/2026 09:20:24
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -1241,6 +1241,7 @@ D:\DEV\PERSONAL\COLLABSKUS
             claude.md
             dump.txt
             instructions.txt
+            memory.md
             
 
 
@@ -3729,7 +3730,7 @@ async function onFetch(event) {
 
 
 ===============================================================================
-EXPORT COMPLETED: 02/24/2026 09:15:33
+EXPORT COMPLETED: 02/24/2026 09:20:32
 Total Files Exported: 32
 Output File: .\docs\llm\dump.txt
 ===============================================================================
