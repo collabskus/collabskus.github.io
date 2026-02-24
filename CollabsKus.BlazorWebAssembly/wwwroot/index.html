@@ -28,7 +28,58 @@
         <a href="." class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-    <script src="_framework/blazor.webassembly.js" autostart="true"></script>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+
+    <script>// ── Moon visibility tracking (Page Visibility API + IntersectionObserver) ──
+        window.moonVisibility = {
+            _observer: null,
+            _dotNetRef: null,
+            _visHandler: null,
+
+            init: function (dotNetRef, elementId) {
+                this._dotNetRef = dotNetRef;
+
+                // 1. Page Visibility API — detect tab focus/blur
+                this._visHandler = function () {
+                    var isVisible = !document.hidden;
+                    dotNetRef.invokeMethodAsync('OnVisibilityChanged', isVisible);
+                };
+                document.addEventListener('visibilitychange', this._visHandler);
+
+                // 2. IntersectionObserver — detect if moon section is in viewport
+                var target = document.getElementById(elementId);
+                if (target && 'IntersectionObserver' in window) {
+                    this._observer = new IntersectionObserver(function (entries) {
+                        var isInView = entries[0].isIntersecting;
+                        dotNetRef.invokeMethodAsync('OnMoonInViewChanged', isInView);
+                    }, {
+                        // Trigger as soon as any part of the element is visible
+                        threshold: 0.0
+                    });
+                    this._observer.observe(target);
+                }
+
+                // Return a reference so Blazor can call dispose
+                return {
+                    dispose: function () {
+                        window.moonVisibility.dispose();
+                    }
+                };
+            },
+
+            dispose: function () {
+                if (this._visHandler) {
+                    document.removeEventListener('visibilitychange', this._visHandler);
+                    this._visHandler = null;
+                }
+                if (this._observer) {
+                    this._observer.disconnect();
+                    this._observer = null;
+                }
+                this._dotNetRef = null;
+            }
+        };</script>
 </body>
 
 </html>

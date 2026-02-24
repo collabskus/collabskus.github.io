@@ -1,7 +1,7 @@
 @page "/"
 @using CollabsKus.BlazorWebAssembly.Models
 @using CollabsKus.BlazorWebAssembly.Services
-@implements IDisposable
+@implements IAsyncDisposable
 
 <PageTitle>Kathmandu Calendar & Time</PageTitle>
 
@@ -22,7 +22,7 @@ else
 {
     <TimeDisplay CurrentTime="_currentTime" />
     <DateCards CalendarData="_calendarData?.Res" />
-    <MoonDisplay MoonPhase="_moonPhase" />
+    <MoonDisplay MoonPhase="_moonPhase" IsLive="_isMoonLive" />
     <CalendarGrid CalendarData="_calendarData?.Res" />
 }
 
@@ -37,6 +37,9 @@ else
     [Inject]
     private MoonPhaseService MoonPhaseService { get; set; } = default!;
 
+    [Inject]
+    private IJSRuntime JS { get; set; } = default!;
+
     private CalendarResponse? _calendarData;
     private TimeResponse? _timeData;
     private MoonPhase? _moonPhase;
@@ -47,6 +50,13 @@ else
     private System.Threading.Timer? _clockTimer;
     private System.Threading.Timer? _timeApiTimer;
     private System.Threading.Timer? _calendarApiTimer;
+
+    // Visibility + intersection tracking
+    private bool _isTabVisible = true;
+    private bool _isMoonInView = true;
+    private bool _isMoonLive => _isTabVisible && _isMoonInView;
+    private DotNetObjectReference<Home>? _dotNetRef;
+    private IJSObjectReference? _jsModule;
 
     protected override async Task OnInitializedAsync()
     {
@@ -59,7 +69,13 @@ else
             _clockTimer = new System.Threading.Timer(async _ =>
             {
                 _currentTime = CalendarService.GetCurrentKathmanduTime();
-                UpdateMoonPhase();
+
+                // Only recalculate moon phase when tab is visible AND moon is in viewport
+                if (_isMoonLive)
+                {
+                    UpdateMoonPhase();
+                }
+
                 await InvokeAsync(StateHasChanged);
             }, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
 
@@ -81,6 +97,51 @@ else
         {
             _error = $"Failed to load data: {ex.Message}";
             _isLoading = false;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _dotNetRef = DotNetObjectReference.Create(this);
+            try
+            {
+                _jsModule = await JS.InvokeAsync<IJSObjectReference>(
+                    "moonVisibility.init", _dotNetRef, "moon-display-root");
+            }
+            catch
+            {
+                // If JS interop fails, default to always-live (graceful degradation)
+                _isTabVisible = true;
+                _isMoonInView = true;
+            }
+        }
+    }
+
+    [JSInvokable]
+    public void OnVisibilityChanged(bool isVisible)
+    {
+        _isTabVisible = isVisible;
+
+        // When tab becomes visible again, immediately recalculate to catch up
+        if (isVisible)
+        {
+            UpdateMoonPhase();
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    [JSInvokable]
+    public void OnMoonInViewChanged(bool isInView)
+    {
+        _isMoonInView = isInView;
+
+        // When moon scrolls into view, immediately recalculate
+        if (isInView && _isTabVisible)
+        {
+            UpdateMoonPhase();
+            InvokeAsync(StateHasChanged);
         }
     }
 
@@ -122,10 +183,25 @@ else
         _lastUpdate = DateTime.Now.ToString("hh:mm:ss tt");
     }
 
-    public void Dispose()
+    public async ValueTask DisposeAsync()
     {
         _clockTimer?.Dispose();
         _timeApiTimer?.Dispose();
         _calendarApiTimer?.Dispose();
+
+        if (_jsModule is not null)
+        {
+            try
+            {
+                await _jsModule.InvokeVoidAsync("dispose");
+                await _jsModule.DisposeAsync();
+            }
+            catch
+            {
+                // Ignore disposal errors during navigation
+            }
+        }
+
+        _dotNetRef?.Dispose();
     }
 }

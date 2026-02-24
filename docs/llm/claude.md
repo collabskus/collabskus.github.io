@@ -379,3 +379,72 @@ please give me full files for all files that need to change
 32
 24
 
+Let me read the full dump.txt first.Now I have a complete picture of the entire codebase. Let me summarize what I see and build the solution.
+
+**Current state from dump.txt (Feb 24, 2026):**
+- `Home.razor` — already calls `UpdateMoonPhase()` every second in the clock timer ✅
+- `MoonPhaseService.cs` — full Meeus algorithm with 60 perturbation terms ✅
+- `MoonPhase.cs` — has all properties (DaysSince/Until, Tithi, Paksha) ✅
+- `MoonDisplay.razor` — shows context/tithi lines ✅
+- `MoonDisplay.razor.css` — has styles for context/tithi ✅
+
+**What you want:**
+1. Recalculate moon phases every second **only when tab is focused AND moon image is in view**
+2. Some animation to show it's updating constantly
+3. Maximum precision
+
+Here's my plan:
+
+**Files that need to change:**
+
+1. **`Home.razor`** — Add JS interop for Page Visibility API + IntersectionObserver. Only tick the moon recalculation when both conditions are met. Currently it recalculates every second unconditionally which is wasteful if the tab is backgrounded or the moon section is scrolled out of view.
+
+2. **`MoonDisplay.razor`** — Add a subtle "live pulse" animation indicator and show more decimal precision on illumination. Add an `id` to the root div so IntersectionObserver can target it.
+
+3. **`MoonDisplay.razor.css`** — Add the pulse/glow animation styles.
+
+4. **`index.html`** — Add the JS interop functions for visibility and intersection observer.
+
+Let me generate all 4 full files:Here's a summary of all changes and why:
+
+---
+
+## Files changed (4):
+
+### 1. `Home.razor`
+- Changed from `IDisposable` to `IAsyncDisposable` (needed for JS module cleanup)
+- Added JS interop fields: `_isTabVisible`, `_isMoonInView`, `_dotNetRef`, `_jsModule`
+- The clock timer now **conditionally recalculates** moon phase only when `_isMoonLive` (tab visible AND moon in viewport). The clock and `StateHasChanged` still tick every second for the time display regardless.
+- Added `OnAfterRenderAsync` to initialize the JS visibility/intersection observers
+- Added two `[JSInvokable]` methods: `OnVisibilityChanged` and `OnMoonInViewChanged` — both immediately recalculate when conditions become favorable again (so you never see stale data when switching back)
+- Passes `IsLive="_isMoonLive"` to `MoonDisplay` so it can show/hide the animation
+- Proper async disposal of JS module
+
+### 2. `MoonDisplay.razor`
+- Root div gets `id="moon-display-root"` so IntersectionObserver can find it
+- Moon icon gets `moon-icon-live` CSS class when live (triggers pulse animation)
+- Illumination now shows **2 decimal places** (`48.37%` instead of `48%`) to visually prove it's updating every second
+- Added **moon age** line in `d h m s` format (e.g., "3d 14h 22m 47s into cycle") — ticks every second, monospace font
+- Added **LIVE indicator** — a green blinking dot with "LIVE" text, only visible when actively recalculating
+- `FormatPreciseDays()` helper converts fractional days to d/h/m/s
+
+### 3. `MoonDisplay.razor.css`
+- `moonPulse` keyframe animation: subtle glow + 3% scale pulse on the moon emoji, 2-second cycle
+- `.moon-age` styled with monospace `tabular-nums` so digits don't shift as they change
+- `.moon-live-indicator` with flexbox layout, subtle glass background
+- `.live-dot` with `liveBlink` animation (green dot fading in/out)
+- All animations are smooth and subtle — they reinforce "this is live" without being distracting
+
+### 4. `index.html` (wwwroot)
+- Added `<script>` block with `window.moonVisibility` object containing:
+  - `init(dotNetRef, elementId)` — sets up both `document.visibilitychange` listener and `IntersectionObserver` on the moon display element
+  - `dispose()` — clean teardown of both listeners
+  - Returns a JS object reference so Blazor can call `dispose` on it
+
+### Files NOT changed:
+- `MoonPhaseService.cs` — already has full Meeus 60-term algorithm, sub-second JD precision, correct tithi/paksha calculation. No changes needed.
+- `MoonPhase.cs` — model already has all required properties
+- `Program.cs`, `App.razor`, `_Imports.razor`, all other files — no changes needed
+
+47
+26

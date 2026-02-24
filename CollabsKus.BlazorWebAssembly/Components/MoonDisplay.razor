@@ -1,13 +1,17 @@
 @using CollabsKus.BlazorWebAssembly.Models
 
-<div class="moon-display">
+<div id="moon-display-root" class="moon-display">
     <div class="label">MOON PHASE</div>
-    <div class="moon-icon">@MoonPhase?.Icon</div>
+    <div class="moon-icon @(IsLive ? "moon-icon-live" : "")">@MoonPhase?.Icon</div>
     <div class="moon-phase-name">@MoonPhase?.Name</div>
-    <div class="moon-illumination">@((int)(MoonPhase?.Illumination ?? 0))% Illuminated</div>
+    <div class="moon-illumination">@FormatIllumination(MoonPhase?.Illumination ?? 0) Illuminated</div>
 
     @if (MoonPhase != null)
     {
+        <div class="moon-age">
+            Moon age: @FormatPreciseDays(MoonPhase.Age) into cycle
+        </div>
+
         <div class="moon-context">
             @if (MoonPhase.Age < 14.765)
             {
@@ -30,12 +34,23 @@
             <span> — </span>
             <span class="tithi-name">@MoonPhase.TithiName (@MoonPhase.TithiNumber)</span>
         </div>
+
+        @if (IsLive)
+        {
+            <div class="moon-live-indicator">
+                <span class="live-dot"></span>
+                <span class="live-text">LIVE</span>
+            </div>
+        }
     }
 </div>
 
 @code {
     [Parameter]
     public MoonPhase? MoonPhase { get; set; }
+
+    [Parameter]
+    public bool IsLive { get; set; }
 
     private string FormatDays(double days)
     {
@@ -44,5 +59,27 @@
         if (days < 1.5)
             return "1 day";
         return $"{days:F1} days";
+    }
+
+    private string FormatPreciseDays(double days)
+    {
+        var totalSeconds = days * 86400.0;
+        var d = (int)days;
+        var remainingSeconds = totalSeconds - (d * 86400.0);
+        var h = (int)(remainingSeconds / 3600.0);
+        var m = (int)((remainingSeconds % 3600.0) / 60.0);
+        var s = (int)(remainingSeconds % 60.0);
+
+        if (d > 0)
+            return $"{d}d {h}h {m}m {s}s";
+        if (h > 0)
+            return $"{h}h {m}m {s}s";
+        return $"{m}m {s}s";
+    }
+
+    private string FormatIllumination(double illumination)
+    {
+        // Show 2 decimal places for precision — updates every second
+        return $"{illumination:F2}%";
     }
 }
