@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 02/24/2026 09:06:55
+Generated: 02/24/2026 09:15:31
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -256,10 +256,10 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |           \---_framework
 |   |   |                   blazor.webassembly.js
 |   |   |                   blazor.webassembly.js.gz
-|   |   |                   CollabsKus.BlazorWebAssembly.mh9ctqcow8.wasm
-|   |   |                   CollabsKus.BlazorWebAssembly.mh9ctqcow8.wasm.gz
-|   |   |                   CollabsKus.BlazorWebAssembly.qlpjacq0wd.pdb
-|   |   |                   CollabsKus.BlazorWebAssembly.qlpjacq0wd.pdb.gz
+|   |   |                   CollabsKus.BlazorWebAssembly.463j7r60uc.pdb
+|   |   |                   CollabsKus.BlazorWebAssembly.463j7r60uc.pdb.gz
+|   |   |                   CollabsKus.BlazorWebAssembly.hgd9fggzpe.wasm
+|   |   |                   CollabsKus.BlazorWebAssembly.hgd9fggzpe.wasm.gz
 |   |   |                   dotnet.js
 |   |   |                   dotnet.js.gz
 |   |   |                   dotnet.js.map
@@ -278,62 +278,62 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |                   icudt_EFIGS.tptq2av103.dat.gz
 |   |   |                   icudt_no_CJK.lfu7j35m59.dat
 |   |   |                   icudt_no_CJK.lfu7j35m59.dat.gz
-|   |   |                   Microsoft.AspNetCore.Authorization.1l4onz0xjo.wasm
-|   |   |                   Microsoft.AspNetCore.Authorization.1l4onz0xjo.wasm.gz
-|   |   |                   Microsoft.AspNetCore.Components.Forms.ij454jqrom.wasm
-|   |   |                   Microsoft.AspNetCore.Components.Forms.ij454jqrom.wasm.gz
-|   |   |                   Microsoft.AspNetCore.Components.nyb7ae3bsc.wasm
-|   |   |                   Microsoft.AspNetCore.Components.nyb7ae3bsc.wasm.gz
-|   |   |                   Microsoft.AspNetCore.Components.Web.nctswpx09d.wasm
-|   |   |                   Microsoft.AspNetCore.Components.Web.nctswpx09d.wasm.gz
-|   |   |                   Microsoft.AspNetCore.Components.WebAssembly.wt1enrrig6.wasm
-|   |   |                   Microsoft.AspNetCore.Components.WebAssembly.wt1enrrig6.wasm.gz
-|   |   |                   Microsoft.AspNetCore.Metadata.9ruf9isj5v.wasm
-|   |   |                   Microsoft.AspNetCore.Metadata.9ruf9isj5v.wasm.gz
+|   |   |                   Microsoft.AspNetCore.Authorization.3ur142rhlk.wasm
+|   |   |                   Microsoft.AspNetCore.Authorization.3ur142rhlk.wasm.gz
+|   |   |                   Microsoft.AspNetCore.Components.Forms.jnskqyrki7.wasm
+|   |   |                   Microsoft.AspNetCore.Components.Forms.jnskqyrki7.wasm.gz
+|   |   |                   Microsoft.AspNetCore.Components.ld1j2d23tn.wasm
+|   |   |                   Microsoft.AspNetCore.Components.ld1j2d23tn.wasm.gz
+|   |   |                   Microsoft.AspNetCore.Components.Web.pe34czp7g7.wasm
+|   |   |                   Microsoft.AspNetCore.Components.Web.pe34czp7g7.wasm.gz
+|   |   |                   Microsoft.AspNetCore.Components.WebAssembly.u0zj27cx7o.wasm
+|   |   |                   Microsoft.AspNetCore.Components.WebAssembly.u0zj27cx7o.wasm.gz
+|   |   |                   Microsoft.AspNetCore.Metadata.a9671ymty2.wasm
+|   |   |                   Microsoft.AspNetCore.Metadata.a9671ymty2.wasm.gz
 |   |   |                   Microsoft.CSharp.3bqyx3jy31.wasm
 |   |   |                   Microsoft.CSharp.3bqyx3jy31.wasm.gz
 |   |   |                   Microsoft.DotNet.HotReload.WebAssembly.Browser.9sdmuz89zv.wasm
 |   |   |                   Microsoft.DotNet.HotReload.WebAssembly.Browser.9sdmuz89zv.wasm.gz
-|   |   |                   Microsoft.Extensions.Configuration.Abstractions.b3pij3tebf.wasm
-|   |   |                   Microsoft.Extensions.Configuration.Abstractions.b3pij3tebf.wasm.gz
-|   |   |                   Microsoft.Extensions.Configuration.Binder.3ucxiitwm2.wasm
-|   |   |                   Microsoft.Extensions.Configuration.Binder.3ucxiitwm2.wasm.gz
-|   |   |                   Microsoft.Extensions.Configuration.FileExtensions.5dd7vyvi95.wasm
-|   |   |                   Microsoft.Extensions.Configuration.FileExtensions.5dd7vyvi95.wasm.gz
-|   |   |                   Microsoft.Extensions.Configuration.Json.bv467jqp58.wasm
-|   |   |                   Microsoft.Extensions.Configuration.Json.bv467jqp58.wasm.gz
-|   |   |                   Microsoft.Extensions.Configuration.orhptnd9xx.wasm
-|   |   |                   Microsoft.Extensions.Configuration.orhptnd9xx.wasm.gz
-|   |   |                   Microsoft.Extensions.DependencyInjection.Abstractions.fin3467xug.wasm
-|   |   |                   Microsoft.Extensions.DependencyInjection.Abstractions.fin3467xug.wasm.gz
-|   |   |                   Microsoft.Extensions.DependencyInjection.irlczz6hcu.wasm
-|   |   |                   Microsoft.Extensions.DependencyInjection.irlczz6hcu.wasm.gz
-|   |   |                   Microsoft.Extensions.Diagnostics.96zflqxp3y.wasm
-|   |   |                   Microsoft.Extensions.Diagnostics.96zflqxp3y.wasm.gz
-|   |   |                   Microsoft.Extensions.Diagnostics.Abstractions.nzpokr6gof.wasm
-|   |   |                   Microsoft.Extensions.Diagnostics.Abstractions.nzpokr6gof.wasm.gz
-|   |   |                   Microsoft.Extensions.FileProviders.Abstractions.nn19foc92m.wasm
-|   |   |                   Microsoft.Extensions.FileProviders.Abstractions.nn19foc92m.wasm.gz
-|   |   |                   Microsoft.Extensions.FileProviders.Physical.94nfa9nm1s.wasm
-|   |   |                   Microsoft.Extensions.FileProviders.Physical.94nfa9nm1s.wasm.gz
-|   |   |                   Microsoft.Extensions.FileSystemGlobbing.ky7o0248s6.wasm
-|   |   |                   Microsoft.Extensions.FileSystemGlobbing.ky7o0248s6.wasm.gz
-|   |   |                   Microsoft.Extensions.Logging.Abstractions.j3u8ouhzz6.wasm
-|   |   |                   Microsoft.Extensions.Logging.Abstractions.j3u8ouhzz6.wasm.gz
-|   |   |                   Microsoft.Extensions.Logging.bypfn3k8np.wasm
-|   |   |                   Microsoft.Extensions.Logging.bypfn3k8np.wasm.gz
-|   |   |                   Microsoft.Extensions.Options.ConfigurationExtensions.wtnkcgjgd7.wasm
-|   |   |                   Microsoft.Extensions.Options.ConfigurationExtensions.wtnkcgjgd7.wasm.gz
-|   |   |                   Microsoft.Extensions.Options.moch3gvzt4.wasm
-|   |   |                   Microsoft.Extensions.Options.moch3gvzt4.wasm.gz
-|   |   |                   Microsoft.Extensions.Primitives.4elrmnoxfr.wasm
-|   |   |                   Microsoft.Extensions.Primitives.4elrmnoxfr.wasm.gz
-|   |   |                   Microsoft.Extensions.Validation.sjdijf10qc.wasm
-|   |   |                   Microsoft.Extensions.Validation.sjdijf10qc.wasm.gz
-|   |   |                   Microsoft.JSInterop.WebAssembly.gpkw9vy0ln.wasm
-|   |   |                   Microsoft.JSInterop.WebAssembly.gpkw9vy0ln.wasm.gz
-|   |   |                   Microsoft.JSInterop.x028qg75kb.wasm
-|   |   |                   Microsoft.JSInterop.x028qg75kb.wasm.gz
+|   |   |                   Microsoft.Extensions.Configuration.0foh9fjffd.wasm
+|   |   |                   Microsoft.Extensions.Configuration.0foh9fjffd.wasm.gz
+|   |   |                   Microsoft.Extensions.Configuration.Abstractions.rerhkqr3eb.wasm
+|   |   |                   Microsoft.Extensions.Configuration.Abstractions.rerhkqr3eb.wasm.gz
+|   |   |                   Microsoft.Extensions.Configuration.Binder.i87u3da4xe.wasm
+|   |   |                   Microsoft.Extensions.Configuration.Binder.i87u3da4xe.wasm.gz
+|   |   |                   Microsoft.Extensions.Configuration.FileExtensions.yli8mx0eos.wasm
+|   |   |                   Microsoft.Extensions.Configuration.FileExtensions.yli8mx0eos.wasm.gz
+|   |   |                   Microsoft.Extensions.Configuration.Json.slxs9murh9.wasm
+|   |   |                   Microsoft.Extensions.Configuration.Json.slxs9murh9.wasm.gz
+|   |   |                   Microsoft.Extensions.DependencyInjection.5j2hllj6bi.wasm
+|   |   |                   Microsoft.Extensions.DependencyInjection.5j2hllj6bi.wasm.gz
+|   |   |                   Microsoft.Extensions.DependencyInjection.Abstractions.bo3l2cgml4.wasm
+|   |   |                   Microsoft.Extensions.DependencyInjection.Abstractions.bo3l2cgml4.wasm.gz
+|   |   |                   Microsoft.Extensions.Diagnostics.Abstractions.bzcztxg906.wasm
+|   |   |                   Microsoft.Extensions.Diagnostics.Abstractions.bzcztxg906.wasm.gz
+|   |   |                   Microsoft.Extensions.Diagnostics.uwboh8k0t2.wasm
+|   |   |                   Microsoft.Extensions.Diagnostics.uwboh8k0t2.wasm.gz
+|   |   |                   Microsoft.Extensions.FileProviders.Abstractions.mpgzemyed2.wasm
+|   |   |                   Microsoft.Extensions.FileProviders.Abstractions.mpgzemyed2.wasm.gz
+|   |   |                   Microsoft.Extensions.FileProviders.Physical.b7hjew9l8i.wasm
+|   |   |                   Microsoft.Extensions.FileProviders.Physical.b7hjew9l8i.wasm.gz
+|   |   |                   Microsoft.Extensions.FileSystemGlobbing.l0tb2qjzko.wasm
+|   |   |                   Microsoft.Extensions.FileSystemGlobbing.l0tb2qjzko.wasm.gz
+|   |   |                   Microsoft.Extensions.Logging.Abstractions.h2nvdx8wws.wasm
+|   |   |                   Microsoft.Extensions.Logging.Abstractions.h2nvdx8wws.wasm.gz
+|   |   |                   Microsoft.Extensions.Logging.lp2m26x9dr.wasm
+|   |   |                   Microsoft.Extensions.Logging.lp2m26x9dr.wasm.gz
+|   |   |                   Microsoft.Extensions.Options.ConfigurationExtensions.dzi10xomgb.wasm
+|   |   |                   Microsoft.Extensions.Options.ConfigurationExtensions.dzi10xomgb.wasm.gz
+|   |   |                   Microsoft.Extensions.Options.yjc3y1bk49.wasm
+|   |   |                   Microsoft.Extensions.Options.yjc3y1bk49.wasm.gz
+|   |   |                   Microsoft.Extensions.Primitives.dqct702y6d.wasm
+|   |   |                   Microsoft.Extensions.Primitives.dqct702y6d.wasm.gz
+|   |   |                   Microsoft.Extensions.Validation.ya5jjh9lxk.wasm
+|   |   |                   Microsoft.Extensions.Validation.ya5jjh9lxk.wasm.gz
+|   |   |                   Microsoft.JSInterop.rq6fr0awtg.wasm
+|   |   |                   Microsoft.JSInterop.rq6fr0awtg.wasm.gz
+|   |   |                   Microsoft.JSInterop.WebAssembly.zh9llui9wt.wasm
+|   |   |                   Microsoft.JSInterop.WebAssembly.zh9llui9wt.wasm.gz
 |   |   |                   Microsoft.VisualBasic.b99k7uyg87.wasm
 |   |   |                   Microsoft.VisualBasic.b99k7uyg87.wasm.gz
 |   |   |                   Microsoft.VisualBasic.Core.0gp3r8s9ux.wasm
@@ -743,9 +743,9 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       +---compressed
 |   |   |       |       0b9a84guqz-{0}-7qg6cckq68-7qg6cckq68.gz
 |   |   |       |       0i5zp19l9f-{0}-1stmypg1wa-1stmypg1wa.gz
-|   |   |       |       0pdg4vk9gb-{0}-orhptnd9xx-orhptnd9xx.gz
+|   |   |       |       0pdg4vk9gb-{0}-0foh9fjffd-0foh9fjffd.gz
 |   |   |       |       16gifuey71-{0}-tjcz0u77k5-tjcz0u77k5.gz
-|   |   |       |       1c3qkw0w51-{0}-fin3467xug-fin3467xug.gz
+|   |   |       |       1c3qkw0w51-{0}-bo3l2cgml4-bo3l2cgml4.gz
 |   |   |       |       1deyn67vgu-{0}-9ehuyqpbg3-9ehuyqpbg3.gz
 |   |   |       |       1hfmv7gg6t-{0}-pf7090d2t5-pf7090d2t5.gz
 |   |   |       |       1vj8id7xo8-{0}-zzuw84g8n0-zzuw84g8n0.gz
@@ -753,23 +753,23 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       1xp43werw0-{0}-c4dnekfeam-c4dnekfeam.gz
 |   |   |       |       1xr9rauwnd-{0}-qk479eofj3-qk479eofj3.gz
 |   |   |       |       23gn20t81g-{0}-2oinf7wns0-2oinf7wns0.gz
-|   |   |       |       2c3hm7nll0-{0}-bypfn3k8np-bypfn3k8np.gz
-|   |   |       |       2mau3pzxk9-{0}-wt1enrrig6-wt1enrrig6.gz
+|   |   |       |       2c3hm7nll0-{0}-lp2m26x9dr-lp2m26x9dr.gz
+|   |   |       |       2mau3pzxk9-{0}-u0zj27cx7o-u0zj27cx7o.gz
 |   |   |       |       2zxgs4tsnx-{0}-clxrybe26z-clxrybe26z.gz
 |   |   |       |       3eoqy7gj56-{0}-5quh18s9mm-5quh18s9mm.gz
-|   |   |       |       3fggfcmk2o-{0}-9sl9hfcmoh-9sl9hfcmoh.gz
+|   |   |       |       3fggfcmk2o-{0}-iuj9ap840v-iuj9ap840v.gz
 |   |   |       |       3p6j8oeurv-{0}-9gnjjozbtj-9gnjjozbtj.gz
 |   |   |       |       3rlo0yi078-{0}-66stpp682q-66stpp682q.gz
 |   |   |       |       3uswc3e8aj-{0}-83r2do0ftq-83r2do0ftq.gz
 |   |   |       |       3xa9xiqtht-{0}-qb0kzx03kl-qb0kzx03kl.gz
-|   |   |       |       3ysh8s79pg-{0}-bv467jqp58-bv467jqp58.gz
+|   |   |       |       3ysh8s79pg-{0}-slxs9murh9-slxs9murh9.gz
 |   |   |       |       3zuozzmu06-{0}-nb5q6xwiuk-nb5q6xwiuk.gz
 |   |   |       |       42amuoer10-{0}-juip1ftcin-juip1ftcin.gz
 |   |   |       |       482vz1t6u5-{0}-z9wj9w0h8c-z9wj9w0h8c.gz
-|   |   |       |       48a7wdie62-{0}-96zflqxp3y-96zflqxp3y.gz
+|   |   |       |       48a7wdie62-{0}-uwboh8k0t2-uwboh8k0t2.gz
 |   |   |       |       4a1xwh1opt-{0}-ejghhwohxz-ejghhwohxz.gz
 |   |   |       |       4hp7kz1aqc-{0}-34inq8ahsc-34inq8ahsc.gz
-|   |   |       |       4lndbx6r8b-{0}-nzpokr6gof-nzpokr6gof.gz
+|   |   |       |       4lndbx6r8b-{0}-bzcztxg906-bzcztxg906.gz
 |   |   |       |       4q9cyo6cet-{0}-43d61ud0lp-43d61ud0lp.gz
 |   |   |       |       4t6a1lr6t8-{0}-aondpdvx6i-aondpdvx6i.gz
 |   |   |       |       5cnr4xr9te-{0}-cfk7zs10xf-cfk7zs10xf.gz
@@ -777,7 +777,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       5ufjppm8nw-{0}-yahsph9epv-yahsph9epv.gz
 |   |   |       |       6nuhangpnp-{0}-pu52m532ie-pu52m532ie.gz
 |   |   |       |       6whpssxz8a-{0}-19my82sfpj-19my82sfpj.gz
-|   |   |       |       6xlui7z80c-{0}-x028qg75kb-x028qg75kb.gz
+|   |   |       |       6xlui7z80c-{0}-rq6fr0awtg-rq6fr0awtg.gz
 |   |   |       |       76sgz3y7r0-{0}-7uve9irnrt-7uve9irnrt.gz
 |   |   |       |       7967rqizn0-{0}-3w2p4d06b7-3w2p4d06b7.gz
 |   |   |       |       7fuwygelwp-{0}-93eqsvbmw8-93eqsvbmw8.gz
@@ -808,30 +808,30 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       ayu8i58got-{0}-pl2mp3svpr-pl2mp3svpr.gz
 |   |   |       |       b14kjmb9vd-{0}-najsturrr4-najsturrr4.gz
 |   |   |       |       b9rfaqky48-{0}-gyfzzp3gzr-gyfzzp3gzr.gz
-|   |   |       |       bjnh5cvtwt-{0}-94nfa9nm1s-94nfa9nm1s.gz
+|   |   |       |       bjnh5cvtwt-{0}-b7hjew9l8i-b7hjew9l8i.gz
 |   |   |       |       bw9mqwopwi-{0}-rj92m02jvk-rj92m02jvk.gz
-|   |   |       |       chz8ud0via-{0}-1l4onz0xjo-1l4onz0xjo.gz
+|   |   |       |       chz8ud0via-{0}-3ur142rhlk-3ur142rhlk.gz
 |   |   |       |       cm69mjq17w-{0}-r0qktb9zk3-r0qktb9zk3.gz
 |   |   |       |       cn1msecvsu-{0}-x4p87bcsuc-x4p87bcsuc.gz
 |   |   |       |       d07juxbuh3-{0}-863sp2fomt-863sp2fomt.gz
 |   |   |       |       d3xctdbsm8-{0}-cc45vjr1b8-cc45vjr1b8.gz
 |   |   |       |       d4e2tqfm2s-{0}-st22xvului-st22xvului.gz
 |   |   |       |       d88qnt9z0r-{0}-5s8pq7f6mj-5s8pq7f6mj.gz
-|   |   |       |       dfreyn5klh-{0}-3whoftt379-3whoftt379.gz
+|   |   |       |       dfreyn5klh-{0}-hjmwiwwn52-hjmwiwwn52.gz
 |   |   |       |       dkj70biooi-{0}-xn7u9hqdzp-xn7u9hqdzp.gz
 |   |   |       |       dmdeonll3k-{0}-qra57zb5iw-qra57zb5iw.gz
 |   |   |       |       dt9uy83tyq-{0}-16sllnulcp-16sllnulcp.gz
 |   |   |       |       dynhy1cwn3-{0}-zh1h2lu7qi-zh1h2lu7qi.gz
 |   |   |       |       egrzhey92b-{0}-sy8oxhg0km-sy8oxhg0km.gz
-|   |   |       |       eho75k9ooj-{0}-9ruf9isj5v-9ruf9isj5v.gz
+|   |   |       |       eho75k9ooj-{0}-a9671ymty2-a9671ymty2.gz
 |   |   |       |       eina7s2dje-{0}-ch4cyksrn0-ch4cyksrn0.gz
 |   |   |       |       emar7ojs7b-{0}-9yf50wt6yq-9yf50wt6yq.gz
 |   |   |       |       f9o902iofb-{0}-99zm1jdh75-99zm1jdh75.gz
-|   |   |       |       fm7tmgkhvw-{0}-nctswpx09d-nctswpx09d.gz
+|   |   |       |       fm7tmgkhvw-{0}-pe34czp7g7-pe34czp7g7.gz
 |   |   |       |       fpqlfqrs4y-{0}-b99k7uyg87-b99k7uyg87.gz
 |   |   |       |       fxjqvkvbjh-{0}-vjmqnrcqw9-vjmqnrcqw9.gz
 |   |   |       |       ggnarkks1w-{0}-qgjhfb602y-qgjhfb602y.gz
-|   |   |       |       gh73yn216j-{0}-b3pij3tebf-b3pij3tebf.gz
+|   |   |       |       gh73yn216j-{0}-rerhkqr3eb-rerhkqr3eb.gz
 |   |   |       |       h1y6b5mt0i-{0}-esps13f27e-esps13f27e.gz
 |   |   |       |       h2wzv8iut0-{0}-0tkk88r043-0tkk88r043.gz
 |   |   |       |       h3nih8h9ur-{0}-a6jqv0xrcf-a6jqv0xrcf.gz
@@ -855,8 +855,8 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       kmbcczlmqv-{0}-3x7f86qfql-3x7f86qfql.gz
 |   |   |       |       kz9p261qc5-{0}-qpf1k0onwr-qpf1k0onwr.gz
 |   |   |       |       l7rbbbd4fi-{0}-sf458cz82b-sf458cz82b.gz
-|   |   |       |       lbxpns34i1-{0}-ij454jqrom-ij454jqrom.gz
-|   |   |       |       lh59ob944f-{0}-mh9ctqcow8-mh9ctqcow8.gz
+|   |   |       |       lbxpns34i1-{0}-jnskqyrki7-jnskqyrki7.gz
+|   |   |       |       lh59ob944f-{0}-hgd9fggzpe-hgd9fggzpe.gz
 |   |   |       |       lj3msr1lhw-{0}-ed335v31ay-ed335v31ay.gz
 |   |   |       |       ljeibr96ow-{0}-ul94u1ukws-ul94u1ukws.gz
 |   |   |       |       lm00a84zr9-{0}-4myqtalz7l-4myqtalz7l.gz
@@ -872,7 +872,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       n35jvnr825-{0}-ok1w9bwh9p-ok1w9bwh9p.gz
 |   |   |       |       nb5ocalx9l-{0}-sg5289qtzr-sg5289qtzr.gz
 |   |   |       |       nhzrlx2glb-{0}-ul68gvf84n-ul68gvf84n.gz
-|   |   |       |       njnlmbjta1-{0}-zftrv9nrnc-zftrv9nrnc.gz
+|   |   |       |       njnlmbjta1-{0}-8vjd7rkb3b-8vjd7rkb3b.gz
 |   |   |       |       nl1aipmkh9-{0}-xxpmmmbzoi-xxpmmmbzoi.gz
 |   |   |       |       nu8bj35gu6-{0}-ljs5h1hf84-ljs5h1hf84.gz
 |   |   |       |       nwswlbpy0n-{0}-bln3oou6sh-bln3oou6sh.gz
@@ -883,17 +883,17 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       onj7928xfn-{0}-35mmztjx47-35mmztjx47.gz
 |   |   |       |       ot0usvebgs-{0}-24ba0xc6vm-24ba0xc6vm.gz
 |   |   |       |       p6fc2t1yj0-{0}-5tr3aitadh-5tr3aitadh.gz
-|   |   |       |       pactsv2pac-{0}-moch3gvzt4-moch3gvzt4.gz
+|   |   |       |       pactsv2pac-{0}-yjc3y1bk49-yjc3y1bk49.gz
 |   |   |       |       pdaotioiej-{0}-c97596j8dp-c97596j8dp.gz
 |   |   |       |       pehuqocd4z-{0}-0q8h4ozt6q-0q8h4ozt6q.gz
 |   |   |       |       pq1zwub8zu-{0}-n949pn5bqf-n949pn5bqf.gz
-|   |   |       |       prwyqf4e4y-{0}-zftrv9nrnc-zftrv9nrnc.gz
+|   |   |       |       prwyqf4e4y-{0}-8vjd7rkb3b-8vjd7rkb3b.gz
 |   |   |       |       pwmpgrqg76-{0}-i26u5a9fau-i26u5a9fau.gz
 |   |   |       |       px0hxgqwjv-{0}-8br0rpc5j3-8br0rpc5j3.gz
 |   |   |       |       pzqxcw519k-{0}-xq74p7yimf-xq74p7yimf.gz
 |   |   |       |       q3154k5biw-{0}-b22pm24uac-b22pm24uac.gz
 |   |   |       |       q4p940erp4-{0}-befq3iek54-befq3iek54.gz
-|   |   |       |       qapwvyh3s0-{0}-e7w1likw36-e7w1likw36.gz
+|   |   |       |       qapwvyh3s0-{0}-q1codjzsmb-q1codjzsmb.gz
 |   |   |       |       qitdg1tdwz-{0}-uakrztahlf-uakrztahlf.gz
 |   |   |       |       qm96gcrzfw-{0}-67mulskwi0-67mulskwi0.gz
 |   |   |       |       qp8xb91mke-{0}-wnrh6t4f3i-wnrh6t4f3i.gz
@@ -911,24 +911,24 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       skxx5aeblm-{0}-3bjru5t7u0-3bjru5t7u0.gz
 |   |   |       |       st7tx8vokm-{0}-87vtjjdetb-87vtjjdetb.gz
 |   |   |       |       sugokdc00a-{0}-mnd3y3a76z-mnd3y3a76z.gz
-|   |   |       |       svb8xodzcv-{0}-irlczz6hcu-irlczz6hcu.gz
+|   |   |       |       svb8xodzcv-{0}-5j2hllj6bi-5j2hllj6bi.gz
 |   |   |       |       sy44tf32kn-{0}-l0r3bunp9q-l0r3bunp9q.gz
-|   |   |       |       syt0dqw1ux-{0}-9410bznlct-9410bznlct.gz
+|   |   |       |       syt0dqw1ux-{0}-pcy0en7946-pcy0en7946.gz
 |   |   |       |       t2kz3thrps-{0}-2tx45g8lli-2tx45g8lli.gz
 |   |   |       |       tbjuh26x5v-{0}-ksfzm5bevd-ksfzm5bevd.gz
-|   |   |       |       tcd8qxaqk5-{0}-5dd7vyvi95-5dd7vyvi95.gz
-|   |   |       |       to3gdc9v7t-{0}-gpkw9vy0ln-gpkw9vy0ln.gz
-|   |   |       |       tqvssf1e25-{0}-4elrmnoxfr-4elrmnoxfr.gz
+|   |   |       |       tcd8qxaqk5-{0}-yli8mx0eos-yli8mx0eos.gz
+|   |   |       |       to3gdc9v7t-{0}-zh9llui9wt-zh9llui9wt.gz
+|   |   |       |       tqvssf1e25-{0}-dqct702y6d-dqct702y6d.gz
 |   |   |       |       tr29skqe6k-{0}-7nk82opmn0-7nk82opmn0.gz
-|   |   |       |       tx163lbqko-{0}-3ucxiitwm2-3ucxiitwm2.gz
+|   |   |       |       tx163lbqko-{0}-i87u3da4xe-i87u3da4xe.gz
 |   |   |       |       tzrr6pqzvj-{0}-mduomqj5ij-mduomqj5ij.gz
 |   |   |       |       u4isgfmkku-{0}-e14q0e2ivp-e14q0e2ivp.gz
-|   |   |       |       u71ga3liwe-{0}-wtnkcgjgd7-wtnkcgjgd7.gz
+|   |   |       |       u71ga3liwe-{0}-dzi10xomgb-dzi10xomgb.gz
 |   |   |       |       ubrqv4m86z-{0}-9wmxbd3xi4-9wmxbd3xi4.gz
 |   |   |       |       uhrx7xxvvp-{0}-c4mxa3g9k3-c4mxa3g9k3.gz
-|   |   |       |       umouci7rgc-{0}-ky7o0248s6-ky7o0248s6.gz
+|   |   |       |       umouci7rgc-{0}-l0tb2qjzko-l0tb2qjzko.gz
 |   |   |       |       umwqcj788f-{0}-qxsd8cyg4g-qxsd8cyg4g.gz
-|   |   |       |       v1r6c947cj-{0}-nyb7ae3bsc-nyb7ae3bsc.gz
+|   |   |       |       v1r6c947cj-{0}-ld1j2d23tn-ld1j2d23tn.gz
 |   |   |       |       v2oy4w573b-{0}-5fwkk0fu07-5fwkk0fu07.gz
 |   |   |       |       v3b7u7how3-{0}-opqs1igb6m-opqs1igb6m.gz
 |   |   |       |       v4otg6irbm-{0}-8hcxxdqep0-8hcxxdqep0.gz
@@ -936,13 +936,13 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       vknov21m65-{0}-9sdmuz89zv-9sdmuz89zv.gz
 |   |   |       |       w18a0z22d2-{0}-c2gy48u1v7-c2gy48u1v7.gz
 |   |   |       |       w3jaqn3h4o-{0}-78lrbgxr1f-78lrbgxr1f.gz
-|   |   |       |       w3ur6j80u7-{0}-j3u8ouhzz6-j3u8ouhzz6.gz
+|   |   |       |       w3ur6j80u7-{0}-h2nvdx8wws-h2nvdx8wws.gz
 |   |   |       |       wuimozunwv-{0}-piem9h0tr4-piem9h0tr4.gz
-|   |   |       |       x3ikudnee4-{0}-qlpjacq0wd-qlpjacq0wd.gz
+|   |   |       |       x3ikudnee4-{0}-463j7r60uc-463j7r60uc.gz
 |   |   |       |       x54bdp6f69-{0}-nc02rhe1iy-nc02rhe1iy.gz
 |   |   |       |       x57r4b36iz-{0}-lfu7j35m59-lfu7j35m59.gz
 |   |   |       |       xf1qqu3s0v-{0}-xfor6r3ecm-xfor6r3ecm.gz
-|   |   |       |       xn58q07e15-{0}-sjdijf10qc-sjdijf10qc.gz
+|   |   |       |       xn58q07e15-{0}-ya5jjh9lxk-ya5jjh9lxk.gz
 |   |   |       |       y27ilh7k6y-{0}-tvr5elqhf3-tvr5elqhf3.gz
 |   |   |       |       y722oc08fd-{0}-pq3olwch7c-pq3olwch7c.gz
 |   |   |       |       y740klzyfn-{0}-oz8q74opte-oz8q74opte.gz
@@ -959,7 +959,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       zcx365lyhk-{0}-9nkvrm3ay5-9nkvrm3ay5.gz
 |   |   |       |       zd6enrk8dw-{0}-uqhq3nhwn0-uqhq3nhwn0.gz
 |   |   |       |       zku9fjt8cp-{0}-310ae10ufo-310ae10ufo.gz
-|   |   |       |       zs35d5qkiu-{0}-nn19foc92m-nn19foc92m.gz
+|   |   |       |       zs35d5qkiu-{0}-mpgzemyed2-mpgzemyed2.gz
 |   |   |       |       zu1a9lmycu-{0}-jhpodym6cr-jhpodym6cr.gz
 |   |   |       |       
 |   |   |       +---ref
@@ -1840,7 +1840,7 @@ MODIFIED: 02/08/2026 15:46:02
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\CollabsKus.BlazorWebAssembly.csproj
 SIZE: 0.71 KB
-MODIFIED: 02/08/2026 15:56:35
+MODIFIED: 02/24/2026 09:13:01
 ================================================================================
 
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
@@ -1853,8 +1853,8 @@ MODIFIED: 02/08/2026 15:56:35
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.2" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.3" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
@@ -2058,20 +2058,24 @@ MODIFIED: 02/08/2026 15:46:02
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Components\MoonDisplay.razor
-SIZE: 1.54 KB
-MODIFIED: 02/18/2026 09:50:07
+SIZE: 2.63 KB
+MODIFIED: 02/24/2026 09:14:23
 ================================================================================
 
 @using CollabsKus.BlazorWebAssembly.Models
 
-<div class="moon-display">
+<div id="moon-display-root" class="moon-display">
     <div class="label">MOON PHASE</div>
-    <div class="moon-icon">@MoonPhase?.Icon</div>
+    <div class="moon-icon @(IsLive ? "moon-icon-live" : "")">@MoonPhase?.Icon</div>
     <div class="moon-phase-name">@MoonPhase?.Name</div>
-    <div class="moon-illumination">@((int)(MoonPhase?.Illumination ?? 0))% Illuminated</div>
+    <div class="moon-illumination">@FormatIllumination(MoonPhase?.Illumination ?? 0) Illuminated</div>
 
     @if (MoonPhase != null)
     {
+        <div class="moon-age">
+            Moon age: @FormatPreciseDays(MoonPhase.Age) into cycle
+        </div>
+
         <div class="moon-context">
             @if (MoonPhase.Age < 14.765)
             {
@@ -2094,12 +2098,23 @@ MODIFIED: 02/18/2026 09:50:07
             <span> — </span>
             <span class="tithi-name">@MoonPhase.TithiName (@MoonPhase.TithiNumber)</span>
         </div>
+
+        @if (IsLive)
+        {
+            <div class="moon-live-indicator">
+                <span class="live-dot"></span>
+                <span class="live-text">LIVE</span>
+            </div>
+        }
     }
 </div>
 
 @code {
     [Parameter]
     public MoonPhase? MoonPhase { get; set; }
+
+    [Parameter]
+    public bool IsLive { get; set; }
 
     private string FormatDays(double days)
     {
@@ -2109,14 +2124,36 @@ MODIFIED: 02/18/2026 09:50:07
             return "1 day";
         return $"{days:F1} days";
     }
+
+    private string FormatPreciseDays(double days)
+    {
+        var totalSeconds = days * 86400.0;
+        var d = (int)days;
+        var remainingSeconds = totalSeconds - (d * 86400.0);
+        var h = (int)(remainingSeconds / 3600.0);
+        var m = (int)((remainingSeconds % 3600.0) / 60.0);
+        var s = (int)(remainingSeconds % 60.0);
+
+        if (d > 0)
+            return $"{d}d {h}h {m}m {s}s";
+        if (h > 0)
+            return $"{h}h {m}m {s}s";
+        return $"{m}m {s}s";
+    }
+
+    private string FormatIllumination(double illumination)
+    {
+        // Show 2 decimal places for precision — updates every second
+        return $"{illumination:F2}%";
+    }
 }
 
 
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Components\MoonDisplay.razor.css
-SIZE: 0.91 KB
-MODIFIED: 02/18/2026 09:50:55
+SIZE: 3.13 KB
+MODIFIED: 02/24/2026 09:14:12
 ================================================================================
 
 .moon-display {
@@ -2135,11 +2172,32 @@ MODIFIED: 02/18/2026 09:50:55
     letter-spacing: 1px;
 }
 
+/* ── Moon icon with optional live glow animation ─────────────────────── */
+
 .moon-icon {
     font-size: 4rem;
     margin: 15px 0;
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    transition: filter 0.3s ease;
 }
+
+.moon-icon-live {
+    animation: moonPulse 2s ease-in-out infinite;
+}
+
+@keyframes moonPulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        transform: scale(1);
+    }
+
+    50% {
+        filter: drop-shadow(0 0 22px rgba(255, 255, 255, 0.85)) drop-shadow(0 0 40px rgba(200, 200, 255, 0.3));
+        transform: scale(1.03);
+    }
+}
+
+/* ── Phase name and illumination ─────────────────────────────────────── */
 
 .moon-phase-name {
     font-size: 1.3rem;
@@ -2151,7 +2209,21 @@ MODIFIED: 02/18/2026 09:50:55
     font-size: 1rem;
     opacity: 0.8;
     margin-top: 5px;
+    font-variant-numeric: tabular-nums;
 }
+
+/* ── Moon age (precise d/h/m/s readout) ──────────────────────────────── */
+
+.moon-age {
+    font-size: 0.85rem;
+    opacity: 0.65;
+    margin-top: 6px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.3px;
+    font-family: 'Consolas', 'Courier New', monospace;
+}
+
+/* ── Context line (days since/until new/full moon) ───────────────────── */
 
 .moon-context {
     font-size: 0.95rem;
@@ -2160,6 +2232,8 @@ MODIFIED: 02/18/2026 09:50:55
     font-weight: 300;
     letter-spacing: 0.3px;
 }
+
+/* ── Tithi / Paksha line ─────────────────────────────────────────────── */
 
 .moon-tithi {
     font-size: 0.85rem;
@@ -2176,6 +2250,48 @@ MODIFIED: 02/18/2026 09:50:55
 .tithi-name {
     font-weight: 300;
 }
+
+/* ── Live indicator ──────────────────────────────────────────────────── */
+
+.moon-live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4ade80;
+    animation: liveBlink 1.5s ease-in-out infinite;
+}
+
+@keyframes liveBlink {
+    0%, 100% {
+        opacity: 1;
+        box-shadow: 0 0 4px #4ade80;
+    }
+
+    50% {
+        opacity: 0.4;
+        box-shadow: 0 0 1px #4ade80;
+    }
+}
+
+.live-text {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    opacity: 0.7;
+    font-style: normal;
+}
+
 
 
 
@@ -2438,14 +2554,14 @@ public class TimeResponse
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Pages\Home.razor
-SIZE: 3.97 KB
-MODIFIED: 02/18/2026 10:09:35
+SIZE: 6.03 KB
+MODIFIED: 02/24/2026 09:14:33
 ================================================================================
 
 @page "/"
 @using CollabsKus.BlazorWebAssembly.Models
 @using CollabsKus.BlazorWebAssembly.Services
-@implements IDisposable
+@implements IAsyncDisposable
 
 <PageTitle>Kathmandu Calendar & Time</PageTitle>
 
@@ -2466,7 +2582,7 @@ else
 {
     <TimeDisplay CurrentTime="_currentTime" />
     <DateCards CalendarData="_calendarData?.Res" />
-    <MoonDisplay MoonPhase="_moonPhase" />
+    <MoonDisplay MoonPhase="_moonPhase" IsLive="_isMoonLive" />
     <CalendarGrid CalendarData="_calendarData?.Res" />
 }
 
@@ -2481,6 +2597,9 @@ else
     [Inject]
     private MoonPhaseService MoonPhaseService { get; set; } = default!;
 
+    [Inject]
+    private IJSRuntime JS { get; set; } = default!;
+
     private CalendarResponse? _calendarData;
     private TimeResponse? _timeData;
     private MoonPhase? _moonPhase;
@@ -2491,6 +2610,13 @@ else
     private System.Threading.Timer? _clockTimer;
     private System.Threading.Timer? _timeApiTimer;
     private System.Threading.Timer? _calendarApiTimer;
+
+    // Visibility + intersection tracking
+    private bool _isTabVisible = true;
+    private bool _isMoonInView = true;
+    private bool _isMoonLive => _isTabVisible && _isMoonInView;
+    private DotNetObjectReference<Home>? _dotNetRef;
+    private IJSObjectReference? _jsModule;
 
     protected override async Task OnInitializedAsync()
     {
@@ -2503,7 +2629,13 @@ else
             _clockTimer = new System.Threading.Timer(async _ =>
             {
                 _currentTime = CalendarService.GetCurrentKathmanduTime();
-                UpdateMoonPhase();
+
+                // Only recalculate moon phase when tab is visible AND moon is in viewport
+                if (_isMoonLive)
+                {
+                    UpdateMoonPhase();
+                }
+
                 await InvokeAsync(StateHasChanged);
             }, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
 
@@ -2525,6 +2657,51 @@ else
         {
             _error = $"Failed to load data: {ex.Message}";
             _isLoading = false;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _dotNetRef = DotNetObjectReference.Create(this);
+            try
+            {
+                _jsModule = await JS.InvokeAsync<IJSObjectReference>(
+                    "moonVisibility.init", _dotNetRef, "moon-display-root");
+            }
+            catch
+            {
+                // If JS interop fails, default to always-live (graceful degradation)
+                _isTabVisible = true;
+                _isMoonInView = true;
+            }
+        }
+    }
+
+    [JSInvokable]
+    public void OnVisibilityChanged(bool isVisible)
+    {
+        _isTabVisible = isVisible;
+
+        // When tab becomes visible again, immediately recalculate to catch up
+        if (isVisible)
+        {
+            UpdateMoonPhase();
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    [JSInvokable]
+    public void OnMoonInViewChanged(bool isInView)
+    {
+        _isMoonInView = isInView;
+
+        // When moon scrolls into view, immediately recalculate
+        if (isInView && _isTabVisible)
+        {
+            UpdateMoonPhase();
+            InvokeAsync(StateHasChanged);
         }
     }
 
@@ -2566,11 +2743,26 @@ else
         _lastUpdate = DateTime.Now.ToString("hh:mm:ss tt");
     }
 
-    public void Dispose()
+    public async ValueTask DisposeAsync()
     {
         _clockTimer?.Dispose();
         _timeApiTimer?.Dispose();
         _calendarApiTimer?.Dispose();
+
+        if (_jsModule is not null)
+        {
+            try
+            {
+                await _jsModule.InvokeVoidAsync("dispose");
+                await _jsModule.DisposeAsync();
+            }
+            catch
+            {
+                // Ignore disposal errors during navigation
+            }
+        }
+
+        _dotNetRef?.Dispose();
     }
 }
 
@@ -3367,8 +3559,8 @@ body {
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\wwwroot\index.html
-SIZE: 1.08 KB
-MODIFIED: 02/08/2026 15:57:15
+SIZE: 3.08 KB
+MODIFIED: 02/24/2026 09:13:58
 ================================================================================
 
 <!DOCTYPE html>
@@ -3401,7 +3593,58 @@ MODIFIED: 02/08/2026 15:57:15
         <a href="." class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-    <script src="_framework/blazor.webassembly.js" autostart="true"></script>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+
+    <script>// ── Moon visibility tracking (Page Visibility API + IntersectionObserver) ──
+        window.moonVisibility = {
+            _observer: null,
+            _dotNetRef: null,
+            _visHandler: null,
+
+            init: function (dotNetRef, elementId) {
+                this._dotNetRef = dotNetRef;
+
+                // 1. Page Visibility API — detect tab focus/blur
+                this._visHandler = function () {
+                    var isVisible = !document.hidden;
+                    dotNetRef.invokeMethodAsync('OnVisibilityChanged', isVisible);
+                };
+                document.addEventListener('visibilitychange', this._visHandler);
+
+                // 2. IntersectionObserver — detect if moon section is in viewport
+                var target = document.getElementById(elementId);
+                if (target && 'IntersectionObserver' in window) {
+                    this._observer = new IntersectionObserver(function (entries) {
+                        var isInView = entries[0].isIntersecting;
+                        dotNetRef.invokeMethodAsync('OnMoonInViewChanged', isInView);
+                    }, {
+                        // Trigger as soon as any part of the element is visible
+                        threshold: 0.0
+                    });
+                    this._observer.observe(target);
+                }
+
+                // Return a reference so Blazor can call dispose
+                return {
+                    dispose: function () {
+                        window.moonVisibility.dispose();
+                    }
+                };
+            },
+
+            dispose: function () {
+                if (this._visHandler) {
+                    document.removeEventListener('visibilitychange', this._visHandler);
+                    this._visHandler = null;
+                }
+                if (this._observer) {
+                    this._observer.disconnect();
+                    this._observer = null;
+                }
+                this._dotNetRef = null;
+            }
+        };</script>
 </body>
 
 </html>
@@ -3486,7 +3729,7 @@ async function onFetch(event) {
 
 
 ===============================================================================
-EXPORT COMPLETED: 02/24/2026 09:07:01
+EXPORT COMPLETED: 02/24/2026 09:15:33
 Total Files Exported: 32
 Output File: .\docs\llm\dump.txt
 ===============================================================================
