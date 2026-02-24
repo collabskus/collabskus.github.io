@@ -365,3 +365,17 @@ The old code just checked `date.Kind == DateTimeKind.Utc ? date : date.ToUnivers
 - `MoonDisplay.razor` — display logic is fine  
 - `MoonDisplay.razor.css` — styles are fine
 - `KathmanduCalendarService.cs` — no changes needed (its behavior is correct for the clock display, just wrong for moon calculations)
+
+
+
+I have updated my `dump.txt` in the project files. 
+I want to make sure we recalculate the moon phases 
+every second if our window / tab is in focus and if the moon image picture is in view 
+and I want some kind of animation to drive home the point that this is updated constantly 
+also I want very accurate information 
+as precise as possible. 
+please give me full files for all files that need to change
+
+32
+24
+
