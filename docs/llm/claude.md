@@ -448,3 +448,118 @@ Let me generate all 4 full files:Here's a summary of all changes and why:
 
 47
 26
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Please thoroughly review the following, 
+make any changes you think are necessary, 
+and give me full files for all files that need to change. 
+Do not make changes just for the sake of making change. 
+We want to avoid regressions at all costs. 
+Please be thorough and methodical. 
+Do NOT hallucinate. 
+```
+This is a wonderfully built Blazor WebAssembly project. I really appreciate the care you’ve taken to optimize for the client side—particularly using the Intersection Observer to pause the 1-second moon ticking when the element is out of view. That’s a fantastic touch for battery life on mobile devices.
+
+I’ve reviewed the code with a specific focus on the astronomical calculations and system logic. Overall, it is highly robust, but there is one subtle time-sync bug you'll want to squash.
+
+Here is the breakdown of the correctness of your application.
+
+### 1. Moon Phase Calculations (Outstanding)
+
+Your implementation in `MoonPhaseService.cs` is genuinely impressive. Most web widgets cheat by using a simple modulo against a known past New Moon (`days % 29.53`). You implemented Jean Meeus's *Astronomical Algorithms* polynomials instead.
+
+* **Meeus Polynomials & Perturbations:** Your calculations for the Moon's mean elongation ($D$), Sun's mean anomaly ($M_0$), and the 60-term harmonic series for longitude corrections ($dL$) are fundamentally sound. This gives you sub-minute accuracy for the phase angle.
+* **Timezone Independence:** In `Home.razor`, you explicitly noted that phase relies on absolute UTC time, bypassing local timezone offsets: `MoonPhaseService.CalculateMoonPhase(DateTime.UtcNow)`. This is precisely correct.
+* **Hindu Lunar Day (Tithi):** Your logic for calculating the Tithi is spot-on. In traditional Vedic astronomy, a Tithi is mathematically defined as the time it takes for the longitudinal angle between the Moon and the Sun to increase by $12^\circ$ (since $360^\circ / 30 = 12^\circ$). `tithiRaw = elongation / 12.0;` perfectly maps to this ancient standard.
+* **Moon Age:** Using `elongation / 360.0 * SynodicMonth` gives the *mean* age. Because the Moon's orbit is elliptical, its angular velocity varies slightly, meaning true age can deviate from mean age by a few hours. However, for a visual UI and general age readout, mapping elongation linearly to the mean synodic month is the standard and correct approach.
+
+### 2. The Date Boundary Bug (Needs Fixing)
+
+There is a subtle bug in `KathmanduCalendarService.cs` when calculating `_serverTimeOffset`.
+
+**The Issue:**
+You build `serverTime` by combining `DateTime.UtcNow`'s year, month, and day with the hour and minute returned by your API. Nepal is UTC+05:45. If the current time is **23:00 UTC on Tuesday**, it is already **04:45 on Wednesday** in Kathmandu.
+Your code will take the API's `04:45` and attach it to *Tuesday's* date (`UtcNow.Year, UtcNow.Month, UtcNow.Day`).
+
+This results in a `serverTime` that is actually 18 hours and 15 minutes *behind* UTC, making your `_serverTimeOffset` roughly `-18h15m`. The UI clock will still look correct because it only formats the hours and minutes, but the underlying `DateTime` object will be on the wrong day.
+
+**The Fix:**
+Since Nepal operates on a fixed offset that doesn't observe Daylight Saving Time, you can avoid date-boundary math entirely by hardcoding the offset or handling the day rollover.
+
+If you want to keep the API as the strict source of truth for the clock, fix the rollover like this:
+
+```csharp
+var localTime = beforeFetch + (afterFetch - beforeFetch) / 2;
+_serverTimeOffset = serverTime - localTime;
+
+// Fix the date boundary crossing issue
+if (_serverTimeOffset.TotalHours < -12) 
+{
+    _serverTimeOffset += TimeSpan.FromHours(24);
+}
+else if (_serverTimeOffset.TotalHours > 12) 
+{
+    _serverTimeOffset -= TimeSpan.FromHours(24);
+}
+
+```
+
+Alternatively, if you don't actually need the API to dictate the seconds, you can completely replace the offset logic with: `_serverTimeOffset = new TimeSpan(5, 45, 0);`
+
+### 3. Minor Polish Observations
+
+* **JS Interop:** In `index.html`, your `moonVisibility.init` returns a plain JavaScript object `{ dispose: function() {...} }`. Passing this back to Blazor as an `IJSObjectReference` and later calling `DisposeAsync()` on it is perfectly valid in modern Blazor, but keep an eye on it if you ever migrate to strict ES modules.
+* **API Logging:** Using `_ = Task.Run(async () => ...)` in `ApiLoggerService` is an excellent use of fire-and-forget to ensure your UI thread is never blocked by telemetry.
+
+Everything else—the DOM rendering, the CSS Grid implementation for the calendar, and your GitHub Actions deployment workflow—looks clean and production-ready.
+
+Would you like me to help you map out the exact code changes to switch the clock over to a purely `TimeZoneInfo`-based local calculation so you can skip the time API fetch entirely?
+```
