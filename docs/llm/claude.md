@@ -563,3 +563,78 @@ Everything else—the DOM rendering, the CSS Grid implementation for the calenda
 
 Would you like me to help you map out the exact code changes to switch the clock over to a purely `TimeZoneInfo`-based local calculation so you can skip the time API fetch entirely?
 ```
+
+00
+48
+
+Let me read the full dump.txt first.I can see from the project knowledge the history of this codebase, but I need the actual current dump.txt to see the live code. Let me check the deployed site and look for the dump file.Now let me find the most recent conversation to get the current state of the code:Now let me get the actual current code from the most recent conversation:Let me now look at the most recent conversation (Feb 24) to get the latest code state:Kushal, I need to be upfront with you: **I don't have access to your current `dump.txt` file.** The project knowledge search is only returning fragments from our past conversation history (the `claude.md` context file), not the actual source code files. I can see descriptions of what we've discussed and changed, but not the live codebase as it exists today.
+
+The review you pasted from the external reviewer identifies **one concrete bug** that needs fixing — the date boundary bug in `KathmanduCalendarService.cs`. Let me address it based on what I know from our conversation history.
+
+The core issue the reviewer found: when UTC time is late evening (e.g. 23:00 UTC = 04:45 next day in Kathmandu), your code builds `serverTime` by combining the API's hour/minute (04:45) with `DateTime.UtcNow`'s date (today, not tomorrow). This creates a `_serverTimeOffset` that's ~18 hours wrong, which means the underlying DateTime is on the wrong calendar day even though the displayed HH:mm looks correct.
+
+The reviewer's suggested fix is sound. Since Nepal doesn't observe DST, the simplest and most robust approach is their alternative suggestion: **hardcode the offset**.
+
+However, **I can't give you full, correct files without seeing the current dump.txt.** If I reconstruct files from memory of our past conversations, I risk:
+1. Writing code against a stale version of `KathmanduCalendarService.cs` that you've already changed
+2. Missing other changes you've made since Feb 24
+3. Introducing regressions by guessing at code I haven't read
+
+Could you please paste or upload the current `dump.txt`? Then I can do the thorough line-by-line review you expect and give you the correct full files with the date boundary fix applied. I want to do this right rather than hallucinate files.
+
+12
+50
+
+I've now read the entire dump.txt. Let me analyze the reviewer's findings against the actual current code.
+
+## Analysis
+
+The reviewer identified one real bug: **the date boundary issue in `KathmanduCalendarService.cs`**. Let me trace through the code to confirm.
+
+In `KathmanduCalendarService.cs`, the `GetTimeDataAsync` method:
+
+```csharp
+var serverTime = new DateTime(
+    DateTime.UtcNow.Year,
+    DateTime.UtcNow.Month,
+    DateTime.UtcNow.Day,    // ← UTC date
+    serverHour,              // ← Kathmandu hour (24h format)
+    serverMin,
+    serverSec
+);
+
+var localTime = beforeFetch + (afterFetch - beforeFetch) / 2;
+_serverTimeOffset = serverTime - localTime;
+```
+
+If it's 23:00 UTC, that's 04:45 next day in Kathmandu. The API returns `04:45`, but the code attaches it to today's UTC date. So `serverTime` becomes `Today 04:45` instead of `Tomorrow 04:45` — creating a `_serverTimeOffset` of roughly -18h15m instead of +5h45m. The clock display still *looks* right because `TimeDisplay.razor` only formats HH:mm:ss, but the underlying `DateTime` from `GetCurrentKathmanduTime()` is on the wrong day.
+
+**Does this affect moon calculations?** No — because `Home.razor`'s `UpdateMoonPhase()` already correctly uses `DateTime.UtcNow` directly, not `_currentTime`. So the moon is fine.
+
+**What it does affect:** The `_currentTime` DateTime object has the wrong date during the ~5h45m window after midnight in Kathmandu (18:15–00:00 UTC). If anything in the future uses `_currentTime.Date`, it would be wrong. And `_serverTimeOffset` being wildly off means if the API fetch ever fails on retry, the accumulated drift could cause display issues.
+
+The reviewer's other observations (JS interop, fire-and-forget logging) are just notes — no action needed.
+
+**Only one file needs to change: `KathmanduCalendarService.cs`.**
+
+Here's the fix with the date boundary correction applied:## Summary of what changed and why
+
+**One file changed: `KathmanduCalendarService.cs`** — added 12 lines (the date boundary fix + explanatory comment) after the `_serverTimeOffset = serverTime - localTime;` line.
+
+**The bug:** When UTC time is between 18:15 and 00:00 (i.e., it's already the next day in Kathmandu), the API returns Kathmandu's local hour/minute (e.g., 04:45 AM) but the code attaches it to today's UTC date. This creates a `_serverTimeOffset` of approximately -18h15m instead of the correct +5h45m. The displayed clock still looked correct because `TimeDisplay.razor` only shows HH:mm:ss, but the underlying `DateTime` was on the wrong calendar day.
+
+**The fix:** After computing `_serverTimeOffset`, clamp it: if it's below -12 hours, add 24 hours; if above +12 hours, subtract 24 hours. This is safe because Nepal uses a fixed UTC+5:45 offset with no DST, so the correct offset is always near +5h45m — well within the ±12h window.
+
+**What I did NOT change (and why):**
+
+- **`MoonPhaseService.cs`** — Already correct. The Jean Meeus algorithm with 60 perturbation terms is sound. The reviewer praised it.
+- **`Home.razor`** — Already correctly passes `DateTime.UtcNow` to `UpdateMoonPhase()`, so the date boundary bug never affected moon calculations.
+- **`MoonDisplay.razor`** — Already has complete tithi/context markup.
+- **`index.html`** — JS interop for `moonVisibility` is fine as-is. The reviewer's note about ES modules is just a future consideration, not a bug.
+- **`ApiLoggerService.cs`** — Fire-and-forget pattern is correct as-is.
+
+33
+53
+
+
+

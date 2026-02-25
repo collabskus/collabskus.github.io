@@ -92,6 +92,23 @@ public class KathmanduCalendarService
                 var localTime = beforeFetch + (afterFetch - beforeFetch) / 2;
                 _serverTimeOffset = serverTime - localTime;
 
+                // FIX: Date boundary crossing.
+                // The API returns Kathmandu local time (UTC+5:45), but we attached it
+                // to the UTC date above. When UTC is late evening (e.g. 23:00 UTC =
+                // 04:45 next day in Kathmandu), the API returns 04:45 but we put it on
+                // today's UTC date, making _serverTimeOffset roughly -18h instead of +5h45m.
+                // Since Nepal is a fixed UTC+5:45 (no DST), a valid offset must be close
+                // to +5h45m. Any offset beyond ±12h from that expected value indicates a
+                // day boundary crossing that needs correction.
+                if (_serverTimeOffset.TotalHours < -12)
+                {
+                    _serverTimeOffset += TimeSpan.FromHours(24);
+                }
+                else if (_serverTimeOffset.TotalHours > 12)
+                {
+                    _serverTimeOffset -= TimeSpan.FromHours(24);
+                }
+
                 await _logger.LogApiRequestAsync(TimeApiUrl, data, false);
             }
             return data;
