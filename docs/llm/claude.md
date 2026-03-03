@@ -718,3 +718,956 @@ Key things to note:
 
 
 
+here is the full code, I am thinking... is the sun position also calculable? like if I give you coordinates like this 
+27.6984037,85.2939889,17z 
+can you tell the exact position of the sun throughout the day?
+
+Yes, absolutely! Sun position is very calculable from coordinates — it's pure deterministic astronomy math, no API needed. Given latitude/longitude and a date/time, you can compute:
+
+- **Altitude** (elevation above horizon, in degrees)
+- **Azimuth** (compass direction, 0° = North)
+- **Sunrise / Solar Noon / Sunset** times
+- **Golden hour / Blue hour** windows
+
+The coordinates `27.6984037, 85.2939889` are lat/lng (that's near Kirtipur/Kathmandu, Nepal). The `17z` is just Google Maps zoom level — ignore it.
+
+The algorithm used is the **NOAA Solar Position Algorithm** (or Jean Meeus's *Astronomical Algorithms*), which works like this in simplified form:
+
+1. Convert your date/time to a **Julian Day Number**
+2. Calculate **solar declination** and **equation of time**
+3. Derive **hour angle** from local solar time
+4. Combine with your latitude to get **altitude** and **azimuth**
+
+Since you're already doing this kind of client-side astronomy math in your Blazor app (moon phase), this fits perfectly. I could add a **sun tracker** to your page that shows:
+
+- A real-time sun position arc across the sky
+- Current altitude + azimuth
+- Sunrise, solar noon, and sunset times for Kathmandu
+
+Want me to build that and integrate it into your existing Blazor app? Or if you'd prefer, I can make it as a standalone HTML demo first so you can see it working before integrating?
+
+Q: How would you like to proceed?
+A: Both — demo first, then Blazor component
+
+Great plan! Let me build a stunning standalone demo first with the full solar position algorithm baked in, then the Blazor component.Now let me create the Blazor component. Let me first check how the existing components are structured.Now I have the full picture. Let me create all the Blazor files:Now the JS block to add to `index.html`, and the Home.razor changes:Here's everything you need. The demo HTML is live and self-contained — open it in your browser and you'll see the real sun for Kathmandu right now.
+
+**What was built:**
+
+The standalone demo (`sun-tracker-demo.html`) uses the full Jean Meeus algorithm entirely in JavaScript — no API, no internet needed after load. It shows a live sky arc with the sun animating along it, compass bearing, altitude/azimuth readouts, sunrise/solar noon/sunset times, and golden hour windows, all in Nepal Standard Time.
+
+**For the Blazor integration, here's exactly what to do:**
+
+1. **Copy** `SolarPosition.cs` → `Models/` and `SolarPositionService.cs` → `Services/`
+2. **Copy** `SunDisplay.razor` + `SunDisplay.razor.css` → `Components/`
+3. **In `Program.cs`** add: `builder.Services.AddSingleton<SolarPositionService>();`
+4. **In `index.html`** paste the contents of `sunTracker-index-snippet.js` into the existing `<script>` tag alongside your `moonVisibility` object
+5. **In `Home.razor`** follow the 5 changes in `Home.razor.changes.txt` — inject the service, add a `_sunPosition` field, compute it in the clock timer tick, and drop `<SunDisplay Position="_sunPosition" />` after `<MoonDisplay>`
+
+The architecture mirrors exactly what you already have — pure C# math in the service (like `MoonPhaseService`), canvas drawing via JS interop (like `moonVisibility`), and a dumb display component that just receives a `Position` parameter.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Solar Tracker — Kathmandu</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap');
+
+  :root {
+    --sky-deep:    #04080f;
+    --sky-night:   #0b1220;
+    --sky-dawn:    #1a2640;
+    --gold:        #f0a500;
+    --gold-bright: #ffd060;
+    --gold-pale:   #ffe8a0;
+    --horizon:     #ff6b35;
+    --blue-hour:   #3a6bc9;
+    --text:        #e8dfc8;
+    --text-dim:    #8a8070;
+    --card-bg:     rgba(255,255,255,0.04);
+    --card-border: rgba(240,165,0,0.18);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    min-height: 100vh;
+    background: var(--sky-deep);
+    color: var(--text);
+    font-family: 'Space Mono', monospace;
+    overflow-x: hidden;
+  }
+
+  /* Star field */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 8%,  rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 12%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 35%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 55%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 92% 70%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 80%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 68% 88%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(2px 2px at 5%  30%, rgba(255,240,200,0.4) 0%, transparent 100%),
+      radial-gradient(2px 2px at 82% 18%, rgba(200,220,255,0.4) 0%, transparent 100%),
+      radial-gradient(2px 2px at 55% 72%, rgba(255,240,200,0.3) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+
+  /* ─── Header ─── */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .header-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    opacity: 0.8;
+  }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2rem, 6vw, 3.6rem);
+    line-height: 1.1;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+  .header h1 span {
+    color: var(--gold);
+  }
+  .coords {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+  }
+
+  /* ─── Sky Arc Canvas ─── */
+  .sky-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 36px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #080e1d 0%, #0f1e35 60%, #1a2e1a 100%);
+    border: 1px solid rgba(240,165,0,0.12);
+  }
+  #skyCanvas {
+    display: block;
+    width: 100%;
+  }
+
+  /* ─── Live badge ─── */
+  .live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(240,165,0,0.12);
+    border: 1px solid rgba(240,165,0,0.3);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    position: absolute;
+    top: 14px;
+    right: 14px;
+  }
+  .live-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ─── Stats grid ─── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .stats-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  @media (max-width: 540px) {
+    .stats-grid   { grid-template-columns: 1fr 1fr; }
+    .stats-grid-3 { grid-template-columns: 1fr; }
+  }
+
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(240,165,0,0.4), transparent);
+  }
+  .stat-card:hover { border-color: rgba(240,165,0,0.4); }
+
+  .stat-label {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .stat-value {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 700;
+    color: var(--gold-bright);
+    line-height: 1;
+  }
+  .stat-unit {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-left: 4px;
+    font-weight: 400;
+  }
+  .stat-sub {
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  /* highlight card when sun is up */
+  .stat-card.highlight {
+    background: rgba(240,165,0,0.07);
+    border-color: rgba(240,165,0,0.35);
+  }
+
+  /* ─── Time events row ─── */
+  .event-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    text-align: center;
+  }
+  .event-icon {
+    font-size: 22px;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .event-time {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gold-bright);
+  }
+  .event-label {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+  .event-card.solar-noon {
+    background: rgba(240,165,0,0.07);
+    border-color: rgba(240,165,0,0.4);
+  }
+
+  /* ─── Compass rose ─── */
+  .compass-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 36px;
+  }
+  #compassCanvas {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--card-border);
+  }
+
+  /* ─── Day info bar ─── */
+  .day-bar {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  .day-bar-item { text-align: center; }
+  .day-bar-label { font-size: 9px; letter-spacing: 0.25em; color: var(--text-dim); text-transform: uppercase; }
+  .day-bar-value { font-size: 1rem; color: var(--text); margin-top: 2px; font-family: 'Space Mono', monospace; }
+
+  /* ─── Below-horizon note ─── */
+  .below-horizon-banner {
+    display: none;
+    background: rgba(58,107,201,0.12);
+    border: 1px solid rgba(58,107,201,0.35);
+    border-radius: 10px;
+    padding: 14px 20px;
+    text-align: center;
+    color: #aabde8;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+  }
+  .below-horizon-banner.visible { display: block; }
+
+  /* ─── Footer ─── */
+  .footer {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <header class="header">
+    <div class="header-eyebrow">☀ Solar Position Tracker</div>
+    <h1>The Sun over<br><span>Kathmandu</span></h1>
+    <div class="coords">27.6984° N &nbsp;·&nbsp; 85.2940° E &nbsp;·&nbsp; Nepal Standard Time (UTC +5:45)</div>
+  </header>
+
+  <!-- Sky Arc -->
+  <div class="sky-container">
+    <canvas id="skyCanvas" height="280"></canvas>
+    <div class="live-badge">
+      <div class="live-dot"></div>
+      LIVE
+    </div>
+  </div>
+
+  <!-- Below horizon notice -->
+  <div class="below-horizon-banner" id="nightBanner">
+    🌙 The sun is currently below the horizon in Kathmandu
+  </div>
+
+  <!-- Primary stats -->
+  <div class="stats-grid">
+    <div class="stat-card" id="altCard">
+      <div class="stat-label">Altitude</div>
+      <div class="stat-value" id="altVal">—<span class="stat-unit">°</span></div>
+      <div class="stat-sub" id="altSub">above horizon</div>
+    </div>
+    <div class="stat-card" id="aziCard">
+      <div class="stat-label">Azimuth</div>
+      <div class="stat-value" id="aziVal">—<span class="stat-unit">°</span></div>
+      <div class="stat-sub" id="aziSub">compass bearing</div>
+    </div>
+  </div>
+
+  <!-- Events row -->
+  <div class="stats-grid-3" style="margin-top:12px;">
+    <div class="event-card" id="srCard">
+      <span class="event-icon">🌅</span>
+      <div class="event-time" id="srTime">—</div>
+      <div class="event-label">Sunrise</div>
+    </div>
+    <div class="event-card solar-noon" id="snCard">
+      <span class="event-icon">☀️</span>
+      <div class="event-time" id="snTime">—</div>
+      <div class="event-label">Solar Noon</div>
+    </div>
+    <div class="event-card" id="ssCard">
+      <span class="event-icon">🌇</span>
+      <div class="event-time" id="ssTime">—</div>
+      <div class="event-label">Sunset</div>
+    </div>
+  </div>
+
+  <!-- Day stats -->
+  <div class="day-bar">
+    <div class="day-bar-item">
+      <div class="day-bar-label">Day Length</div>
+      <div class="day-bar-value" id="dayLen">—</div>
+    </div>
+    <div class="day-bar-item">
+      <div class="day-bar-label">Max Elevation</div>
+      <div class="day-bar-value" id="maxElev">—</div>
+    </div>
+    <div class="day-bar-item">
+      <div class="day-bar-label">Declination</div>
+      <div class="day-bar-value" id="declVal">—</div>
+    </div>
+    <div class="day-bar-item">
+      <div class="day-bar-label">Local Solar Time</div>
+      <div class="day-bar-value" id="solarTimeVal">—</div>
+    </div>
+  </div>
+
+  <!-- Compass -->
+  <div class="compass-wrap">
+    <canvas id="compassCanvas" width="180" height="180"></canvas>
+  </div>
+
+  <!-- Golden/blue hour info -->
+  <div class="stats-grid">
+    <div class="stat-card" id="ghCard">
+      <div class="stat-label">🌄 Golden Hour (morning)</div>
+      <div class="stat-value" id="ghMornVal" style="font-size:1rem;">—</div>
+    </div>
+    <div class="stat-card" id="ghEveCard">
+      <div class="stat-label">🌆 Golden Hour (evening)</div>
+      <div class="stat-value" id="ghEveVal" style="font-size:1rem;">—</div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    Calculated using Jean Meeus solar position algorithm &nbsp;·&nbsp; Updates every second
+  </footer>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+//  CONSTANTS
+// ═══════════════════════════════════════════════════════════════════
+const LAT  = 27.6984037;
+const LNG  = 85.2939889;
+const TZ_OFFSET_MS = (5 * 60 + 45) * 60 * 1000; // Nepal UTC+5:45
+
+// ═══════════════════════════════════════════════════════════════════
+//  SOLAR POSITION ALGORITHM (Jean Meeus / NOAA)
+// ═══════════════════════════════════════════════════════════════════
+function toRad(d) { return d * Math.PI / 180; }
+function toDeg(r) { return r * 180 / Math.PI; }
+function normDeg(d) { return ((d % 360) + 360) % 360; }
+
+function julianDay(date) {
+  return date.getTime() / 86400000 + 2440587.5;
+}
+
+function sunPosition(date, lat, lng) {
+  const JD = julianDay(date);
+  const T  = (JD - 2451545.0) / 36525;
+
+  // Geometric mean longitude
+  const L0 = normDeg(280.46646 + T * (36000.76983 + T * 0.0003032));
+  // Mean anomaly
+  const M  = normDeg(357.52911 + T * (35999.05029 - 0.0001537 * T));
+  const Mr = toRad(M);
+  // Equation of center
+  const C  = (1.914602 - T * (0.004817 + 0.000014 * T)) * Math.sin(Mr)
+           + (0.019993 - 0.000101 * T) * Math.sin(2 * Mr)
+           + 0.000289 * Math.sin(3 * Mr);
+  const sunLon = L0 + C;
+  // Apparent longitude
+  const omega  = 125.04 - 1934.136 * T;
+  const lambda = sunLon - 0.00569 - 0.00478 * Math.sin(toRad(omega));
+  // Obliquity
+  const eps0   = 23 + (26 + (21.448 - T*(46.8150 + T*(0.00059 - T*0.001813)))/60)/60;
+  const epsilon= eps0 + 0.00256 * Math.cos(toRad(omega));
+  // Declination
+  const decl   = toDeg(Math.asin(Math.sin(toRad(epsilon)) * Math.sin(toRad(lambda))));
+  // Right ascension
+  const RA_raw = toDeg(Math.atan2(Math.cos(toRad(epsilon))*Math.sin(toRad(lambda)), Math.cos(toRad(lambda))));
+  const RA     = normDeg(RA_raw);
+  // Greenwich Mean Sidereal Time
+  const GMST   = normDeg(280.46061837 + 360.98564736629*(JD-2451545) + T*T*(0.000387933 - T/38710000));
+  // Local Hour Angle
+  const LST    = normDeg(GMST + lng);
+  let   HA     = normDeg(LST - RA);
+  if (HA > 180) HA -= 360;
+  const HAr    = toRad(HA);
+  const latr   = toRad(lat);
+  const declr  = toRad(decl);
+  // Altitude
+  const alt = toDeg(Math.asin(
+    Math.sin(latr)*Math.sin(declr) + Math.cos(latr)*Math.cos(declr)*Math.cos(HAr)
+  ));
+  // Azimuth (N=0, E=90)
+  const az = normDeg(toDeg(Math.atan2(
+    -Math.sin(HAr),
+    Math.tan(declr)*Math.cos(latr) - Math.sin(latr)*Math.cos(HAr)
+  )));
+
+  // Equation of time (minutes)
+  const y   = Math.tan(toRad(epsilon/2))**2;
+  const eot = 4 * toDeg(
+    y*Math.sin(2*toRad(L0))
+    - 2*Math.sin(Mr)
+    + 4*Math.sin(Mr)*y*Math.cos(2*toRad(L0))
+    - 0.5*y*y*Math.sin(4*toRad(L0))
+    - 1.25*Math.sin(2*Mr)
+  );
+
+  return { alt, az, decl, HA, eot };
+}
+
+// Find sunrise / sunset / noon for a given UTC date (noon time)
+function solarEvents(dateUTC, lat, lng) {
+  const JD = julianDay(dateUTC);
+  const T  = (JD - 2451545.0) / 36525;
+  const M  = normDeg(357.52911 + T * (35999.05029 - 0.0001537 * T));
+  const L0 = normDeg(280.46646 + T * (36000.76983 + T * 0.0003032));
+  const Mr = toRad(M);
+  const C  = (1.914602 - T*(0.004817+0.000014*T))*Math.sin(Mr)
+           + (0.019993-0.000101*T)*Math.sin(2*Mr)
+           + 0.000289*Math.sin(3*Mr);
+  const omega   = 125.04 - 1934.136*T;
+  const lambda  = L0 + C - 0.00569 - 0.00478*Math.sin(toRad(omega));
+  const eps0    = 23+(26+(21.448-T*(46.8150+T*(0.00059-T*0.001813)))/60)/60;
+  const epsilon = eps0 + 0.00256*Math.cos(toRad(omega));
+  const decl    = toDeg(Math.asin(Math.sin(toRad(epsilon))*Math.sin(toRad(lambda))));
+  const RA_raw  = toDeg(Math.atan2(Math.cos(toRad(epsilon))*Math.sin(toRad(lambda)), Math.cos(toRad(lambda))));
+  const RA      = normDeg(RA_raw);
+  const y       = Math.tan(toRad(epsilon/2))**2;
+  const eot     = 4 * toDeg(
+    y*Math.sin(2*toRad(L0)) - 2*Math.sin(Mr)
+    + 4*Math.sin(Mr)*y*Math.cos(2*toRad(L0))
+    - 0.5*y*y*Math.sin(4*toRad(L0)) - 1.25*Math.sin(2*Mr)
+  );
+
+  // Solar noon (UTC minutes from midnight)
+  const solarNoonUTC = 720 - 4*lng - eot;
+  // Hour angle for sunrise (deg) — using -0.833 for atmospheric refraction
+  const cosHA = (Math.cos(toRad(90.833)) - Math.sin(toRad(lat))*Math.sin(toRad(decl)))
+              / (Math.cos(toRad(lat))*Math.cos(toRad(decl)));
+
+  let sunriseMin = null, sunsetMin = null, maxElev = null;
+  if (cosHA >= -1 && cosHA <= 1) {
+    const HAsr = toDeg(Math.acos(cosHA));
+    sunriseMin = solarNoonUTC - 4*HAsr;
+    sunsetMin  = solarNoonUTC + 4*HAsr;
+  }
+
+  // Max elevation at solar noon
+  maxElev = 90 - Math.abs(lat - decl);
+
+  // Golden hour: sun between -6° and +6° elevation (approx)
+  // We find time offsets via the same HA inversion
+  function elevToUTCmin(elev) {
+    const cosH = (Math.sin(toRad(elev)) - Math.sin(toRad(lat))*Math.sin(toRad(decl)))
+               / (Math.cos(toRad(lat))*Math.cos(toRad(decl)));
+    if (cosH < -1 || cosH > 1) return null;
+    return toDeg(Math.acos(cosH)) * 4;
+  }
+  const ha6  = elevToUTCmin(6);
+  const ha_6 = elevToUTCmin(-6);
+
+  return {
+    solarNoonUTC,
+    sunriseMin,
+    sunsetMin,
+    maxElev,
+    decl,
+    goldenMornEnd:  ha6  !== null ? solarNoonUTC - ha6  : null,
+    goldenMornStart:ha_6 !== null ? solarNoonUTC - ha_6 : null,
+    goldenEveStart: ha6  !== null ? solarNoonUTC + ha6  : null,
+    goldenEveEnd:   ha_6 !== null ? solarNoonUTC + ha_6 : null,
+  };
+}
+
+function fmtMinutes(utcMin) {
+  // Convert UTC minutes from today-midnight to Nepal local time string
+  if (utcMin === null) return '—';
+  const local = utcMin + TZ_OFFSET_MS / 60000;
+  const h = Math.floor(((local % 1440) + 1440) % 1440 / 60);
+  const m = Math.floor(((local % 1440) + 1440) % 1440 % 60);
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  const hh = h % 12 || 12;
+  return `${hh}:${String(m).padStart(2,'0')} ${ampm}`;
+}
+
+function fmtDuration(mins) {
+  const h = Math.floor(mins / 60);
+  const m = Math.round(mins % 60);
+  return `${h}h ${m}m`;
+}
+
+function compassDir(az) {
+  const dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+  return dirs[Math.round(az / 22.5) % 16];
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  SKY ARC CANVAS
+// ═══════════════════════════════════════════════════════════════════
+const skyCanvas   = document.getElementById('skyCanvas');
+const skyCtx      = skyCanvas.getContext('2d');
+const compassCanv = document.getElementById('compassCanvas');
+const compassCtx  = compassCanv.getContext('2d');
+
+function resizeSky() {
+  const W = skyCanvas.parentElement.clientWidth;
+  skyCanvas.width  = W;
+  skyCanvas.height = Math.min(280, W * 0.38);
+}
+resizeSky();
+window.addEventListener('resize', resizeSky);
+
+function drawSky(pos, events) {
+  const W = skyCanvas.width, H = skyCanvas.height;
+  skyCtx.clearRect(0, 0, W, H);
+
+  const cx = W / 2;
+  const horizY = H * 0.75;
+  const arcRx  = W * 0.44;
+  const arcRy  = H * 0.82;
+
+  // Sky gradient based on sun altitude
+  const alt = pos.alt;
+  let skyTop, skyBot;
+  if (alt > 15) {
+    skyTop = '#061228'; skyBot = '#0d2040';
+  } else if (alt > 0) {
+    const t = alt / 15;
+    skyTop = lerpColor('#0f2050','#061228',t);
+    skyBot  = lerpColor('#3a1a08','#0d2040',t);
+  } else if (alt > -6) {
+    const t = (alt + 6) / 6;
+    skyTop = lerpColor('#0a0e18','#0f2050',t);
+    skyBot  = lerpColor('#1a0e04','#3a1a08',t);
+  } else {
+    skyTop = '#04080f'; skyBot = '#080c16';
+  }
+  const skyGrad = skyCtx.createLinearGradient(0, 0, 0, horizY);
+  skyGrad.addColorStop(0, skyTop);
+  skyGrad.addColorStop(1, skyBot);
+  skyCtx.fillStyle = skyGrad;
+  skyCtx.fillRect(0, 0, W, horizY);
+
+  // Ground
+  const gndGrad = skyCtx.createLinearGradient(0, horizY, 0, H);
+  gndGrad.addColorStop(0, '#0e180e');
+  gndGrad.addColorStop(1, '#060c06');
+  skyCtx.fillStyle = gndGrad;
+  skyCtx.fillRect(0, horizY, W, H - horizY);
+
+  // Horizon glow when sun near horizon
+  if (alt > -8 && alt < 20) {
+    const t = Math.max(0, 1 - Math.abs(alt) / 20);
+    const glowGrad = skyCtx.createRadialGradient(cx, horizY, 0, cx, horizY, W*0.5);
+    glowGrad.addColorStop(0, `rgba(255,120,40,${0.35*t})`);
+    glowGrad.addColorStop(0.4,`rgba(255,80,20,${0.15*t})`);
+    glowGrad.addColorStop(1,  'rgba(0,0,0,0)');
+    skyCtx.fillStyle = glowGrad;
+    skyCtx.fillRect(0, horizY - H*0.4, W, H*0.6);
+  }
+
+  // Horizon line
+  skyCtx.beginPath();
+  skyCtx.moveTo(0, horizY); skyCtx.lineTo(W, horizY);
+  skyCtx.strokeStyle = 'rgba(240,165,0,0.25)';
+  skyCtx.lineWidth = 1;
+  skyCtx.stroke();
+
+  // Sun arc path (E to W)  — map fraction of day to x position
+  // Draw the arc as an ellipse above the horizon
+  skyCtx.beginPath();
+  skyCtx.ellipse(cx, horizY, arcRx, arcRy, 0, Math.PI, 0, false);
+  skyCtx.strokeStyle = 'rgba(240,165,0,0.10)';
+  skyCtx.lineWidth = 1;
+  skyCtx.setLineDash([4, 6]);
+  skyCtx.stroke();
+  skyCtx.setLineDash([]);
+
+  // Current sun position on arc
+  // fraction: 0=sunrise, 0.5=noon, 1=sunset — map to angle on half-ellipse
+  let sunX, sunY, sunVisible = true;
+  if (events.sunriseMin !== null && events.sunsetMin !== null) {
+    const nowLocalMin = getNowLocalMinutes();
+    const sr = events.sunriseMin + TZ_OFFSET_MS/60000;
+    const ss = events.sunsetMin  + TZ_OFFSET_MS/60000;
+    const frac = (nowLocalMin - ((sr%1440+1440)%1440)) / (((ss-sr)%1440+1440)%1440);
+    const angle = Math.PI - frac * Math.PI; // PI=east, 0=west
+    sunX = cx + arcRx * Math.cos(angle);
+    sunY = horizY - arcRy * Math.sin(angle);
+    if (frac < 0 || frac > 1) sunVisible = false;
+  } else {
+    sunVisible = false;
+    sunX = cx; sunY = horizY - arcRy;
+  }
+
+  // Draw sun or moon icon
+  if (sunVisible && pos.alt > 0) {
+    // Corona glow
+    const glow = skyCtx.createRadialGradient(sunX, sunY, 2, sunX, sunY, 40);
+    glow.addColorStop(0,   'rgba(255,220,80,0.9)');
+    glow.addColorStop(0.2, 'rgba(255,180,40,0.5)');
+    glow.addColorStop(0.6, 'rgba(255,140,20,0.15)');
+    glow.addColorStop(1,   'rgba(0,0,0,0)');
+    skyCtx.fillStyle = glow;
+    skyCtx.beginPath();
+    skyCtx.arc(sunX, sunY, 40, 0, Math.PI*2);
+    skyCtx.fill();
+    // Sun disc
+    skyCtx.beginPath();
+    skyCtx.arc(sunX, sunY, 11, 0, Math.PI*2);
+    skyCtx.fillStyle = '#ffe060';
+    skyCtx.fill();
+  } else if (sunVisible) {
+    // Rising/setting, below horizon
+    skyCtx.beginPath();
+    skyCtx.arc(sunX, sunY, 9, 0, Math.PI*2);
+    skyCtx.fillStyle = 'rgba(255,160,60,0.4)';
+    skyCtx.fill();
+  }
+
+  // Altitude text
+  skyCtx.font = '11px "Space Mono", monospace';
+  skyCtx.fillStyle = 'rgba(240,165,0,0.6)';
+  skyCtx.textAlign = 'left';
+  skyCtx.fillText(`ALT ${pos.alt >= 0 ? '+' : ''}${pos.alt.toFixed(1)}°`, 14, H - 12);
+  skyCtx.textAlign = 'right';
+  skyCtx.fillText(`AZ ${pos.az.toFixed(1)}°`, W - 14, H - 12);
+
+  // Cardinal labels
+  skyCtx.fillStyle = 'rgba(255,255,255,0.2)';
+  skyCtx.textAlign = 'left';  skyCtx.fillText('E', 14, horizY - 6);
+  skyCtx.textAlign = 'right'; skyCtx.fillText('W', W-14, horizY - 6);
+  skyCtx.textAlign = 'center'; skyCtx.fillText('S', cx, horizY - 6);
+}
+
+function lerpColor(c1, c2, t) {
+  const p1 = hexToRgb(c1), p2 = hexToRgb(c2);
+  const r = Math.round(p1[0] + (p2[0]-p1[0])*t);
+  const g = Math.round(p1[1] + (p2[1]-p1[1])*t);
+  const b = Math.round(p1[2] + (p2[2]-p1[2])*t);
+  return `rgb(${r},${g},${b})`;
+}
+function hexToRgb(hex) {
+  const m = hex.replace('#','').match(/.{2}/g);
+  return m.map(x => parseInt(x,16));
+}
+
+function drawCompass(az) {
+  const c = compassCtx, W = 180, H = 180, cx = 90, cy = 90, r = 78;
+  c.clearRect(0,0,W,H);
+
+  // Background
+  c.beginPath(); c.arc(cx,cy,r,0,Math.PI*2);
+  const bg = c.createRadialGradient(cx,cy,0,cx,cy,r);
+  bg.addColorStop(0,'rgba(20,30,50,0.9)');
+  bg.addColorStop(1,'rgba(8,12,20,0.9)');
+  c.fillStyle = bg; c.fill();
+
+  // Tick marks
+  for (let i=0; i<360; i+=10) {
+    const a = toRad(i - 90);
+    const inner = i%90===0 ? r-18 : i%30===0 ? r-12 : r-7;
+    c.beginPath();
+    c.moveTo(cx + Math.cos(a)*(r-2), cy + Math.sin(a)*(r-2));
+    c.lineTo(cx + Math.cos(a)*inner,  cy + Math.sin(a)*inner);
+    c.strokeStyle = i%90===0 ? 'rgba(240,165,0,0.7)' : 'rgba(255,255,255,0.15)';
+    c.lineWidth = i%90===0 ? 1.5 : 0.8;
+    c.stroke();
+  }
+
+  // Cardinal labels
+  const cards = ['N','E','S','W'];
+  c.font = 'bold 11px "Space Mono",monospace';
+  c.textAlign = 'center'; c.textBaseline = 'middle';
+  cards.forEach((lbl,i) => {
+    const a = toRad(i*90 - 90);
+    const lr = r - 26;
+    c.fillStyle = lbl === 'N' ? '#f0a500' : 'rgba(255,255,255,0.5)';
+    c.fillText(lbl, cx + Math.cos(a)*lr, cy + Math.sin(a)*lr);
+  });
+
+  // Sun needle
+  const needleA = toRad(az - 90);
+  c.save();
+  c.translate(cx, cy);
+  c.rotate(needleA);
+  // needle body
+  c.beginPath();
+  c.moveTo(-10, 0); c.lineTo(52, 0);
+  c.strokeStyle = '#ffd060'; c.lineWidth = 2;
+  c.stroke();
+  // needle tip (sun)
+  c.beginPath();
+  c.arc(52, 0, 7, 0, Math.PI*2);
+  const sunG = c.createRadialGradient(52,0,0,52,0,7);
+  sunG.addColorStop(0,'#fff5b0'); sunG.addColorStop(1,'#f0a500');
+  c.fillStyle = sunG; c.fill();
+  c.restore();
+
+  // Center dot
+  c.beginPath(); c.arc(cx,cy,4,0,Math.PI*2);
+  c.fillStyle='rgba(240,165,0,0.9)'; c.fill();
+
+  // Az label
+  c.font = '10px "Space Mono",monospace';
+  c.textAlign='center'; c.textBaseline='top';
+  c.fillStyle='rgba(240,165,0,0.8)';
+  c.fillText(`${az.toFixed(1)}° ${compassDir(az)}`, cx, cy + 18);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════════════════════════════════
+function getNowLocalMinutes() {
+  const now = new Date();
+  const localMs = now.getTime() + TZ_OFFSET_MS - now.getTimezoneOffset()*60000;
+  // minutes from midnight
+  return (localMs / 60000) % 1440;
+}
+
+function getNowNepalTime() {
+  // Return a Date-like that represents Nepal local time as if it were UTC
+  const now = new Date();
+  return new Date(now.getTime() + TZ_OFFSET_MS);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  UPDATE LOOP
+// ═══════════════════════════════════════════════════════════════════
+let cachedEvents = null;
+let lastEventDay = -1;
+
+function update() {
+  const now = new Date();
+
+  // Recompute daily events once per day
+  const nepalDay = Math.floor((now.getTime() + TZ_OFFSET_MS) / 86400000);
+  if (nepalDay !== lastEventDay) {
+    // Use solar noon UTC as reference
+    const midnightUTC = new Date(now);
+    midnightUTC.setUTCHours(0,0,0,0);
+    // Offset to Nepal noon
+    const noonUTC = new Date(midnightUTC.getTime() - TZ_OFFSET_MS + 6*3600000);
+    cachedEvents = solarEvents(noonUTC, LAT, LNG);
+    lastEventDay = nepalDay;
+    updateStaticInfo(cachedEvents);
+  }
+
+  const pos = sunPosition(now, LAT, LNG);
+  drawSky(pos, cachedEvents);
+  drawCompass(pos.az);
+
+  // Alt / Az cards
+  document.getElementById('altVal').innerHTML =
+    `${pos.alt.toFixed(2)}<span class="stat-unit">°</span>`;
+  document.getElementById('aziVal').innerHTML =
+    `${pos.az.toFixed(2)}<span class="stat-unit">°</span>`;
+  document.getElementById('aziSub').textContent = compassDir(pos.az);
+  document.getElementById('altSub').textContent =
+    pos.alt > 0 ? 'above horizon ☀️' : 'below horizon 🌙';
+
+  // Highlight alt card
+  document.getElementById('altCard').classList.toggle('highlight', pos.alt > 0);
+
+  // Night banner
+  document.getElementById('nightBanner').classList.toggle('visible', pos.alt <= 0);
+
+  // Solar time
+  const solarMinFromNoon = pos.HA / 15 * 60; // HA in hours * 60
+  const solarMin = 720 + solarMinFromNoon;
+  const sh = Math.floor(((solarMin%1440)+1440)%1440/60);
+  const sm = Math.floor(((solarMin%1440)+1440)%1440%60);
+  const sAmpm = sh>=12?'PM':'AM';
+  document.getElementById('solarTimeVal').textContent =
+    `${sh%12||12}:${String(sm).padStart(2,'0')} ${sAmpm}`;
+}
+
+function updateStaticInfo(ev) {
+  document.getElementById('srTime').textContent = fmtMinutes(ev.sunriseMin);
+  document.getElementById('snTime').textContent = fmtMinutes(ev.solarNoonUTC);
+  document.getElementById('ssTime').textContent = fmtMinutes(ev.sunsetMin);
+  document.getElementById('maxElev').textContent =
+    ev.maxElev !== null ? `${ev.maxElev.toFixed(1)}°` : '—';
+  document.getElementById('declVal').textContent =
+    `${ev.decl >= 0 ? '+' : ''}${ev.decl.toFixed(2)}°`;
+
+  if (ev.sunriseMin !== null && ev.sunsetMin !== null) {
+    const dayLen = ev.sunsetMin - ev.sunriseMin;
+    document.getElementById('dayLen').textContent = fmtDuration(dayLen);
+  }
+
+  // Golden hour
+  const ghMornStart = ev.goldenMornStart, ghMornEnd = ev.goldenMornEnd;
+  const ghEveStart  = ev.goldenEveStart,  ghEveEnd  = ev.goldenEveEnd;
+  document.getElementById('ghMornVal').textContent =
+    ghMornStart!==null
+      ? `${fmtMinutes(ghMornStart)} – ${fmtMinutes(ghMornEnd)}`
+      : 'N/A';
+  document.getElementById('ghEveVal').textContent =
+    ghEveStart!==null
+      ? `${fmtMinutes(ghEveStart)} – ${fmtMinutes(ghEveEnd)}`
+      : 'N/A';
+}
+
+update();
+setInterval(update, 1000);
+</script>
+</body>
+</html>
+```
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  HOME.RAZOR — changes needed to wire in SunDisplay
+// ═══════════════════════════════════════════════════════════════════════════
+
+// ── 1. Add inject at top of @code block ─────────────────────────────────────
+
+[Inject]
+private SolarPositionService SolarPositionService { get; set; } = default!;
+
+// ── 2. Add field alongside _moonPhase ───────────────────────────────────────
+
+private SolarPosition? _sunPosition;
+
+// ── 3. In the clock timer callback (inside the _ => { } lambda), add: ───────
+
+_sunPosition = SolarPositionService.Calculate(DateTime.UtcNow);
+
+// (Put it right after  _currentTime = CalendarService.GetCurrentKathmanduTime();)
+
+
+// ── 4. In the markup (else branch), add <SunDisplay> after <MoonDisplay> ────
+
+<SunDisplay Position="_sunPosition" />
+
+
+// ── 5. In Program.cs, register the service ──────────────────────────────────
+//   (alongside the existing builder.Services.AddSingleton<MoonPhaseService>() line)
+
+builder.Services.AddSingleton<SolarPositionService>();
+
+
+
+response is missing the actual razor. can you please add the razor file? no need to return the rest, only the razor file css I have I need razor file 
+
+

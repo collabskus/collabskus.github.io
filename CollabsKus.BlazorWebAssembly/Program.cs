@@ -12,6 +12,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 // Register our services
 builder.Services.AddScoped<KathmanduCalendarService>();
 builder.Services.AddScoped<MoonPhaseService>();
+builder.Services.AddSingleton<SolarPositionService>();
 builder.Services.AddScoped<ApiLoggerService>();
 
 await builder.Build().RunAsync();

@@ -23,6 +23,7 @@ else
     <TimeDisplay CurrentTime="_currentTime" />
     <DateCards CalendarData="_calendarData?.Res" />
     <MoonDisplay MoonPhase="_moonPhase" IsLive="_isMoonLive" />
+    <Sundisplay Position="_sunPosition" />
     <CalendarGrid CalendarData="_calendarData?.Res" />
 }
 
@@ -31,6 +32,9 @@ else
 </div>
 
 @code {
+    [Inject]
+    private SolarPositionService SolarPositionService { get; set; } = default!;
+
     [Inject]
     private KathmanduCalendarService CalendarService { get; set; } = default!;
 
@@ -43,6 +47,7 @@ else
     private CalendarResponse? _calendarData;
     private TimeResponse? _timeData;
     private MoonPhase? _moonPhase;
+    private SolarPosition? _sunPosition;
     private DateTime _currentTime = DateTime.Now;
     private string _lastUpdate = "--";
     private bool _isLoading = true;
@@ -74,6 +79,7 @@ else
                 if (_isMoonLive)
                 {
                     UpdateMoonPhase();
+                    _sunPosition = SolarPositionService.Calculate(DateTime.UtcNow);
                 }
 
                 await InvokeAsync(StateHasChanged);
