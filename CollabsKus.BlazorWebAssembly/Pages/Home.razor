@@ -77,7 +77,7 @@ else
                 }
 
                 await InvokeAsync(StateHasChanged);
-            }, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+            }, null, TimeSpan.Zero, TimeSpan.FromSeconds(0.01));
 
             // Start time API timer (refreshes every hour)
             _timeApiTimer = new System.Threading.Timer(async _ =>

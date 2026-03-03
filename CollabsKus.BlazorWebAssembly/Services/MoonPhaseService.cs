@@ -181,7 +181,7 @@ public class MoonPhaseService
         {
             Name = phaseName,
             Icon = phaseIcon,
-            Illumination = Math.Round(illumination, 4),
+            Illumination = illumination,
             Age = Math.Round(moonAge, 6),
             DaysSinceNewMoon = Math.Round(daysSinceNew, 4),
             DaysSinceFullMoon = Math.Round(daysSinceFull, 4),
