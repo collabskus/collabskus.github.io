@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 03/03/2026 16:21:48
+Generated: 03/03/2026 16:32:57
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -257,10 +257,10 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |           \---_framework
 |   |   |                   blazor.webassembly.js
 |   |   |                   blazor.webassembly.js.gz
-|   |   |                   CollabsKus.BlazorWebAssembly.o9pldw8tf1.wasm
-|   |   |                   CollabsKus.BlazorWebAssembly.o9pldw8tf1.wasm.gz
-|   |   |                   CollabsKus.BlazorWebAssembly.zor2z7w0cf.pdb
-|   |   |                   CollabsKus.BlazorWebAssembly.zor2z7w0cf.pdb.gz
+|   |   |                   CollabsKus.BlazorWebAssembly.m7um439vx7.pdb
+|   |   |                   CollabsKus.BlazorWebAssembly.m7um439vx7.pdb.gz
+|   |   |                   CollabsKus.BlazorWebAssembly.zw071ubfje.wasm
+|   |   |                   CollabsKus.BlazorWebAssembly.zw071ubfje.wasm.gz
 |   |   |                   dotnet.js
 |   |   |                   dotnet.js.gz
 |   |   |                   dotnet.js.map
@@ -687,6 +687,8 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |       DateCards.razor.css
 |   |       MoonDisplay.razor
 |   |       MoonDisplay.razor.css
+|   |       Sundisplay.razor
+|   |       Sundisplay.razor.css
 |   |       TimeDisplay.razor
 |   |       TimeDisplay.razor.css
 |   |       
@@ -697,6 +699,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   +---Models
 |   |       CalendarResponse.cs
 |   |       MoonPhase.cs
+|   |       SolarPosition.cs
 |   |       TimeResponse.cs
 |   |       
 |   +---obj
@@ -759,7 +762,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       2mau3pzxk9-{0}-u0zj27cx7o-u0zj27cx7o.gz
 |   |   |       |       2zxgs4tsnx-{0}-clxrybe26z-clxrybe26z.gz
 |   |   |       |       3eoqy7gj56-{0}-5quh18s9mm-5quh18s9mm.gz
-|   |   |       |       3fggfcmk2o-{0}-amfd8uwpnx-amfd8uwpnx.gz
+|   |   |       |       3fggfcmk2o-{0}-2gzk78ypou-2gzk78ypou.gz
 |   |   |       |       3p6j8oeurv-{0}-9gnjjozbtj-9gnjjozbtj.gz
 |   |   |       |       3rlo0yi078-{0}-66stpp682q-66stpp682q.gz
 |   |   |       |       3uswc3e8aj-{0}-83r2do0ftq-83r2do0ftq.gz
@@ -819,7 +822,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       d3xctdbsm8-{0}-cc45vjr1b8-cc45vjr1b8.gz
 |   |   |       |       d4e2tqfm2s-{0}-st22xvului-st22xvului.gz
 |   |   |       |       d88qnt9z0r-{0}-5s8pq7f6mj-5s8pq7f6mj.gz
-|   |   |       |       dfreyn5klh-{0}-6usqmainrx-6usqmainrx.gz
+|   |   |       |       dfreyn5klh-{0}-51xhus1cdu-51xhus1cdu.gz
 |   |   |       |       dkj70biooi-{0}-xn7u9hqdzp-xn7u9hqdzp.gz
 |   |   |       |       dmdeonll3k-{0}-qra57zb5iw-qra57zb5iw.gz
 |   |   |       |       dt9uy83tyq-{0}-16sllnulcp-16sllnulcp.gz
@@ -858,7 +861,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       kz9p261qc5-{0}-qpf1k0onwr-qpf1k0onwr.gz
 |   |   |       |       l7rbbbd4fi-{0}-sf458cz82b-sf458cz82b.gz
 |   |   |       |       lbxpns34i1-{0}-jnskqyrki7-jnskqyrki7.gz
-|   |   |       |       lh59ob944f-{0}-o9pldw8tf1-o9pldw8tf1.gz
+|   |   |       |       lh59ob944f-{0}-zw071ubfje-zw071ubfje.gz
 |   |   |       |       lj3msr1lhw-{0}-ed335v31ay-ed335v31ay.gz
 |   |   |       |       ljeibr96ow-{0}-ul94u1ukws-ul94u1ukws.gz
 |   |   |       |       lm00a84zr9-{0}-4myqtalz7l-4myqtalz7l.gz
@@ -874,7 +877,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       n35jvnr825-{0}-ok1w9bwh9p-ok1w9bwh9p.gz
 |   |   |       |       nb5ocalx9l-{0}-sg5289qtzr-sg5289qtzr.gz
 |   |   |       |       nhzrlx2glb-{0}-ul68gvf84n-ul68gvf84n.gz
-|   |   |       |       njnlmbjta1-{0}-8vjd7rkb3b-8vjd7rkb3b.gz
+|   |   |       |       njnlmbjta1-{0}-gqd0v00eeu-gqd0v00eeu.gz
 |   |   |       |       nl1aipmkh9-{0}-xxpmmmbzoi-xxpmmmbzoi.gz
 |   |   |       |       nu8bj35gu6-{0}-ljs5h1hf84-ljs5h1hf84.gz
 |   |   |       |       nwswlbpy0n-{0}-bln3oou6sh-bln3oou6sh.gz
@@ -889,13 +892,13 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       pdaotioiej-{0}-c97596j8dp-c97596j8dp.gz
 |   |   |       |       pehuqocd4z-{0}-0q8h4ozt6q-0q8h4ozt6q.gz
 |   |   |       |       pq1zwub8zu-{0}-n949pn5bqf-n949pn5bqf.gz
-|   |   |       |       prwyqf4e4y-{0}-8vjd7rkb3b-8vjd7rkb3b.gz
+|   |   |       |       prwyqf4e4y-{0}-gqd0v00eeu-gqd0v00eeu.gz
 |   |   |       |       pwmpgrqg76-{0}-i26u5a9fau-i26u5a9fau.gz
 |   |   |       |       px0hxgqwjv-{0}-8br0rpc5j3-8br0rpc5j3.gz
 |   |   |       |       pzqxcw519k-{0}-xq74p7yimf-xq74p7yimf.gz
 |   |   |       |       q3154k5biw-{0}-b22pm24uac-b22pm24uac.gz
 |   |   |       |       q4p940erp4-{0}-befq3iek54-befq3iek54.gz
-|   |   |       |       qapwvyh3s0-{0}-v9k881bcmj-v9k881bcmj.gz
+|   |   |       |       qapwvyh3s0-{0}-1d2qq5kdat-1d2qq5kdat.gz
 |   |   |       |       qitdg1tdwz-{0}-uakrztahlf-uakrztahlf.gz
 |   |   |       |       qm96gcrzfw-{0}-67mulskwi0-67mulskwi0.gz
 |   |   |       |       qp8xb91mke-{0}-wnrh6t4f3i-wnrh6t4f3i.gz
@@ -915,7 +918,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       sugokdc00a-{0}-mnd3y3a76z-mnd3y3a76z.gz
 |   |   |       |       svb8xodzcv-{0}-5j2hllj6bi-5j2hllj6bi.gz
 |   |   |       |       sy44tf32kn-{0}-l0r3bunp9q-l0r3bunp9q.gz
-|   |   |       |       syt0dqw1ux-{0}-pcy0en7946-pcy0en7946.gz
+|   |   |       |       syt0dqw1ux-{0}-boo8yg8dxz-boo8yg8dxz.gz
 |   |   |       |       t2kz3thrps-{0}-2tx45g8lli-2tx45g8lli.gz
 |   |   |       |       tbjuh26x5v-{0}-ksfzm5bevd-ksfzm5bevd.gz
 |   |   |       |       tcd8qxaqk5-{0}-yli8mx0eos-yli8mx0eos.gz
@@ -940,7 +943,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       w3jaqn3h4o-{0}-78lrbgxr1f-78lrbgxr1f.gz
 |   |   |       |       w3ur6j80u7-{0}-h2nvdx8wws-h2nvdx8wws.gz
 |   |   |       |       wuimozunwv-{0}-piem9h0tr4-piem9h0tr4.gz
-|   |   |       |       x3ikudnee4-{0}-zor2z7w0cf-zor2z7w0cf.gz
+|   |   |       |       x3ikudnee4-{0}-m7um439vx7-m7um439vx7.gz
 |   |   |       |       x54bdp6f69-{0}-nc02rhe1iy-nc02rhe1iy.gz
 |   |   |       |       x57r4b36iz-{0}-lfu7j35m59-lfu7j35m59.gz
 |   |   |       |       xf1qqu3s0v-{0}-xfor6r3ecm-xfor6r3ecm.gz
@@ -978,6 +981,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |   |       CalendarGrid.razor.rz.scp.css
 |   |   |       |   |       DateCards.razor.rz.scp.css
 |   |   |       |   |       MoonDisplay.razor.rz.scp.css
+|   |   |       |   |       Sundisplay.razor.rz.scp.css
 |   |   |       |   |       TimeDisplay.razor.rz.scp.css
 |   |   |       |   |       
 |   |   |       |   +---Layout
@@ -1223,6 +1227,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |       ApiLoggerService.cs
 |   |       KathmanduCalendarService.cs
 |   |       MoonPhaseService.cs
+|   |       SolarPositionService.cs
 |   |       
 |   \---wwwroot
 |       |   .nojekyll
@@ -2295,6 +2300,266 @@ MODIFIED: 02/24/2026 09:14:12
 
 
 ================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Components\Sundisplay.razor
+SIZE: 0 KB
+MODIFIED: 03/03/2026 16:24:48
+================================================================================
+
+[EMPTY FILE]
+
+
+================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Components\Sundisplay.razor.css
+SIZE: 5.56 KB
+MODIFIED: 03/03/2026 16:25:06
+================================================================================
+
+/* ── Container ──────────────────────────────────────────────────────────── */
+
+.sun-display {
+    margin: 30px 0;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    border: 1px solid rgba(240, 165, 0, 0.2);
+}
+
+.sun-section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 16px;
+    color: #f0a500;
+}
+
+.sun-loading {
+    text-align: center;
+    padding: 20px;
+    opacity: 0.6;
+}
+
+/* ── Sky canvas ──────────────────────────────────────────────────────────── */
+
+.sky-wrap {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    background: linear-gradient(180deg, #080e1d 0%, #0f1e35 60%, #0e180e 100%);
+    border: 1px solid rgba(240, 165, 0, 0.12);
+}
+
+#sunSkyCanvas {
+    display: block;
+    width: 100%;
+    height: 220px;
+}
+
+.sky-live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: rgba(240, 165, 0, 0.12);
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: #f0a500;
+}
+
+.sky-live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #f0a500;
+    animation: skyLivePulse 2s ease-in-out infinite;
+}
+
+@keyframes skyLivePulse {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.25;
+    }
+}
+
+/* ── Night banner ─────────────────────────────────────────────────────────── */
+
+.sun-night-banner {
+    background: rgba(58, 107, 201, 0.12);
+    border: 1px solid rgba(58, 107, 201, 0.3);
+    border-radius: 8px;
+    padding: 10px 16px;
+    text-align: center;
+    color: #aabde8;
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+}
+
+/* ── Stats row ────────────────────────────────────────────────────────────── */
+
+.sun-stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.sun-stat {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(240, 165, 0, 0.15);
+    border-radius: 12px;
+    padding: 16px 18px;
+    transition: border-color 0.3s;
+}
+
+.sun-stat--lit {
+    background: rgba(240, 165, 0, 0.06);
+    border-color: rgba(240, 165, 0, 0.35);
+}
+
+.sun-stat--golden {
+    background: rgba(255, 140, 20, 0.05);
+    border-color: rgba(255, 140, 20, 0.2);
+}
+
+.sun-stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-bottom: 6px;
+}
+
+.sun-stat-value {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #ffd060;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+
+.sun-unit {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    font-weight: 400;
+    margin-left: 2px;
+}
+
+.sun-stat-sub {
+    font-size: 0.7rem;
+    opacity: 0.55;
+    margin-top: 4px;
+}
+
+/* ── Events row ───────────────────────────────────────────────────────────── */
+
+.sun-events-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.sun-event {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(240, 165, 0, 0.15);
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
+}
+
+.sun-event--noon {
+    background: rgba(240, 165, 0, 0.07);
+    border-color: rgba(240, 165, 0, 0.4);
+}
+
+.sun-event-icon {
+    font-size: 1.3rem;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.sun-event-time {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffd060;
+    font-variant-numeric: tabular-nums;
+}
+
+.sun-event-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-top: 3px;
+}
+
+/* ── Info bar ─────────────────────────────────────────────────────────────── */
+
+.sun-info-bar {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(240, 165, 0, 0.12);
+    border-radius: 12px;
+    padding: 14px 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.sun-info-item {
+    text-align: center;
+}
+
+.sun-info-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.5;
+}
+
+.sun-info-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    margin-top: 3px;
+    color: #e8dfc8;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+
+@media (max-width: 520px) {
+    .sun-stats-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .sun-events-row {
+        grid-template-columns: 1fr;
+    }
+
+    .sun-stat-value {
+        font-size: 1.3rem;
+    }
+
+    .sun-info-bar {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+
+
+================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Components\TimeDisplay.razor
 SIZE: 0.9 KB
 MODIFIED: 03/03/2026 10:09:33
@@ -2516,6 +2781,83 @@ public class MoonPhase
 
 
 ================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Models\SolarPosition.cs
+SIZE: 3.15 KB
+MODIFIED: 03/03/2026 16:23:44
+================================================================================
+
+namespace CollabsKus.BlazorWebAssembly.Models;
+
+/// <summary>
+/// Instantaneous sun position and daily solar events for Kathmandu.
+/// All calculations are pure astronomy — no network requests.
+/// </summary>
+public class SolarPosition
+{
+    // ── Instantaneous values (change every second) ────────────────────────
+    /// <summary>Elevation angle above the horizon in degrees. Negative = below horizon.</summary>
+    public double Altitude { get; init; }
+
+    /// <summary>Compass bearing in degrees (0 = North, 90 = East, 180 = South, 270 = West).</summary>
+    public double Azimuth { get; init; }
+
+    /// <summary>Solar declination in degrees (positive = northern hemisphere tilt).</summary>
+    public double Declination { get; init; }
+
+    /// <summary>Local hour angle in degrees (negative = morning, 0 = noon, positive = afternoon).</summary>
+    public double HourAngle { get; init; }
+
+    /// <summary>True if the sun is above the horizon.</summary>
+    public bool IsAboveHorizon => Altitude > 0;
+
+    /// <summary>True if within golden hour window (sun between -6° and +6°).</summary>
+    public bool IsGoldenHour => Altitude is > -6 and < 6;
+
+    /// <summary>Fraction of the day arc traveled (0 = sunrise, 1 = sunset). -1 if polar night/day.</summary>
+    public double DayFraction { get; init; }
+
+    // ── Daily events (recomputed once per Nepal calendar day) ─────────────
+    /// <summary>Sunrise time in Nepal Standard Time. Null during polar phenomena.</summary>
+    public TimeOnly? SunriseNST { get; init; }
+
+    /// <summary>Solar noon time in Nepal Standard Time.</summary>
+    public TimeOnly SolarNoonNST { get; init; }
+
+    /// <summary>Sunset time in Nepal Standard Time. Null during polar phenomena.</summary>
+    public TimeOnly? SunsetNST { get; init; }
+
+    /// <summary>Start of morning golden hour (sun at -6°) in NST.</summary>
+    public TimeOnly? GoldenHourMorningStart { get; init; }
+
+    /// <summary>End of morning golden hour (sun at +6°) in NST.</summary>
+    public TimeOnly? GoldenHourMorningEnd { get; init; }
+
+    /// <summary>Start of evening golden hour (sun at +6°) in NST.</summary>
+    public TimeOnly? GoldenHourEveningStart { get; init; }
+
+    /// <summary>End of evening golden hour (sun at -6°) in NST.</summary>
+    public TimeOnly? GoldenHourEveningEnd { get; init; }
+
+    /// <summary>Maximum sun elevation at solar noon, degrees.</summary>
+    public double MaxElevation { get; init; }
+
+    /// <summary>Total daylight duration. Zero during polar night.</summary>
+    public TimeSpan DayLength { get; init; }
+
+    // ── Helpers ───────────────────────────────────────────────────────────
+    public string AzimuthCardinal => AzToCardinal(Azimuth);
+    public string AltitudeSign => Altitude >= 0 ? "+" : "";
+
+    private static string AzToCardinal(double az)
+    {
+        string[] dirs = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+        return dirs[(int)Math.Round(az / 22.5) % 16];
+    }
+}
+
+
+
+================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Models\TimeResponse.cs
 SIZE: 0.7 KB
 MODIFIED: 02/08/2026 15:46:02
@@ -2553,8 +2895,8 @@ public class TimeResponse
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Pages\Home.razor
-SIZE: 6.04 KB
-MODIFIED: 03/03/2026 09:48:19
+SIZE: 6.29 KB
+MODIFIED: 03/03/2026 16:29:41
 ================================================================================
 
 @page "/"
@@ -2582,6 +2924,7 @@ else
     <TimeDisplay CurrentTime="_currentTime" />
     <DateCards CalendarData="_calendarData?.Res" />
     <MoonDisplay MoonPhase="_moonPhase" IsLive="_isMoonLive" />
+    <Sundisplay Position="_sunPosition" />
     <CalendarGrid CalendarData="_calendarData?.Res" />
 }
 
@@ -2590,6 +2933,9 @@ else
 </div>
 
 @code {
+    [Inject]
+    private SolarPositionService SolarPositionService { get; set; } = default!;
+
     [Inject]
     private KathmanduCalendarService CalendarService { get; set; } = default!;
 
@@ -2602,6 +2948,7 @@ else
     private CalendarResponse? _calendarData;
     private TimeResponse? _timeData;
     private MoonPhase? _moonPhase;
+    private SolarPosition? _sunPosition;
     private DateTime _currentTime = DateTime.Now;
     private string _lastUpdate = "--";
     private bool _isLoading = true;
@@ -2633,6 +2980,7 @@ else
                 if (_isMoonLive)
                 {
                     UpdateMoonPhase();
+                    _sunPosition = SolarPositionService.Calculate(DateTime.UtcNow);
                 }
 
                 await InvokeAsync(StateHasChanged);
@@ -2843,8 +3191,8 @@ MODIFIED: 02/08/2026 10:27:06
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Program.cs
-SIZE: 0.65 KB
-MODIFIED: 02/08/2026 15:46:02
+SIZE: 0.7 KB
+MODIFIED: 03/03/2026 16:29:15
 ================================================================================
 
 using Microsoft.AspNetCore.Components.Web;
@@ -2861,6 +3209,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 // Register our services
 builder.Services.AddScoped<KathmanduCalendarService>();
 builder.Services.AddScoped<MoonPhaseService>();
+builder.Services.AddSingleton<SolarPositionService>();
 builder.Services.AddScoped<ApiLoggerService>();
 
 await builder.Build().RunAsync();
@@ -3467,6 +3816,218 @@ public class MoonPhaseService
 
 
 ================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\SolarPositionService.cs
+SIZE: 9.17 KB
+MODIFIED: 03/03/2026 16:24:07
+================================================================================
+
+using CollabsKus.BlazorWebAssembly.Models;
+
+namespace CollabsKus.BlazorWebAssembly.Services;
+
+/// <summary>
+/// Calculates sun position and daily solar events for Kathmandu using the
+/// Jean Meeus astronomical algorithm (Astronomical Algorithms, 2nd ed.).
+/// Pure math — no network calls, no JS interop.
+/// </summary>
+public class SolarPositionService
+{
+    // Kathmandu coordinates
+    private const double Lat = 27.6984037;
+    private const double Lng = 85.2939889;
+
+    // Nepal Standard Time = UTC + 5h 45m
+    private static readonly TimeSpan NstOffset = TimeSpan.FromMinutes(5 * 60 + 45);
+
+    // ── Public API ────────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Compute the full SolarPosition snapshot for the given UTC instant.
+    /// Call this every second from the clock timer.
+    /// </summary>
+    public SolarPosition Calculate(DateTime utcNow)
+    {
+        var (alt, az, decl, ha) = GetAltAz(utcNow, Lat, Lng);
+        var events = GetDailyEvents(utcNow, Lat, Lng);
+
+        double dayFraction = -1;
+        if (events.SunriseUtcMinutes.HasValue && events.SunsetUtcMinutes.HasValue)
+        {
+            double totalDayMin = events.SunsetUtcMinutes.Value - events.SunriseUtcMinutes.Value;
+            double utcMinutes = utcNow.Hour * 60.0 + utcNow.Minute + utcNow.Second / 60.0;
+            dayFraction = Math.Clamp((utcMinutes - events.SunriseUtcMinutes.Value) / totalDayMin, 0, 1);
+        }
+
+        return new SolarPosition
+        {
+            Altitude = alt,
+            Azimuth = az,
+            Declination = decl,
+            HourAngle = ha,
+            DayFraction = dayFraction,
+            SunriseNST = UtcMinutesToNst(events.SunriseUtcMinutes),
+            SolarNoonNST = UtcMinutesToNst(events.SolarNoonUtcMinutes)!.Value,
+            SunsetNST = UtcMinutesToNst(events.SunsetUtcMinutes),
+            GoldenHourMorningStart = UtcMinutesToNst(events.GoldenMorningStartUtcMin),
+            GoldenHourMorningEnd = UtcMinutesToNst(events.GoldenMorningEndUtcMin),
+            GoldenHourEveningStart = UtcMinutesToNst(events.GoldenEveningStartUtcMin),
+            GoldenHourEveningEnd = UtcMinutesToNst(events.GoldenEveningEndUtcMin),
+            MaxElevation = events.MaxElevation,
+            DayLength = events.SunriseUtcMinutes.HasValue && events.SunsetUtcMinutes.HasValue
+                ? TimeSpan.FromMinutes(events.SunsetUtcMinutes.Value - events.SunriseUtcMinutes.Value)
+                : TimeSpan.Zero,
+        };
+    }
+
+    // ── Core algorithm ────────────────────────────────────────────────────
+
+    private static (double alt, double az, double decl, double ha) GetAltAz(DateTime utc, double lat, double lng)
+    {
+        double jd = ToJulianDay(utc);
+        double T = (jd - 2451545.0) / 36525.0;
+
+        double L0 = NormDeg(280.46646 + T * (36000.76983 + T * 0.0003032));
+        double M = NormDeg(357.52911 + T * (35999.05029 - 0.0001537 * T));
+        double Mr = ToRad(M);
+        double C = (1.914602 - T * (0.004817 + 0.000014 * T)) * Math.Sin(Mr)
+                     + (0.019993 - 0.000101 * T) * Math.Sin(2 * Mr)
+                     + 0.000289 * Math.Sin(3 * Mr);
+        double sunLon = L0 + C;
+        double omega = 125.04 - 1934.136 * T;
+        double lambda = sunLon - 0.00569 - 0.00478 * Math.Sin(ToRad(omega));
+        double eps0 = 23.0 + (26.0 + (21.448 - T * (46.8150 + T * (0.00059 - T * 0.001813))) / 60.0) / 60.0;
+        double epsilon = eps0 + 0.00256 * Math.Cos(ToRad(omega));
+
+        double decl = ToDeg(Math.Asin(Math.Sin(ToRad(epsilon)) * Math.Sin(ToRad(lambda))));
+        double RA = NormDeg(ToDeg(Math.Atan2(
+                            Math.Cos(ToRad(epsilon)) * Math.Sin(ToRad(lambda)),
+                            Math.Cos(ToRad(lambda)))));
+
+        double GMST = NormDeg(280.46061837 + 360.98564736629 * (jd - 2451545.0)
+                        + T * T * (0.000387933 - T / 38710000.0));
+        double LST = NormDeg(GMST + lng);
+        double ha = NormDeg(LST - RA);
+        if (ha > 180) ha -= 360;
+        double HAr = ToRad(ha);
+        double latr = ToRad(lat);
+        double declr = ToRad(decl);
+
+        double alt = ToDeg(Math.Asin(
+            Math.Sin(latr) * Math.Sin(declr) + Math.Cos(latr) * Math.Cos(declr) * Math.Cos(HAr)));
+        double az = NormDeg(ToDeg(Math.Atan2(
+            -Math.Sin(HAr),
+            Math.Tan(declr) * Math.Cos(latr) - Math.Sin(latr) * Math.Cos(HAr))));
+
+        return (alt, az, decl, ha);
+    }
+
+    // ── Daily events (sunrise, sunset, golden hour) ───────────────────────
+
+    private record DailyEvents(
+        double? SunriseUtcMinutes,
+        double SolarNoonUtcMinutes,
+        double? SunsetUtcMinutes,
+        double MaxElevation,
+        double? GoldenMorningStartUtcMin,
+        double? GoldenMorningEndUtcMin,
+        double? GoldenEveningStartUtcMin,
+        double? GoldenEveningEndUtcMin
+    );
+
+    private static DailyEvents GetDailyEvents(DateTime utc, double lat, double lng)
+    {
+        // Use solar noon UTC as the reference time for the day
+        double jd = ToJulianDay(new DateTime(utc.Year, utc.Month, utc.Day, 12, 0, 0, DateTimeKind.Utc));
+        double T = (jd - 2451545.0) / 36525.0;
+
+        double L0 = NormDeg(280.46646 + T * (36000.76983 + T * 0.0003032));
+        double M = NormDeg(357.52911 + T * (35999.05029 - 0.0001537 * T));
+        double Mr = ToRad(M);
+        double C = (1.914602 - T * (0.004817 + 0.000014 * T)) * Math.Sin(Mr)
+                      + (0.019993 - 0.000101 * T) * Math.Sin(2 * Mr)
+                      + 0.000289 * Math.Sin(3 * Mr);
+        double sunLon = L0 + C;
+        double omega = 125.04 - 1934.136 * T;
+        double lambda = sunLon - 0.00569 - 0.00478 * Math.Sin(ToRad(omega));
+        double eps0 = 23.0 + (26.0 + (21.448 - T * (46.8150 + T * (0.00059 - T * 0.001813))) / 60.0) / 60.0;
+        double epsilon = eps0 + 0.00256 * Math.Cos(ToRad(omega));
+        double decl = ToDeg(Math.Asin(Math.Sin(ToRad(epsilon)) * Math.Sin(ToRad(lambda))));
+
+        // Equation of time (minutes)
+        double y = Math.Pow(Math.Tan(ToRad(epsilon / 2)), 2);
+        double eot = 4.0 * ToDeg(
+            y * Math.Sin(2 * ToRad(L0))
+            - 2 * Math.Sin(Mr)
+            + 4 * Math.Sin(Mr) * y * Math.Cos(2 * ToRad(L0))
+            - 0.5 * y * y * Math.Sin(4 * ToRad(L0))
+            - 1.25 * Math.Sin(2 * Mr));
+
+        // Solar noon in UTC minutes from midnight
+        double solarNoonUtc = 720.0 - 4.0 * lng - eot;
+
+        // Hour angle for sunrise/sunset (atmospheric refraction correction: -0.833°)
+        double cosHA = (Math.Cos(ToRad(90.833)) - Math.Sin(ToRad(lat)) * Math.Sin(ToRad(decl)))
+                     / (Math.Cos(ToRad(lat)) * Math.Cos(ToRad(decl)));
+
+        double? sunriseMin = null, sunsetMin = null;
+        if (cosHA is >= -1 and <= 1)
+        {
+            double hasr = ToDeg(Math.Acos(cosHA));
+            sunriseMin = solarNoonUtc - 4.0 * hasr;
+            sunsetMin = solarNoonUtc + 4.0 * hasr;
+        }
+
+        double maxElev = 90.0 - Math.Abs(lat - decl);
+
+        // Golden / blue hour: find HA for target elevations -6° and +6°
+        static double? HaMinutes(double elevDeg, double latDeg, double declDeg, double noon)
+        {
+            double cosH = (Math.Sin(ToRad(elevDeg)) - Math.Sin(ToRad(latDeg)) * Math.Sin(ToRad(declDeg)))
+                        / (Math.Cos(ToRad(latDeg)) * Math.Cos(ToRad(declDeg)));
+            if (cosH is < -1 or > 1) return null;
+            return ToDeg(Math.Acos(cosH)) * 4.0;
+        }
+
+        double? ha6 = HaMinutes(6, lat, decl, solarNoonUtc);
+        double? ha_6 = HaMinutes(-6, lat, decl, solarNoonUtc);
+
+        return new DailyEvents(
+            SunriseUtcMinutes: sunriseMin,
+            SolarNoonUtcMinutes: solarNoonUtc,
+            SunsetUtcMinutes: sunsetMin,
+            MaxElevation: maxElev,
+            GoldenMorningStartUtcMin: ha_6.HasValue ? solarNoonUtc - ha_6.Value : null,
+            GoldenMorningEndUtcMin: ha6.HasValue ? solarNoonUtc - ha6.Value : null,
+            GoldenEveningStartUtcMin: ha6.HasValue ? solarNoonUtc + ha6.Value : null,
+            GoldenEveningEndUtcMin: ha_6.HasValue ? solarNoonUtc + ha_6.Value : null
+        );
+    }
+
+    // ── Helpers ───────────────────────────────────────────────────────────
+
+    private static TimeOnly? UtcMinutesToNst(double? utcMinutes)
+    {
+        if (!utcMinutes.HasValue) return null;
+        double nstMin = (utcMinutes.Value + NstOffset.TotalMinutes) % 1440;
+        if (nstMin < 0) nstMin += 1440;
+        int h = (int)(nstMin / 60);
+        int m = (int)(nstMin % 60);
+        int s = (int)((nstMin % 1) * 60);
+        h %= 24;
+        return new TimeOnly(h, m, s);
+    }
+
+    private static double ToJulianDay(DateTime utc)
+        => utc.ToOADate() + 2415018.5;
+
+    private static double ToRad(double deg) => deg * Math.PI / 180.0;
+    private static double ToDeg(double rad) => rad * 180.0 / Math.PI;
+    private static double NormDeg(double d) => ((d % 360) + 360) % 360;
+}
+
+
+
+================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\wwwroot\appsettings.json
 SIZE: 0.01 KB
 MODIFIED: 02/08/2026 10:28:53
@@ -3565,8 +4126,8 @@ body {
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\wwwroot\index.html
-SIZE: 3.08 KB
-MODIFIED: 02/24/2026 09:13:58
+SIZE: 9.25 KB
+MODIFIED: 03/03/2026 16:26:04
 ================================================================================
 
 <!DOCTYPE html>
@@ -3650,7 +4211,130 @@ MODIFIED: 02/24/2026 09:13:58
                 }
                 this._dotNetRef = null;
             }
-        };</script>
+        };
+        // ── Sun tracker canvas (add this block to wwwroot/index.html, inside the existing <script> tag) ──
+        // Place it alongside the moonVisibility object.
+
+        window.sunTracker = {
+            _canvases: {},
+
+            init: function (canvasId) {
+                const canvas = document.getElementById(canvasId);
+                if (!canvas) return;
+                // Make canvas resolution match display size
+                const resize = () => {
+                    canvas.width = canvas.offsetWidth;
+                    canvas.height = canvas.offsetHeight || 220;
+                };
+                resize();
+                window.addEventListener('resize', resize);
+                this._canvases[canvasId] = { canvas, resize };
+            },
+
+            draw: function (canvasId, altitude, azimuth, dayFraction, isAboveHorizon) {
+                const entry = this._canvases[canvasId];
+                if (!entry) return;
+                const canvas = entry.canvas;
+                const ctx = canvas.getContext('2d');
+                const W = canvas.width, H = canvas.height;
+                const cx = W / 2, horizY = H * 0.75;
+                const arcRx = W * 0.44, arcRy = H * 0.82;
+
+                ctx.clearRect(0, 0, W, H);
+
+                // ── Sky gradient (shifts with altitude) ──────────────────────────
+                let skyTop, skyBot;
+                if (altitude > 15) { skyTop = '#061228'; skyBot = '#0d2040'; }
+                else if (altitude > 0) { const t = altitude / 15; skyTop = lerpHex('#0f2050', '#061228', t); skyBot = lerpHex('#3a1a08', '#0d2040', t); }
+                else if (altitude > -6) { const t = (altitude + 6) / 6; skyTop = lerpHex('#0a0e18', '#0f2050', t); skyBot = lerpHex('#1a0e04', '#3a1a08', t); }
+                else { skyTop = '#04080f'; skyBot = '#080c16'; }
+
+                const skyGrad = ctx.createLinearGradient(0, 0, 0, horizY);
+                skyGrad.addColorStop(0, skyTop); skyGrad.addColorStop(1, skyBot);
+                ctx.fillStyle = skyGrad;
+                ctx.fillRect(0, 0, W, horizY);
+
+                // Ground
+                const gnd = ctx.createLinearGradient(0, horizY, 0, H);
+                gnd.addColorStop(0, '#0e180e'); gnd.addColorStop(1, '#060c06');
+                ctx.fillStyle = gnd;
+                ctx.fillRect(0, horizY, W, H - horizY);
+
+                // Horizon glow
+                if (altitude > -8 && altitude < 20) {
+                    const t = Math.max(0, 1 - Math.abs(altitude) / 20);
+                    const glow = ctx.createRadialGradient(cx, horizY, 0, cx, horizY, W * 0.5);
+                    glow.addColorStop(0, `rgba(255,120,40,${0.38 * t})`);
+                    glow.addColorStop(0.4, `rgba(255,80,20,${0.15 * t})`);
+                    glow.addColorStop(1, 'rgba(0,0,0,0)');
+                    ctx.fillStyle = glow;
+                    ctx.fillRect(0, horizY - H * 0.4, W, H * 0.5);
+                }
+
+                // Horizon line
+                ctx.beginPath(); ctx.moveTo(0, horizY); ctx.lineTo(W, horizY);
+                ctx.strokeStyle = 'rgba(240,165,0,0.22)'; ctx.lineWidth = 1; ctx.stroke();
+
+                // Dashed arc path
+                ctx.beginPath();
+                ctx.ellipse(cx, horizY, arcRx, arcRy, 0, Math.PI, 0, false);
+                ctx.strokeStyle = 'rgba(240,165,0,0.10)';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([4, 7]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Sun position on arc
+                const frac = Math.max(0, Math.min(1, dayFraction < 0 ? 0.5 : dayFraction));
+                const angle = Math.PI - frac * Math.PI; // PI=east → 0=west
+                const sunX = cx + arcRx * Math.cos(angle);
+                const sunY = horizY - arcRy * Math.sin(angle);
+
+                if (dayFraction >= 0 && isAboveHorizon) {
+                    // Corona
+                    const corona = ctx.createRadialGradient(sunX, sunY, 2, sunX, sunY, 42);
+                    corona.addColorStop(0, 'rgba(255,220,80,0.92)');
+                    corona.addColorStop(0.2, 'rgba(255,180,40,0.5)');
+                    corona.addColorStop(0.6, 'rgba(255,140,20,0.14)');
+                    corona.addColorStop(1, 'rgba(0,0,0,0)');
+                    ctx.fillStyle = corona;
+                    ctx.beginPath(); ctx.arc(sunX, sunY, 42, 0, Math.PI * 2); ctx.fill();
+                    // Disc
+                    ctx.beginPath(); ctx.arc(sunX, sunY, 11, 0, Math.PI * 2);
+                    ctx.fillStyle = '#ffe060'; ctx.fill();
+                } else if (dayFraction >= 0) {
+                    ctx.beginPath(); ctx.arc(sunX, sunY, 8, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255,160,60,0.38)'; ctx.fill();
+                }
+
+                // Labels
+                ctx.font = '10px "Courier New", monospace';
+                ctx.fillStyle = 'rgba(240,165,0,0.55)';
+                ctx.textAlign = 'left';
+                ctx.fillText(`ALT ${altitude >= 0 ? '+' : ''}${altitude.toFixed(1)}°`, 12, H - 10);
+                ctx.textAlign = 'right';
+                ctx.fillText(`AZ ${azimuth.toFixed(1)}°`, W - 12, H - 10);
+                ctx.fillStyle = 'rgba(255,255,255,0.18)';
+                ctx.textAlign = 'left'; ctx.fillText('E', 12, horizY - 5);
+                ctx.textAlign = 'right'; ctx.fillText('W', W - 12, horizY - 5);
+                ctx.textAlign = 'center'; ctx.fillText('S', cx, horizY - 5);
+            },
+
+            dispose: function (canvasId) {
+                const entry = this._canvases[canvasId];
+                if (!entry) return;
+                window.removeEventListener('resize', entry.resize);
+                delete this._canvases[canvasId];
+            }
+        };
+
+        function lerpHex(c1, c2, t) {
+            const r1 = parseInt(c1.slice(1, 3), 16), g1 = parseInt(c1.slice(3, 5), 16), b1 = parseInt(c1.slice(5, 7), 16);
+            const r2 = parseInt(c2.slice(1, 3), 16), g2 = parseInt(c2.slice(3, 5), 16), b2 = parseInt(c2.slice(5, 7), 16);
+            const r = Math.round(r1 + (r2 - r1) * t), g = Math.round(g1 + (g2 - g1) * t), b = Math.round(b1 + (b2 - b1) * t);
+            return `rgb(${r},${g},${b})`;
+        }
+        </script>
 </body>
 
 </html>
@@ -3753,7 +4437,7 @@ MODIFIED: 03/03/2026 09:57:37
 
 
 ===============================================================================
-EXPORT COMPLETED: 03/03/2026 16:21:51
-Total Files Exported: 33
+EXPORT COMPLETED: 03/03/2026 16:32:59
+Total Files Exported: 37
 Output File: .\docs\llm\dump.txt
 ===============================================================================
