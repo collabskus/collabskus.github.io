@@ -3858,3 +3858,44 @@ dotnet test
 17:31:00:612	========== Rebuild All: 3 succeeded, 0 failed, 0 skipped ==========
 17:31:00:612	========== Rebuild completed at 5:31 PM and took 09.462 seconds ==========
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The application runs great, which is nice. However, there are a lot of issues. 
