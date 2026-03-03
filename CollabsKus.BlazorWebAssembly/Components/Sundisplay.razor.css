@@ -23,6 +23,28 @@
     opacity: 0.6;
 }
 
+/* ── Location header ─────────────────────────────────────────────────────── */
+
+.sun-location-header {
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: #ffd060;
+    letter-spacing: 0.3px;
+}
+
+.sun-location-coords {
+    font-size: 0.7rem;
+    opacity: 0.5;
+    font-weight: 300;
+}
+
+.sun-location-divider {
+    height: 1px;
+    background: rgba(240, 165, 0, 0.15);
+    margin: 24px 0 18px;
+}
+
 /* ── Sky canvas ──────────────────────────────────────────────────────────── */
 
 .sky-wrap {
@@ -34,7 +56,7 @@
     border: 1px solid rgba(240, 165, 0, 0.12);
 }
 
-#sunSkyCanvas {
+.sun-sky-canvas {
     display: block;
     width: 100%;
     height: 220px;
@@ -186,6 +208,38 @@
     margin-top: 3px;
 }
 
+/* ── Previous / Next row ──────────────────────────────────────────────────── */
+
+.sun-prev-next-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.sun-prev-next-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(240, 165, 0, 0.10);
+    border-radius: 10px;
+    padding: 10px 14px;
+    text-align: center;
+}
+
+.sun-prev-next-label {
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.45;
+    margin-bottom: 4px;
+}
+
+.sun-prev-next-value {
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: #e8dfc8;
+}
+
 /* ── Info bar ─────────────────────────────────────────────────────────────── */
 
 .sun-info-bar {
@@ -230,6 +284,10 @@
         grid-template-columns: 1fr;
     }
 
+    .sun-prev-next-row {
+        grid-template-columns: 1fr;
+    }
+
     .sun-stat-value {
         font-size: 1.3rem;
     }
@@ -239,4 +297,3 @@
         align-items: center;
     }
 }
-

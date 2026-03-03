@@ -1,1 +1,215 @@
-﻿
+﻿@using CollabsKus.BlazorWebAssembly.Models
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+
+<div id="sun-display-root" class="sun-display">
+    <div class="sun-section-label">☀ SUN TRACKER</div>
+
+    @if (Position == null)
+    {
+        <div class="sun-loading">Calculating solar position…</div>
+    }
+    else
+    {
+        @foreach (var (pos, canvasId, idx) in GetLocations())
+        {
+            @if (idx > 0)
+            {
+                <div class="sun-location-divider"></div>
+            }
+
+            <div class="sun-location-header">
+                📍 @pos.LocationName
+                <span class="sun-location-coords">(@pos.Latitude.ToString("F2")°N, @pos.Longitude.ToString("F2")°E)</span>
+            </div>
+
+            <div class="sky-wrap">
+                <canvas id="@canvasId" class="sun-sky-canvas"></canvas>
+                @if (IsLive && idx == 0)
+                {
+                    <div class="sky-live-badge"><span class="sky-live-dot"></span>LIVE</div>
+                }
+            </div>
+
+            @if (!pos.IsAboveHorizon)
+            {
+                <div class="sun-night-banner">☽ The sun is below the horizon</div>
+            }
+
+            @* ── Stats row ── *@
+            <div class="sun-stats-row">
+                <div class="sun-stat @(pos.IsAboveHorizon ? "sun-stat--lit" : "")">
+                    <div class="sun-stat-label">ALTITUDE</div>
+                    <div class="sun-stat-value">@pos.AltitudeSign@pos.Altitude.ToString("F1")<span class="sun-unit">°</span></div>
+                    <div class="sun-stat-sub">@(pos.IsGoldenHour ? "Golden hour" : pos.IsAboveHorizon ? "Daytime" : "Night")</div>
+                </div>
+                <div class="sun-stat">
+                    <div class="sun-stat-label">AZIMUTH</div>
+                    <div class="sun-stat-value">@pos.Azimuth.ToString("F1")<span class="sun-unit">°</span></div>
+                    <div class="sun-stat-sub">@pos.AzimuthCardinal</div>
+                </div>
+            </div>
+
+            @* ── Events row (today) ── *@
+            <div class="sun-events-row">
+                <div class="sun-event">
+                    <span class="sun-event-icon">🌅</span>
+                    <div class="sun-event-time">@FormatTime(pos.SunriseLocal)</div>
+                    <div class="sun-event-label">SUNRISE</div>
+                </div>
+                <div class="sun-event sun-event--noon">
+                    <span class="sun-event-icon">☀️</span>
+                    <div class="sun-event-time">@pos.SolarNoonLocal.ToString("hh\\:mm\\:ss")</div>
+                    <div class="sun-event-label">SOLAR NOON</div>
+                </div>
+                <div class="sun-event">
+                    <span class="sun-event-icon">🌇</span>
+                    <div class="sun-event-time">@FormatTime(pos.SunsetLocal)</div>
+                    <div class="sun-event-label">SUNSET</div>
+                </div>
+            </div>
+
+            @* ── Previous / Next row ── *@
+            <div class="sun-prev-next-row">
+                <div class="sun-prev-next-item">
+                    <div class="sun-prev-next-label">PREV SUNRISE</div>
+                    <div class="sun-prev-next-value">@FormatDateTime(pos.PreviousSunrise)</div>
+                </div>
+                <div class="sun-prev-next-item">
+                    <div class="sun-prev-next-label">PREV SUNSET</div>
+                    <div class="sun-prev-next-value">@FormatDateTime(pos.PreviousSunset)</div>
+                </div>
+                <div class="sun-prev-next-item">
+                    <div class="sun-prev-next-label">NEXT SUNRISE</div>
+                    <div class="sun-prev-next-value">@FormatDateTime(pos.NextSunrise)</div>
+                </div>
+                <div class="sun-prev-next-item">
+                    <div class="sun-prev-next-label">NEXT SUNSET</div>
+                    <div class="sun-prev-next-value">@FormatDateTime(pos.NextSunset)</div>
+                </div>
+            </div>
+
+            @* ── Info bar ── *@
+            <div class="sun-info-bar">
+                <div class="sun-info-item">
+                    <div class="sun-info-label">DAY LENGTH</div>
+                    <div class="sun-info-value">@pos.DayLength.ToString(@"hh\:mm\:ss")</div>
+                </div>
+                <div class="sun-info-item">
+                    <div class="sun-info-label">MAX ELEV</div>
+                    <div class="sun-info-value">@pos.MaxElevation.ToString("F1")°</div>
+                </div>
+                @if (pos.GoldenHourMorningStart.HasValue)
+                {
+                    <div class="sun-info-item">
+                        <div class="sun-info-label">GOLDEN AM</div>
+                        <div class="sun-info-value">@pos.GoldenHourMorningStart.Value.ToString("hh\\:mm")–@FormatTime(pos.GoldenHourMorningEnd)</div>
+                    </div>
+                }
+                @if (pos.GoldenHourEveningStart.HasValue)
+                {
+                    <div class="sun-info-item">
+                        <div class="sun-info-label">GOLDEN PM</div>
+                        <div class="sun-info-value">@pos.GoldenHourEveningStart.Value.ToString("hh\\:mm")–@FormatTime(pos.GoldenHourEveningEnd)</div>
+                    </div>
+                }
+            </div>
+        }
+    }
+</div>
+
+@code {
+    [Parameter]
+    public SolarPosition? Position { get; set; }
+
+    [Parameter]
+    public SolarPosition? UserPosition { get; set; }
+
+    [Parameter]
+    public bool IsLive { get; set; }
+
+    private bool _canvasInitialized;
+
+    private IEnumerable<(SolarPosition pos, string canvasId, int idx)> GetLocations()
+    {
+        var list = new List<(SolarPosition, string, int)>();
+        if (Position != null)
+            list.Add((Position, "sunSkyCanvasKtm", 0));
+        if (UserPosition != null)
+            list.Add((UserPosition, "sunSkyCanvasUser", 1));
+        return list;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender || !_canvasInitialized)
+        {
+            if (Position != null)
+            {
+                try
+                {
+                    await JS.InvokeVoidAsync("sunTracker.init", "sunSkyCanvasKtm");
+                    if (UserPosition != null)
+                        await JS.InvokeVoidAsync("sunTracker.init", "sunSkyCanvasUser");
+                    _canvasInitialized = true;
+                }
+                catch
+                {
+                    // Graceful degradation — canvas is optional
+                }
+            }
+        }
+
+        // Draw every render cycle
+        if (_canvasInitialized && Position != null)
+        {
+            try
+            {
+                await JS.InvokeVoidAsync("sunTracker.draw",
+                    "sunSkyCanvasKtm", Position.Altitude, Position.Azimuth,
+                    Position.DayFraction, Position.IsAboveHorizon);
+
+                if (UserPosition != null)
+                {
+                    await JS.InvokeVoidAsync("sunTracker.draw",
+                        "sunSkyCanvasUser", UserPosition.Altitude, UserPosition.Azimuth,
+                        UserPosition.DayFraction, UserPosition.IsAboveHorizon);
+                }
+            }
+            catch
+            {
+                // Ignore draw errors
+            }
+        }
+    }
+
+    private static string FormatTime(TimeOnly? time)
+    {
+        return time?.ToString("hh\\:mm\\:ss") ?? "--:--:--";
+    }
+
+    private static string FormatDateTime(DateTime? dt)
+    {
+        if (!dt.HasValue) return "—";
+        var val = dt.Value;
+        var today = DateTime.Now.Date; // approximate — good enough for labeling
+        var dayLabel = val.Date == today ? "" :
+                       val.Date == today.AddDays(-1) ? " (yesterday)" :
+                       val.Date == today.AddDays(1) ? " (tomorrow)" :
+                       $" ({val:MMM dd})";
+        return $"{val:hh:mm:ss tt}{dayLabel}";
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        try
+        {
+            await JS.InvokeVoidAsync("sunTracker.dispose", "sunSkyCanvasKtm");
+            await JS.InvokeVoidAsync("sunTracker.dispose", "sunSkyCanvasUser");
+        }
+        catch
+        {
+            // Ignore disposal errors
+        }
+    }
+}

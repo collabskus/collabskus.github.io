@@ -1,11 +1,16 @@
 ﻿namespace CollabsKus.BlazorWebAssembly.Models;
 
 /// <summary>
-/// Instantaneous sun position and daily solar events for Kathmandu.
+/// Instantaneous sun position and daily solar events for a given location.
 /// All calculations are pure astronomy — no network requests.
 /// </summary>
 public class SolarPosition
 {
+    // ── Location metadata ─────────────────────────────────────────────────
+    public string LocationName { get; init; } = "";
+    public double Latitude { get; init; }
+    public double Longitude { get; init; }
+
     // ── Instantaneous values (change every second) ────────────────────────
     /// <summary>Elevation angle above the horizon in degrees. Negative = below horizon.</summary>
     public double Altitude { get; init; }
@@ -28,26 +33,40 @@ public class SolarPosition
     /// <summary>Fraction of the day arc traveled (0 = sunrise, 1 = sunset). -1 if polar night/day.</summary>
     public double DayFraction { get; init; }
 
-    // ── Daily events (recomputed once per Nepal calendar day) ─────────────
-    /// <summary>Sunrise time in Nepal Standard Time. Null during polar phenomena.</summary>
-    public TimeOnly? SunriseNST { get; init; }
+    // ── Today's events (in local time for this location) ──────────────────
+    /// <summary>Sunrise time in local time. Null during polar phenomena.</summary>
+    public TimeOnly? SunriseLocal { get; init; }
 
-    /// <summary>Solar noon time in Nepal Standard Time.</summary>
-    public TimeOnly SolarNoonNST { get; init; }
+    /// <summary>Solar noon time in local time.</summary>
+    public TimeOnly SolarNoonLocal { get; init; }
 
-    /// <summary>Sunset time in Nepal Standard Time. Null during polar phenomena.</summary>
-    public TimeOnly? SunsetNST { get; init; }
+    /// <summary>Sunset time in local time. Null during polar phenomena.</summary>
+    public TimeOnly? SunsetLocal { get; init; }
 
-    /// <summary>Start of morning golden hour (sun at -6°) in NST.</summary>
+    // ── Previous / Next sunrise & sunset (local DateTimes) ────────────────
+    /// <summary>Most recent sunrise that has already occurred (local time).</summary>
+    public DateTime? PreviousSunrise { get; init; }
+
+    /// <summary>Most recent sunset that has already occurred (local time).</summary>
+    public DateTime? PreviousSunset { get; init; }
+
+    /// <summary>Next upcoming sunrise (local time).</summary>
+    public DateTime? NextSunrise { get; init; }
+
+    /// <summary>Next upcoming sunset (local time).</summary>
+    public DateTime? NextSunset { get; init; }
+
+    // ── Golden hour times in local time ───────────────────────────────────
+    /// <summary>Start of morning golden hour (sun at -6°) in local time.</summary>
     public TimeOnly? GoldenHourMorningStart { get; init; }
 
-    /// <summary>End of morning golden hour (sun at +6°) in NST.</summary>
+    /// <summary>End of morning golden hour (sun at +6°) in local time.</summary>
     public TimeOnly? GoldenHourMorningEnd { get; init; }
 
-    /// <summary>Start of evening golden hour (sun at +6°) in NST.</summary>
+    /// <summary>Start of evening golden hour (sun at +6°) in local time.</summary>
     public TimeOnly? GoldenHourEveningStart { get; init; }
 
-    /// <summary>End of evening golden hour (sun at -6°) in NST.</summary>
+    /// <summary>End of evening golden hour (sun at -6°) in local time.</summary>
     public TimeOnly? GoldenHourEveningEnd { get; init; }
 
     /// <summary>Maximum sun elevation at solar noon, degrees.</summary>

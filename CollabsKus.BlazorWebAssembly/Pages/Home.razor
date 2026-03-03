@@ -23,7 +23,7 @@ else
     <TimeDisplay CurrentTime="_currentTime" />
     <DateCards CalendarData="_calendarData?.Res" />
     <MoonDisplay MoonPhase="_moonPhase" IsLive="_isMoonLive" />
-    <Sundisplay Position="_sunPosition" />
+    <Sundisplay Position="_sunPosition" UserPosition="_userSunPosition" IsLive="_isSunLive" />
     <CalendarGrid CalendarData="_calendarData?.Res" />
 }
 
@@ -32,22 +32,17 @@ else
 </div>
 
 @code {
-    [Inject]
-    private SolarPositionService SolarPositionService { get; set; } = default!;
-
-    [Inject]
-    private KathmanduCalendarService CalendarService { get; set; } = default!;
-
-    [Inject]
-    private MoonPhaseService MoonPhaseService { get; set; } = default!;
-
-    [Inject]
-    private IJSRuntime JS { get; set; } = default!;
+    [Inject] private SolarPositionService SolarPositionService { get; set; } = default!;
+    [Inject] private KathmanduCalendarService CalendarService { get; set; } = default!;
+    [Inject] private MoonPhaseService MoonPhaseService { get; set; } = default!;
+    [Inject] private ApiLoggerService Logger { get; set; } = default!;
+    [Inject] private IJSRuntime JS { get; set; } = default!;
 
     private CalendarResponse? _calendarData;
     private TimeResponse? _timeData;
     private MoonPhase? _moonPhase;
     private SolarPosition? _sunPosition;
+    private SolarPosition? _userSunPosition;
     private DateTime _currentTime = DateTime.Now;
     private string _lastUpdate = "--";
     private bool _isLoading = true;
@@ -56,42 +51,52 @@ else
     private System.Threading.Timer? _timeApiTimer;
     private System.Threading.Timer? _calendarApiTimer;
 
+    // User geolocation
+    private double? _userLat;
+    private double? _userLng;
+    private TimeSpan _userTzOffset = TimeSpan.Zero;
+    private string _userLocationName = "Your Location";
+
     // Visibility + intersection tracking
     private bool _isTabVisible = true;
     private bool _isMoonInView = true;
+    private bool _isSunInView = true;
     private bool _isMoonLive => _isTabVisible && _isMoonInView;
+    private bool _isSunLive => _isTabVisible && _isSunInView;
     private DotNetObjectReference<Home>? _dotNetRef;
     private IJSObjectReference? _jsModule;
+
+    // First-calc logging
+    private bool _hasLoggedFirstSolarCalc;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            // Initial data fetch
             await LoadDataAsync();
 
-            // Start clock timer (updates every second)
             _clockTimer = new System.Threading.Timer(async _ =>
             {
                 _currentTime = CalendarService.GetCurrentKathmanduTime();
 
-                // Only recalculate moon phase when tab is visible AND moon is in viewport
                 if (_isMoonLive)
                 {
                     UpdateMoonPhase();
-                    _sunPosition = SolarPositionService.Calculate(DateTime.UtcNow);
+                }
+
+                if (_isSunLive)
+                {
+                    UpdateSunPositions();
                 }
 
                 await InvokeAsync(StateHasChanged);
             }, null, TimeSpan.Zero, TimeSpan.FromSeconds(0.01));
 
-            // Start time API timer (refreshes every hour)
             _timeApiTimer = new System.Threading.Timer(async _ =>
             {
                 await LoadTimeDataAsync();
             }, null, TimeSpan.FromHours(1), TimeSpan.FromHours(1));
 
-            // Start calendar API timer (refreshes every 24 hours)
             _calendarApiTimer = new System.Threading.Timer(async _ =>
             {
                 await LoadCalendarDataAsync();
@@ -113,14 +118,50 @@ else
             _dotNetRef = DotNetObjectReference.Create(this);
             try
             {
+                // Initialize visibility tracking for moon and sun
                 _jsModule = await JS.InvokeAsync<IJSObjectReference>(
-                    "moonVisibility.init", _dotNetRef, "moon-display-root");
+                    "visibilityTracker.init", _dotNetRef);
+
+                // Observe moon element
+                await JS.InvokeVoidAsync("visibilityTracker.observeElement",
+                    "moon-display-root", "OnMoonInViewChanged");
+
+                // Observe sun element
+                await JS.InvokeVoidAsync("visibilityTracker.observeElement",
+                    "sun-display-root", "OnSunInViewChanged");
             }
             catch
             {
-                // If JS interop fails, default to always-live (graceful degradation)
                 _isTabVisible = true;
                 _isMoonInView = true;
+                _isSunInView = true;
+            }
+
+            // Request geolocation
+            try
+            {
+                var geo = await JS.InvokeAsync<GeoResult?>("getGeolocation");
+                if (geo != null)
+                {
+                    _userLat = geo.Lat;
+                    _userLng = geo.Lng;
+
+                    // Get browser timezone offset (minutes from UTC, negative = ahead)
+                    var offsetMinutes = await JS.InvokeAsync<int>("getTimezoneOffsetMinutes");
+                    _userTzOffset = TimeSpan.FromMinutes(-offsetMinutes);
+
+                    // Get timezone name
+                    var tzName = await JS.InvokeAsync<string>("getTimezoneName");
+                    if (!string.IsNullOrEmpty(tzName))
+                        _userLocationName = $"Your Location ({tzName})";
+
+                    UpdateSunPositions();
+                    await InvokeAsync(StateHasChanged);
+                }
+            }
+            catch
+            {
+                // Geolocation denied or unavailable — Kathmandu-only mode
             }
         }
     }
@@ -129,11 +170,10 @@ else
     public void OnVisibilityChanged(bool isVisible)
     {
         _isTabVisible = isVisible;
-
-        // When tab becomes visible again, immediately recalculate to catch up
         if (isVisible)
         {
             UpdateMoonPhase();
+            UpdateSunPositions();
             InvokeAsync(StateHasChanged);
         }
     }
@@ -142,11 +182,20 @@ else
     public void OnMoonInViewChanged(bool isInView)
     {
         _isMoonInView = isInView;
-
-        // When moon scrolls into view, immediately recalculate
         if (isInView && _isTabVisible)
         {
             UpdateMoonPhase();
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    [JSInvokable]
+    public void OnSunInViewChanged(bool isInView)
+    {
+        _isSunInView = isInView;
+        if (isInView && _isTabVisible)
+        {
+            UpdateSunPositions();
             InvokeAsync(StateHasChanged);
         }
     }
@@ -155,6 +204,7 @@ else
     {
         await Task.WhenAll(LoadCalendarDataAsync(), LoadTimeDataAsync());
         UpdateMoonPhase();
+        UpdateSunPositions();
         UpdateLastUpdateTime();
     }
 
@@ -169,19 +219,57 @@ else
         _timeData = await CalendarService.GetTimeDataAsync();
         _currentTime = CalendarService.GetCurrentKathmanduTime();
         UpdateMoonPhase();
+        UpdateSunPositions();
         UpdateLastUpdateTime();
         await InvokeAsync(StateHasChanged);
     }
 
     private void UpdateMoonPhase()
     {
-        // IMPORTANT: Use DateTime.UtcNow, NOT _currentTime.
-        // _currentTime is Kathmandu local time (UTC+5:45) but tagged as DateTimeKind.Utc
-        // by GetCurrentKathmanduTime(). Moon phase is the same everywhere on Earth at any
-        // given instant — it only depends on the actual UTC moment, not the timezone.
-        // Passing _currentTime (which is ~5h45m ahead of real UTC) would make the moon
-        // calculation off by ~6 hours, causing illumination differences across devices.
         _moonPhase = MoonPhaseService.CalculateMoonPhase(DateTime.UtcNow);
+    }
+
+    private void UpdateSunPositions()
+    {
+        var utcNow = DateTime.UtcNow;
+        _sunPosition = SolarPositionService.CalculateKathmandu(utcNow);
+
+        if (_userLat.HasValue && _userLng.HasValue)
+        {
+            _userSunPosition = SolarPositionService.Calculate(
+                utcNow, _userLat.Value, _userLng.Value, _userTzOffset, _userLocationName);
+        }
+
+        // Log first calculation after app start
+        if (!_hasLoggedFirstSolarCalc && _sunPosition != null)
+        {
+            _hasLoggedFirstSolarCalc = true;
+            _ = LogFirstSolarCalcAsync();
+        }
+    }
+
+    private async Task LogFirstSolarCalcAsync()
+    {
+        try
+        {
+            var logPayload = new
+            {
+                kathmanduAltitude = _sunPosition?.Altitude,
+                kathmanduAzimuth = _sunPosition?.Azimuth,
+                kathmanduSunrise = _sunPosition?.SunriseLocal?.ToString("HH:mm:ss"),
+                kathmanduSunset = _sunPosition?.SunsetLocal?.ToString("HH:mm:ss"),
+                userLat = _userLat,
+                userLng = _userLng,
+                userAltitude = _userSunPosition?.Altitude,
+                userAzimuth = _userSunPosition?.Azimuth,
+                utcTimestamp = DateTime.UtcNow.ToString("O")
+            };
+            await Logger.LogApiRequestAsync("SolarPosition/FirstCalc", logPayload, false, ApiLoggerService.GetOptions());
+        }
+        catch
+        {
+            // Non-critical
+        }
     }
 
     private void UpdateLastUpdateTime()
@@ -209,5 +297,12 @@ else
         }
 
         _dotNetRef?.Dispose();
+    }
+
+    // JS interop model for geolocation result
+    private class GeoResult
+    {
+        public double Lat { get; set; }
+        public double Lng { get; set; }
     }
 }

@@ -3,29 +3,36 @@
 namespace CollabsKus.BlazorWebAssembly.Services;
 
 /// <summary>
-/// Calculates sun position and daily solar events for Kathmandu using the
+/// Calculates sun position and daily solar events for any location using the
 /// Jean Meeus astronomical algorithm (Astronomical Algorithms, 2nd ed.).
 /// Pure math — no network calls, no JS interop.
 /// </summary>
 public class SolarPositionService
 {
     // Kathmandu coordinates
-    private const double Lat = 27.6984037;
-    private const double Lng = 85.2939889;
+    public const double KathmanduLat = 27.6984037;
+    public const double KathmanduLng = 85.2939889;
 
     // Nepal Standard Time = UTC + 5h 45m
-    private static readonly TimeSpan NstOffset = TimeSpan.FromMinutes(5 * 60 + 45);
+    public static readonly TimeSpan NstOffset = TimeSpan.FromMinutes(5 * 60 + 45);
 
     // ── Public API ────────────────────────────────────────────────────────
 
     /// <summary>
-    /// Compute the full SolarPosition snapshot for the given UTC instant.
-    /// Call this every second from the clock timer.
+    /// Convenience method: compute SolarPosition for Kathmandu.
     /// </summary>
-    public SolarPosition Calculate(DateTime utcNow)
+    public SolarPosition CalculateKathmandu(DateTime utcNow)
     {
-        var (alt, az, decl, ha) = GetAltAz(utcNow, Lat, Lng);
-        var events = GetDailyEvents(utcNow, Lat, Lng);
+        return Calculate(utcNow, KathmanduLat, KathmanduLng, NstOffset, "Kathmandu, Nepal");
+    }
+
+    /// <summary>
+    /// Compute the full SolarPosition snapshot for a given location and UTC instant.
+    /// </summary>
+    public SolarPosition Calculate(DateTime utcNow, double lat, double lng, TimeSpan tzOffset, string locationName)
+    {
+        var (alt, az, decl, ha) = GetAltAz(utcNow, lat, lng);
+        var events = GetDailyEvents(utcNow, lat, lng);
 
         double dayFraction = -1;
         if (events.SunriseUtcMinutes.HasValue && events.SunsetUtcMinutes.HasValue)
@@ -35,20 +42,29 @@ public class SolarPositionService
             dayFraction = Math.Clamp((utcMinutes - events.SunriseUtcMinutes.Value) / totalDayMin, 0, 1);
         }
 
+        var (prevSr, prevSs, nextSr, nextSs) = ComputePrevNext(utcNow, lat, lng, tzOffset);
+
         return new SolarPosition
         {
+            LocationName = locationName,
+            Latitude = lat,
+            Longitude = lng,
             Altitude = alt,
             Azimuth = az,
             Declination = decl,
             HourAngle = ha,
             DayFraction = dayFraction,
-            SunriseNST = UtcMinutesToNst(events.SunriseUtcMinutes),
-            SolarNoonNST = UtcMinutesToNst(events.SolarNoonUtcMinutes)!.Value,
-            SunsetNST = UtcMinutesToNst(events.SunsetUtcMinutes),
-            GoldenHourMorningStart = UtcMinutesToNst(events.GoldenMorningStartUtcMin),
-            GoldenHourMorningEnd = UtcMinutesToNst(events.GoldenMorningEndUtcMin),
-            GoldenHourEveningStart = UtcMinutesToNst(events.GoldenEveningStartUtcMin),
-            GoldenHourEveningEnd = UtcMinutesToNst(events.GoldenEveningEndUtcMin),
+            SunriseLocal = UtcMinutesToLocal(events.SunriseUtcMinutes, tzOffset),
+            SolarNoonLocal = UtcMinutesToLocal(events.SolarNoonUtcMinutes, tzOffset)!.Value,
+            SunsetLocal = UtcMinutesToLocal(events.SunsetUtcMinutes, tzOffset),
+            PreviousSunrise = prevSr,
+            PreviousSunset = prevSs,
+            NextSunrise = nextSr,
+            NextSunset = nextSs,
+            GoldenHourMorningStart = UtcMinutesToLocal(events.GoldenMorningStartUtcMin, tzOffset),
+            GoldenHourMorningEnd = UtcMinutesToLocal(events.GoldenMorningEndUtcMin, tzOffset),
+            GoldenHourEveningStart = UtcMinutesToLocal(events.GoldenEveningStartUtcMin, tzOffset),
+            GoldenHourEveningEnd = UtcMinutesToLocal(events.GoldenEveningEndUtcMin, tzOffset),
             MaxElevation = events.MaxElevation,
             DayLength = events.SunriseUtcMinutes.HasValue && events.SunsetUtcMinutes.HasValue
                 ? TimeSpan.FromMinutes(events.SunsetUtcMinutes.Value - events.SunriseUtcMinutes.Value)
@@ -56,9 +72,46 @@ public class SolarPositionService
         };
     }
 
+    // ── Previous / Next sunrise & sunset ──────────────────────────────────
+
+    private static (DateTime? prevSunrise, DateTime? prevSunset, DateTime? nextSunrise, DateTime? nextSunset)
+        ComputePrevNext(DateTime utcNow, double lat, double lng, TimeSpan tzOffset)
+    {
+        var localNow = utcNow + tzOffset;
+
+        var dates = new[] { utcNow.Date.AddDays(-1), utcNow.Date, utcNow.Date.AddDays(1) };
+        var allSunrises = new List<DateTime>();
+        var allSunsets = new List<DateTime>();
+
+        foreach (var date in dates)
+        {
+            var ev = GetDailyEvents(new DateTime(date.Year, date.Month, date.Day, 12, 0, 0, DateTimeKind.Utc), lat, lng);
+            if (ev.SunriseUtcMinutes.HasValue)
+            {
+                allSunrises.Add(date.AddMinutes(ev.SunriseUtcMinutes.Value) + tzOffset);
+            }
+            if (ev.SunsetUtcMinutes.HasValue)
+            {
+                allSunsets.Add(date.AddMinutes(ev.SunsetUtcMinutes.Value) + tzOffset);
+            }
+        }
+
+        var prevSrList = allSunrises.Where(s => s <= localNow).OrderByDescending(s => s).ToList();
+        var nextSrList = allSunrises.Where(s => s > localNow).OrderBy(s => s).ToList();
+        var prevSsList = allSunsets.Where(s => s <= localNow).OrderByDescending(s => s).ToList();
+        var nextSsList = allSunsets.Where(s => s > localNow).OrderBy(s => s).ToList();
+
+        return (
+            prevSrList.Count > 0 ? prevSrList[0] : null,
+            prevSsList.Count > 0 ? prevSsList[0] : null,
+            nextSrList.Count > 0 ? nextSrList[0] : null,
+            nextSsList.Count > 0 ? nextSsList[0] : null
+        );
+    }
+
     // ── Core algorithm ────────────────────────────────────────────────────
 
-    private static (double alt, double az, double decl, double ha) GetAltAz(DateTime utc, double lat, double lng)
+    internal static (double alt, double az, double decl, double ha) GetAltAz(DateTime utc, double lat, double lng)
     {
         double jd = ToJulianDay(utc);
         double T = (jd - 2451545.0) / 36525.0;
@@ -100,7 +153,7 @@ public class SolarPositionService
 
     // ── Daily events (sunrise, sunset, golden hour) ───────────────────────
 
-    private record DailyEvents(
+    internal record DailyEvents(
         double? SunriseUtcMinutes,
         double SolarNoonUtcMinutes,
         double? SunsetUtcMinutes,
@@ -111,9 +164,8 @@ public class SolarPositionService
         double? GoldenEveningEndUtcMin
     );
 
-    private static DailyEvents GetDailyEvents(DateTime utc, double lat, double lng)
+    internal static DailyEvents GetDailyEvents(DateTime utc, double lat, double lng)
     {
-        // Use solar noon UTC as the reference time for the day
         double jd = ToJulianDay(new DateTime(utc.Year, utc.Month, utc.Day, 12, 0, 0, DateTimeKind.Utc));
         double T = (jd - 2451545.0) / 36525.0;
 
@@ -139,10 +191,8 @@ public class SolarPositionService
             - 0.5 * y * y * Math.Sin(4 * ToRad(L0))
             - 1.25 * Math.Sin(2 * Mr));
 
-        // Solar noon in UTC minutes from midnight
         double solarNoonUtc = 720.0 - 4.0 * lng - eot;
 
-        // Hour angle for sunrise/sunset (atmospheric refraction correction: -0.833°)
         double cosHA = (Math.Cos(ToRad(90.833)) - Math.Sin(ToRad(lat)) * Math.Sin(ToRad(decl)))
                      / (Math.Cos(ToRad(lat)) * Math.Cos(ToRad(decl)));
 
@@ -156,8 +206,7 @@ public class SolarPositionService
 
         double maxElev = 90.0 - Math.Abs(lat - decl);
 
-        // Golden / blue hour: find HA for target elevations -6° and +6°
-        static double? HaMinutes(double elevDeg, double latDeg, double declDeg, double noon)
+        static double? HaMinutes(double elevDeg, double latDeg, double declDeg)
         {
             double cosH = (Math.Sin(ToRad(elevDeg)) - Math.Sin(ToRad(latDeg)) * Math.Sin(ToRad(declDeg)))
                         / (Math.Cos(ToRad(latDeg)) * Math.Cos(ToRad(declDeg)));
@@ -165,8 +214,8 @@ public class SolarPositionService
             return ToDeg(Math.Acos(cosH)) * 4.0;
         }
 
-        double? ha6 = HaMinutes(6, lat, decl, solarNoonUtc);
-        double? ha_6 = HaMinutes(-6, lat, decl, solarNoonUtc);
+        double? ha6 = HaMinutes(6, lat, decl);
+        double? ha_6 = HaMinutes(-6, lat, decl);
 
         return new DailyEvents(
             SunriseUtcMinutes: sunriseMin,
@@ -182,22 +231,21 @@ public class SolarPositionService
 
     // ── Helpers ───────────────────────────────────────────────────────────
 
-    private static TimeOnly? UtcMinutesToNst(double? utcMinutes)
+    private static TimeOnly? UtcMinutesToLocal(double? utcMinutes, TimeSpan tzOffset)
     {
         if (!utcMinutes.HasValue) return null;
-        double nstMin = (utcMinutes.Value + NstOffset.TotalMinutes) % 1440;
-        if (nstMin < 0) nstMin += 1440;
-        int h = (int)(nstMin / 60);
-        int m = (int)(nstMin % 60);
-        int s = (int)((nstMin % 1) * 60);
-        h %= 24;
+        double localMin = (utcMinutes.Value + tzOffset.TotalMinutes) % 1440;
+        if (localMin < 0) localMin += 1440;
+        int h = (int)(localMin / 60) % 24;
+        int m = (int)(localMin % 60);
+        int s = (int)((localMin % 1) * 60);
         return new TimeOnly(h, m, s);
     }
 
-    private static double ToJulianDay(DateTime utc)
+    internal static double ToJulianDay(DateTime utc)
         => utc.ToOADate() + 2415018.5;
 
-    private static double ToRad(double deg) => deg * Math.PI / 180.0;
-    private static double ToDeg(double rad) => rad * 180.0 / Math.PI;
-    private static double NormDeg(double d) => ((d % 360) + 360) % 360;
+    internal static double ToRad(double deg) => deg * Math.PI / 180.0;
+    internal static double ToDeg(double rad) => rad * 180.0 / Math.PI;
+    internal static double NormDeg(double d) => ((d % 360) + 360) % 360;
 }

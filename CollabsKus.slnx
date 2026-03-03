@@ -1,3 +1,5 @@
 <Solution>
   <Project Path="CollabsKus.BlazorWebAssembly/CollabsKus.BlazorWebAssembly.csproj" />
+  <Project Path="CollabsKus.Tests/CollabsKus.Tests.csproj" />
+  <Project Path="CollabsKus.PlaywrightTests/CollabsKus.PlaywrightTests.csproj" />
 </Solution>
