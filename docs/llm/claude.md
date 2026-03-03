@@ -3833,3 +3833,28 @@ pwsh bin/Debug/net10.0/playwright.ps1 install
 # In another terminal: dotnet run --project ../CollabsKus.BlazorWebAssembly
 dotnet test
 ```
+
+
+
+
+
+17:30:20:763	Clean started at 5:30 PM...
+17:30:21:004	1>------ Clean started: Project: CollabsKus.Tests, Configuration: Debug Any CPU ------
+17:30:21:006	2>------ Clean started: Project: CollabsKus.PlaywrightTests, Configuration: Debug Any CPU ------
+17:30:36:012	3>------ Clean started: Project: CollabsKus.BlazorWebAssembly, Configuration: Debug Any CPU ------
+17:30:36:353	========== Clean: 3 succeeded, 0 failed, 0 skipped ==========
+17:30:36:353	========== Clean completed at 5:30 PM and took 15.656 seconds ==========
+17:30:51:234	Rebuild started at 5:30 PM...
+17:30:51:471	1>------ Rebuild All started: Project: CollabsKus.BlazorWebAssembly, Configuration: Debug Any CPU ------
+17:30:51:472	2>------ Rebuild All started: Project: CollabsKus.PlaywrightTests, Configuration: Debug Any CPU ------
+17:30:51:516	Restored D:\DEV\personal\collabskus\CollabsKus.PlaywrightTests\CollabsKus.PlaywrightTests.csproj (in 29 ms).
+17:30:51:516	Restored D:\DEV\personal\collabskus\CollabsKus.Tests\CollabsKus.Tests.csproj (in 31 ms).
+17:30:51:516	Restored D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\CollabsKus.BlazorWebAssembly.csproj (in 34 ms).
+17:30:57:417	2>  CollabsKus.PlaywrightTests -> D:\DEV\personal\collabskus\CollabsKus.PlaywrightTests\bin\Debug\net10.0\CollabsKus.PlaywrightTests.dll
+17:30:59:548	1>  CollabsKus.BlazorWebAssembly -> D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\bin\Debug\net10.0\CollabsKus.BlazorWebAssembly.dll
+17:30:59:548	1>  CollabsKus.BlazorWebAssembly (Blazor output) -> D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\bin\Debug\net10.0\wwwroot
+17:30:59:567	3>------ Rebuild All started: Project: CollabsKus.Tests, Configuration: Debug Any CPU ------
+17:31:00:575	3>  CollabsKus.Tests -> D:\DEV\personal\collabskus\CollabsKus.Tests\bin\Debug\net10.0\CollabsKus.Tests.dll
+17:31:00:612	========== Rebuild All: 3 succeeded, 0 failed, 0 skipped ==========
+17:31:00:612	========== Rebuild completed at 5:31 PM and took 09.462 seconds ==========
+
