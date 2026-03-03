@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CollabsKus.PlaywrightTests": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "BASE_URL": "https://localhost:7212/"
+      }
+    }
+  }
+}
