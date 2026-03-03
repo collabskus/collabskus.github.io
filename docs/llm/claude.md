@@ -638,3 +638,83 @@ Here's the fix with the date boundary correction applied:## Summary of what chan
 
 
 
+I have the following csproj I want to migrate to central package management. can you give me the new csproj and prop files? 
+
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
+
+</Project>
+
+D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\CollabsKus.BlazorWebAssembly.csproj
+
+I have attached the whole project for context 
+
+
+
+
+
+This is a simple migration with just two packages. Here are both files:
+
+**`Directory.Packages.props`** (place at solution root, next to `CollabsKus.slnx`):
+
+```xml
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.3" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.3" />
+  </ItemGroup>
+</Project>
+```
+
+**`CollabsKus.BlazorWebAssembly.csproj`** (updated — versions removed, `PrivateAssets` stays on the reference itself):
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" PrivateAssets="all" />
+  </ItemGroup>
+  <ItemGroup>
+    <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
+</Project>
+```
+
+Key things to note:
+- `Version` attributes are removed from `PackageReference` elements in the csproj — versions now live exclusively in `Directory.Packages.props`
+- `PrivateAssets="all"` stays on the `PackageReference` in the csproj, not in the props file — it's a reference metadata attribute, not a version concern
+- The `Directory.Packages.props` file goes at the **solution root** (`D:\DEV\personal\collabskus\`) so it applies to all projects in the solution as you add more
+
+
+
+
+
+
+
+
+
+
