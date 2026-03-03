@@ -19,7 +19,7 @@ public class MoonPhaseService
 
     // ── Phase name definitions (by ecliptic longitude difference 0–360°) ─────
     private static readonly (string Name, string Icon, double Min, double Max)[] Phases =
-    {
+    [
         ("New Moon",        "🌑",   0.0,   22.5),
         ("Waxing Crescent", "🌒",  22.5,   67.5),
         ("First Quarter",   "🌓",  67.5,  112.5),
@@ -29,16 +29,16 @@ public class MoonPhaseService
         ("Last Quarter",    "🌗", 247.5,  292.5),
         ("Waning Crescent", "🌘", 292.5,  337.5),
         ("New Moon",        "🌑", 337.5,  360.0),
-    };
+    ];
 
     // Tithi names: indices 0–13 are the first 14 tithis of each paksha.
     // The 15th tithi (index 14) is handled separately: Purnima for Shukla, Amavasya for Krishna.
     private static readonly string[] TithiNames =
-    {
+    [
         "Pratipada", "Dwitiya",    "Tritiya",    "Chaturthi", "Panchami",
         "Shashthi",  "Saptami",    "Ashtami",    "Navami",    "Dashami",
         "Ekadashi",  "Dwadashi",   "Trayodashi", "Chaturdashi"
-    };
+    ];
 
     // ── Public entry point ────────────────────────────────────────────────────
 
@@ -46,7 +46,7 @@ public class MoonPhaseService
     /// Calculate the current moon phase. Pass DateTime.UtcNow for real-time use.
     /// The date MUST be true UTC — do not pass local/Kathmandu time.
     /// </summary>
-    public MoonPhase CalculateMoonPhase(DateTime utcDate)
+    public static MoonPhase CalculateMoonPhase(DateTime utcDate)
     {
         // Ensure we're working with true UTC
         var utc = utcDate.Kind switch
@@ -294,11 +294,11 @@ public class MoonPhaseService
         };
 
         var sum = 0.0;
-        foreach (var t in terms)
+        foreach (var (d, m, mm, f, coef) in terms)
         {
-            var arg = (t.d * D + t.m * M + t.mm * Mm + t.f * F) * Rad;
-            var eCorr = Math.Abs(t.m) == 1 ? E : Math.Abs(t.m) == 2 ? E * E : 1.0;
-            sum += t.coef * eCorr * Math.Sin(arg);
+            var arg = (d * D + m * M + mm * Mm + f * F) * Rad;
+            var eCorr = Math.Abs(m) == 1 ? E : Math.Abs(m) == 2 ? E * E : 1.0;
+            sum += coef * eCorr * Math.Sin(arg);
         }
         return sum;
     }

@@ -3,10 +3,8 @@ using CollabsKus.BlazorWebAssembly.Models;
 
 namespace CollabsKus.BlazorWebAssembly.Services;
 
-public class KathmanduCalendarService
+public class KathmanduCalendarService(HttpClient httpClient, ApiLoggerService logger)
 {
-    private readonly HttpClient _httpClient;
-    private readonly ApiLoggerService _logger;
     private CalendarResponse? _cachedCalendarData;
     private DateTime? _calendarCacheTime;
     private TimeResponse? _cachedTimeData;
@@ -16,36 +14,30 @@ public class KathmanduCalendarService
     private const string TodayApiUrl = "https://calendar.bloggernepal.com/api/today";
     private const string TimeApiUrl = "https://calendar.bloggernepal.com/api/time";
 
-    public KathmanduCalendarService(HttpClient httpClient, ApiLoggerService logger)
-    {
-        _httpClient = httpClient;
-        _logger = logger;
-    }
-
     public async Task<CalendarResponse?> GetTodayDataAsync()
     {
         // Cache for 1 hour
         if (_cachedCalendarData != null && _calendarCacheTime.HasValue &&
             DateTime.UtcNow - _calendarCacheTime.Value < TimeSpan.FromHours(1))
         {
-            await _logger.LogApiRequestAsync(TodayApiUrl, _cachedCalendarData, true);
+            await logger.LogApiRequestAsync(TodayApiUrl, _cachedCalendarData, true, ApiLoggerService.GetOptions());
             return _cachedCalendarData;
         }
 
         try
         {
-            var data = await _httpClient.GetFromJsonAsync<CalendarResponse>(TodayApiUrl);
+            var data = await httpClient.GetFromJsonAsync<CalendarResponse>(TodayApiUrl);
             if (data != null)
             {
                 _cachedCalendarData = data;
                 _calendarCacheTime = DateTime.UtcNow;
-                await _logger.LogApiRequestAsync(TodayApiUrl, data, false);
+                await logger.LogApiRequestAsync(TodayApiUrl, data, false, ApiLoggerService.GetOptions());
             }
             return data;
         }
         catch (Exception ex)
         {
-            await _logger.LogApiRequestAsync(TodayApiUrl, new { error = ex.Message, failed = true }, false);
+            await logger.LogApiRequestAsync(TodayApiUrl, new { error = ex.Message, failed = true }, false, ApiLoggerService.GetOptions());
             throw;
         }
     }
@@ -56,14 +48,14 @@ public class KathmanduCalendarService
         if (_cachedTimeData != null && _timeCacheTime.HasValue &&
             DateTime.UtcNow - _timeCacheTime.Value < TimeSpan.FromMinutes(5))
         {
-            await _logger.LogApiRequestAsync(TimeApiUrl, _cachedTimeData, true);
+            await logger.LogApiRequestAsync(TimeApiUrl, _cachedTimeData, true, ApiLoggerService.GetOptions());
             return _cachedTimeData;
         }
 
         try
         {
             var beforeFetch = DateTime.UtcNow;
-            var data = await _httpClient.GetFromJsonAsync<TimeResponse>(TimeApiUrl);
+            var data = await httpClient.GetFromJsonAsync<TimeResponse>(TimeApiUrl);
             var afterFetch = DateTime.UtcNow;
 
             if (data != null)
@@ -109,13 +101,13 @@ public class KathmanduCalendarService
                     _serverTimeOffset -= TimeSpan.FromHours(24);
                 }
 
-                await _logger.LogApiRequestAsync(TimeApiUrl, data, false);
+                await logger.LogApiRequestAsync(TimeApiUrl, data, false, ApiLoggerService.GetOptions());
             }
             return data;
         }
         catch (Exception ex)
         {
-            await _logger.LogApiRequestAsync(TimeApiUrl, new { error = ex.Message, failed = true }, false);
+            await logger.LogApiRequestAsync(TimeApiUrl, new { error = ex.Message, failed = true }, false, ApiLoggerService.GetOptions());
             throw;
         }
     }
@@ -125,7 +117,7 @@ public class KathmanduCalendarService
         return DateTime.UtcNow + _serverTimeOffset;
     }
 
-    public string ToNepaliDigits(int number)
+    public static string ToNepaliDigits(int number)
     {
         var nepaliDigits = new[] { "०", "१", "२", "३", "४", "५", "६", "७", "८", "९" };
         var numStr = number.ToString("D2");

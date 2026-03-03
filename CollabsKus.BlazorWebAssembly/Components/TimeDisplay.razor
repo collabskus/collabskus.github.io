@@ -17,7 +17,7 @@
     private string Seconds => CurrentTime.ToString("ss");
     private string AmPm => CurrentTime.ToString("tt");
 
-    private string HoursNepali => CalendarService.ToNepaliDigits(int.Parse(Hours));
-    private string MinutesNepali => CalendarService.ToNepaliDigits(int.Parse(Minutes));
-    private string SecondsNepali => CalendarService.ToNepaliDigits(int.Parse(Seconds));
+    private string HoursNepali => KathmanduCalendarService.ToNepaliDigits(int.Parse(Hours));
+    private string MinutesNepali => KathmanduCalendarService.ToNepaliDigits(int.Parse(Minutes));
+    private string SecondsNepali => KathmanduCalendarService.ToNepaliDigits(int.Parse(Seconds));
 }
