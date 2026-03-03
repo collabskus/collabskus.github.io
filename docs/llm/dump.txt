@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 03/03/2026 09:58:29
+Generated: 03/03/2026 10:10:03
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -257,10 +257,10 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |           \---_framework
 |   |   |                   blazor.webassembly.js
 |   |   |                   blazor.webassembly.js.gz
-|   |   |                   CollabsKus.BlazorWebAssembly.4axl0m8suf.pdb
-|   |   |                   CollabsKus.BlazorWebAssembly.4axl0m8suf.pdb.gz
-|   |   |                   CollabsKus.BlazorWebAssembly.4iztidt0wj.wasm
-|   |   |                   CollabsKus.BlazorWebAssembly.4iztidt0wj.wasm.gz
+|   |   |                   CollabsKus.BlazorWebAssembly.o9pldw8tf1.wasm
+|   |   |                   CollabsKus.BlazorWebAssembly.o9pldw8tf1.wasm.gz
+|   |   |                   CollabsKus.BlazorWebAssembly.zor2z7w0cf.pdb
+|   |   |                   CollabsKus.BlazorWebAssembly.zor2z7w0cf.pdb.gz
 |   |   |                   dotnet.js
 |   |   |                   dotnet.js.gz
 |   |   |                   dotnet.js.map
@@ -759,7 +759,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       2mau3pzxk9-{0}-u0zj27cx7o-u0zj27cx7o.gz
 |   |   |       |       2zxgs4tsnx-{0}-clxrybe26z-clxrybe26z.gz
 |   |   |       |       3eoqy7gj56-{0}-5quh18s9mm-5quh18s9mm.gz
-|   |   |       |       3fggfcmk2o-{0}-1p8meii7zv-1p8meii7zv.gz
+|   |   |       |       3fggfcmk2o-{0}-amfd8uwpnx-amfd8uwpnx.gz
 |   |   |       |       3p6j8oeurv-{0}-9gnjjozbtj-9gnjjozbtj.gz
 |   |   |       |       3rlo0yi078-{0}-66stpp682q-66stpp682q.gz
 |   |   |       |       3uswc3e8aj-{0}-83r2do0ftq-83r2do0ftq.gz
@@ -819,7 +819,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       d3xctdbsm8-{0}-cc45vjr1b8-cc45vjr1b8.gz
 |   |   |       |       d4e2tqfm2s-{0}-st22xvului-st22xvului.gz
 |   |   |       |       d88qnt9z0r-{0}-5s8pq7f6mj-5s8pq7f6mj.gz
-|   |   |       |       dfreyn5klh-{0}-t281uv06jc-t281uv06jc.gz
+|   |   |       |       dfreyn5klh-{0}-6usqmainrx-6usqmainrx.gz
 |   |   |       |       dkj70biooi-{0}-xn7u9hqdzp-xn7u9hqdzp.gz
 |   |   |       |       dmdeonll3k-{0}-qra57zb5iw-qra57zb5iw.gz
 |   |   |       |       dt9uy83tyq-{0}-16sllnulcp-16sllnulcp.gz
@@ -858,7 +858,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       kz9p261qc5-{0}-qpf1k0onwr-qpf1k0onwr.gz
 |   |   |       |       l7rbbbd4fi-{0}-sf458cz82b-sf458cz82b.gz
 |   |   |       |       lbxpns34i1-{0}-jnskqyrki7-jnskqyrki7.gz
-|   |   |       |       lh59ob944f-{0}-4iztidt0wj-4iztidt0wj.gz
+|   |   |       |       lh59ob944f-{0}-o9pldw8tf1-o9pldw8tf1.gz
 |   |   |       |       lj3msr1lhw-{0}-ed335v31ay-ed335v31ay.gz
 |   |   |       |       ljeibr96ow-{0}-ul94u1ukws-ul94u1ukws.gz
 |   |   |       |       lm00a84zr9-{0}-4myqtalz7l-4myqtalz7l.gz
@@ -895,7 +895,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       pzqxcw519k-{0}-xq74p7yimf-xq74p7yimf.gz
 |   |   |       |       q3154k5biw-{0}-b22pm24uac-b22pm24uac.gz
 |   |   |       |       q4p940erp4-{0}-befq3iek54-befq3iek54.gz
-|   |   |       |       qapwvyh3s0-{0}-hi9wg5zoj1-hi9wg5zoj1.gz
+|   |   |       |       qapwvyh3s0-{0}-v9k881bcmj-v9k881bcmj.gz
 |   |   |       |       qitdg1tdwz-{0}-uakrztahlf-uakrztahlf.gz
 |   |   |       |       qm96gcrzfw-{0}-67mulskwi0-67mulskwi0.gz
 |   |   |       |       qp8xb91mke-{0}-wnrh6t4f3i-wnrh6t4f3i.gz
@@ -940,7 +940,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       w3jaqn3h4o-{0}-78lrbgxr1f-78lrbgxr1f.gz
 |   |   |       |       w3ur6j80u7-{0}-h2nvdx8wws-h2nvdx8wws.gz
 |   |   |       |       wuimozunwv-{0}-piem9h0tr4-piem9h0tr4.gz
-|   |   |       |       x3ikudnee4-{0}-4axl0m8suf-4axl0m8suf.gz
+|   |   |       |       x3ikudnee4-{0}-zor2z7w0cf-zor2z7w0cf.gz
 |   |   |       |       x54bdp6f69-{0}-nc02rhe1iy-nc02rhe1iy.gz
 |   |   |       |       x57r4b36iz-{0}-lfu7j35m59-lfu7j35m59.gz
 |   |   |       |       xf1qqu3s0v-{0}-xfor6r3ecm-xfor6r3ecm.gz
@@ -2296,8 +2296,8 @@ MODIFIED: 02/24/2026 09:14:12
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Components\TimeDisplay.razor
-SIZE: 0.88 KB
-MODIFIED: 02/08/2026 15:46:02
+SIZE: 0.9 KB
+MODIFIED: 03/03/2026 10:09:33
 ================================================================================
 
 @using CollabsKus.BlazorWebAssembly.Services
@@ -2319,9 +2319,9 @@ MODIFIED: 02/08/2026 15:46:02
     private string Seconds => CurrentTime.ToString("ss");
     private string AmPm => CurrentTime.ToString("tt");
 
-    private string HoursNepali => CalendarService.ToNepaliDigits(int.Parse(Hours));
-    private string MinutesNepali => CalendarService.ToNepaliDigits(int.Parse(Minutes));
-    private string SecondsNepali => CalendarService.ToNepaliDigits(int.Parse(Seconds));
+    private string HoursNepali => KathmanduCalendarService.ToNepaliDigits(int.Parse(Hours));
+    private string MinutesNepali => KathmanduCalendarService.ToNepaliDigits(int.Parse(Minutes));
+    private string SecondsNepali => KathmanduCalendarService.ToNepaliDigits(int.Parse(Seconds));
 }
 
 
@@ -2903,26 +2903,27 @@ MODIFIED: 02/08/2026 10:21:22
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\ApiLoggerService.cs
-SIZE: 2.01 KB
-MODIFIED: 02/08/2026 15:46:02
+SIZE: 2 KB
+MODIFIED: 03/03/2026 10:07:42
 ================================================================================
 
-using System.Text;
 using System.Text.Json;
 
 namespace CollabsKus.BlazorWebAssembly.Services;
 
-public class ApiLoggerService
+public class ApiLoggerService(HttpClient httpClient)
 {
-    private readonly HttpClient _httpClient;
     private const string LoggerUrl = "https://my-api.2w7sp317.workers.dev/ui/create";
 
-    public ApiLoggerService(HttpClient httpClient)
+    public static JsonSerializerOptions GetOptions()
     {
-        _httpClient = httpClient;
+        return new JsonSerializerOptions
+        {
+            WriteIndented = true
+        };
     }
 
-    public async Task LogApiRequestAsync(string endpoint, object data, bool fromCache)
+    public async Task LogApiRequestAsync(string endpoint, object data, bool fromCache, JsonSerializerOptions options)
     {
         try
         {
@@ -2936,15 +2937,12 @@ public class ApiLoggerService
                 page = "https://collabskus.github.io"
             };
 
-            var logContent = JsonSerializer.Serialize(logData, new JsonSerializerOptions
-            {
-                WriteIndented = true
-            });
+            var logContent = JsonSerializer.Serialize(logData, options);
 
             // Truncate to 1000 chars
             if (logContent.Length > 1000)
             {
-                logContent = logContent.Substring(0, 997) + "...";
+                logContent = string.Concat(logContent.AsSpan(0, 997), "...");
             }
 
             var formData = new Dictionary<string, string>
@@ -2966,7 +2964,7 @@ public class ApiLoggerService
                     };
                     request.Headers.Add("Accept", "application/json");
 
-                    await _httpClient.SendAsync(request);
+                    await httpClient.SendAsync(request);
                 }
                 catch
                 {
@@ -2985,8 +2983,8 @@ public class ApiLoggerService
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\KathmanduCalendarService.cs
-SIZE: 4.99 KB
-MODIFIED: 02/25/2026 07:42:44
+SIZE: 4.98 KB
+MODIFIED: 03/03/2026 10:07:51
 ================================================================================
 
 using System.Net.Http.Json;
@@ -2994,10 +2992,8 @@ using CollabsKus.BlazorWebAssembly.Models;
 
 namespace CollabsKus.BlazorWebAssembly.Services;
 
-public class KathmanduCalendarService
+public class KathmanduCalendarService(HttpClient httpClient, ApiLoggerService logger)
 {
-    private readonly HttpClient _httpClient;
-    private readonly ApiLoggerService _logger;
     private CalendarResponse? _cachedCalendarData;
     private DateTime? _calendarCacheTime;
     private TimeResponse? _cachedTimeData;
@@ -3007,36 +3003,30 @@ public class KathmanduCalendarService
     private const string TodayApiUrl = "https://calendar.bloggernepal.com/api/today";
     private const string TimeApiUrl = "https://calendar.bloggernepal.com/api/time";
 
-    public KathmanduCalendarService(HttpClient httpClient, ApiLoggerService logger)
-    {
-        _httpClient = httpClient;
-        _logger = logger;
-    }
-
     public async Task<CalendarResponse?> GetTodayDataAsync()
     {
         // Cache for 1 hour
         if (_cachedCalendarData != null && _calendarCacheTime.HasValue &&
             DateTime.UtcNow - _calendarCacheTime.Value < TimeSpan.FromHours(1))
         {
-            await _logger.LogApiRequestAsync(TodayApiUrl, _cachedCalendarData, true);
+            await logger.LogApiRequestAsync(TodayApiUrl, _cachedCalendarData, true, ApiLoggerService.GetOptions());
             return _cachedCalendarData;
         }
 
         try
         {
-            var data = await _httpClient.GetFromJsonAsync<CalendarResponse>(TodayApiUrl);
+            var data = await httpClient.GetFromJsonAsync<CalendarResponse>(TodayApiUrl);
             if (data != null)
             {
                 _cachedCalendarData = data;
                 _calendarCacheTime = DateTime.UtcNow;
-                await _logger.LogApiRequestAsync(TodayApiUrl, data, false);
+                await logger.LogApiRequestAsync(TodayApiUrl, data, false, ApiLoggerService.GetOptions());
             }
             return data;
         }
         catch (Exception ex)
         {
-            await _logger.LogApiRequestAsync(TodayApiUrl, new { error = ex.Message, failed = true }, false);
+            await logger.LogApiRequestAsync(TodayApiUrl, new { error = ex.Message, failed = true }, false, ApiLoggerService.GetOptions());
             throw;
         }
     }
@@ -3047,14 +3037,14 @@ public class KathmanduCalendarService
         if (_cachedTimeData != null && _timeCacheTime.HasValue &&
             DateTime.UtcNow - _timeCacheTime.Value < TimeSpan.FromMinutes(5))
         {
-            await _logger.LogApiRequestAsync(TimeApiUrl, _cachedTimeData, true);
+            await logger.LogApiRequestAsync(TimeApiUrl, _cachedTimeData, true, ApiLoggerService.GetOptions());
             return _cachedTimeData;
         }
 
         try
         {
             var beforeFetch = DateTime.UtcNow;
-            var data = await _httpClient.GetFromJsonAsync<TimeResponse>(TimeApiUrl);
+            var data = await httpClient.GetFromJsonAsync<TimeResponse>(TimeApiUrl);
             var afterFetch = DateTime.UtcNow;
 
             if (data != null)
@@ -3100,13 +3090,13 @@ public class KathmanduCalendarService
                     _serverTimeOffset -= TimeSpan.FromHours(24);
                 }
 
-                await _logger.LogApiRequestAsync(TimeApiUrl, data, false);
+                await logger.LogApiRequestAsync(TimeApiUrl, data, false, ApiLoggerService.GetOptions());
             }
             return data;
         }
         catch (Exception ex)
         {
-            await _logger.LogApiRequestAsync(TimeApiUrl, new { error = ex.Message, failed = true }, false);
+            await logger.LogApiRequestAsync(TimeApiUrl, new { error = ex.Message, failed = true }, false, ApiLoggerService.GetOptions());
             throw;
         }
     }
@@ -3116,7 +3106,7 @@ public class KathmanduCalendarService
         return DateTime.UtcNow + _serverTimeOffset;
     }
 
-    public string ToNepaliDigits(int number)
+    public static string ToNepaliDigits(int number)
     {
         var nepaliDigits = new[] { "०", "१", "२", "३", "४", "५", "६", "७", "८", "९" };
         var numStr = number.ToString("D2");
@@ -3136,8 +3126,8 @@ public class KathmanduCalendarService
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\MoonPhaseService.cs
-SIZE: 13.33 KB
-MODIFIED: 03/03/2026 09:45:24
+SIZE: 13.34 KB
+MODIFIED: 03/03/2026 10:08:50
 ================================================================================
 
 using CollabsKus.BlazorWebAssembly.Models;
@@ -3161,7 +3151,7 @@ public class MoonPhaseService
 
     // ── Phase name definitions (by ecliptic longitude difference 0–360°) ─────
     private static readonly (string Name, string Icon, double Min, double Max)[] Phases =
-    {
+    [
         ("New Moon",        "🌑",   0.0,   22.5),
         ("Waxing Crescent", "🌒",  22.5,   67.5),
         ("First Quarter",   "🌓",  67.5,  112.5),
@@ -3171,16 +3161,16 @@ public class MoonPhaseService
         ("Last Quarter",    "🌗", 247.5,  292.5),
         ("Waning Crescent", "🌘", 292.5,  337.5),
         ("New Moon",        "🌑", 337.5,  360.0),
-    };
+    ];
 
     // Tithi names: indices 0–13 are the first 14 tithis of each paksha.
     // The 15th tithi (index 14) is handled separately: Purnima for Shukla, Amavasya for Krishna.
     private static readonly string[] TithiNames =
-    {
+    [
         "Pratipada", "Dwitiya",    "Tritiya",    "Chaturthi", "Panchami",
         "Shashthi",  "Saptami",    "Ashtami",    "Navami",    "Dashami",
         "Ekadashi",  "Dwadashi",   "Trayodashi", "Chaturdashi"
-    };
+    ];
 
     // ── Public entry point ────────────────────────────────────────────────────
 
@@ -3188,7 +3178,7 @@ public class MoonPhaseService
     /// Calculate the current moon phase. Pass DateTime.UtcNow for real-time use.
     /// The date MUST be true UTC — do not pass local/Kathmandu time.
     /// </summary>
-    public MoonPhase CalculateMoonPhase(DateTime utcDate)
+    public static MoonPhase CalculateMoonPhase(DateTime utcDate)
     {
         // Ensure we're working with true UTC
         var utc = utcDate.Kind switch
@@ -3436,11 +3426,11 @@ public class MoonPhaseService
         };
 
         var sum = 0.0;
-        foreach (var t in terms)
+        foreach (var (d, m, mm, f, coef) in terms)
         {
-            var arg = (t.d * D + t.m * M + t.mm * Mm + t.f * F) * Rad;
-            var eCorr = Math.Abs(t.m) == 1 ? E : Math.Abs(t.m) == 2 ? E * E : 1.0;
-            sum += t.coef * eCorr * Math.Sin(arg);
+            var arg = (d * D + m * M + mm * Mm + f * F) * Rad;
+            var eCorr = Math.Abs(m) == 1 ? E : Math.Abs(m) == 2 ? E * E : 1.0;
+            sum += coef * eCorr * Math.Sin(arg);
         }
         return sum;
     }
@@ -3763,7 +3753,7 @@ MODIFIED: 03/03/2026 09:57:37
 
 
 ===============================================================================
-EXPORT COMPLETED: 03/03/2026 09:58:34
+EXPORT COMPLETED: 03/03/2026 10:10:06
 Total Files Exported: 33
 Output File: .\docs\llm\dump.txt
 ===============================================================================
