@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 03/03/2026 17:32:26
+Generated: 03/03/2026 17:42:39
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -257,10 +257,10 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |           \---_framework
 |   |   |                   blazor.webassembly.js
 |   |   |                   blazor.webassembly.js.gz
-|   |   |                   CollabsKus.BlazorWebAssembly.46muym618g.pdb
-|   |   |                   CollabsKus.BlazorWebAssembly.46muym618g.pdb.gz
-|   |   |                   CollabsKus.BlazorWebAssembly.mt5v8ictl7.wasm
-|   |   |                   CollabsKus.BlazorWebAssembly.mt5v8ictl7.wasm.gz
+|   |   |                   CollabsKus.BlazorWebAssembly.4apjrkp4h1.wasm
+|   |   |                   CollabsKus.BlazorWebAssembly.4apjrkp4h1.wasm.gz
+|   |   |                   CollabsKus.BlazorWebAssembly.8bya0mhlef.pdb
+|   |   |                   CollabsKus.BlazorWebAssembly.8bya0mhlef.pdb.gz
 |   |   |                   dotnet.js
 |   |   |                   dotnet.js.gz
 |   |   |                   dotnet.js.map
@@ -762,7 +762,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       2mau3pzxk9-{0}-u0zj27cx7o-u0zj27cx7o.gz
 |   |   |       |       2zxgs4tsnx-{0}-clxrybe26z-clxrybe26z.gz
 |   |   |       |       3eoqy7gj56-{0}-5quh18s9mm-5quh18s9mm.gz
-|   |   |       |       3fggfcmk2o-{0}-pxvxr46dij-pxvxr46dij.gz
+|   |   |       |       3fggfcmk2o-{0}-s8ahnw0iu2-s8ahnw0iu2.gz
 |   |   |       |       3p6j8oeurv-{0}-9gnjjozbtj-9gnjjozbtj.gz
 |   |   |       |       3rlo0yi078-{0}-66stpp682q-66stpp682q.gz
 |   |   |       |       3uswc3e8aj-{0}-83r2do0ftq-83r2do0ftq.gz
@@ -822,7 +822,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       d3xctdbsm8-{0}-cc45vjr1b8-cc45vjr1b8.gz
 |   |   |       |       d4e2tqfm2s-{0}-st22xvului-st22xvului.gz
 |   |   |       |       d88qnt9z0r-{0}-5s8pq7f6mj-5s8pq7f6mj.gz
-|   |   |       |       dfreyn5klh-{0}-819u5qkgbs-819u5qkgbs.gz
+|   |   |       |       dfreyn5klh-{0}-p9d5eyhsoa-p9d5eyhsoa.gz
 |   |   |       |       dkj70biooi-{0}-xn7u9hqdzp-xn7u9hqdzp.gz
 |   |   |       |       dmdeonll3k-{0}-qra57zb5iw-qra57zb5iw.gz
 |   |   |       |       dt9uy83tyq-{0}-16sllnulcp-16sllnulcp.gz
@@ -861,7 +861,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       kz9p261qc5-{0}-qpf1k0onwr-qpf1k0onwr.gz
 |   |   |       |       l7rbbbd4fi-{0}-sf458cz82b-sf458cz82b.gz
 |   |   |       |       lbxpns34i1-{0}-jnskqyrki7-jnskqyrki7.gz
-|   |   |       |       lh59ob944f-{0}-mt5v8ictl7-mt5v8ictl7.gz
+|   |   |       |       lh59ob944f-{0}-4apjrkp4h1-4apjrkp4h1.gz
 |   |   |       |       lj3msr1lhw-{0}-ed335v31ay-ed335v31ay.gz
 |   |   |       |       ljeibr96ow-{0}-ul94u1ukws-ul94u1ukws.gz
 |   |   |       |       lm00a84zr9-{0}-4myqtalz7l-4myqtalz7l.gz
@@ -898,7 +898,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       pzqxcw519k-{0}-xq74p7yimf-xq74p7yimf.gz
 |   |   |       |       q3154k5biw-{0}-b22pm24uac-b22pm24uac.gz
 |   |   |       |       q4p940erp4-{0}-befq3iek54-befq3iek54.gz
-|   |   |       |       qapwvyh3s0-{0}-0i5g8gjmnz-0i5g8gjmnz.gz
+|   |   |       |       qapwvyh3s0-{0}-0dzin6ftwe-0dzin6ftwe.gz
 |   |   |       |       qitdg1tdwz-{0}-uakrztahlf-uakrztahlf.gz
 |   |   |       |       qm96gcrzfw-{0}-67mulskwi0-67mulskwi0.gz
 |   |   |       |       qp8xb91mke-{0}-wnrh6t4f3i-wnrh6t4f3i.gz
@@ -943,7 +943,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       w3jaqn3h4o-{0}-78lrbgxr1f-78lrbgxr1f.gz
 |   |   |       |       w3ur6j80u7-{0}-h2nvdx8wws-h2nvdx8wws.gz
 |   |   |       |       wuimozunwv-{0}-piem9h0tr4-piem9h0tr4.gz
-|   |   |       |       x3ikudnee4-{0}-46muym618g-46muym618g.gz
+|   |   |       |       x3ikudnee4-{0}-8bya0mhlef-8bya0mhlef.gz
 |   |   |       |       x54bdp6f69-{0}-nc02rhe1iy-nc02rhe1iy.gz
 |   |   |       |       x57r4b36iz-{0}-lfu7j35m59-lfu7j35m59.gz
 |   |   |       |       xf1qqu3s0v-{0}-xfor6r3ecm-xfor6r3ecm.gz
@@ -1257,11 +1257,26 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |           |   CollabsKus.PlaywrightTests.pdb
 |   |           |   CollabsKus.PlaywrightTests.runtimeconfig.json
 |   |           |   EnumerableAsyncProcessor.dll
+|   |           |   Microsoft.ApplicationInsights.dll
 |   |           |   Microsoft.Bcl.AsyncInterfaces.dll
+|   |           |   Microsoft.CodeCoverage.Core.dll
+|   |           |   Microsoft.CodeCoverage.Instrumentation.Core.dll
+|   |           |   Microsoft.CodeCoverage.Instrumentation.dll
+|   |           |   Microsoft.CodeCoverage.Interprocess.dll
+|   |           |   Microsoft.DiaSymReader.dll
+|   |           |   Microsoft.Extensions.DependencyModel.dll
 |   |           |   Microsoft.Playwright.dll
+|   |           |   Microsoft.Testing.Extensions.CodeCoverage.dll
+|   |           |   Microsoft.Testing.Extensions.MSBuild.dll
+|   |           |   Microsoft.Testing.Extensions.Telemetry.dll
 |   |           |   Microsoft.Testing.Extensions.TrxReport.Abstractions.dll
+|   |           |   Microsoft.Testing.Extensions.TrxReport.dll
 |   |           |   Microsoft.Testing.Platform.dll
-|   |           |   Microsoft.Testing.Platform.MSBuild.dll
+|   |           |   Microsoft.VisualStudio.CodeCoverage.Shim.dll
+|   |           |   Mono.Cecil.dll
+|   |           |   Mono.Cecil.Mdb.dll
+|   |           |   Mono.Cecil.Pdb.dll
+|   |           |   Mono.Cecil.Rocks.dll
 |   |           |   playwright.ps1
 |   |           |   TUnit.Assertions.dll
 |   |           |   TUnit.Core.dll
@@ -1720,96 +1735,220 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |           |               types.d.ts
 |   |           |               
 |   |           +---cs
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
 |   |           +---de
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
 |   |           +---es
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
 |   |           +---fr
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
+|   |           +---hu
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       
 |   |           +---it
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
 |   |           +---ja
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
 |   |           +---ko
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
 |   |           +---Log
 |   |           |       log_260303223153702.diag
 |   |           |       log_260303223154562.diag
+|   |           |       log_260303223344274.diag
+|   |           |       log_260303223344885.diag
+|   |           |       log_260303223549070.diag
+|   |           |       log_260303223728579.diag
+|   |           |       log_260303224153100.diag
+|   |           |       
+|   |           +---nl
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
 |   |           |       
 |   |           +---pl
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
 |   |           +---pt-BR
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---pt-PT
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
 |   |           |       
 |   |           +---ru
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
+|   |           +---runtimes
+|   |           |   +---linux-musl-x64
+|   |           |   |   \---native
+|   |           |   |           Cov_x64.config
+|   |           |   |           libCoverageInstrumentationMethod.so
+|   |           |   |           libInstrumentationEngine.so
+|   |           |   |           
+|   |           |   +---linux-x64
+|   |           |   |   \---native
+|   |           |   |           Cov_x64.config
+|   |           |   |           libCoverageInstrumentationMethod.so
+|   |           |   |           libInstrumentationEngine.so
+|   |           |   |           
+|   |           |   +---osx-x64
+|   |           |   |   \---native
+|   |           |   |           Cov_x64.config
+|   |           |   |           libCoverageInstrumentationMethod.dylib
+|   |           |   |           libInstrumentationEngine.dylib
+|   |           |   |           
+|   |           |   +---win-arm64
+|   |           |   |   \---native
+|   |           |   |           CodeCoverageMessages.dll
+|   |           |   |           covrun32.dll
+|   |           |   |           covrun64.dll
+|   |           |   |           covrunarm64.dll
+|   |           |   |           Cov_arm64.config
+|   |           |   |           Cov_x64.config
+|   |           |   |           Cov_x86.config
+|   |           |   |           MicrosoftInstrumentationEngine_arm64.dll
+|   |           |   |           MicrosoftInstrumentationEngine_x64.dll
+|   |           |   |           MicrosoftInstrumentationEngine_x86.dll
+|   |           |   |           msdia140.dll
+|   |           |   |           
+|   |           |   +---win-x64
+|   |           |   |   \---native
+|   |           |   |           CodeCoverageMessages.dll
+|   |           |   |           covrun32.dll
+|   |           |   |           covrun64.dll
+|   |           |   |           covrunarm64.dll
+|   |           |   |           Cov_arm64.config
+|   |           |   |           Cov_x64.config
+|   |           |   |           Cov_x86.config
+|   |           |   |           MicrosoftInstrumentationEngine_arm64.dll
+|   |           |   |           MicrosoftInstrumentationEngine_x64.dll
+|   |           |   |           MicrosoftInstrumentationEngine_x86.dll
+|   |           |   |           msdia140.dll
+|   |           |   |           
+|   |           |   \---win-x86
+|   |           |       \---native
+|   |           |               CodeCoverageMessages.dll
+|   |           |               covrun32.dll
+|   |           |               covrun64.dll
+|   |           |               covrunarm64.dll
+|   |           |               Cov_arm64.config
+|   |           |               Cov_x64.config
+|   |           |               Cov_x86.config
+|   |           |               MicrosoftInstrumentationEngine_arm64.dll
+|   |           |               MicrosoftInstrumentationEngine_x64.dll
+|   |           |               MicrosoftInstrumentationEngine_x86.dll
+|   |           |               msdia140.dll
+|   |           |               
+|   |           +---sv
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       
+|   |           +---TestResults
+|   |           |       CollabsKus.PlaywrightTests-windows-net10.0-report.html
+|   |           |       
 |   |           +---tr
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
 |   |           +---zh-Hans
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
 |   |           \---zh-Hant
-|   |                   Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |                   Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |                   Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |                   Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |                   Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |                   Microsoft.Testing.Platform.resources.dll
 |   |                   
-|   \---obj
-|       |   CollabsKus.PlaywrightTests.csproj.nuget.dgspec.json
-|       |   CollabsKus.PlaywrightTests.csproj.nuget.g.props
-|       |   CollabsKus.PlaywrightTests.csproj.nuget.g.targets
-|       |   project.assets.json
-|       |   project.nuget.cache
-|       |   
-|       \---Debug
-|           \---net10.0
-|               |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
-|               |   apphost.exe
-|               |   AutoRegisteredExtensions.cs
-|               |   CollabsK.677A1748.Up2Date
-|               |   CollabsKus.PlaywrightTests.AssemblyInfo.cs
-|               |   CollabsKus.PlaywrightTests.AssemblyInfoInputs.cache
-|               |   CollabsKus.PlaywrightTests.assets.cache
-|               |   CollabsKus.PlaywrightTests.csproj.AssemblyReference.cache
-|               |   CollabsKus.PlaywrightTests.csproj.CoreCompileInputs.cache
-|               |   CollabsKus.PlaywrightTests.csproj.FileListAbsolute.txt
-|               |   CollabsKus.PlaywrightTests.dll
-|               |   CollabsKus.PlaywrightTests.genautoregisteredextensionsinputcache.cache
-|               |   CollabsKus.PlaywrightTests.GeneratedMSBuildEditorConfig.editorconfig
-|               |   CollabsKus.PlaywrightTests.genruntimeconfig.cache
-|               |   CollabsKus.PlaywrightTests.gentestingplatformentrypointinputcache.cache
-|               |   CollabsKus.PlaywrightTests.GlobalUsings.g.cs
-|               |   CollabsKus.PlaywrightTests.pdb
-|               |   CollabsKus.PlaywrightTests.sourcelink.json
-|               |   TestPlatformEntryPoint.cs
-|               |   
-|               +---ref
-|               |       CollabsKus.PlaywrightTests.dll
-|               |       
-|               \---refint
-|                       CollabsKus.PlaywrightTests.dll
-|                       
+|   +---obj
+|   |   |   CollabsKus.PlaywrightTests.csproj.nuget.dgspec.json
+|   |   |   CollabsKus.PlaywrightTests.csproj.nuget.g.props
+|   |   |   CollabsKus.PlaywrightTests.csproj.nuget.g.targets
+|   |   |   project.assets.json
+|   |   |   project.nuget.cache
+|   |   |   
+|   |   \---Debug
+|   |       \---net10.0
+|   |           |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+|   |           |   apphost.exe
+|   |           |   CollabsK.677A1748.Up2Date
+|   |           |   CollabsKus.PlaywrightTests.AssemblyInfo.cs
+|   |           |   CollabsKus.PlaywrightTests.AssemblyInfoInputs.cache
+|   |           |   CollabsKus.PlaywrightTests.assets.cache
+|   |           |   CollabsKus.PlaywrightTests.csproj.AssemblyReference.cache
+|   |           |   CollabsKus.PlaywrightTests.csproj.BuildWithSkipAnalyzers
+|   |           |   CollabsKus.PlaywrightTests.csproj.CoreCompileInputs.cache
+|   |           |   CollabsKus.PlaywrightTests.csproj.FileListAbsolute.txt
+|   |           |   CollabsKus.PlaywrightTests.dll
+|   |           |   CollabsKus.PlaywrightTests.genautoregisteredextensionsinputcache.cache
+|   |           |   CollabsKus.PlaywrightTests.GeneratedMSBuildEditorConfig.editorconfig
+|   |           |   CollabsKus.PlaywrightTests.genruntimeconfig.cache
+|   |           |   CollabsKus.PlaywrightTests.gentestingplatformentrypointinputcache.cache
+|   |           |   CollabsKus.PlaywrightTests.GlobalUsings.g.cs
+|   |           |   CollabsKus.PlaywrightTests.pdb
+|   |           |   CollabsKus.PlaywrightTests.sourcelink.json
+|   |           |   MicrosoftTestingPlatformEntryPoint.cs
+|   |           |   SelfRegisteredExtensions.cs
+|   |           |   
+|   |           +---ref
+|   |           |       CollabsKus.PlaywrightTests.dll
+|   |           |       
+|   |           \---refint
+|   |                   CollabsKus.PlaywrightTests.dll
+|   |                   
+|   \---Properties
+|           launchSettings.json
+|           
 +---CollabsKus.Tests
 |   |   CollabsKus.Tests.csproj
 |   |   GlobalUsings.cs
@@ -1817,6 +1956,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   +---bin
 |   |   \---Debug
 |   |       \---net10.0
+|   |           |   .msCoverageExtensionSourceRootsMapping_CollabsKus.Tests
 |   |           |   CollabsKus.BlazorWebAssembly.dll
 |   |           |   CollabsKus.BlazorWebAssembly.pdb
 |   |           |   CollabsKus.BlazorWebAssembly.runtimeconfig.json
@@ -1828,12 +1968,18 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |           |   CollabsKus.Tests.pdb
 |   |           |   CollabsKus.Tests.runtimeconfig.json
 |   |           |   EnumerableAsyncProcessor.dll
+|   |           |   Microsoft.ApplicationInsights.dll
 |   |           |   Microsoft.AspNetCore.Authorization.dll
 |   |           |   Microsoft.AspNetCore.Components.dll
 |   |           |   Microsoft.AspNetCore.Components.Forms.dll
 |   |           |   Microsoft.AspNetCore.Components.Web.dll
 |   |           |   Microsoft.AspNetCore.Components.WebAssembly.dll
 |   |           |   Microsoft.AspNetCore.Metadata.dll
+|   |           |   Microsoft.CodeCoverage.Core.dll
+|   |           |   Microsoft.CodeCoverage.Instrumentation.Core.dll
+|   |           |   Microsoft.CodeCoverage.Instrumentation.dll
+|   |           |   Microsoft.CodeCoverage.Interprocess.dll
+|   |           |   Microsoft.DiaSymReader.dll
 |   |           |   Microsoft.DotNet.HotReload.WebAssembly.Browser.dll
 |   |           |   Microsoft.Extensions.Configuration.Abstractions.dll
 |   |           |   Microsoft.Extensions.Configuration.Binder.dll
@@ -1842,6 +1988,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |           |   Microsoft.Extensions.Configuration.Json.dll
 |   |           |   Microsoft.Extensions.DependencyInjection.Abstractions.dll
 |   |           |   Microsoft.Extensions.DependencyInjection.dll
+|   |           |   Microsoft.Extensions.DependencyModel.dll
 |   |           |   Microsoft.Extensions.Diagnostics.Abstractions.dll
 |   |           |   Microsoft.Extensions.Diagnostics.dll
 |   |           |   Microsoft.Extensions.FileProviders.Abstractions.dll
@@ -1855,68 +2002,196 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |           |   Microsoft.Extensions.Validation.dll
 |   |           |   Microsoft.JSInterop.dll
 |   |           |   Microsoft.JSInterop.WebAssembly.dll
+|   |           |   Microsoft.Testing.Extensions.CodeCoverage.dll
+|   |           |   Microsoft.Testing.Extensions.MSBuild.dll
+|   |           |   Microsoft.Testing.Extensions.Telemetry.dll
 |   |           |   Microsoft.Testing.Extensions.TrxReport.Abstractions.dll
+|   |           |   Microsoft.Testing.Extensions.TrxReport.dll
 |   |           |   Microsoft.Testing.Platform.dll
-|   |           |   Microsoft.Testing.Platform.MSBuild.dll
+|   |           |   Microsoft.VisualStudio.CodeCoverage.Shim.dll
+|   |           |   Mono.Cecil.dll
+|   |           |   Mono.Cecil.Mdb.dll
+|   |           |   Mono.Cecil.Pdb.dll
+|   |           |   Mono.Cecil.Rocks.dll
 |   |           |   TUnit.Assertions.dll
 |   |           |   TUnit.Core.dll
 |   |           |   TUnit.dll
 |   |           |   TUnit.Engine.dll
 |   |           |   
 |   |           +---cs
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
 |   |           +---de
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
 |   |           +---es
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
 |   |           +---fr
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
+|   |           +---hu
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       
 |   |           +---it
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
 |   |           +---ja
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
 |   |           +---ko
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
 |   |           +---Log
 |   |           |       log_260303223153707.diag
 |   |           |       log_260303223154547.diag
+|   |           |       log_260303223344276.diag
+|   |           |       log_260303223344878.diag
+|   |           |       log_260303223549068.diag
+|   |           |       log_260303223728570.diag
+|   |           |       log_260303224153066.diag
+|   |           |       
+|   |           +---nl
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
 |   |           |       
 |   |           +---pl
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
 |   |           +---pt-BR
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---pt-PT
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
 |   |           |       
 |   |           +---ru
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
+|   |           +---runtimes
+|   |           |   +---linux-musl-x64
+|   |           |   |   \---native
+|   |           |   |           Cov_x64.config
+|   |           |   |           libCoverageInstrumentationMethod.so
+|   |           |   |           libInstrumentationEngine.so
+|   |           |   |           
+|   |           |   +---linux-x64
+|   |           |   |   \---native
+|   |           |   |           Cov_x64.config
+|   |           |   |           libCoverageInstrumentationMethod.so
+|   |           |   |           libInstrumentationEngine.so
+|   |           |   |           
+|   |           |   +---osx-x64
+|   |           |   |   \---native
+|   |           |   |           Cov_x64.config
+|   |           |   |           libCoverageInstrumentationMethod.dylib
+|   |           |   |           libInstrumentationEngine.dylib
+|   |           |   |           
+|   |           |   +---win-arm64
+|   |           |   |   \---native
+|   |           |   |           CodeCoverageMessages.dll
+|   |           |   |           covrun32.dll
+|   |           |   |           covrun64.dll
+|   |           |   |           covrunarm64.dll
+|   |           |   |           Cov_arm64.config
+|   |           |   |           Cov_x64.config
+|   |           |   |           Cov_x86.config
+|   |           |   |           MicrosoftInstrumentationEngine_arm64.dll
+|   |           |   |           MicrosoftInstrumentationEngine_x64.dll
+|   |           |   |           MicrosoftInstrumentationEngine_x86.dll
+|   |           |   |           msdia140.dll
+|   |           |   |           
+|   |           |   +---win-x64
+|   |           |   |   \---native
+|   |           |   |           CodeCoverageMessages.dll
+|   |           |   |           covrun32.dll
+|   |           |   |           covrun64.dll
+|   |           |   |           covrunarm64.dll
+|   |           |   |           Cov_arm64.config
+|   |           |   |           Cov_x64.config
+|   |           |   |           Cov_x86.config
+|   |           |   |           MicrosoftInstrumentationEngine_arm64.dll
+|   |           |   |           MicrosoftInstrumentationEngine_x64.dll
+|   |           |   |           MicrosoftInstrumentationEngine_x86.dll
+|   |           |   |           msdia140.dll
+|   |           |   |           
+|   |           |   \---win-x86
+|   |           |       \---native
+|   |           |               CodeCoverageMessages.dll
+|   |           |               covrun32.dll
+|   |           |               covrun64.dll
+|   |           |               covrunarm64.dll
+|   |           |               Cov_arm64.config
+|   |           |               Cov_x64.config
+|   |           |               Cov_x86.config
+|   |           |               MicrosoftInstrumentationEngine_arm64.dll
+|   |           |               MicrosoftInstrumentationEngine_x64.dll
+|   |           |               MicrosoftInstrumentationEngine_x86.dll
+|   |           |               msdia140.dll
+|   |           |               
+|   |           +---sv
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       
+|   |           +---TestResults
+|   |           |       CollabsKus.Tests-windows-net10.0-report.html
+|   |           |       
 |   |           +---tr
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
 |   |           +---zh-Hans
-|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |           |       Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |           |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |           |       Microsoft.Testing.Platform.resources.dll
 |   |           |       
 |   |           \---zh-Hant
-|   |                   Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |                   Microsoft.Testing.Extensions.CodeCoverage.resources.dll
+|   |                   Microsoft.Testing.Extensions.MSBuild.resources.dll
+|   |                   Microsoft.Testing.Extensions.Telemetry.resources.dll
+|   |                   Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |                   Microsoft.Testing.Platform.resources.dll
 |   |                   
 |   +---obj
@@ -1930,12 +2205,12 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |       \---net10.0
 |   |           |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
 |   |           |   apphost.exe
-|   |           |   AutoRegisteredExtensions.cs
 |   |           |   CollabsK.C140B4C8.Up2Date
 |   |           |   CollabsKus.Tests.AssemblyInfo.cs
 |   |           |   CollabsKus.Tests.AssemblyInfoInputs.cache
 |   |           |   CollabsKus.Tests.assets.cache
 |   |           |   CollabsKus.Tests.csproj.AssemblyReference.cache
+|   |           |   CollabsKus.Tests.csproj.BuildWithSkipAnalyzers
 |   |           |   CollabsKus.Tests.csproj.CoreCompileInputs.cache
 |   |           |   CollabsKus.Tests.csproj.FileListAbsolute.txt
 |   |           |   CollabsKus.Tests.dll
@@ -1946,7 +2221,8 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |           |   CollabsKus.Tests.GlobalUsings.g.cs
 |   |           |   CollabsKus.Tests.pdb
 |   |           |   CollabsKus.Tests.sourcelink.json
-|   |           |   TestPlatformEntryPoint.cs
+|   |           |   MicrosoftTestingPlatformEntryPoint.cs
+|   |           |   SelfRegisteredExtensions.cs
 |   |           |   
 |   |           +---ref
 |   |           |       CollabsKus.Tests.dll
@@ -5821,6 +6097,24 @@ public class HomePageTests
 
 
 ================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.PlaywrightTests\Properties\launchSettings.json
+SIZE: 0.19 KB
+MODIFIED: 03/03/2026 17:40:02
+================================================================================
+
+{
+  "profiles": {
+    "CollabsKus.PlaywrightTests": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "BASE_URL": "https://localhost:7212/"
+      }
+    }
+  }
+}
+
+
+================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.Tests\CollabsKus.Tests.csproj
 SIZE: 0.44 KB
 MODIFIED: 03/03/2026 17:26:43
@@ -6253,8 +6547,8 @@ public class SolarPositionServiceTests
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\Directory.Packages.props
-SIZE: 0.49 KB
-MODIFIED: 03/03/2026 17:22:32
+SIZE: 0.48 KB
+MODIFIED: 03/03/2026 17:33:03
 ================================================================================
 
 <Project>
@@ -6264,15 +6558,14 @@ MODIFIED: 03/03/2026 17:22:32
   <ItemGroup>
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.3" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.3" />
-    <PackageVersion Include="TUnit" Version="0.61.25" />
+    <PackageVersion Include="TUnit" Version="1.18.9" />
     <PackageVersion Include="Microsoft.Playwright" Version="1.58.0" />
   </ItemGroup>
 </Project>
 
 
-
 ===============================================================================
-EXPORT COMPLETED: 03/03/2026 17:32:31
-Total Files Exported: 45
+EXPORT COMPLETED: 03/03/2026 17:42:47
+Total Files Exported: 46
 Output File: .\docs\llm\dump.txt
 ===============================================================================
