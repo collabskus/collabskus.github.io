@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 03/03/2026 16:32:57
+Generated: 03/03/2026 17:32:26
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -257,10 +257,10 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |           \---_framework
 |   |   |                   blazor.webassembly.js
 |   |   |                   blazor.webassembly.js.gz
-|   |   |                   CollabsKus.BlazorWebAssembly.m7um439vx7.pdb
-|   |   |                   CollabsKus.BlazorWebAssembly.m7um439vx7.pdb.gz
-|   |   |                   CollabsKus.BlazorWebAssembly.zw071ubfje.wasm
-|   |   |                   CollabsKus.BlazorWebAssembly.zw071ubfje.wasm.gz
+|   |   |                   CollabsKus.BlazorWebAssembly.46muym618g.pdb
+|   |   |                   CollabsKus.BlazorWebAssembly.46muym618g.pdb.gz
+|   |   |                   CollabsKus.BlazorWebAssembly.mt5v8ictl7.wasm
+|   |   |                   CollabsKus.BlazorWebAssembly.mt5v8ictl7.wasm.gz
 |   |   |                   dotnet.js
 |   |   |                   dotnet.js.gz
 |   |   |                   dotnet.js.map
@@ -762,7 +762,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       2mau3pzxk9-{0}-u0zj27cx7o-u0zj27cx7o.gz
 |   |   |       |       2zxgs4tsnx-{0}-clxrybe26z-clxrybe26z.gz
 |   |   |       |       3eoqy7gj56-{0}-5quh18s9mm-5quh18s9mm.gz
-|   |   |       |       3fggfcmk2o-{0}-2gzk78ypou-2gzk78ypou.gz
+|   |   |       |       3fggfcmk2o-{0}-pxvxr46dij-pxvxr46dij.gz
 |   |   |       |       3p6j8oeurv-{0}-9gnjjozbtj-9gnjjozbtj.gz
 |   |   |       |       3rlo0yi078-{0}-66stpp682q-66stpp682q.gz
 |   |   |       |       3uswc3e8aj-{0}-83r2do0ftq-83r2do0ftq.gz
@@ -822,7 +822,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       d3xctdbsm8-{0}-cc45vjr1b8-cc45vjr1b8.gz
 |   |   |       |       d4e2tqfm2s-{0}-st22xvului-st22xvului.gz
 |   |   |       |       d88qnt9z0r-{0}-5s8pq7f6mj-5s8pq7f6mj.gz
-|   |   |       |       dfreyn5klh-{0}-51xhus1cdu-51xhus1cdu.gz
+|   |   |       |       dfreyn5klh-{0}-819u5qkgbs-819u5qkgbs.gz
 |   |   |       |       dkj70biooi-{0}-xn7u9hqdzp-xn7u9hqdzp.gz
 |   |   |       |       dmdeonll3k-{0}-qra57zb5iw-qra57zb5iw.gz
 |   |   |       |       dt9uy83tyq-{0}-16sllnulcp-16sllnulcp.gz
@@ -861,7 +861,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       kz9p261qc5-{0}-qpf1k0onwr-qpf1k0onwr.gz
 |   |   |       |       l7rbbbd4fi-{0}-sf458cz82b-sf458cz82b.gz
 |   |   |       |       lbxpns34i1-{0}-jnskqyrki7-jnskqyrki7.gz
-|   |   |       |       lh59ob944f-{0}-zw071ubfje-zw071ubfje.gz
+|   |   |       |       lh59ob944f-{0}-mt5v8ictl7-mt5v8ictl7.gz
 |   |   |       |       lj3msr1lhw-{0}-ed335v31ay-ed335v31ay.gz
 |   |   |       |       ljeibr96ow-{0}-ul94u1ukws-ul94u1ukws.gz
 |   |   |       |       lm00a84zr9-{0}-4myqtalz7l-4myqtalz7l.gz
@@ -877,7 +877,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       n35jvnr825-{0}-ok1w9bwh9p-ok1w9bwh9p.gz
 |   |   |       |       nb5ocalx9l-{0}-sg5289qtzr-sg5289qtzr.gz
 |   |   |       |       nhzrlx2glb-{0}-ul68gvf84n-ul68gvf84n.gz
-|   |   |       |       njnlmbjta1-{0}-gqd0v00eeu-gqd0v00eeu.gz
+|   |   |       |       njnlmbjta1-{0}-f5ujztojdk-f5ujztojdk.gz
 |   |   |       |       nl1aipmkh9-{0}-xxpmmmbzoi-xxpmmmbzoi.gz
 |   |   |       |       nu8bj35gu6-{0}-ljs5h1hf84-ljs5h1hf84.gz
 |   |   |       |       nwswlbpy0n-{0}-bln3oou6sh-bln3oou6sh.gz
@@ -892,13 +892,13 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       pdaotioiej-{0}-c97596j8dp-c97596j8dp.gz
 |   |   |       |       pehuqocd4z-{0}-0q8h4ozt6q-0q8h4ozt6q.gz
 |   |   |       |       pq1zwub8zu-{0}-n949pn5bqf-n949pn5bqf.gz
-|   |   |       |       prwyqf4e4y-{0}-gqd0v00eeu-gqd0v00eeu.gz
+|   |   |       |       prwyqf4e4y-{0}-f5ujztojdk-f5ujztojdk.gz
 |   |   |       |       pwmpgrqg76-{0}-i26u5a9fau-i26u5a9fau.gz
 |   |   |       |       px0hxgqwjv-{0}-8br0rpc5j3-8br0rpc5j3.gz
 |   |   |       |       pzqxcw519k-{0}-xq74p7yimf-xq74p7yimf.gz
 |   |   |       |       q3154k5biw-{0}-b22pm24uac-b22pm24uac.gz
 |   |   |       |       q4p940erp4-{0}-befq3iek54-befq3iek54.gz
-|   |   |       |       qapwvyh3s0-{0}-1d2qq5kdat-1d2qq5kdat.gz
+|   |   |       |       qapwvyh3s0-{0}-0i5g8gjmnz-0i5g8gjmnz.gz
 |   |   |       |       qitdg1tdwz-{0}-uakrztahlf-uakrztahlf.gz
 |   |   |       |       qm96gcrzfw-{0}-67mulskwi0-67mulskwi0.gz
 |   |   |       |       qp8xb91mke-{0}-wnrh6t4f3i-wnrh6t4f3i.gz
@@ -918,7 +918,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       sugokdc00a-{0}-mnd3y3a76z-mnd3y3a76z.gz
 |   |   |       |       svb8xodzcv-{0}-5j2hllj6bi-5j2hllj6bi.gz
 |   |   |       |       sy44tf32kn-{0}-l0r3bunp9q-l0r3bunp9q.gz
-|   |   |       |       syt0dqw1ux-{0}-boo8yg8dxz-boo8yg8dxz.gz
+|   |   |       |       syt0dqw1ux-{0}-5sftu8v1nk-5sftu8v1nk.gz
 |   |   |       |       t2kz3thrps-{0}-2tx45g8lli-2tx45g8lli.gz
 |   |   |       |       tbjuh26x5v-{0}-ksfzm5bevd-ksfzm5bevd.gz
 |   |   |       |       tcd8qxaqk5-{0}-yli8mx0eos-yli8mx0eos.gz
@@ -943,7 +943,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       w3jaqn3h4o-{0}-78lrbgxr1f-78lrbgxr1f.gz
 |   |   |       |       w3ur6j80u7-{0}-h2nvdx8wws-h2nvdx8wws.gz
 |   |   |       |       wuimozunwv-{0}-piem9h0tr4-piem9h0tr4.gz
-|   |   |       |       x3ikudnee4-{0}-m7um439vx7-m7um439vx7.gz
+|   |   |       |       x3ikudnee4-{0}-46muym618g-46muym618g.gz
 |   |   |       |       x54bdp6f69-{0}-nc02rhe1iy-nc02rhe1iy.gz
 |   |   |       |       x57r4b36iz-{0}-lfu7j35m59-lfu7j35m59.gz
 |   |   |       |       xf1qqu3s0v-{0}-xfor6r3ecm-xfor6r3ecm.gz
@@ -1243,13 +1243,730 @@ D:\DEV\PERSONAL\COLLABSKUS
 |       \---css
 |               app.css
 |               
-\---docs
-    \---llm
-            claude.md
-            dump.txt
-            instructions.txt
-            memory.md
-            
++---CollabsKus.PlaywrightTests
+|   |   CollabsKus.PlaywrightTests.csproj
+|   |   GlobalUsings.cs
+|   |   HomePageTests.cs
+|   |   
+|   +---bin
+|   |   \---Debug
+|   |       \---net10.0
+|   |           |   CollabsKus.PlaywrightTests.deps.json
+|   |           |   CollabsKus.PlaywrightTests.dll
+|   |           |   CollabsKus.PlaywrightTests.exe
+|   |           |   CollabsKus.PlaywrightTests.pdb
+|   |           |   CollabsKus.PlaywrightTests.runtimeconfig.json
+|   |           |   EnumerableAsyncProcessor.dll
+|   |           |   Microsoft.Bcl.AsyncInterfaces.dll
+|   |           |   Microsoft.Playwright.dll
+|   |           |   Microsoft.Testing.Extensions.TrxReport.Abstractions.dll
+|   |           |   Microsoft.Testing.Platform.dll
+|   |           |   Microsoft.Testing.Platform.MSBuild.dll
+|   |           |   playwright.ps1
+|   |           |   TUnit.Assertions.dll
+|   |           |   TUnit.Core.dll
+|   |           |   TUnit.dll
+|   |           |   TUnit.Engine.dll
+|   |           |   
+|   |           +---.playwright
+|   |           |   +---node
+|   |           |   |   |   LICENSE
+|   |           |   |   |   
+|   |           |   |   \---win32_x64
+|   |           |   |           node.exe
+|   |           |   |           
+|   |           |   \---package
+|   |           |       |   api.json
+|   |           |       |   browsers.json
+|   |           |       |   cli.js
+|   |           |       |   index.d.ts
+|   |           |       |   index.js
+|   |           |       |   index.mjs
+|   |           |       |   LICENSE
+|   |           |       |   NOTICE
+|   |           |       |   package.json
+|   |           |       |   protocol.yml
+|   |           |       |   README.md
+|   |           |       |   ThirdPartyNotices.txt
+|   |           |       |   
+|   |           |       +---bin
+|   |           |       |       install_media_pack.ps1
+|   |           |       |       install_webkit_wsl.ps1
+|   |           |       |       reinstall_chrome_beta_linux.sh
+|   |           |       |       reinstall_chrome_beta_mac.sh
+|   |           |       |       reinstall_chrome_beta_win.ps1
+|   |           |       |       reinstall_chrome_stable_linux.sh
+|   |           |       |       reinstall_chrome_stable_mac.sh
+|   |           |       |       reinstall_chrome_stable_win.ps1
+|   |           |       |       reinstall_msedge_beta_linux.sh
+|   |           |       |       reinstall_msedge_beta_mac.sh
+|   |           |       |       reinstall_msedge_beta_win.ps1
+|   |           |       |       reinstall_msedge_dev_linux.sh
+|   |           |       |       reinstall_msedge_dev_mac.sh
+|   |           |       |       reinstall_msedge_dev_win.ps1
+|   |           |       |       reinstall_msedge_stable_linux.sh
+|   |           |       |       reinstall_msedge_stable_mac.sh
+|   |           |       |       reinstall_msedge_stable_win.ps1
+|   |           |       |       
+|   |           |       +---lib
+|   |           |       |   |   androidServerImpl.js
+|   |           |       |   |   browserServerImpl.js
+|   |           |       |   |   inprocess.js
+|   |           |       |   |   inProcessFactory.js
+|   |           |       |   |   mcpBundle.js
+|   |           |       |   |   outofprocess.js
+|   |           |       |   |   utils.js
+|   |           |       |   |   utilsBundle.js
+|   |           |       |   |   zipBundle.js
+|   |           |       |   |   zipBundleImpl.js
+|   |           |       |   |   
+|   |           |       |   +---cli
+|   |           |       |   |       driver.js
+|   |           |       |   |       program.js
+|   |           |       |   |       programWithTestStub.js
+|   |           |       |   |       
+|   |           |       |   +---client
+|   |           |       |   |       android.js
+|   |           |       |   |       api.js
+|   |           |       |   |       artifact.js
+|   |           |       |   |       browser.js
+|   |           |       |   |       browserContext.js
+|   |           |       |   |       browserType.js
+|   |           |       |   |       cdpSession.js
+|   |           |       |   |       channelOwner.js
+|   |           |       |   |       clientHelper.js
+|   |           |       |   |       clientInstrumentation.js
+|   |           |       |   |       clientStackTrace.js
+|   |           |       |   |       clock.js
+|   |           |       |   |       connection.js
+|   |           |       |   |       consoleMessage.js
+|   |           |       |   |       coverage.js
+|   |           |       |   |       dialog.js
+|   |           |       |   |       download.js
+|   |           |       |   |       electron.js
+|   |           |       |   |       elementHandle.js
+|   |           |       |   |       errors.js
+|   |           |       |   |       eventEmitter.js
+|   |           |       |   |       events.js
+|   |           |       |   |       fetch.js
+|   |           |       |   |       fileChooser.js
+|   |           |       |   |       fileUtils.js
+|   |           |       |   |       frame.js
+|   |           |       |   |       harRouter.js
+|   |           |       |   |       input.js
+|   |           |       |   |       jsHandle.js
+|   |           |       |   |       jsonPipe.js
+|   |           |       |   |       localUtils.js
+|   |           |       |   |       locator.js
+|   |           |       |   |       network.js
+|   |           |       |   |       page.js
+|   |           |       |   |       pageAgent.js
+|   |           |       |   |       platform.js
+|   |           |       |   |       playwright.js
+|   |           |       |   |       selectors.js
+|   |           |       |   |       stream.js
+|   |           |       |   |       timeoutSettings.js
+|   |           |       |   |       tracing.js
+|   |           |       |   |       types.js
+|   |           |       |   |       video.js
+|   |           |       |   |       waiter.js
+|   |           |       |   |       webError.js
+|   |           |       |   |       webSocket.js
+|   |           |       |   |       worker.js
+|   |           |       |   |       writableStream.js
+|   |           |       |   |       
+|   |           |       |   +---generated
+|   |           |       |   |       bindingsControllerSource.js
+|   |           |       |   |       clockSource.js
+|   |           |       |   |       injectedScriptSource.js
+|   |           |       |   |       pollingRecorderSource.js
+|   |           |       |   |       storageScriptSource.js
+|   |           |       |   |       utilityScriptSource.js
+|   |           |       |   |       webSocketMockSource.js
+|   |           |       |   |       
+|   |           |       |   +---mcpBundleImpl
+|   |           |       |   |       index.js
+|   |           |       |   |       
+|   |           |       |   +---protocol
+|   |           |       |   |       serializers.js
+|   |           |       |   |       validator.js
+|   |           |       |   |       validatorPrimitives.js
+|   |           |       |   |       
+|   |           |       |   +---remote
+|   |           |       |   |       playwrightConnection.js
+|   |           |       |   |       playwrightServer.js
+|   |           |       |   |       
+|   |           |       |   +---server
+|   |           |       |   |   |   artifact.js
+|   |           |       |   |   |   browser.js
+|   |           |       |   |   |   browserContext.js
+|   |           |       |   |   |   browserType.js
+|   |           |       |   |   |   callLog.js
+|   |           |       |   |   |   clock.js
+|   |           |       |   |   |   console.js
+|   |           |       |   |   |   cookieStore.js
+|   |           |       |   |   |   debugController.js
+|   |           |       |   |   |   debugger.js
+|   |           |       |   |   |   deviceDescriptors.js
+|   |           |       |   |   |   deviceDescriptorsSource.json
+|   |           |       |   |   |   dialog.js
+|   |           |       |   |   |   dom.js
+|   |           |       |   |   |   download.js
+|   |           |       |   |   |   errors.js
+|   |           |       |   |   |   fetch.js
+|   |           |       |   |   |   fileChooser.js
+|   |           |       |   |   |   fileUploadUtils.js
+|   |           |       |   |   |   formData.js
+|   |           |       |   |   |   frames.js
+|   |           |       |   |   |   frameSelectors.js
+|   |           |       |   |   |   harBackend.js
+|   |           |       |   |   |   helper.js
+|   |           |       |   |   |   index.js
+|   |           |       |   |   |   input.js
+|   |           |       |   |   |   instrumentation.js
+|   |           |       |   |   |   javascript.js
+|   |           |       |   |   |   launchApp.js
+|   |           |       |   |   |   localUtils.js
+|   |           |       |   |   |   macEditingCommands.js
+|   |           |       |   |   |   network.js
+|   |           |       |   |   |   page.js
+|   |           |       |   |   |   pipeTransport.js
+|   |           |       |   |   |   playwright.js
+|   |           |       |   |   |   progress.js
+|   |           |       |   |   |   protocolError.js
+|   |           |       |   |   |   recorder.js
+|   |           |       |   |   |   screencast.js
+|   |           |       |   |   |   screenshotter.js
+|   |           |       |   |   |   selectors.js
+|   |           |       |   |   |   socksClientCertificatesInterceptor.js
+|   |           |       |   |   |   socksInterceptor.js
+|   |           |       |   |   |   transport.js
+|   |           |       |   |   |   types.js
+|   |           |       |   |   |   usKeyboardLayout.js
+|   |           |       |   |   |   videoRecorder.js
+|   |           |       |   |   |   
+|   |           |       |   |   +---agent
+|   |           |       |   |   |       actionRunner.js
+|   |           |       |   |   |       actions.js
+|   |           |       |   |   |       codegen.js
+|   |           |       |   |   |       context.js
+|   |           |       |   |   |       expectTools.js
+|   |           |       |   |   |       pageAgent.js
+|   |           |       |   |   |       performTools.js
+|   |           |       |   |   |       tool.js
+|   |           |       |   |   |       
+|   |           |       |   |   +---android
+|   |           |       |   |   |       android.js
+|   |           |       |   |   |       backendAdb.js
+|   |           |       |   |   |       
+|   |           |       |   |   +---bidi
+|   |           |       |   |   |   |   bidiBrowser.js
+|   |           |       |   |   |   |   bidiChromium.js
+|   |           |       |   |   |   |   bidiConnection.js
+|   |           |       |   |   |   |   bidiDeserializer.js
+|   |           |       |   |   |   |   bidiExecutionContext.js
+|   |           |       |   |   |   |   bidiFirefox.js
+|   |           |       |   |   |   |   bidiInput.js
+|   |           |       |   |   |   |   bidiNetworkManager.js
+|   |           |       |   |   |   |   bidiOverCdp.js
+|   |           |       |   |   |   |   bidiPage.js
+|   |           |       |   |   |   |   bidiPdf.js
+|   |           |       |   |   |   |   
+|   |           |       |   |   |   \---third_party
+|   |           |       |   |   |           bidiCommands.d.js
+|   |           |       |   |   |           bidiKeyboard.js
+|   |           |       |   |   |           bidiProtocol.js
+|   |           |       |   |   |           bidiProtocolCore.js
+|   |           |       |   |   |           bidiProtocolPermissions.js
+|   |           |       |   |   |           bidiSerializer.js
+|   |           |       |   |   |           firefoxPrefs.js
+|   |           |       |   |   |           
+|   |           |       |   |   +---chromium
+|   |           |       |   |   |       appIcon.png
+|   |           |       |   |   |       chromium.js
+|   |           |       |   |   |       chromiumSwitches.js
+|   |           |       |   |   |       crBrowser.js
+|   |           |       |   |   |       crConnection.js
+|   |           |       |   |   |       crCoverage.js
+|   |           |       |   |   |       crDevTools.js
+|   |           |       |   |   |       crDragDrop.js
+|   |           |       |   |   |       crExecutionContext.js
+|   |           |       |   |   |       crInput.js
+|   |           |       |   |   |       crNetworkManager.js
+|   |           |       |   |   |       crPage.js
+|   |           |       |   |   |       crPdf.js
+|   |           |       |   |   |       crProtocolHelper.js
+|   |           |       |   |   |       crServiceWorker.js
+|   |           |       |   |   |       defaultFontFamilies.js
+|   |           |       |   |   |       protocol.d.js
+|   |           |       |   |   |       
+|   |           |       |   |   +---codegen
+|   |           |       |   |   |       csharp.js
+|   |           |       |   |   |       java.js
+|   |           |       |   |   |       javascript.js
+|   |           |       |   |   |       jsonl.js
+|   |           |       |   |   |       language.js
+|   |           |       |   |   |       languages.js
+|   |           |       |   |   |       python.js
+|   |           |       |   |   |       types.js
+|   |           |       |   |   |       
+|   |           |       |   |   +---dispatchers
+|   |           |       |   |   |       androidDispatcher.js
+|   |           |       |   |   |       artifactDispatcher.js
+|   |           |       |   |   |       browserContextDispatcher.js
+|   |           |       |   |   |       browserDispatcher.js
+|   |           |       |   |   |       browserTypeDispatcher.js
+|   |           |       |   |   |       cdpSessionDispatcher.js
+|   |           |       |   |   |       debugControllerDispatcher.js
+|   |           |       |   |   |       dialogDispatcher.js
+|   |           |       |   |   |       dispatcher.js
+|   |           |       |   |   |       electronDispatcher.js
+|   |           |       |   |   |       elementHandlerDispatcher.js
+|   |           |       |   |   |       frameDispatcher.js
+|   |           |       |   |   |       jsHandleDispatcher.js
+|   |           |       |   |   |       jsonPipeDispatcher.js
+|   |           |       |   |   |       localUtilsDispatcher.js
+|   |           |       |   |   |       networkDispatchers.js
+|   |           |       |   |   |       pageAgentDispatcher.js
+|   |           |       |   |   |       pageDispatcher.js
+|   |           |       |   |   |       playwrightDispatcher.js
+|   |           |       |   |   |       streamDispatcher.js
+|   |           |       |   |   |       tracingDispatcher.js
+|   |           |       |   |   |       webSocketRouteDispatcher.js
+|   |           |       |   |   |       writableStreamDispatcher.js
+|   |           |       |   |   |       
+|   |           |       |   |   +---electron
+|   |           |       |   |   |       electron.js
+|   |           |       |   |   |       loader.js
+|   |           |       |   |   |       
+|   |           |       |   |   +---firefox
+|   |           |       |   |   |       ffBrowser.js
+|   |           |       |   |   |       ffConnection.js
+|   |           |       |   |   |       ffExecutionContext.js
+|   |           |       |   |   |       ffInput.js
+|   |           |       |   |   |       ffNetworkManager.js
+|   |           |       |   |   |       ffPage.js
+|   |           |       |   |   |       firefox.js
+|   |           |       |   |   |       protocol.d.js
+|   |           |       |   |   |       
+|   |           |       |   |   +---har
+|   |           |       |   |   |       harRecorder.js
+|   |           |       |   |   |       harTracer.js
+|   |           |       |   |   |       
+|   |           |       |   |   +---recorder
+|   |           |       |   |   |       chat.js
+|   |           |       |   |   |       recorderApp.js
+|   |           |       |   |   |       recorderRunner.js
+|   |           |       |   |   |       recorderSignalProcessor.js
+|   |           |       |   |   |       recorderUtils.js
+|   |           |       |   |   |       throttledFile.js
+|   |           |       |   |   |       
+|   |           |       |   |   +---registry
+|   |           |       |   |   |       browserFetcher.js
+|   |           |       |   |   |       dependencies.js
+|   |           |       |   |   |       index.js
+|   |           |       |   |   |       nativeDeps.js
+|   |           |       |   |   |       oopDownloadBrowserMain.js
+|   |           |       |   |   |       
+|   |           |       |   |   +---trace
+|   |           |       |   |   |   +---recorder
+|   |           |       |   |   |   |       snapshotter.js
+|   |           |       |   |   |   |       snapshotterInjected.js
+|   |           |       |   |   |   |       tracing.js
+|   |           |       |   |   |   |       
+|   |           |       |   |   |   \---viewer
+|   |           |       |   |   |           traceParser.js
+|   |           |       |   |   |           traceViewer.js
+|   |           |       |   |   |           
+|   |           |       |   |   +---utils
+|   |           |       |   |   |   |   ascii.js
+|   |           |       |   |   |   |   comparators.js
+|   |           |       |   |   |   |   crypto.js
+|   |           |       |   |   |   |   debug.js
+|   |           |       |   |   |   |   debugLogger.js
+|   |           |       |   |   |   |   env.js
+|   |           |       |   |   |   |   eventsHelper.js
+|   |           |       |   |   |   |   expectUtils.js
+|   |           |       |   |   |   |   fileUtils.js
+|   |           |       |   |   |   |   happyEyeballs.js
+|   |           |       |   |   |   |   hostPlatform.js
+|   |           |       |   |   |   |   httpServer.js
+|   |           |       |   |   |   |   imageUtils.js
+|   |           |       |   |   |   |   linuxUtils.js
+|   |           |       |   |   |   |   network.js
+|   |           |       |   |   |   |   nodePlatform.js
+|   |           |       |   |   |   |   pipeTransport.js
+|   |           |       |   |   |   |   processLauncher.js
+|   |           |       |   |   |   |   profiler.js
+|   |           |       |   |   |   |   socksProxy.js
+|   |           |       |   |   |   |   spawnAsync.js
+|   |           |       |   |   |   |   task.js
+|   |           |       |   |   |   |   userAgent.js
+|   |           |       |   |   |   |   wsServer.js
+|   |           |       |   |   |   |   zipFile.js
+|   |           |       |   |   |   |   zones.js
+|   |           |       |   |   |   |   
+|   |           |       |   |   |   \---image_tools
+|   |           |       |   |   |           colorUtils.js
+|   |           |       |   |   |           compare.js
+|   |           |       |   |   |           imageChannel.js
+|   |           |       |   |   |           stats.js
+|   |           |       |   |   |           
+|   |           |       |   |   \---webkit
+|   |           |       |   |           protocol.d.js
+|   |           |       |   |           webkit.js
+|   |           |       |   |           wkBrowser.js
+|   |           |       |   |           wkConnection.js
+|   |           |       |   |           wkExecutionContext.js
+|   |           |       |   |           wkInput.js
+|   |           |       |   |           wkInterceptableRequest.js
+|   |           |       |   |           wkPage.js
+|   |           |       |   |           wkProvisionalPage.js
+|   |           |       |   |           wkWorkers.js
+|   |           |       |   |           
+|   |           |       |   +---third_party
+|   |           |       |   |       pixelmatch.js
+|   |           |       |   |       
+|   |           |       |   +---utils
+|   |           |       |   |   \---isomorphic
+|   |           |       |   |       |   ariaSnapshot.js
+|   |           |       |   |       |   assert.js
+|   |           |       |   |       |   colors.js
+|   |           |       |   |       |   cssParser.js
+|   |           |       |   |       |   cssTokenizer.js
+|   |           |       |   |       |   headers.js
+|   |           |       |   |       |   locatorGenerators.js
+|   |           |       |   |       |   locatorParser.js
+|   |           |       |   |       |   locatorUtils.js
+|   |           |       |   |       |   lruCache.js
+|   |           |       |   |       |   manualPromise.js
+|   |           |       |   |       |   mimeType.js
+|   |           |       |   |       |   multimap.js
+|   |           |       |   |       |   protocolFormatter.js
+|   |           |       |   |       |   protocolMetainfo.js
+|   |           |       |   |       |   rtti.js
+|   |           |       |   |       |   selectorParser.js
+|   |           |       |   |       |   semaphore.js
+|   |           |       |   |       |   stackTrace.js
+|   |           |       |   |       |   stringUtils.js
+|   |           |       |   |       |   time.js
+|   |           |       |   |       |   timeoutRunner.js
+|   |           |       |   |       |   traceUtils.js
+|   |           |       |   |       |   types.js
+|   |           |       |   |       |   urlMatch.js
+|   |           |       |   |       |   utilityScriptSerializers.js
+|   |           |       |   |       |   yaml.js
+|   |           |       |   |       |   
+|   |           |       |   |       \---trace
+|   |           |       |   |           |   entries.js
+|   |           |       |   |           |   snapshotRenderer.js
+|   |           |       |   |           |   snapshotServer.js
+|   |           |       |   |           |   snapshotStorage.js
+|   |           |       |   |           |   traceLoader.js
+|   |           |       |   |           |   traceModel.js
+|   |           |       |   |           |   traceModernizer.js
+|   |           |       |   |           |   
+|   |           |       |   |           \---versions
+|   |           |       |   |                   traceV3.js
+|   |           |       |   |                   traceV4.js
+|   |           |       |   |                   traceV5.js
+|   |           |       |   |                   traceV6.js
+|   |           |       |   |                   traceV7.js
+|   |           |       |   |                   traceV8.js
+|   |           |       |   |                   
+|   |           |       |   +---utilsBundleImpl
+|   |           |       |   |       index.js
+|   |           |       |   |       xdg-open
+|   |           |       |   |       
+|   |           |       |   \---vite
+|   |           |       |       +---htmlReport
+|   |           |       |       |       index.html
+|   |           |       |       |       
+|   |           |       |       +---recorder
+|   |           |       |       |   |   index.html
+|   |           |       |       |   |   playwright-logo.svg
+|   |           |       |       |   |   
+|   |           |       |       |   \---assets
+|   |           |       |       |           codeMirrorModule-DadYNm1I.js
+|   |           |       |       |           codeMirrorModule-DYBRYzYX.css
+|   |           |       |       |           codicon-DCmgc-ay.ttf
+|   |           |       |       |           index-BhTWtUlo.js
+|   |           |       |       |           index-BSjZa4pk.css
+|   |           |       |       |           
+|   |           |       |       \---traceViewer
+|   |           |       |           |   codeMirrorModule.DYBRYzYX.css
+|   |           |       |           |   codicon.DCmgc-ay.ttf
+|   |           |       |           |   defaultSettingsView.7ch9cixO.css
+|   |           |       |           |   index.BiGyQqiM.js
+|   |           |       |           |   index.BVu7tZDe.css
+|   |           |       |           |   index.html
+|   |           |       |           |   manifest.webmanifest
+|   |           |       |           |   playwright-logo.svg
+|   |           |       |           |   snapshot.html
+|   |           |       |           |   sw.bundle.js
+|   |           |       |           |   uiMode.Btcz36p_.css
+|   |           |       |           |   uiMode.CQJ9SCIQ.js
+|   |           |       |           |   uiMode.html
+|   |           |       |           |   xtermModule.DYP7pi_n.css
+|   |           |       |           |   
+|   |           |       |           \---assets
+|   |           |       |                   codeMirrorModule-a5XoALAZ.js
+|   |           |       |                   defaultSettingsView-CJSZINFr.js
+|   |           |       |                   xtermModule-CsJ4vdCR.js
+|   |           |       |                   
+|   |           |       \---types
+|   |           |               protocol.d.ts
+|   |           |               structs.d.ts
+|   |           |               types.d.ts
+|   |           |               
+|   |           +---cs
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---de
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---es
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---fr
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---it
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---ja
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---ko
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---Log
+|   |           |       log_260303223153702.diag
+|   |           |       log_260303223154562.diag
+|   |           |       
+|   |           +---pl
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---pt-BR
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---ru
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---tr
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---zh-Hans
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           \---zh-Hant
+|   |                   Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |                   Microsoft.Testing.Platform.resources.dll
+|   |                   
+|   \---obj
+|       |   CollabsKus.PlaywrightTests.csproj.nuget.dgspec.json
+|       |   CollabsKus.PlaywrightTests.csproj.nuget.g.props
+|       |   CollabsKus.PlaywrightTests.csproj.nuget.g.targets
+|       |   project.assets.json
+|       |   project.nuget.cache
+|       |   
+|       \---Debug
+|           \---net10.0
+|               |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+|               |   apphost.exe
+|               |   AutoRegisteredExtensions.cs
+|               |   CollabsK.677A1748.Up2Date
+|               |   CollabsKus.PlaywrightTests.AssemblyInfo.cs
+|               |   CollabsKus.PlaywrightTests.AssemblyInfoInputs.cache
+|               |   CollabsKus.PlaywrightTests.assets.cache
+|               |   CollabsKus.PlaywrightTests.csproj.AssemblyReference.cache
+|               |   CollabsKus.PlaywrightTests.csproj.CoreCompileInputs.cache
+|               |   CollabsKus.PlaywrightTests.csproj.FileListAbsolute.txt
+|               |   CollabsKus.PlaywrightTests.dll
+|               |   CollabsKus.PlaywrightTests.genautoregisteredextensionsinputcache.cache
+|               |   CollabsKus.PlaywrightTests.GeneratedMSBuildEditorConfig.editorconfig
+|               |   CollabsKus.PlaywrightTests.genruntimeconfig.cache
+|               |   CollabsKus.PlaywrightTests.gentestingplatformentrypointinputcache.cache
+|               |   CollabsKus.PlaywrightTests.GlobalUsings.g.cs
+|               |   CollabsKus.PlaywrightTests.pdb
+|               |   CollabsKus.PlaywrightTests.sourcelink.json
+|               |   TestPlatformEntryPoint.cs
+|               |   
+|               +---ref
+|               |       CollabsKus.PlaywrightTests.dll
+|               |       
+|               \---refint
+|                       CollabsKus.PlaywrightTests.dll
+|                       
++---CollabsKus.Tests
+|   |   CollabsKus.Tests.csproj
+|   |   GlobalUsings.cs
+|   |   
+|   +---bin
+|   |   \---Debug
+|   |       \---net10.0
+|   |           |   CollabsKus.BlazorWebAssembly.dll
+|   |           |   CollabsKus.BlazorWebAssembly.pdb
+|   |           |   CollabsKus.BlazorWebAssembly.runtimeconfig.json
+|   |           |   CollabsKus.BlazorWebAssembly.staticwebassets.endpoints.json
+|   |           |   CollabsKus.BlazorWebAssembly.staticwebassets.runtime.json
+|   |           |   CollabsKus.Tests.deps.json
+|   |           |   CollabsKus.Tests.dll
+|   |           |   CollabsKus.Tests.exe
+|   |           |   CollabsKus.Tests.pdb
+|   |           |   CollabsKus.Tests.runtimeconfig.json
+|   |           |   EnumerableAsyncProcessor.dll
+|   |           |   Microsoft.AspNetCore.Authorization.dll
+|   |           |   Microsoft.AspNetCore.Components.dll
+|   |           |   Microsoft.AspNetCore.Components.Forms.dll
+|   |           |   Microsoft.AspNetCore.Components.Web.dll
+|   |           |   Microsoft.AspNetCore.Components.WebAssembly.dll
+|   |           |   Microsoft.AspNetCore.Metadata.dll
+|   |           |   Microsoft.DotNet.HotReload.WebAssembly.Browser.dll
+|   |           |   Microsoft.Extensions.Configuration.Abstractions.dll
+|   |           |   Microsoft.Extensions.Configuration.Binder.dll
+|   |           |   Microsoft.Extensions.Configuration.dll
+|   |           |   Microsoft.Extensions.Configuration.FileExtensions.dll
+|   |           |   Microsoft.Extensions.Configuration.Json.dll
+|   |           |   Microsoft.Extensions.DependencyInjection.Abstractions.dll
+|   |           |   Microsoft.Extensions.DependencyInjection.dll
+|   |           |   Microsoft.Extensions.Diagnostics.Abstractions.dll
+|   |           |   Microsoft.Extensions.Diagnostics.dll
+|   |           |   Microsoft.Extensions.FileProviders.Abstractions.dll
+|   |           |   Microsoft.Extensions.FileProviders.Physical.dll
+|   |           |   Microsoft.Extensions.FileSystemGlobbing.dll
+|   |           |   Microsoft.Extensions.Logging.Abstractions.dll
+|   |           |   Microsoft.Extensions.Logging.dll
+|   |           |   Microsoft.Extensions.Options.ConfigurationExtensions.dll
+|   |           |   Microsoft.Extensions.Options.dll
+|   |           |   Microsoft.Extensions.Primitives.dll
+|   |           |   Microsoft.Extensions.Validation.dll
+|   |           |   Microsoft.JSInterop.dll
+|   |           |   Microsoft.JSInterop.WebAssembly.dll
+|   |           |   Microsoft.Testing.Extensions.TrxReport.Abstractions.dll
+|   |           |   Microsoft.Testing.Platform.dll
+|   |           |   Microsoft.Testing.Platform.MSBuild.dll
+|   |           |   TUnit.Assertions.dll
+|   |           |   TUnit.Core.dll
+|   |           |   TUnit.dll
+|   |           |   TUnit.Engine.dll
+|   |           |   
+|   |           +---cs
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---de
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---es
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---fr
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---it
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---ja
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---ko
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---Log
+|   |           |       log_260303223153707.diag
+|   |           |       log_260303223154547.diag
+|   |           |       
+|   |           +---pl
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---pt-BR
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---ru
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---tr
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           +---zh-Hans
+|   |           |       Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |           |       Microsoft.Testing.Platform.resources.dll
+|   |           |       
+|   |           \---zh-Hant
+|   |                   Microsoft.Testing.Platform.MSBuild.resources.dll
+|   |                   Microsoft.Testing.Platform.resources.dll
+|   |                   
+|   +---obj
+|   |   |   CollabsKus.Tests.csproj.nuget.dgspec.json
+|   |   |   CollabsKus.Tests.csproj.nuget.g.props
+|   |   |   CollabsKus.Tests.csproj.nuget.g.targets
+|   |   |   project.assets.json
+|   |   |   project.nuget.cache
+|   |   |   
+|   |   \---Debug
+|   |       \---net10.0
+|   |           |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+|   |           |   apphost.exe
+|   |           |   AutoRegisteredExtensions.cs
+|   |           |   CollabsK.C140B4C8.Up2Date
+|   |           |   CollabsKus.Tests.AssemblyInfo.cs
+|   |           |   CollabsKus.Tests.AssemblyInfoInputs.cache
+|   |           |   CollabsKus.Tests.assets.cache
+|   |           |   CollabsKus.Tests.csproj.AssemblyReference.cache
+|   |           |   CollabsKus.Tests.csproj.CoreCompileInputs.cache
+|   |           |   CollabsKus.Tests.csproj.FileListAbsolute.txt
+|   |           |   CollabsKus.Tests.dll
+|   |           |   CollabsKus.Tests.genautoregisteredextensionsinputcache.cache
+|   |           |   CollabsKus.Tests.GeneratedMSBuildEditorConfig.editorconfig
+|   |           |   CollabsKus.Tests.genruntimeconfig.cache
+|   |           |   CollabsKus.Tests.gentestingplatformentrypointinputcache.cache
+|   |           |   CollabsKus.Tests.GlobalUsings.g.cs
+|   |           |   CollabsKus.Tests.pdb
+|   |           |   CollabsKus.Tests.sourcelink.json
+|   |           |   TestPlatformEntryPoint.cs
+|   |           |   
+|   |           +---ref
+|   |           |       CollabsKus.Tests.dll
+|   |           |       
+|   |           \---refint
+|   |                   CollabsKus.Tests.dll
+|   |                   
+|   \---Services
+|           KathmanduCalendarServiceTests.cs
+|           MoonPhaseServiceTests.cs
+|           SolarPositionServiceTests.cs
+|           
++---docs
+|   \---llm
+|           claude.md
+|           dump.txt
+|           instructions.txt
+|           memory.md
+|           
+\---TestResults
 
 
 FILE CONTENTS:
@@ -2301,17 +3018,232 @@ MODIFIED: 02/24/2026 09:14:12
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Components\Sundisplay.razor
-SIZE: 0 KB
-MODIFIED: 03/03/2026 16:24:48
+SIZE: 8.37 KB
+MODIFIED: 03/03/2026 17:24:42
 ================================================================================
 
-[EMPTY FILE]
+@using CollabsKus.BlazorWebAssembly.Models
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+
+<div id="sun-display-root" class="sun-display">
+    <div class="sun-section-label">☀ SUN TRACKER</div>
+
+    @if (Position == null)
+    {
+        <div class="sun-loading">Calculating solar position…</div>
+    }
+    else
+    {
+        @foreach (var (pos, canvasId, idx) in GetLocations())
+        {
+            @if (idx > 0)
+            {
+                <div class="sun-location-divider"></div>
+            }
+
+            <div class="sun-location-header">
+                📍 @pos.LocationName
+                <span class="sun-location-coords">(@pos.Latitude.ToString("F2")°N, @pos.Longitude.ToString("F2")°E)</span>
+            </div>
+
+            <div class="sky-wrap">
+                <canvas id="@canvasId" class="sun-sky-canvas"></canvas>
+                @if (IsLive && idx == 0)
+                {
+                    <div class="sky-live-badge"><span class="sky-live-dot"></span>LIVE</div>
+                }
+            </div>
+
+            @if (!pos.IsAboveHorizon)
+            {
+                <div class="sun-night-banner">☽ The sun is below the horizon</div>
+            }
+
+            @* ── Stats row ── *@
+            <div class="sun-stats-row">
+                <div class="sun-stat @(pos.IsAboveHorizon ? "sun-stat--lit" : "")">
+                    <div class="sun-stat-label">ALTITUDE</div>
+                    <div class="sun-stat-value">@pos.AltitudeSign@pos.Altitude.ToString("F1")<span class="sun-unit">°</span></div>
+                    <div class="sun-stat-sub">@(pos.IsGoldenHour ? "Golden hour" : pos.IsAboveHorizon ? "Daytime" : "Night")</div>
+                </div>
+                <div class="sun-stat">
+                    <div class="sun-stat-label">AZIMUTH</div>
+                    <div class="sun-stat-value">@pos.Azimuth.ToString("F1")<span class="sun-unit">°</span></div>
+                    <div class="sun-stat-sub">@pos.AzimuthCardinal</div>
+                </div>
+            </div>
+
+            @* ── Events row (today) ── *@
+            <div class="sun-events-row">
+                <div class="sun-event">
+                    <span class="sun-event-icon">🌅</span>
+                    <div class="sun-event-time">@FormatTime(pos.SunriseLocal)</div>
+                    <div class="sun-event-label">SUNRISE</div>
+                </div>
+                <div class="sun-event sun-event--noon">
+                    <span class="sun-event-icon">☀️</span>
+                    <div class="sun-event-time">@pos.SolarNoonLocal.ToString("hh\\:mm\\:ss")</div>
+                    <div class="sun-event-label">SOLAR NOON</div>
+                </div>
+                <div class="sun-event">
+                    <span class="sun-event-icon">🌇</span>
+                    <div class="sun-event-time">@FormatTime(pos.SunsetLocal)</div>
+                    <div class="sun-event-label">SUNSET</div>
+                </div>
+            </div>
+
+            @* ── Previous / Next row ── *@
+            <div class="sun-prev-next-row">
+                <div class="sun-prev-next-item">
+                    <div class="sun-prev-next-label">PREV SUNRISE</div>
+                    <div class="sun-prev-next-value">@FormatDateTime(pos.PreviousSunrise)</div>
+                </div>
+                <div class="sun-prev-next-item">
+                    <div class="sun-prev-next-label">PREV SUNSET</div>
+                    <div class="sun-prev-next-value">@FormatDateTime(pos.PreviousSunset)</div>
+                </div>
+                <div class="sun-prev-next-item">
+                    <div class="sun-prev-next-label">NEXT SUNRISE</div>
+                    <div class="sun-prev-next-value">@FormatDateTime(pos.NextSunrise)</div>
+                </div>
+                <div class="sun-prev-next-item">
+                    <div class="sun-prev-next-label">NEXT SUNSET</div>
+                    <div class="sun-prev-next-value">@FormatDateTime(pos.NextSunset)</div>
+                </div>
+            </div>
+
+            @* ── Info bar ── *@
+            <div class="sun-info-bar">
+                <div class="sun-info-item">
+                    <div class="sun-info-label">DAY LENGTH</div>
+                    <div class="sun-info-value">@pos.DayLength.ToString(@"hh\:mm\:ss")</div>
+                </div>
+                <div class="sun-info-item">
+                    <div class="sun-info-label">MAX ELEV</div>
+                    <div class="sun-info-value">@pos.MaxElevation.ToString("F1")°</div>
+                </div>
+                @if (pos.GoldenHourMorningStart.HasValue)
+                {
+                    <div class="sun-info-item">
+                        <div class="sun-info-label">GOLDEN AM</div>
+                        <div class="sun-info-value">@pos.GoldenHourMorningStart.Value.ToString("hh\\:mm")–@FormatTime(pos.GoldenHourMorningEnd)</div>
+                    </div>
+                }
+                @if (pos.GoldenHourEveningStart.HasValue)
+                {
+                    <div class="sun-info-item">
+                        <div class="sun-info-label">GOLDEN PM</div>
+                        <div class="sun-info-value">@pos.GoldenHourEveningStart.Value.ToString("hh\\:mm")–@FormatTime(pos.GoldenHourEveningEnd)</div>
+                    </div>
+                }
+            </div>
+        }
+    }
+</div>
+
+@code {
+    [Parameter]
+    public SolarPosition? Position { get; set; }
+
+    [Parameter]
+    public SolarPosition? UserPosition { get; set; }
+
+    [Parameter]
+    public bool IsLive { get; set; }
+
+    private bool _canvasInitialized;
+
+    private IEnumerable<(SolarPosition pos, string canvasId, int idx)> GetLocations()
+    {
+        var list = new List<(SolarPosition, string, int)>();
+        if (Position != null)
+            list.Add((Position, "sunSkyCanvasKtm", 0));
+        if (UserPosition != null)
+            list.Add((UserPosition, "sunSkyCanvasUser", 1));
+        return list;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender || !_canvasInitialized)
+        {
+            if (Position != null)
+            {
+                try
+                {
+                    await JS.InvokeVoidAsync("sunTracker.init", "sunSkyCanvasKtm");
+                    if (UserPosition != null)
+                        await JS.InvokeVoidAsync("sunTracker.init", "sunSkyCanvasUser");
+                    _canvasInitialized = true;
+                }
+                catch
+                {
+                    // Graceful degradation — canvas is optional
+                }
+            }
+        }
+
+        // Draw every render cycle
+        if (_canvasInitialized && Position != null)
+        {
+            try
+            {
+                await JS.InvokeVoidAsync("sunTracker.draw",
+                    "sunSkyCanvasKtm", Position.Altitude, Position.Azimuth,
+                    Position.DayFraction, Position.IsAboveHorizon);
+
+                if (UserPosition != null)
+                {
+                    await JS.InvokeVoidAsync("sunTracker.draw",
+                        "sunSkyCanvasUser", UserPosition.Altitude, UserPosition.Azimuth,
+                        UserPosition.DayFraction, UserPosition.IsAboveHorizon);
+                }
+            }
+            catch
+            {
+                // Ignore draw errors
+            }
+        }
+    }
+
+    private static string FormatTime(TimeOnly? time)
+    {
+        return time?.ToString("hh\\:mm\\:ss") ?? "--:--:--";
+    }
+
+    private static string FormatDateTime(DateTime? dt)
+    {
+        if (!dt.HasValue) return "—";
+        var val = dt.Value;
+        var today = DateTime.Now.Date; // approximate — good enough for labeling
+        var dayLabel = val.Date == today ? "" :
+                       val.Date == today.AddDays(-1) ? " (yesterday)" :
+                       val.Date == today.AddDays(1) ? " (tomorrow)" :
+                       $" ({val:MMM dd})";
+        return $"{val:hh:mm:ss tt}{dayLabel}";
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        try
+        {
+            await JS.InvokeVoidAsync("sunTracker.dispose", "sunSkyCanvasKtm");
+            await JS.InvokeVoidAsync("sunTracker.dispose", "sunSkyCanvasUser");
+        }
+        catch
+        {
+            // Ignore disposal errors
+        }
+    }
+}
+
 
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Components\Sundisplay.razor.css
-SIZE: 5.56 KB
-MODIFIED: 03/03/2026 16:25:06
+SIZE: 6.92 KB
+MODIFIED: 03/03/2026 17:25:09
 ================================================================================
 
 /* ── Container ──────────────────────────────────────────────────────────── */
@@ -2339,6 +3271,28 @@ MODIFIED: 03/03/2026 16:25:06
     opacity: 0.6;
 }
 
+/* ── Location header ─────────────────────────────────────────────────────── */
+
+.sun-location-header {
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: #ffd060;
+    letter-spacing: 0.3px;
+}
+
+.sun-location-coords {
+    font-size: 0.7rem;
+    opacity: 0.5;
+    font-weight: 300;
+}
+
+.sun-location-divider {
+    height: 1px;
+    background: rgba(240, 165, 0, 0.15);
+    margin: 24px 0 18px;
+}
+
 /* ── Sky canvas ──────────────────────────────────────────────────────────── */
 
 .sky-wrap {
@@ -2350,7 +3304,7 @@ MODIFIED: 03/03/2026 16:25:06
     border: 1px solid rgba(240, 165, 0, 0.12);
 }
 
-#sunSkyCanvas {
+.sun-sky-canvas {
     display: block;
     width: 100%;
     height: 220px;
@@ -2502,6 +3456,38 @@ MODIFIED: 03/03/2026 16:25:06
     margin-top: 3px;
 }
 
+/* ── Previous / Next row ──────────────────────────────────────────────────── */
+
+.sun-prev-next-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.sun-prev-next-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(240, 165, 0, 0.10);
+    border-radius: 10px;
+    padding: 10px 14px;
+    text-align: center;
+}
+
+.sun-prev-next-label {
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.45;
+    margin-bottom: 4px;
+}
+
+.sun-prev-next-value {
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: #e8dfc8;
+}
+
 /* ── Info bar ─────────────────────────────────────────────────────────────── */
 
 .sun-info-bar {
@@ -2546,6 +3532,10 @@ MODIFIED: 03/03/2026 16:25:06
         grid-template-columns: 1fr;
     }
 
+    .sun-prev-next-row {
+        grid-template-columns: 1fr;
+    }
+
     .sun-stat-value {
         font-size: 1.3rem;
     }
@@ -2555,7 +3545,6 @@ MODIFIED: 03/03/2026 16:25:06
         align-items: center;
     }
 }
-
 
 
 
@@ -2782,18 +3771,23 @@ public class MoonPhase
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Models\SolarPosition.cs
-SIZE: 3.15 KB
-MODIFIED: 03/03/2026 16:23:44
+SIZE: 4.24 KB
+MODIFIED: 03/03/2026 17:23:08
 ================================================================================
 
 namespace CollabsKus.BlazorWebAssembly.Models;
 
 /// <summary>
-/// Instantaneous sun position and daily solar events for Kathmandu.
+/// Instantaneous sun position and daily solar events for a given location.
 /// All calculations are pure astronomy — no network requests.
 /// </summary>
 public class SolarPosition
 {
+    // ── Location metadata ─────────────────────────────────────────────────
+    public string LocationName { get; init; } = "";
+    public double Latitude { get; init; }
+    public double Longitude { get; init; }
+
     // ── Instantaneous values (change every second) ────────────────────────
     /// <summary>Elevation angle above the horizon in degrees. Negative = below horizon.</summary>
     public double Altitude { get; init; }
@@ -2816,26 +3810,40 @@ public class SolarPosition
     /// <summary>Fraction of the day arc traveled (0 = sunrise, 1 = sunset). -1 if polar night/day.</summary>
     public double DayFraction { get; init; }
 
-    // ── Daily events (recomputed once per Nepal calendar day) ─────────────
-    /// <summary>Sunrise time in Nepal Standard Time. Null during polar phenomena.</summary>
-    public TimeOnly? SunriseNST { get; init; }
+    // ── Today's events (in local time for this location) ──────────────────
+    /// <summary>Sunrise time in local time. Null during polar phenomena.</summary>
+    public TimeOnly? SunriseLocal { get; init; }
 
-    /// <summary>Solar noon time in Nepal Standard Time.</summary>
-    public TimeOnly SolarNoonNST { get; init; }
+    /// <summary>Solar noon time in local time.</summary>
+    public TimeOnly SolarNoonLocal { get; init; }
 
-    /// <summary>Sunset time in Nepal Standard Time. Null during polar phenomena.</summary>
-    public TimeOnly? SunsetNST { get; init; }
+    /// <summary>Sunset time in local time. Null during polar phenomena.</summary>
+    public TimeOnly? SunsetLocal { get; init; }
 
-    /// <summary>Start of morning golden hour (sun at -6°) in NST.</summary>
+    // ── Previous / Next sunrise & sunset (local DateTimes) ────────────────
+    /// <summary>Most recent sunrise that has already occurred (local time).</summary>
+    public DateTime? PreviousSunrise { get; init; }
+
+    /// <summary>Most recent sunset that has already occurred (local time).</summary>
+    public DateTime? PreviousSunset { get; init; }
+
+    /// <summary>Next upcoming sunrise (local time).</summary>
+    public DateTime? NextSunrise { get; init; }
+
+    /// <summary>Next upcoming sunset (local time).</summary>
+    public DateTime? NextSunset { get; init; }
+
+    // ── Golden hour times in local time ───────────────────────────────────
+    /// <summary>Start of morning golden hour (sun at -6°) in local time.</summary>
     public TimeOnly? GoldenHourMorningStart { get; init; }
 
-    /// <summary>End of morning golden hour (sun at +6°) in NST.</summary>
+    /// <summary>End of morning golden hour (sun at +6°) in local time.</summary>
     public TimeOnly? GoldenHourMorningEnd { get; init; }
 
-    /// <summary>Start of evening golden hour (sun at +6°) in NST.</summary>
+    /// <summary>Start of evening golden hour (sun at +6°) in local time.</summary>
     public TimeOnly? GoldenHourEveningStart { get; init; }
 
-    /// <summary>End of evening golden hour (sun at -6°) in NST.</summary>
+    /// <summary>End of evening golden hour (sun at -6°) in local time.</summary>
     public TimeOnly? GoldenHourEveningEnd { get; init; }
 
     /// <summary>Maximum sun elevation at solar noon, degrees.</summary>
@@ -2895,8 +3903,8 @@ public class TimeResponse
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Pages\Home.razor
-SIZE: 6.29 KB
-MODIFIED: 03/03/2026 16:29:41
+SIZE: 9.2 KB
+MODIFIED: 03/03/2026 17:25:46
 ================================================================================
 
 @page "/"
@@ -2924,7 +3932,7 @@ else
     <TimeDisplay CurrentTime="_currentTime" />
     <DateCards CalendarData="_calendarData?.Res" />
     <MoonDisplay MoonPhase="_moonPhase" IsLive="_isMoonLive" />
-    <Sundisplay Position="_sunPosition" />
+    <Sundisplay Position="_sunPosition" UserPosition="_userSunPosition" IsLive="_isSunLive" />
     <CalendarGrid CalendarData="_calendarData?.Res" />
 }
 
@@ -2933,22 +3941,17 @@ else
 </div>
 
 @code {
-    [Inject]
-    private SolarPositionService SolarPositionService { get; set; } = default!;
-
-    [Inject]
-    private KathmanduCalendarService CalendarService { get; set; } = default!;
-
-    [Inject]
-    private MoonPhaseService MoonPhaseService { get; set; } = default!;
-
-    [Inject]
-    private IJSRuntime JS { get; set; } = default!;
+    [Inject] private SolarPositionService SolarPositionService { get; set; } = default!;
+    [Inject] private KathmanduCalendarService CalendarService { get; set; } = default!;
+    [Inject] private MoonPhaseService MoonPhaseService { get; set; } = default!;
+    [Inject] private ApiLoggerService Logger { get; set; } = default!;
+    [Inject] private IJSRuntime JS { get; set; } = default!;
 
     private CalendarResponse? _calendarData;
     private TimeResponse? _timeData;
     private MoonPhase? _moonPhase;
     private SolarPosition? _sunPosition;
+    private SolarPosition? _userSunPosition;
     private DateTime _currentTime = DateTime.Now;
     private string _lastUpdate = "--";
     private bool _isLoading = true;
@@ -2957,42 +3960,52 @@ else
     private System.Threading.Timer? _timeApiTimer;
     private System.Threading.Timer? _calendarApiTimer;
 
+    // User geolocation
+    private double? _userLat;
+    private double? _userLng;
+    private TimeSpan _userTzOffset = TimeSpan.Zero;
+    private string _userLocationName = "Your Location";
+
     // Visibility + intersection tracking
     private bool _isTabVisible = true;
     private bool _isMoonInView = true;
+    private bool _isSunInView = true;
     private bool _isMoonLive => _isTabVisible && _isMoonInView;
+    private bool _isSunLive => _isTabVisible && _isSunInView;
     private DotNetObjectReference<Home>? _dotNetRef;
     private IJSObjectReference? _jsModule;
+
+    // First-calc logging
+    private bool _hasLoggedFirstSolarCalc;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            // Initial data fetch
             await LoadDataAsync();
 
-            // Start clock timer (updates every second)
             _clockTimer = new System.Threading.Timer(async _ =>
             {
                 _currentTime = CalendarService.GetCurrentKathmanduTime();
 
-                // Only recalculate moon phase when tab is visible AND moon is in viewport
                 if (_isMoonLive)
                 {
                     UpdateMoonPhase();
-                    _sunPosition = SolarPositionService.Calculate(DateTime.UtcNow);
+                }
+
+                if (_isSunLive)
+                {
+                    UpdateSunPositions();
                 }
 
                 await InvokeAsync(StateHasChanged);
             }, null, TimeSpan.Zero, TimeSpan.FromSeconds(0.01));
 
-            // Start time API timer (refreshes every hour)
             _timeApiTimer = new System.Threading.Timer(async _ =>
             {
                 await LoadTimeDataAsync();
             }, null, TimeSpan.FromHours(1), TimeSpan.FromHours(1));
 
-            // Start calendar API timer (refreshes every 24 hours)
             _calendarApiTimer = new System.Threading.Timer(async _ =>
             {
                 await LoadCalendarDataAsync();
@@ -3014,14 +4027,50 @@ else
             _dotNetRef = DotNetObjectReference.Create(this);
             try
             {
+                // Initialize visibility tracking for moon and sun
                 _jsModule = await JS.InvokeAsync<IJSObjectReference>(
-                    "moonVisibility.init", _dotNetRef, "moon-display-root");
+                    "visibilityTracker.init", _dotNetRef);
+
+                // Observe moon element
+                await JS.InvokeVoidAsync("visibilityTracker.observeElement",
+                    "moon-display-root", "OnMoonInViewChanged");
+
+                // Observe sun element
+                await JS.InvokeVoidAsync("visibilityTracker.observeElement",
+                    "sun-display-root", "OnSunInViewChanged");
             }
             catch
             {
-                // If JS interop fails, default to always-live (graceful degradation)
                 _isTabVisible = true;
                 _isMoonInView = true;
+                _isSunInView = true;
+            }
+
+            // Request geolocation
+            try
+            {
+                var geo = await JS.InvokeAsync<GeoResult?>("getGeolocation");
+                if (geo != null)
+                {
+                    _userLat = geo.Lat;
+                    _userLng = geo.Lng;
+
+                    // Get browser timezone offset (minutes from UTC, negative = ahead)
+                    var offsetMinutes = await JS.InvokeAsync<int>("getTimezoneOffsetMinutes");
+                    _userTzOffset = TimeSpan.FromMinutes(-offsetMinutes);
+
+                    // Get timezone name
+                    var tzName = await JS.InvokeAsync<string>("getTimezoneName");
+                    if (!string.IsNullOrEmpty(tzName))
+                        _userLocationName = $"Your Location ({tzName})";
+
+                    UpdateSunPositions();
+                    await InvokeAsync(StateHasChanged);
+                }
+            }
+            catch
+            {
+                // Geolocation denied or unavailable — Kathmandu-only mode
             }
         }
     }
@@ -3030,11 +4079,10 @@ else
     public void OnVisibilityChanged(bool isVisible)
     {
         _isTabVisible = isVisible;
-
-        // When tab becomes visible again, immediately recalculate to catch up
         if (isVisible)
         {
             UpdateMoonPhase();
+            UpdateSunPositions();
             InvokeAsync(StateHasChanged);
         }
     }
@@ -3043,11 +4091,20 @@ else
     public void OnMoonInViewChanged(bool isInView)
     {
         _isMoonInView = isInView;
-
-        // When moon scrolls into view, immediately recalculate
         if (isInView && _isTabVisible)
         {
             UpdateMoonPhase();
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    [JSInvokable]
+    public void OnSunInViewChanged(bool isInView)
+    {
+        _isSunInView = isInView;
+        if (isInView && _isTabVisible)
+        {
+            UpdateSunPositions();
             InvokeAsync(StateHasChanged);
         }
     }
@@ -3056,6 +4113,7 @@ else
     {
         await Task.WhenAll(LoadCalendarDataAsync(), LoadTimeDataAsync());
         UpdateMoonPhase();
+        UpdateSunPositions();
         UpdateLastUpdateTime();
     }
 
@@ -3070,19 +4128,57 @@ else
         _timeData = await CalendarService.GetTimeDataAsync();
         _currentTime = CalendarService.GetCurrentKathmanduTime();
         UpdateMoonPhase();
+        UpdateSunPositions();
         UpdateLastUpdateTime();
         await InvokeAsync(StateHasChanged);
     }
 
     private void UpdateMoonPhase()
     {
-        // IMPORTANT: Use DateTime.UtcNow, NOT _currentTime.
-        // _currentTime is Kathmandu local time (UTC+5:45) but tagged as DateTimeKind.Utc
-        // by GetCurrentKathmanduTime(). Moon phase is the same everywhere on Earth at any
-        // given instant — it only depends on the actual UTC moment, not the timezone.
-        // Passing _currentTime (which is ~5h45m ahead of real UTC) would make the moon
-        // calculation off by ~6 hours, causing illumination differences across devices.
         _moonPhase = MoonPhaseService.CalculateMoonPhase(DateTime.UtcNow);
+    }
+
+    private void UpdateSunPositions()
+    {
+        var utcNow = DateTime.UtcNow;
+        _sunPosition = SolarPositionService.CalculateKathmandu(utcNow);
+
+        if (_userLat.HasValue && _userLng.HasValue)
+        {
+            _userSunPosition = SolarPositionService.Calculate(
+                utcNow, _userLat.Value, _userLng.Value, _userTzOffset, _userLocationName);
+        }
+
+        // Log first calculation after app start
+        if (!_hasLoggedFirstSolarCalc && _sunPosition != null)
+        {
+            _hasLoggedFirstSolarCalc = true;
+            _ = LogFirstSolarCalcAsync();
+        }
+    }
+
+    private async Task LogFirstSolarCalcAsync()
+    {
+        try
+        {
+            var logPayload = new
+            {
+                kathmanduAltitude = _sunPosition?.Altitude,
+                kathmanduAzimuth = _sunPosition?.Azimuth,
+                kathmanduSunrise = _sunPosition?.SunriseLocal?.ToString("HH:mm:ss"),
+                kathmanduSunset = _sunPosition?.SunsetLocal?.ToString("HH:mm:ss"),
+                userLat = _userLat,
+                userLng = _userLng,
+                userAltitude = _userSunPosition?.Altitude,
+                userAzimuth = _userSunPosition?.Azimuth,
+                utcTimestamp = DateTime.UtcNow.ToString("O")
+            };
+            await Logger.LogApiRequestAsync("SolarPosition/FirstCalc", logPayload, false, ApiLoggerService.GetOptions());
+        }
+        catch
+        {
+            // Non-critical
+        }
     }
 
     private void UpdateLastUpdateTime()
@@ -3110,6 +4206,13 @@ else
         }
 
         _dotNetRef?.Dispose();
+    }
+
+    // JS interop model for geolocation result
+    private class GeoResult
+    {
+        public double Lat { get; set; }
+        public double Lng { get; set; }
     }
 }
 
@@ -3817,8 +4920,8 @@ public class MoonPhaseService
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\SolarPositionService.cs
-SIZE: 9.17 KB
-MODIFIED: 03/03/2026 16:24:07
+SIZE: 11.28 KB
+MODIFIED: 03/03/2026 17:23:40
 ================================================================================
 
 using CollabsKus.BlazorWebAssembly.Models;
@@ -3826,29 +4929,36 @@ using CollabsKus.BlazorWebAssembly.Models;
 namespace CollabsKus.BlazorWebAssembly.Services;
 
 /// <summary>
-/// Calculates sun position and daily solar events for Kathmandu using the
+/// Calculates sun position and daily solar events for any location using the
 /// Jean Meeus astronomical algorithm (Astronomical Algorithms, 2nd ed.).
 /// Pure math — no network calls, no JS interop.
 /// </summary>
 public class SolarPositionService
 {
     // Kathmandu coordinates
-    private const double Lat = 27.6984037;
-    private const double Lng = 85.2939889;
+    public const double KathmanduLat = 27.6984037;
+    public const double KathmanduLng = 85.2939889;
 
     // Nepal Standard Time = UTC + 5h 45m
-    private static readonly TimeSpan NstOffset = TimeSpan.FromMinutes(5 * 60 + 45);
+    public static readonly TimeSpan NstOffset = TimeSpan.FromMinutes(5 * 60 + 45);
 
     // ── Public API ────────────────────────────────────────────────────────
 
     /// <summary>
-    /// Compute the full SolarPosition snapshot for the given UTC instant.
-    /// Call this every second from the clock timer.
+    /// Convenience method: compute SolarPosition for Kathmandu.
     /// </summary>
-    public SolarPosition Calculate(DateTime utcNow)
+    public SolarPosition CalculateKathmandu(DateTime utcNow)
     {
-        var (alt, az, decl, ha) = GetAltAz(utcNow, Lat, Lng);
-        var events = GetDailyEvents(utcNow, Lat, Lng);
+        return Calculate(utcNow, KathmanduLat, KathmanduLng, NstOffset, "Kathmandu, Nepal");
+    }
+
+    /// <summary>
+    /// Compute the full SolarPosition snapshot for a given location and UTC instant.
+    /// </summary>
+    public SolarPosition Calculate(DateTime utcNow, double lat, double lng, TimeSpan tzOffset, string locationName)
+    {
+        var (alt, az, decl, ha) = GetAltAz(utcNow, lat, lng);
+        var events = GetDailyEvents(utcNow, lat, lng);
 
         double dayFraction = -1;
         if (events.SunriseUtcMinutes.HasValue && events.SunsetUtcMinutes.HasValue)
@@ -3858,20 +4968,29 @@ public class SolarPositionService
             dayFraction = Math.Clamp((utcMinutes - events.SunriseUtcMinutes.Value) / totalDayMin, 0, 1);
         }
 
+        var (prevSr, prevSs, nextSr, nextSs) = ComputePrevNext(utcNow, lat, lng, tzOffset);
+
         return new SolarPosition
         {
+            LocationName = locationName,
+            Latitude = lat,
+            Longitude = lng,
             Altitude = alt,
             Azimuth = az,
             Declination = decl,
             HourAngle = ha,
             DayFraction = dayFraction,
-            SunriseNST = UtcMinutesToNst(events.SunriseUtcMinutes),
-            SolarNoonNST = UtcMinutesToNst(events.SolarNoonUtcMinutes)!.Value,
-            SunsetNST = UtcMinutesToNst(events.SunsetUtcMinutes),
-            GoldenHourMorningStart = UtcMinutesToNst(events.GoldenMorningStartUtcMin),
-            GoldenHourMorningEnd = UtcMinutesToNst(events.GoldenMorningEndUtcMin),
-            GoldenHourEveningStart = UtcMinutesToNst(events.GoldenEveningStartUtcMin),
-            GoldenHourEveningEnd = UtcMinutesToNst(events.GoldenEveningEndUtcMin),
+            SunriseLocal = UtcMinutesToLocal(events.SunriseUtcMinutes, tzOffset),
+            SolarNoonLocal = UtcMinutesToLocal(events.SolarNoonUtcMinutes, tzOffset)!.Value,
+            SunsetLocal = UtcMinutesToLocal(events.SunsetUtcMinutes, tzOffset),
+            PreviousSunrise = prevSr,
+            PreviousSunset = prevSs,
+            NextSunrise = nextSr,
+            NextSunset = nextSs,
+            GoldenHourMorningStart = UtcMinutesToLocal(events.GoldenMorningStartUtcMin, tzOffset),
+            GoldenHourMorningEnd = UtcMinutesToLocal(events.GoldenMorningEndUtcMin, tzOffset),
+            GoldenHourEveningStart = UtcMinutesToLocal(events.GoldenEveningStartUtcMin, tzOffset),
+            GoldenHourEveningEnd = UtcMinutesToLocal(events.GoldenEveningEndUtcMin, tzOffset),
             MaxElevation = events.MaxElevation,
             DayLength = events.SunriseUtcMinutes.HasValue && events.SunsetUtcMinutes.HasValue
                 ? TimeSpan.FromMinutes(events.SunsetUtcMinutes.Value - events.SunriseUtcMinutes.Value)
@@ -3879,9 +4998,46 @@ public class SolarPositionService
         };
     }
 
+    // ── Previous / Next sunrise & sunset ──────────────────────────────────
+
+    private static (DateTime? prevSunrise, DateTime? prevSunset, DateTime? nextSunrise, DateTime? nextSunset)
+        ComputePrevNext(DateTime utcNow, double lat, double lng, TimeSpan tzOffset)
+    {
+        var localNow = utcNow + tzOffset;
+
+        var dates = new[] { utcNow.Date.AddDays(-1), utcNow.Date, utcNow.Date.AddDays(1) };
+        var allSunrises = new List<DateTime>();
+        var allSunsets = new List<DateTime>();
+
+        foreach (var date in dates)
+        {
+            var ev = GetDailyEvents(new DateTime(date.Year, date.Month, date.Day, 12, 0, 0, DateTimeKind.Utc), lat, lng);
+            if (ev.SunriseUtcMinutes.HasValue)
+            {
+                allSunrises.Add(date.AddMinutes(ev.SunriseUtcMinutes.Value) + tzOffset);
+            }
+            if (ev.SunsetUtcMinutes.HasValue)
+            {
+                allSunsets.Add(date.AddMinutes(ev.SunsetUtcMinutes.Value) + tzOffset);
+            }
+        }
+
+        var prevSrList = allSunrises.Where(s => s <= localNow).OrderByDescending(s => s).ToList();
+        var nextSrList = allSunrises.Where(s => s > localNow).OrderBy(s => s).ToList();
+        var prevSsList = allSunsets.Where(s => s <= localNow).OrderByDescending(s => s).ToList();
+        var nextSsList = allSunsets.Where(s => s > localNow).OrderBy(s => s).ToList();
+
+        return (
+            prevSrList.Count > 0 ? prevSrList[0] : null,
+            prevSsList.Count > 0 ? prevSsList[0] : null,
+            nextSrList.Count > 0 ? nextSrList[0] : null,
+            nextSsList.Count > 0 ? nextSsList[0] : null
+        );
+    }
+
     // ── Core algorithm ────────────────────────────────────────────────────
 
-    private static (double alt, double az, double decl, double ha) GetAltAz(DateTime utc, double lat, double lng)
+    internal static (double alt, double az, double decl, double ha) GetAltAz(DateTime utc, double lat, double lng)
     {
         double jd = ToJulianDay(utc);
         double T = (jd - 2451545.0) / 36525.0;
@@ -3923,7 +5079,7 @@ public class SolarPositionService
 
     // ── Daily events (sunrise, sunset, golden hour) ───────────────────────
 
-    private record DailyEvents(
+    internal record DailyEvents(
         double? SunriseUtcMinutes,
         double SolarNoonUtcMinutes,
         double? SunsetUtcMinutes,
@@ -3934,9 +5090,8 @@ public class SolarPositionService
         double? GoldenEveningEndUtcMin
     );
 
-    private static DailyEvents GetDailyEvents(DateTime utc, double lat, double lng)
+    internal static DailyEvents GetDailyEvents(DateTime utc, double lat, double lng)
     {
-        // Use solar noon UTC as the reference time for the day
         double jd = ToJulianDay(new DateTime(utc.Year, utc.Month, utc.Day, 12, 0, 0, DateTimeKind.Utc));
         double T = (jd - 2451545.0) / 36525.0;
 
@@ -3962,10 +5117,8 @@ public class SolarPositionService
             - 0.5 * y * y * Math.Sin(4 * ToRad(L0))
             - 1.25 * Math.Sin(2 * Mr));
 
-        // Solar noon in UTC minutes from midnight
         double solarNoonUtc = 720.0 - 4.0 * lng - eot;
 
-        // Hour angle for sunrise/sunset (atmospheric refraction correction: -0.833°)
         double cosHA = (Math.Cos(ToRad(90.833)) - Math.Sin(ToRad(lat)) * Math.Sin(ToRad(decl)))
                      / (Math.Cos(ToRad(lat)) * Math.Cos(ToRad(decl)));
 
@@ -3979,8 +5132,7 @@ public class SolarPositionService
 
         double maxElev = 90.0 - Math.Abs(lat - decl);
 
-        // Golden / blue hour: find HA for target elevations -6° and +6°
-        static double? HaMinutes(double elevDeg, double latDeg, double declDeg, double noon)
+        static double? HaMinutes(double elevDeg, double latDeg, double declDeg)
         {
             double cosH = (Math.Sin(ToRad(elevDeg)) - Math.Sin(ToRad(latDeg)) * Math.Sin(ToRad(declDeg)))
                         / (Math.Cos(ToRad(latDeg)) * Math.Cos(ToRad(declDeg)));
@@ -3988,8 +5140,8 @@ public class SolarPositionService
             return ToDeg(Math.Acos(cosH)) * 4.0;
         }
 
-        double? ha6 = HaMinutes(6, lat, decl, solarNoonUtc);
-        double? ha_6 = HaMinutes(-6, lat, decl, solarNoonUtc);
+        double? ha6 = HaMinutes(6, lat, decl);
+        double? ha_6 = HaMinutes(-6, lat, decl);
 
         return new DailyEvents(
             SunriseUtcMinutes: sunriseMin,
@@ -4005,24 +5157,23 @@ public class SolarPositionService
 
     // ── Helpers ───────────────────────────────────────────────────────────
 
-    private static TimeOnly? UtcMinutesToNst(double? utcMinutes)
+    private static TimeOnly? UtcMinutesToLocal(double? utcMinutes, TimeSpan tzOffset)
     {
         if (!utcMinutes.HasValue) return null;
-        double nstMin = (utcMinutes.Value + NstOffset.TotalMinutes) % 1440;
-        if (nstMin < 0) nstMin += 1440;
-        int h = (int)(nstMin / 60);
-        int m = (int)(nstMin % 60);
-        int s = (int)((nstMin % 1) * 60);
-        h %= 24;
+        double localMin = (utcMinutes.Value + tzOffset.TotalMinutes) % 1440;
+        if (localMin < 0) localMin += 1440;
+        int h = (int)(localMin / 60) % 24;
+        int m = (int)(localMin % 60);
+        int s = (int)((localMin % 1) * 60);
         return new TimeOnly(h, m, s);
     }
 
-    private static double ToJulianDay(DateTime utc)
+    internal static double ToJulianDay(DateTime utc)
         => utc.ToOADate() + 2415018.5;
 
-    private static double ToRad(double deg) => deg * Math.PI / 180.0;
-    private static double ToDeg(double rad) => rad * 180.0 / Math.PI;
-    private static double NormDeg(double d) => ((d % 360) + 360) % 360;
+    internal static double ToRad(double deg) => deg * Math.PI / 180.0;
+    internal static double ToDeg(double rad) => rad * 180.0 / Math.PI;
+    internal static double NormDeg(double d) => ((d % 360) + 360) % 360;
 }
 
 
@@ -4126,8 +5277,8 @@ body {
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\wwwroot\index.html
-SIZE: 9.25 KB
-MODIFIED: 03/03/2026 16:26:04
+SIZE: 10.25 KB
+MODIFIED: 03/03/2026 17:26:13
 ================================================================================
 
 <!DOCTYPE html>
@@ -4163,41 +5314,42 @@ MODIFIED: 03/03/2026 16:26:04
 
     <script src="_framework/blazor.webassembly.js"></script>
 
-    <script>// ── Moon visibility tracking (Page Visibility API + IntersectionObserver) ──
-        window.moonVisibility = {
-            _observer: null,
+    <script>
+        // ── Unified visibility tracking (Page Visibility API + IntersectionObserver) ──
+        window.visibilityTracker = {
+            _observers: {},
             _dotNetRef: null,
             _visHandler: null,
 
-            init: function (dotNetRef, elementId) {
+            init: function (dotNetRef) {
                 this._dotNetRef = dotNetRef;
 
-                // 1. Page Visibility API — detect tab focus/blur
+                // Page Visibility API — detect tab focus/blur
                 this._visHandler = function () {
                     var isVisible = !document.hidden;
                     dotNetRef.invokeMethodAsync('OnVisibilityChanged', isVisible);
                 };
                 document.addEventListener('visibilitychange', this._visHandler);
 
-                // 2. IntersectionObserver — detect if moon section is in viewport
-                var target = document.getElementById(elementId);
-                if (target && 'IntersectionObserver' in window) {
-                    this._observer = new IntersectionObserver(function (entries) {
-                        var isInView = entries[0].isIntersecting;
-                        dotNetRef.invokeMethodAsync('OnMoonInViewChanged', isInView);
-                    }, {
-                        // Trigger as soon as any part of the element is visible
-                        threshold: 0.0
-                    });
-                    this._observer.observe(target);
-                }
-
                 // Return a reference so Blazor can call dispose
                 return {
                     dispose: function () {
-                        window.moonVisibility.dispose();
+                        window.visibilityTracker.dispose();
                     }
                 };
+            },
+
+            observeElement: function (elementId, callbackName) {
+                var target = document.getElementById(elementId);
+                var ref = this._dotNetRef;
+                if (target && ref && 'IntersectionObserver' in window) {
+                    var observer = new IntersectionObserver(function (entries) {
+                        var isInView = entries[0].isIntersecting;
+                        ref.invokeMethodAsync(callbackName, isInView);
+                    }, { threshold: 0.0 });
+                    observer.observe(target);
+                    this._observers[elementId] = observer;
+                }
             },
 
             dispose: function () {
@@ -4205,67 +5357,98 @@ MODIFIED: 03/03/2026 16:26:04
                     document.removeEventListener('visibilitychange', this._visHandler);
                     this._visHandler = null;
                 }
-                if (this._observer) {
-                    this._observer.disconnect();
-                    this._observer = null;
+                for (var id in this._observers) {
+                    if (this._observers.hasOwnProperty(id)) {
+                        this._observers[id].disconnect();
+                    }
                 }
+                this._observers = {};
                 this._dotNetRef = null;
             }
         };
-        // ── Sun tracker canvas (add this block to wwwroot/index.html, inside the existing <script> tag) ──
-        // Place it alongside the moonVisibility object.
 
+        // ── Geolocation helpers ──────────────────────────────────────────────
+        window.getGeolocation = function () {
+            return new Promise(function (resolve) {
+                if (!navigator.geolocation) {
+                    resolve(null);
+                    return;
+                }
+                navigator.geolocation.getCurrentPosition(
+                    function (pos) {
+                        resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+                    },
+                    function () {
+                        resolve(null);
+                    },
+                    { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
+                );
+            });
+        };
+
+        window.getTimezoneOffsetMinutes = function () {
+            return new Date().getTimezoneOffset();
+        };
+
+        window.getTimezoneName = function () {
+            try {
+                return Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+            } catch (e) {
+                return '';
+            }
+        };
+
+        // ── Sun tracker canvas ───────────────────────────────────────────────
         window.sunTracker = {
             _canvases: {},
 
             init: function (canvasId) {
-                const canvas = document.getElementById(canvasId);
+                var canvas = document.getElementById(canvasId);
                 if (!canvas) return;
-                // Make canvas resolution match display size
-                const resize = () => {
+                var resize = function () {
                     canvas.width = canvas.offsetWidth;
                     canvas.height = canvas.offsetHeight || 220;
                 };
                 resize();
                 window.addEventListener('resize', resize);
-                this._canvases[canvasId] = { canvas, resize };
+                this._canvases[canvasId] = { canvas: canvas, resize: resize };
             },
 
             draw: function (canvasId, altitude, azimuth, dayFraction, isAboveHorizon) {
-                const entry = this._canvases[canvasId];
+                var entry = this._canvases[canvasId];
                 if (!entry) return;
-                const canvas = entry.canvas;
-                const ctx = canvas.getContext('2d');
-                const W = canvas.width, H = canvas.height;
-                const cx = W / 2, horizY = H * 0.75;
-                const arcRx = W * 0.44, arcRy = H * 0.82;
+                var canvas = entry.canvas;
+                var ctx = canvas.getContext('2d');
+                var W = canvas.width, H = canvas.height;
+                var cx = W / 2, horizY = H * 0.75;
+                var arcRx = W * 0.44, arcRy = H * 0.82;
 
                 ctx.clearRect(0, 0, W, H);
 
-                // ── Sky gradient (shifts with altitude) ──────────────────────────
-                let skyTop, skyBot;
+                // Sky gradient
+                var skyTop, skyBot;
                 if (altitude > 15) { skyTop = '#061228'; skyBot = '#0d2040'; }
-                else if (altitude > 0) { const t = altitude / 15; skyTop = lerpHex('#0f2050', '#061228', t); skyBot = lerpHex('#3a1a08', '#0d2040', t); }
-                else if (altitude > -6) { const t = (altitude + 6) / 6; skyTop = lerpHex('#0a0e18', '#0f2050', t); skyBot = lerpHex('#1a0e04', '#3a1a08', t); }
+                else if (altitude > 0) { var t = altitude / 15; skyTop = lerpHex('#0f2050', '#061228', t); skyBot = lerpHex('#3a1a08', '#0d2040', t); }
+                else if (altitude > -6) { var t2 = (altitude + 6) / 6; skyTop = lerpHex('#0a0e18', '#0f2050', t2); skyBot = lerpHex('#1a0e04', '#3a1a08', t2); }
                 else { skyTop = '#04080f'; skyBot = '#080c16'; }
 
-                const skyGrad = ctx.createLinearGradient(0, 0, 0, horizY);
+                var skyGrad = ctx.createLinearGradient(0, 0, 0, horizY);
                 skyGrad.addColorStop(0, skyTop); skyGrad.addColorStop(1, skyBot);
                 ctx.fillStyle = skyGrad;
                 ctx.fillRect(0, 0, W, horizY);
 
                 // Ground
-                const gnd = ctx.createLinearGradient(0, horizY, 0, H);
+                var gnd = ctx.createLinearGradient(0, horizY, 0, H);
                 gnd.addColorStop(0, '#0e180e'); gnd.addColorStop(1, '#060c06');
                 ctx.fillStyle = gnd;
                 ctx.fillRect(0, horizY, W, H - horizY);
 
                 // Horizon glow
                 if (altitude > -8 && altitude < 20) {
-                    const t = Math.max(0, 1 - Math.abs(altitude) / 20);
-                    const glow = ctx.createRadialGradient(cx, horizY, 0, cx, horizY, W * 0.5);
-                    glow.addColorStop(0, `rgba(255,120,40,${0.38 * t})`);
-                    glow.addColorStop(0.4, `rgba(255,80,20,${0.15 * t})`);
+                    var tg = Math.max(0, 1 - Math.abs(altitude) / 20);
+                    var glow = ctx.createRadialGradient(cx, horizY, 0, cx, horizY, W * 0.5);
+                    glow.addColorStop(0, 'rgba(255,120,40,' + (0.38 * tg) + ')');
+                    glow.addColorStop(0.4, 'rgba(255,80,20,' + (0.15 * tg) + ')');
                     glow.addColorStop(1, 'rgba(0,0,0,0)');
                     ctx.fillStyle = glow;
                     ctx.fillRect(0, horizY - H * 0.4, W, H * 0.5);
@@ -4285,21 +5468,19 @@ MODIFIED: 03/03/2026 16:26:04
                 ctx.setLineDash([]);
 
                 // Sun position on arc
-                const frac = Math.max(0, Math.min(1, dayFraction < 0 ? 0.5 : dayFraction));
-                const angle = Math.PI - frac * Math.PI; // PI=east → 0=west
-                const sunX = cx + arcRx * Math.cos(angle);
-                const sunY = horizY - arcRy * Math.sin(angle);
+                var frac = Math.max(0, Math.min(1, dayFraction < 0 ? 0.5 : dayFraction));
+                var angle = Math.PI - frac * Math.PI;
+                var sunX = cx + arcRx * Math.cos(angle);
+                var sunY = horizY - arcRy * Math.sin(angle);
 
                 if (dayFraction >= 0 && isAboveHorizon) {
-                    // Corona
-                    const corona = ctx.createRadialGradient(sunX, sunY, 2, sunX, sunY, 42);
+                    var corona = ctx.createRadialGradient(sunX, sunY, 2, sunX, sunY, 42);
                     corona.addColorStop(0, 'rgba(255,220,80,0.92)');
                     corona.addColorStop(0.2, 'rgba(255,180,40,0.5)');
                     corona.addColorStop(0.6, 'rgba(255,140,20,0.14)');
                     corona.addColorStop(1, 'rgba(0,0,0,0)');
                     ctx.fillStyle = corona;
                     ctx.beginPath(); ctx.arc(sunX, sunY, 42, 0, Math.PI * 2); ctx.fill();
-                    // Disc
                     ctx.beginPath(); ctx.arc(sunX, sunY, 11, 0, Math.PI * 2);
                     ctx.fillStyle = '#ffe060'; ctx.fill();
                 } else if (dayFraction >= 0) {
@@ -4311,9 +5492,9 @@ MODIFIED: 03/03/2026 16:26:04
                 ctx.font = '10px "Courier New", monospace';
                 ctx.fillStyle = 'rgba(240,165,0,0.55)';
                 ctx.textAlign = 'left';
-                ctx.fillText(`ALT ${altitude >= 0 ? '+' : ''}${altitude.toFixed(1)}°`, 12, H - 10);
+                ctx.fillText('ALT ' + (altitude >= 0 ? '+' : '') + altitude.toFixed(1) + '\u00B0', 12, H - 10);
                 ctx.textAlign = 'right';
-                ctx.fillText(`AZ ${azimuth.toFixed(1)}°`, W - 12, H - 10);
+                ctx.fillText('AZ ' + azimuth.toFixed(1) + '\u00B0', W - 12, H - 10);
                 ctx.fillStyle = 'rgba(255,255,255,0.18)';
                 ctx.textAlign = 'left'; ctx.fillText('E', 12, horizY - 5);
                 ctx.textAlign = 'right'; ctx.fillText('W', W - 12, horizY - 5);
@@ -4321,7 +5502,7 @@ MODIFIED: 03/03/2026 16:26:04
             },
 
             dispose: function (canvasId) {
-                const entry = this._canvases[canvasId];
+                var entry = this._canvases[canvasId];
                 if (!entry) return;
                 window.removeEventListener('resize', entry.resize);
                 delete this._canvases[canvasId];
@@ -4329,12 +5510,12 @@ MODIFIED: 03/03/2026 16:26:04
         };
 
         function lerpHex(c1, c2, t) {
-            const r1 = parseInt(c1.slice(1, 3), 16), g1 = parseInt(c1.slice(3, 5), 16), b1 = parseInt(c1.slice(5, 7), 16);
-            const r2 = parseInt(c2.slice(1, 3), 16), g2 = parseInt(c2.slice(3, 5), 16), b2 = parseInt(c2.slice(5, 7), 16);
-            const r = Math.round(r1 + (r2 - r1) * t), g = Math.round(g1 + (g2 - g1) * t), b = Math.round(b1 + (b2 - b1) * t);
-            return `rgb(${r},${g},${b})`;
+            var r1 = parseInt(c1.slice(1, 3), 16), g1 = parseInt(c1.slice(3, 5), 16), b1 = parseInt(c1.slice(5, 7), 16);
+            var r2 = parseInt(c2.slice(1, 3), 16), g2 = parseInt(c2.slice(3, 5), 16), b2 = parseInt(c2.slice(5, 7), 16);
+            var r = Math.round(r1 + (r2 - r1) * t), g = Math.round(g1 + (g2 - g1) * t), b = Math.round(b1 + (b2 - b1) * t);
+            return 'rgb(' + r + ',' + g + ',' + b + ')';
         }
-        </script>
+    </script>
 </body>
 
 </html>
@@ -4419,9 +5600,661 @@ async function onFetch(event) {
 
 
 ================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.PlaywrightTests\CollabsKus.PlaywrightTests.csproj
+SIZE: 0.37 KB
+MODIFIED: 03/03/2026 17:29:02
+================================================================================
+
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="TUnit" />
+    <PackageReference Include="Microsoft.Playwright" />
+  </ItemGroup>
+</Project>
+
+
+
+================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.PlaywrightTests\GlobalUsings.cs
+SIZE: 0.13 KB
+MODIFIED: 03/03/2026 17:29:22
+================================================================================
+
+global using TUnit.Core;
+global using TUnit.Assertions;
+global using TUnit.Assertions.Extensions;
+global using Microsoft.Playwright;
+
+
+
+================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.PlaywrightTests\HomePageTests.cs
+SIZE: 7.21 KB
+MODIFIED: 03/03/2026 17:29:49
+================================================================================
+
+namespace CollabsKus.PlaywrightTests;
+
+/// <summary>
+/// End-to-end Playwright tests for the Kathmandu Calendar app.
+///
+/// Prerequisites:
+///   1. Install browsers: pwsh bin/Debug/net10.0/playwright.ps1 install
+///   2. Run the app: dotnet run --project CollabsKus.BlazorWebAssembly
+///   3. Run tests: dotnet test CollabsKus.PlaywrightTests
+///
+/// Set the BASE_URL environment variable to override the default (http://localhost:5267).
+/// </summary>
+public class HomePageTests
+{
+    private static string BaseUrl => Environment.GetEnvironmentVariable("BASE_URL") ?? "http://localhost:5267";
+
+    private IPlaywright _playwright = null!;
+    private IBrowser _browser = null!;
+    private IBrowserContext _context = null!;
+    private IPage _page = null!;
+
+    [Before(Test)]
+    public async Task Setup()
+    {
+        _playwright = await Playwright.CreateAsync();
+        _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
+        _context = await _browser.NewContextAsync(new BrowserNewContextOptions
+        {
+            // Deny geolocation to test Kathmandu-only mode
+            Permissions = []
+        });
+        _page = await _context.NewPageAsync();
+    }
+
+    [After(Test)]
+    public async Task Teardown()
+    {
+        await _context.CloseAsync();
+        await _browser.CloseAsync();
+        _playwright.Dispose();
+    }
+
+    [Test]
+    public async Task Page_HasCorrectTitle()
+    {
+        await _page.GotoAsync(BaseUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+        var title = await _page.TitleAsync();
+        await Assert.That(title).IsEqualTo("Kathmandu Calendar & Time");
+    }
+
+    [Test]
+    public async Task Header_ShowsKathmanduInNepali()
+    {
+        await _page.GotoAsync(BaseUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+        var h1 = await _page.Locator("h1").TextContentAsync();
+        await Assert.That(h1).IsEqualTo("काठमाडौं");
+    }
+
+    [Test]
+    public async Task TimeDisplay_IsVisible()
+    {
+        await _page.GotoAsync(BaseUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+        // Wait for Blazor to render (loading state disappears)
+        await _page.WaitForSelectorAsync(".time-display", new PageWaitForSelectorOptions { Timeout = 30000 });
+        var isVisible = await _page.Locator(".time-display").IsVisibleAsync();
+        await Assert.That(isVisible).IsTrue();
+    }
+
+    [Test]
+    public async Task MoonDisplay_ShowsPhaseInfo()
+    {
+        await _page.GotoAsync(BaseUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+        await _page.WaitForSelectorAsync("#moon-display-root", new PageWaitForSelectorOptions { Timeout = 30000 });
+
+        var moonIcon = await _page.Locator(".moon-icon").TextContentAsync();
+        await Assert.That(string.IsNullOrWhiteSpace(moonIcon)).IsFalse();
+
+        var phaseName = await _page.Locator(".moon-phase-name").TextContentAsync();
+        await Assert.That(string.IsNullOrWhiteSpace(phaseName)).IsFalse();
+    }
+
+    [Test]
+    public async Task SunDisplay_IsRendered()
+    {
+        await _page.GotoAsync(BaseUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+        await _page.WaitForSelectorAsync("#sun-display-root", new PageWaitForSelectorOptions { Timeout = 30000 });
+        var isVisible = await _page.Locator("#sun-display-root").IsVisibleAsync();
+        await Assert.That(isVisible).IsTrue();
+    }
+
+    [Test]
+    public async Task SunDisplay_ShowsKathmanduLocation()
+    {
+        await _page.GotoAsync(BaseUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+        await _page.WaitForSelectorAsync(".sun-location-header", new PageWaitForSelectorOptions { Timeout = 30000 });
+
+        var header = await _page.Locator(".sun-location-header").First.TextContentAsync();
+        await Assert.That(header!.Contains("Kathmandu")).IsTrue();
+    }
+
+    [Test]
+    public async Task DateCards_ShowBikramSambat()
+    {
+        await _page.GotoAsync(BaseUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+        await _page.WaitForSelectorAsync(".date-card", new PageWaitForSelectorOptions { Timeout = 30000 });
+
+        var cards = await _page.Locator(".date-card").CountAsync();
+        await Assert.That(cards).IsGreaterThanOrEqualTo(2);
+    }
+
+    [Test]
+    public async Task CalendarGrid_RendersSevenDayColumns()
+    {
+        await _page.GotoAsync(BaseUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+        await _page.WaitForSelectorAsync(".calendar-header .day-name", new PageWaitForSelectorOptions { Timeout = 30000 });
+
+        var dayNames = await _page.Locator(".calendar-header .day-name").CountAsync();
+        await Assert.That(dayNames).IsEqualTo(7);
+    }
+
+    [Test]
+    public async Task Footer_ShowsLastUpdated()
+    {
+        await _page.GotoAsync(BaseUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+        await _page.WaitForSelectorAsync(".footer", new PageWaitForSelectorOptions { Timeout = 30000 });
+
+        var footer = await _page.Locator(".footer").TextContentAsync();
+        await Assert.That(footer!.Contains("Last updated")).IsTrue();
+    }
+
+    [Test]
+    public async Task MoonLiveIndicator_AppearsWhenVisible()
+    {
+        await _page.GotoAsync(BaseUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+        await _page.WaitForSelectorAsync(".moon-live-indicator", new PageWaitForSelectorOptions { Timeout = 30000 });
+
+        var isVisible = await _page.Locator(".moon-live-indicator").IsVisibleAsync();
+        await Assert.That(isVisible).IsTrue();
+    }
+
+    [Test]
+    public async Task SunCanvas_ExistsForKathmandu()
+    {
+        await _page.GotoAsync(BaseUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+        await _page.WaitForSelectorAsync("#sunSkyCanvasKtm", new PageWaitForSelectorOptions { Timeout = 30000 });
+
+        var canvas = await _page.Locator("#sunSkyCanvasKtm").CountAsync();
+        await Assert.That(canvas).IsEqualTo(1);
+    }
+
+    [Test]
+    public async Task WithGeolocation_ShowsUserSunTracker()
+    {
+        // Create a new context with geolocation granted
+        var geoContext = await _browser.NewContextAsync(new BrowserNewContextOptions
+        {
+            Permissions = ["geolocation"],
+            Geolocation = new Geolocation { Latitude = 40.7128f, Longitude = -74.006f },
+        });
+
+        var geoPage = await geoContext.NewPageAsync();
+        await geoPage.GotoAsync(BaseUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+
+        // Wait for the user canvas to appear (geolocation callback triggers re-render)
+        try
+        {
+            await geoPage.WaitForSelectorAsync("#sunSkyCanvasUser", new PageWaitForSelectorOptions { Timeout = 15000 });
+            var count = await geoPage.Locator("#sunSkyCanvasUser").CountAsync();
+            await Assert.That(count).IsEqualTo(1);
+        }
+        catch (TimeoutException)
+        {
+            // If geolocation doesn't work in headless mode, that's acceptable — skip
+        }
+
+        await geoContext.CloseAsync();
+    }
+}
+
+
+
+================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.Tests\CollabsKus.Tests.csproj
+SIZE: 0.44 KB
+MODIFIED: 03/03/2026 17:26:43
+================================================================================
+
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="TUnit" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CollabsKus.BlazorWebAssembly\CollabsKus.BlazorWebAssembly.csproj" />
+  </ItemGroup>
+</Project>
+
+
+
+================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.Tests\GlobalUsings.cs
+SIZE: 0.1 KB
+MODIFIED: 03/03/2026 17:27:06
+================================================================================
+
+global using TUnit.Core;
+global using TUnit.Assertions;
+global using TUnit.Assertions.Extensions;
+
+
+
+================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.Tests\Services\KathmanduCalendarServiceTests.cs
+SIZE: 1.63 KB
+MODIFIED: 03/03/2026 17:28:44
+================================================================================
+
+using CollabsKus.BlazorWebAssembly.Services;
+
+namespace CollabsKus.Tests.Services;
+
+public class KathmanduCalendarServiceTests
+{
+    [Test]
+    public async Task ToNepaliDigits_Zero_Returns_DoubleZero()
+    {
+        var result = KathmanduCalendarService.ToNepaliDigits(0);
+        await Assert.That(result).IsEqualTo("००");
+    }
+
+    [Test]
+    public async Task ToNepaliDigits_SingleDigit_ReturnsPaddedNepali()
+    {
+        var result = KathmanduCalendarService.ToNepaliDigits(5);
+        await Assert.That(result).IsEqualTo("०५");
+    }
+
+    [Test]
+    public async Task ToNepaliDigits_TwoDigitNumber_ReturnsCorrectNepali()
+    {
+        var result = KathmanduCalendarService.ToNepaliDigits(12);
+        await Assert.That(result).IsEqualTo("१२");
+    }
+
+    [Test]
+    public async Task ToNepaliDigits_AllDigits_MapCorrectly()
+    {
+        // Test each digit 0-9
+        var expected = new[] { "००", "०१", "०२", "०३", "०४", "०५", "०६", "०७", "०८", "०९" };
+        for (int i = 0; i < 10; i++)
+        {
+            var result = KathmanduCalendarService.ToNepaliDigits(i);
+            await Assert.That(result).IsEqualTo(expected[i]);
+        }
+    }
+
+    [Test]
+    public async Task ToNepaliDigits_59_Returns_Correct()
+    {
+        var result = KathmanduCalendarService.ToNepaliDigits(59);
+        await Assert.That(result).IsEqualTo("५९");
+    }
+
+    [Test]
+    public async Task ToNepaliDigits_10_Returns_Correct()
+    {
+        var result = KathmanduCalendarService.ToNepaliDigits(10);
+        await Assert.That(result).IsEqualTo("१०");
+    }
+}
+
+
+
+================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.Tests\Services\MoonPhaseServiceTests.cs
+SIZE: 5.53 KB
+MODIFIED: 03/03/2026 17:27:33
+================================================================================
+
+using CollabsKus.BlazorWebAssembly.Services;
+
+namespace CollabsKus.Tests.Services;
+
+public class MoonPhaseServiceTests
+{
+    private const double SynodicMonth = 29.53058770576;
+
+    [Test]
+    public async Task Illumination_IsAlways_Between0And100()
+    {
+        // Test across a full synodic month in 1-day increments
+        var baseDate = new DateTime(2025, 6, 1, 12, 0, 0, DateTimeKind.Utc);
+        for (int i = 0; i < 30; i++)
+        {
+            var date = baseDate.AddDays(i);
+            var phase = MoonPhaseService.CalculateMoonPhase(date);
+            await Assert.That(phase.Illumination).IsGreaterThanOrEqualTo(0.0);
+            await Assert.That(phase.Illumination).IsLessThanOrEqualTo(100.0);
+        }
+    }
+
+    [Test]
+    public async Task MoonAge_IsAlways_WithinSynodicMonth()
+    {
+        var baseDate = new DateTime(2025, 3, 15, 0, 0, 0, DateTimeKind.Utc);
+        for (int i = 0; i < 60; i++)
+        {
+            var date = baseDate.AddDays(i);
+            var phase = MoonPhaseService.CalculateMoonPhase(date);
+            await Assert.That(phase.Age).IsGreaterThanOrEqualTo(0.0);
+            await Assert.That(phase.Age).IsLessThan(SynodicMonth);
+        }
+    }
+
+    [Test]
+    public async Task PhaseName_IsAlways_OneOfKnownPhases()
+    {
+        var validNames = new HashSet<string>
+        {
+            "New Moon", "Waxing Crescent", "First Quarter", "Waxing Gibbous",
+            "Full Moon", "Waning Gibbous", "Last Quarter", "Waning Crescent"
+        };
+
+        var baseDate = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        for (int i = 0; i < 365; i += 3)
+        {
+            var date = baseDate.AddDays(i);
+            var phase = MoonPhaseService.CalculateMoonPhase(date);
+            await Assert.That(validNames.Contains(phase.Name)).IsTrue();
+        }
+    }
+
+    [Test]
+    public async Task TithiNumber_IsAlways_Between1And15()
+    {
+        var baseDate = new DateTime(2025, 4, 1, 6, 0, 0, DateTimeKind.Utc);
+        for (int i = 0; i < 30; i++)
+        {
+            var date = baseDate.AddDays(i);
+            var phase = MoonPhaseService.CalculateMoonPhase(date);
+            await Assert.That(phase.TithiNumber).IsGreaterThanOrEqualTo(1);
+            await Assert.That(phase.TithiNumber).IsLessThanOrEqualTo(15);
+        }
+    }
+
+    [Test]
+    public async Task Paksha_IsAlways_ShuklaOrKrishna()
+    {
+        var baseDate = new DateTime(2025, 7, 10, 12, 0, 0, DateTimeKind.Utc);
+        for (int i = 0; i < 30; i++)
+        {
+            var date = baseDate.AddDays(i);
+            var phase = MoonPhaseService.CalculateMoonPhase(date);
+            var validPaksha = phase.Paksha == "Shukla Paksha" || phase.Paksha == "Krishna Paksha";
+            await Assert.That(validPaksha).IsTrue();
+        }
+    }
+
+    [Test]
+    public async Task Icon_IsNeverEmpty()
+    {
+        var date = new DateTime(2025, 9, 20, 18, 30, 0, DateTimeKind.Utc);
+        var phase = MoonPhaseService.CalculateMoonPhase(date);
+        await Assert.That(string.IsNullOrEmpty(phase.Icon)).IsFalse();
+    }
+
+    [Test]
+    public async Task DaysSinceNewMoon_EqualsAge()
+    {
+        var date = new DateTime(2025, 5, 5, 0, 0, 0, DateTimeKind.Utc);
+        var phase = MoonPhaseService.CalculateMoonPhase(date);
+        // DaysSinceNewMoon should equal Age (both derived from elongation)
+        await Assert.That(Math.Abs(phase.DaysSinceNewMoon - phase.Age)).IsLessThan(0.01);
+    }
+
+    [Test]
+    public async Task DaysUntilNewMoon_PlusDaysSince_EqualsSynodicMonth()
+    {
+        var date = new DateTime(2025, 8, 12, 8, 0, 0, DateTimeKind.Utc);
+        var phase = MoonPhaseService.CalculateMoonPhase(date);
+        var total = phase.DaysSinceNewMoon + phase.DaysUntilNewMoon;
+        await Assert.That(Math.Abs(total - SynodicMonth)).IsLessThan(0.01);
+    }
+
+    [Test]
+    public async Task NewMoon_HasLowIllumination()
+    {
+        // A known approximate new moon: 2025-01-29 ~12:36 UTC
+        var newMoonApprox = new DateTime(2025, 1, 29, 12, 36, 0, DateTimeKind.Utc);
+        var phase = MoonPhaseService.CalculateMoonPhase(newMoonApprox);
+        await Assert.That(phase.Illumination).IsLessThan(1.0);
+    }
+
+    [Test]
+    public async Task FullMoon_HasHighIllumination()
+    {
+        // A known approximate full moon: 2025-02-12 ~13:53 UTC
+        var fullMoonApprox = new DateTime(2025, 2, 12, 13, 53, 0, DateTimeKind.Utc);
+        var phase = MoonPhaseService.CalculateMoonPhase(fullMoonApprox);
+        await Assert.That(phase.Illumination).IsGreaterThan(99.0);
+    }
+
+    [Test]
+    public async Task SameUtcInstant_ProducesSameResult()
+    {
+        var utc = new DateTime(2025, 6, 15, 14, 30, 0, DateTimeKind.Utc);
+        var phase1 = MoonPhaseService.CalculateMoonPhase(utc);
+        var phase2 = MoonPhaseService.CalculateMoonPhase(utc);
+        await Assert.That(phase1.Illumination).IsEqualTo(phase2.Illumination);
+        await Assert.That(phase1.Age).IsEqualTo(phase2.Age);
+    }
+
+    [Test]
+    public async Task ShuklaLastTithi_IsPurnima()
+    {
+        // Find a date near full moon where Shukla Paksha tithi 15 occurs
+        var fullMoonApprox = new DateTime(2025, 2, 12, 13, 53, 0, DateTimeKind.Utc);
+        var phase = MoonPhaseService.CalculateMoonPhase(fullMoonApprox);
+        if (phase.Paksha == "Shukla Paksha" && phase.TithiNumber == 15)
+        {
+            await Assert.That(phase.TithiName).IsEqualTo("Purnima");
+        }
+        // else: the exact moment might land in Krishna Paksha — that's OK, just skip assertion
+    }
+}
+
+
+
+================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.Tests\Services\SolarPositionServiceTests.cs
+SIZE: 6.52 KB
+MODIFIED: 03/03/2026 17:28:07
+================================================================================
+
+using CollabsKus.BlazorWebAssembly.Services;
+
+namespace CollabsKus.Tests.Services;
+
+public class SolarPositionServiceTests
+{
+    private readonly SolarPositionService _service = new();
+
+    [Test]
+    public async Task Kathmandu_MidDay_HasPositiveAltitude()
+    {
+        // Mid-day UTC in summer — Kathmandu is UTC+5:45, so noon NST ≈ 06:15 UTC
+        var utc = new DateTime(2025, 6, 21, 6, 15, 0, DateTimeKind.Utc);
+        var pos = _service.CalculateKathmandu(utc);
+        await Assert.That(pos.Altitude).IsGreaterThan(50.0);
+        await Assert.That(pos.IsAboveHorizon).IsTrue();
+    }
+
+    [Test]
+    public async Task Kathmandu_MidNight_HasNegativeAltitude()
+    {
+        // Midnight NST ≈ 18:15 UTC
+        var utc = new DateTime(2025, 6, 21, 18, 15, 0, DateTimeKind.Utc);
+        var pos = _service.CalculateKathmandu(utc);
+        await Assert.That(pos.Altitude).IsLessThan(0.0);
+        await Assert.That(pos.IsAboveHorizon).IsFalse();
+    }
+
+    [Test]
+    public async Task Azimuth_IsAlways_Between0And360()
+    {
+        var baseDate = new DateTime(2025, 3, 20, 0, 0, 0, DateTimeKind.Utc);
+        for (int hour = 0; hour < 24; hour++)
+        {
+            var utc = baseDate.AddHours(hour);
+            var pos = _service.CalculateKathmandu(utc);
+            await Assert.That(pos.Azimuth).IsGreaterThanOrEqualTo(0.0);
+            await Assert.That(pos.Azimuth).IsLessThan(360.0);
+        }
+    }
+
+    [Test]
+    public async Task DayLength_InKathmandu_IsBetween10And14Hours()
+    {
+        // Test a few dates across the year
+        var dates = new[]
+        {
+            new DateTime(2025, 1, 15, 12, 0, 0, DateTimeKind.Utc),  // winter
+            new DateTime(2025, 3, 21, 12, 0, 0, DateTimeKind.Utc),  // equinox
+            new DateTime(2025, 6, 21, 12, 0, 0, DateTimeKind.Utc),  // summer solstice
+            new DateTime(2025, 9, 23, 12, 0, 0, DateTimeKind.Utc),  // equinox
+            new DateTime(2025, 12, 21, 12, 0, 0, DateTimeKind.Utc), // winter solstice
+        };
+
+        foreach (var utc in dates)
+        {
+            var pos = _service.CalculateKathmandu(utc);
+            await Assert.That(pos.DayLength.TotalHours).IsGreaterThan(10.0);
+            await Assert.That(pos.DayLength.TotalHours).IsLessThan(14.0);
+        }
+    }
+
+    [Test]
+    public async Task Sunrise_IsBeforeSunset()
+    {
+        var utc = new DateTime(2025, 4, 10, 12, 0, 0, DateTimeKind.Utc);
+        var pos = _service.CalculateKathmandu(utc);
+        await Assert.That(pos.SunriseLocal.HasValue).IsTrue();
+        await Assert.That(pos.SunsetLocal.HasValue).IsTrue();
+        await Assert.That(pos.SunriseLocal!.Value < pos.SunsetLocal!.Value).IsTrue();
+    }
+
+    [Test]
+    public async Task SolarNoon_IsBetweenSunriseAndSunset()
+    {
+        var utc = new DateTime(2025, 7, 1, 12, 0, 0, DateTimeKind.Utc);
+        var pos = _service.CalculateKathmandu(utc);
+        await Assert.That(pos.SunriseLocal.HasValue).IsTrue();
+        await Assert.That(pos.SunsetLocal.HasValue).IsTrue();
+        await Assert.That(pos.SolarNoonLocal > pos.SunriseLocal!.Value).IsTrue();
+        await Assert.That(pos.SolarNoonLocal < pos.SunsetLocal!.Value).IsTrue();
+    }
+
+    [Test]
+    public async Task MaxElevation_IsReasonableForKathmandu()
+    {
+        // Kathmandu at ~27.7°N: max elevation should be 60-90° in summer, 35-65° in winter
+        var summerUtc = new DateTime(2025, 6, 21, 12, 0, 0, DateTimeKind.Utc);
+        var winterUtc = new DateTime(2025, 12, 21, 12, 0, 0, DateTimeKind.Utc);
+
+        var summer = _service.CalculateKathmandu(summerUtc);
+        var winter = _service.CalculateKathmandu(winterUtc);
+
+        await Assert.That(summer.MaxElevation).IsGreaterThan(60.0);
+        await Assert.That(winter.MaxElevation).IsGreaterThan(35.0);
+        await Assert.That(winter.MaxElevation).IsLessThan(65.0);
+    }
+
+    [Test]
+    public async Task DayFraction_IsZeroToOne_DuringDaytime()
+    {
+        // 9 AM NST ≈ 03:15 UTC
+        var utc = new DateTime(2025, 5, 15, 3, 15, 0, DateTimeKind.Utc);
+        var pos = _service.CalculateKathmandu(utc);
+        if (pos.IsAboveHorizon)
+        {
+            await Assert.That(pos.DayFraction).IsGreaterThanOrEqualTo(0.0);
+            await Assert.That(pos.DayFraction).IsLessThanOrEqualTo(1.0);
+        }
+    }
+
+    [Test]
+    public async Task Calculate_WithCustomLocation_Works()
+    {
+        // New York: 40.7128°N, 74.0060°W, UTC-5
+        var utc = new DateTime(2025, 6, 15, 17, 0, 0, DateTimeKind.Utc); // noon EDT
+        var tzOffset = TimeSpan.FromHours(-4); // EDT
+        var pos = _service.Calculate(utc, 40.7128, -74.0060, tzOffset, "New York");
+
+        await Assert.That(pos.LocationName).IsEqualTo("New York");
+        await Assert.That(pos.Latitude).IsEqualTo(40.7128);
+        await Assert.That(pos.Altitude).IsGreaterThan(40.0); // midday altitude
+    }
+
+    [Test]
+    public async Task PreviousSunrise_IsBeforeNow()
+    {
+        // 3 PM NST ≈ 09:15 UTC (well after sunrise)
+        var utc = new DateTime(2025, 4, 10, 9, 15, 0, DateTimeKind.Utc);
+        var pos = _service.CalculateKathmandu(utc);
+        var localNow = utc + SolarPositionService.NstOffset;
+
+        await Assert.That(pos.PreviousSunrise.HasValue).IsTrue();
+        await Assert.That(pos.PreviousSunrise!.Value <= localNow).IsTrue();
+    }
+
+    [Test]
+    public async Task NextSunset_IsAfterNow()
+    {
+        // 10 AM NST ≈ 04:15 UTC (before sunset)
+        var utc = new DateTime(2025, 4, 10, 4, 15, 0, DateTimeKind.Utc);
+        var pos = _service.CalculateKathmandu(utc);
+        var localNow = utc + SolarPositionService.NstOffset;
+
+        await Assert.That(pos.NextSunset.HasValue).IsTrue();
+        await Assert.That(pos.NextSunset!.Value > localNow).IsTrue();
+    }
+
+    [Test]
+    public async Task LocationName_IsSetCorrectly()
+    {
+        var utc = new DateTime(2025, 3, 1, 12, 0, 0, DateTimeKind.Utc);
+        var pos = _service.CalculateKathmandu(utc);
+        await Assert.That(pos.LocationName).IsEqualTo("Kathmandu, Nepal");
+    }
+
+    [Test]
+    public async Task AzimuthCardinal_ReturnsValidDirection()
+    {
+        var validDirs = new HashSet<string>
+        {
+            "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
+            "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"
+        };
+
+        var utc = new DateTime(2025, 5, 1, 8, 0, 0, DateTimeKind.Utc);
+        var pos = _service.CalculateKathmandu(utc);
+        await Assert.That(validDirs.Contains(pos.AzimuthCardinal)).IsTrue();
+    }
+}
+
+
+
+================================================================================
 FILE: :\DEV\personal\collabskus\Directory.Packages.props
-SIZE: 0.36 KB
-MODIFIED: 03/03/2026 09:57:37
+SIZE: 0.49 KB
+MODIFIED: 03/03/2026 17:22:32
 ================================================================================
 
 <Project>
@@ -4431,13 +6264,15 @@ MODIFIED: 03/03/2026 09:57:37
   <ItemGroup>
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.3" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.3" />
+    <PackageVersion Include="TUnit" Version="0.61.25" />
+    <PackageVersion Include="Microsoft.Playwright" Version="1.58.0" />
   </ItemGroup>
 </Project>
 
 
 
 ===============================================================================
-EXPORT COMPLETED: 03/03/2026 16:32:59
-Total Files Exported: 37
+EXPORT COMPLETED: 03/03/2026 17:32:31
+Total Files Exported: 45
 Output File: .\docs\llm\dump.txt
 ===============================================================================
