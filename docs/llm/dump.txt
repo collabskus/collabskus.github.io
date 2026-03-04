@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 03/03/2026 20:24:44
+Generated: 03/04/2026 13:40:01
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -27,9 +27,13 @@ D:\DEV\PERSONAL\COLLABSKUS
 +---CollabsKus.BlazorWebAssembly
 |   |   App.razor
 |   |   CollabsKus.BlazorWebAssembly.csproj
+|   |   CollabsKus.BlazorWebAssembly.csproj.user
 |   |   Program.cs
 |   |   _Imports.razor
 |   |   
+|   +---bin
+|   |   \---Debug
+|   |       \---net10.0
 |   +---Components
 |   |       CalendarGrid.razor
 |   |       CalendarGrid.razor.css
@@ -52,6 +56,30 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |       SolarPosition.cs
 |   |       TimeResponse.cs
 |   |       
+|   +---obj
+|   |   |   CollabsKus.BlazorWebAssembly.csproj.nuget.dgspec.json
+|   |   |   CollabsKus.BlazorWebAssembly.csproj.nuget.g.props
+|   |   |   CollabsKus.BlazorWebAssembly.csproj.nuget.g.targets
+|   |   |   project.assets.json
+|   |   |   project.nuget.cache
+|   |   |   
+|   |   \---Debug
+|   |       \---net10.0
+|   |           |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+|   |           |   CollabsKus.BlazorWebAssembly.AssemblyInfo.cs
+|   |           |   CollabsKus.BlazorWebAssembly.AssemblyInfoInputs.cache
+|   |           |   CollabsKus.BlazorWebAssembly.assets.cache
+|   |           |   CollabsKus.BlazorWebAssembly.csproj.AssemblyReference.cache
+|   |           |   CollabsKus.BlazorWebAssembly.GeneratedMSBuildEditorConfig.editorconfig
+|   |           |   CollabsKus.BlazorWebAssembly.GlobalUsings.g.cs
+|   |           |   EmbeddedAttribute.cs
+|   |           |   rpswa.dswa.cache.json
+|   |           |   staticwebassets.removed.txt
+|   |           |   ValidatableTypeAttribute.cs
+|   |           |   
+|   |           +---ref
+|   |           +---refint
+|   |           \---staticwebassets
 |   +---Pages
 |   |       Home.razor
 |   |       Home.razor.css
@@ -85,6 +113,32 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   GlobalUsings.cs
 |   |   HomePageTests.cs
 |   |   
+|   +---bin
+|   |   \---Debug
+|   |       \---net10.0
+|   +---obj
+|   |   |   CollabsKus.PlaywrightTests.csproj.nuget.dgspec.json
+|   |   |   CollabsKus.PlaywrightTests.csproj.nuget.g.props
+|   |   |   CollabsKus.PlaywrightTests.csproj.nuget.g.targets
+|   |   |   project.assets.json
+|   |   |   project.nuget.cache
+|   |   |   
+|   |   \---Debug
+|   |       \---net10.0
+|   |           |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+|   |           |   CollabsKus.PlaywrightTests.AssemblyInfo.cs
+|   |           |   CollabsKus.PlaywrightTests.AssemblyInfoInputs.cache
+|   |           |   CollabsKus.PlaywrightTests.assets.cache
+|   |           |   CollabsKus.PlaywrightTests.csproj.AssemblyReference.cache
+|   |           |   CollabsKus.PlaywrightTests.genautoregisteredextensionsinputcache.cache
+|   |           |   CollabsKus.PlaywrightTests.GeneratedMSBuildEditorConfig.editorconfig
+|   |           |   CollabsKus.PlaywrightTests.gentestingplatformentrypointinputcache.cache
+|   |           |   CollabsKus.PlaywrightTests.GlobalUsings.g.cs
+|   |           |   MicrosoftTestingPlatformEntryPoint.cs
+|   |           |   SelfRegisteredExtensions.cs
+|   |           |   
+|   |           +---ref
+|   |           \---refint
 |   \---Properties
 |           launchSettings.json
 |           
@@ -92,6 +146,34 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   CollabsKus.Tests.csproj
 |   |   GlobalUsings.cs
 |   |   
+|   +---bin
+|   |   \---Debug
+|   |       \---net10.0
+|   |               .msCoverageExtensionSourceRootsMapping_CollabsKus.Tests
+|   |               
+|   +---obj
+|   |   |   CollabsKus.Tests.csproj.nuget.dgspec.json
+|   |   |   CollabsKus.Tests.csproj.nuget.g.props
+|   |   |   CollabsKus.Tests.csproj.nuget.g.targets
+|   |   |   project.assets.json
+|   |   |   project.nuget.cache
+|   |   |   
+|   |   \---Debug
+|   |       \---net10.0
+|   |           |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+|   |           |   CollabsKus.Tests.AssemblyInfo.cs
+|   |           |   CollabsKus.Tests.AssemblyInfoInputs.cache
+|   |           |   CollabsKus.Tests.assets.cache
+|   |           |   CollabsKus.Tests.csproj.AssemblyReference.cache
+|   |           |   CollabsKus.Tests.genautoregisteredextensionsinputcache.cache
+|   |           |   CollabsKus.Tests.GeneratedMSBuildEditorConfig.editorconfig
+|   |           |   CollabsKus.Tests.gentestingplatformentrypointinputcache.cache
+|   |           |   CollabsKus.Tests.GlobalUsings.g.cs
+|   |           |   MicrosoftTestingPlatformEntryPoint.cs
+|   |           |   SelfRegisteredExtensions.cs
+|   |           |   
+|   |           +---ref
+|   |           \---refint
 |   \---Services
 |           KathmanduCalendarServiceTests.cs
 |           MoonPhaseServiceTests.cs
@@ -4645,7 +4727,7 @@ MODIFIED: 03/03/2026 17:33:03
 
 
 ===============================================================================
-EXPORT COMPLETED: 03/03/2026 20:24:44
+EXPORT COMPLETED: 03/04/2026 13:40:03
 Total Files Exported: 46
 Output File: .\docs\llm\dump.txt
 ===============================================================================
