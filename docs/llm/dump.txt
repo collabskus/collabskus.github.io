@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 03/03/2026 19:18:49
+Generated: 03/03/2026 19:28:14
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -1155,8 +1155,8 @@ MODIFIED: 02/24/2026 09:14:12
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Components\Sundisplay.razor
-SIZE: 8.37 KB
-MODIFIED: 03/03/2026 17:24:42
+SIZE: 9.12 KB
+MODIFIED: 03/03/2026 19:26:25
 ================================================================================
 
 @using CollabsKus.BlazorWebAssembly.Models
@@ -1181,7 +1181,7 @@ MODIFIED: 03/03/2026 17:24:42
 
             <div class="sun-location-header">
                 📍 @pos.LocationName
-                <span class="sun-location-coords">(@pos.Latitude.ToString("F2")°N, @pos.Longitude.ToString("F2")°E)</span>
+                <span class="sun-location-coords">(@FormatCoordinate(pos.Latitude, true), @FormatCoordinate(pos.Longitude, false))</span>
             </div>
 
             <div class="sky-wrap">
@@ -1220,7 +1220,7 @@ MODIFIED: 03/03/2026 17:24:42
                 </div>
                 <div class="sun-event sun-event--noon">
                     <span class="sun-event-icon">☀️</span>
-                    <div class="sun-event-time">@pos.SolarNoonLocal.ToString("hh\\:mm\\:ss")</div>
+                    <div class="sun-event-time">@pos.SolarNoonLocal.ToString("HH\\:mm\\:ss")</div>
                     <div class="sun-event-label">SOLAR NOON</div>
                 </div>
                 <div class="sun-event">
@@ -1264,14 +1264,14 @@ MODIFIED: 03/03/2026 17:24:42
                 {
                     <div class="sun-info-item">
                         <div class="sun-info-label">GOLDEN AM</div>
-                        <div class="sun-info-value">@pos.GoldenHourMorningStart.Value.ToString("hh\\:mm")–@FormatTime(pos.GoldenHourMorningEnd)</div>
+                        <div class="sun-info-value">@pos.GoldenHourMorningStart.Value.ToString("HH\\:mm")–@FormatTimeShort(pos.GoldenHourMorningEnd)</div>
                     </div>
                 }
                 @if (pos.GoldenHourEveningStart.HasValue)
                 {
                     <div class="sun-info-item">
                         <div class="sun-info-label">GOLDEN PM</div>
-                        <div class="sun-info-value">@pos.GoldenHourEveningStart.Value.ToString("hh\\:mm")–@FormatTime(pos.GoldenHourEveningEnd)</div>
+                        <div class="sun-info-value">@pos.GoldenHourEveningStart.Value.ToString("HH\\:mm")–@FormatTimeShort(pos.GoldenHourEveningEnd)</div>
                     </div>
                 }
             </div>
@@ -1344,9 +1344,31 @@ MODIFIED: 03/03/2026 17:24:42
         }
     }
 
+    /// <summary>Format a coordinate value with the correct N/S or E/W suffix.</summary>
+    private static string FormatCoordinate(double value, bool isLatitude)
+    {
+        if (isLatitude)
+        {
+            var suffix = value >= 0 ? "N" : "S";
+            return $"{Math.Abs(value):F2}°{suffix}";
+        }
+        else
+        {
+            var suffix = value >= 0 ? "E" : "W";
+            return $"{Math.Abs(value):F2}°{suffix}";
+        }
+    }
+
+    /// <summary>Format time in 24-hour HH:mm:ss format.</summary>
     private static string FormatTime(TimeOnly? time)
     {
-        return time?.ToString("hh\\:mm\\:ss") ?? "--:--:--";
+        return time?.ToString("HH\\:mm\\:ss") ?? "--:--:--";
+    }
+
+    /// <summary>Format time in 24-hour HH:mm format (short).</summary>
+    private static string FormatTimeShort(TimeOnly? time)
+    {
+        return time?.ToString("HH\\:mm") ?? "--:--";
     }
 
     private static string FormatDateTime(DateTime? dt)
@@ -1358,7 +1380,7 @@ MODIFIED: 03/03/2026 17:24:42
                        val.Date == today.AddDays(-1) ? " (yesterday)" :
                        val.Date == today.AddDays(1) ? " (tomorrow)" :
                        $" ({val:MMM dd})";
-        return $"{val:hh:mm:ss tt}{dayLabel}";
+        return $"{val:HH:mm:ss}{dayLabel}";
     }
 
     public async ValueTask DisposeAsync()
@@ -1908,8 +1930,8 @@ public class MoonPhase
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Models\SolarPosition.cs
-SIZE: 4.24 KB
-MODIFIED: 03/03/2026 17:23:08
+SIZE: 4.32 KB
+MODIFIED: 03/03/2026 19:26:06
 ================================================================================
 
 namespace CollabsKus.BlazorWebAssembly.Models;
@@ -3057,8 +3079,8 @@ public class MoonPhaseService
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\SolarPositionService.cs
-SIZE: 11.28 KB
-MODIFIED: 03/03/2026 17:23:40
+SIZE: 11.62 KB
+MODIFIED: 03/03/2026 19:26:15
 ================================================================================
 
 using CollabsKus.BlazorWebAssembly.Models;
@@ -3245,14 +3267,19 @@ public class SolarPositionService
         double epsilon = eps0 + 0.00256 * Math.Cos(ToRad(omega));
         double decl = ToDeg(Math.Asin(Math.Sin(ToRad(epsilon)) * Math.Sin(ToRad(lambda))));
 
-        // Equation of time (minutes)
+        // Earth's orbital eccentricity (Meeus eq. 25.4)
+        double e = 0.016708634 - T * (0.000042037 + 0.0000001267 * T);
+
+        // Equation of time (minutes) — Meeus Ch. 28
+        // EoT = y·sin(2L₀) − 2e·sin(M) + 4ey·sin(M)·cos(2L₀) − ½y²·sin(4L₀) − 1.25e²·sin(2M)
+        // Result is in radians; 4·ToDeg converts to minutes of time.
         double y = Math.Pow(Math.Tan(ToRad(epsilon / 2)), 2);
         double eot = 4.0 * ToDeg(
             y * Math.Sin(2 * ToRad(L0))
-            - 2 * Math.Sin(Mr)
-            + 4 * Math.Sin(Mr) * y * Math.Cos(2 * ToRad(L0))
+            - 2.0 * e * Math.Sin(Mr)
+            + 4.0 * e * y * Math.Sin(Mr) * Math.Cos(2 * ToRad(L0))
             - 0.5 * y * y * Math.Sin(4 * ToRad(L0))
-            - 1.25 * Math.Sin(2 * Mr));
+            - 1.25 * e * e * Math.Sin(2 * Mr));
 
         double solarNoonUtc = 720.0 - 4.0 * lng - eot;
 
@@ -3738,8 +3765,8 @@ async function onFetch(event) {
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.PlaywrightTests\CollabsKus.PlaywrightTests.csproj
-SIZE: 0.37 KB
-MODIFIED: 03/03/2026 17:29:02
+SIZE: 0.53 KB
+MODIFIED: 03/03/2026 19:26:53
 ================================================================================
 
 <Project Sdk="Microsoft.NET.Sdk">
@@ -3748,6 +3775,8 @@ MODIFIED: 03/03/2026 17:29:02
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <OutputType>Exe</OutputType>
+    <!-- Required for .NET 10+: use Microsoft Testing Platform instead of VSTest -->
+    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="TUnit" />
@@ -3772,30 +3801,142 @@ global using Microsoft.Playwright;
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.PlaywrightTests\HomePageTests.cs
-SIZE: 7.21 KB
-MODIFIED: 03/03/2026 17:29:49
+SIZE: 11.32 KB
+MODIFIED: 03/03/2026 19:27:06
 ================================================================================
+
+using System.Diagnostics;
 
 namespace CollabsKus.PlaywrightTests;
 
 /// <summary>
 /// End-to-end Playwright tests for the Kathmandu Calendar app.
 ///
+/// The test class automatically starts the Blazor WASM dev server before
+/// any tests run and shuts it down after all tests complete.
+///
 /// Prerequisites:
 ///   1. Install browsers: pwsh bin/Debug/net10.0/playwright.ps1 install
-///   2. Run the app: dotnet run --project CollabsKus.BlazorWebAssembly
-///   3. Run tests: dotnet test CollabsKus.PlaywrightTests
+///   2. Run tests: dotnet test CollabsKus.PlaywrightTests
 ///
 /// Set the BASE_URL environment variable to override the default (http://localhost:5267).
+/// If BASE_URL is set, the server will NOT be auto-started (assumes external server).
 /// </summary>
 public class HomePageTests
 {
-    private static string BaseUrl => Environment.GetEnvironmentVariable("BASE_URL") ?? "http://localhost:5267";
+    private const string DefaultBaseUrl = "http://localhost:5267";
+
+    private static string BaseUrl => Environment.GetEnvironmentVariable("BASE_URL") ?? DefaultBaseUrl;
+    private static bool _shouldManageServer = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("BASE_URL"));
+    private static Process? _serverProcess;
+    private static readonly object _serverLock = new();
 
     private IPlaywright _playwright = null!;
     private IBrowser _browser = null!;
     private IBrowserContext _context = null!;
     private IPage _page = null!;
+
+    // ── Server lifecycle (once per class) ────────────────────────────────
+
+    [Before(Class)]
+    public static async Task StartServer()
+    {
+        if (!_shouldManageServer)
+            return;
+
+        // Resolve the Blazor WASM project path relative to the test output directory.
+        // Test output is: CollabsKus.PlaywrightTests/bin/Debug/net10.0/
+        // We need:        CollabsKus.BlazorWebAssembly/
+        var baseDir = AppContext.BaseDirectory;
+        var projectRoot = Path.GetFullPath(Path.Combine(baseDir, "..", "..", "..", ".."));
+        var blazorProject = Path.Combine(projectRoot, "CollabsKus.BlazorWebAssembly", "CollabsKus.BlazorWebAssembly.csproj");
+
+        if (!File.Exists(blazorProject))
+        {
+            throw new FileNotFoundException(
+                $"Could not find Blazor project at: {blazorProject}. " +
+                $"Resolved from base directory: {baseDir}");
+        }
+
+        lock (_serverLock)
+        {
+            if (_serverProcess != null)
+                return;
+
+            _serverProcess = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "dotnet",
+                    Arguments = $"run --project \"{blazorProject}\" --urls {DefaultBaseUrl} --no-launch-profile",
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                }
+            };
+
+            _serverProcess.Start();
+
+            // Consume stdout/stderr to prevent buffer deadlocks
+            _serverProcess.BeginOutputReadLine();
+            _serverProcess.BeginErrorReadLine();
+        }
+
+        // Wait for the server to respond (up to 120 seconds for initial build + start)
+        using var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
+        var deadline = DateTime.UtcNow.AddSeconds(120);
+
+        while (DateTime.UtcNow < deadline)
+        {
+            try
+            {
+                var response = await httpClient.GetAsync(DefaultBaseUrl);
+                if (response.IsSuccessStatusCode)
+                    return; // Server is ready
+            }
+            catch
+            {
+                // Server not ready yet
+            }
+
+            // Check if the process crashed
+            if (_serverProcess.HasExited)
+            {
+                throw new InvalidOperationException(
+                    $"Blazor dev server exited with code {_serverProcess.ExitCode} before becoming ready.");
+            }
+
+            await Task.Delay(1000);
+        }
+
+        throw new TimeoutException(
+            $"Blazor dev server did not respond at {DefaultBaseUrl} within 120 seconds.");
+    }
+
+    [After(Class)]
+    public static async Task StopServer()
+    {
+        if (_serverProcess == null || _serverProcess.HasExited)
+            return;
+
+        try
+        {
+            _serverProcess.Kill(entireProcessTree: true);
+            await _serverProcess.WaitForExitAsync();
+        }
+        catch
+        {
+            // Best effort cleanup
+        }
+        finally
+        {
+            _serverProcess.Dispose();
+            _serverProcess = null;
+        }
+    }
+
+    // ── Per-test browser lifecycle ────────────────────────────────────────
 
     [Before(Test)]
     public async Task Setup()
@@ -3818,6 +3959,8 @@ public class HomePageTests
         _playwright.Dispose();
     }
 
+    // ── Tests ─────────────────────────────────────────────────────────────
+
     [Test]
     public async Task Page_HasCorrectTitle()
     {
@@ -3838,7 +3981,6 @@ public class HomePageTests
     public async Task TimeDisplay_IsVisible()
     {
         await _page.GotoAsync(BaseUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
-        // Wait for Blazor to render (loading state disappears)
         await _page.WaitForSelectorAsync(".time-display", new PageWaitForSelectorOptions { Timeout = 30000 });
         var isVisible = await _page.Locator(".time-display").IsVisibleAsync();
         await Assert.That(isVisible).IsTrue();
@@ -3959,26 +4101,24 @@ public class HomePageTests
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.PlaywrightTests\Properties\launchSettings.json
-SIZE: 0.19 KB
-MODIFIED: 03/03/2026 17:40:02
+SIZE: 0.1 KB
+MODIFIED: 03/03/2026 19:27:30
 ================================================================================
 
 {
   "profiles": {
     "CollabsKus.PlaywrightTests": {
-      "commandName": "Project",
-      "environmentVariables": {
-        "BASE_URL": "https://localhost:7212/"
-      }
+      "commandName": "Project"
     }
   }
 }
 
 
+
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.Tests\CollabsKus.Tests.csproj
-SIZE: 0.44 KB
-MODIFIED: 03/03/2026 17:26:43
+SIZE: 0.6 KB
+MODIFIED: 03/03/2026 19:26:38
 ================================================================================
 
 <Project Sdk="Microsoft.NET.Sdk">
@@ -3987,6 +4127,8 @@ MODIFIED: 03/03/2026 17:26:43
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <OutputType>Exe</OutputType>
+    <!-- Required for .NET 10+: use Microsoft Testing Platform instead of VSTest -->
+    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="TUnit" />
@@ -4229,8 +4371,8 @@ public class MoonPhaseServiceTests
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.Tests\Services\SolarPositionServiceTests.cs
-SIZE: 6.52 KB
-MODIFIED: 03/03/2026 17:28:07
+SIZE: 9.72 KB
+MODIFIED: 03/03/2026 19:27:44
 ================================================================================
 
 using CollabsKus.BlazorWebAssembly.Services;
@@ -4402,6 +4544,83 @@ public class SolarPositionServiceTests
         var pos = _service.CalculateKathmandu(utc);
         await Assert.That(validDirs.Contains(pos.AzimuthCardinal)).IsTrue();
     }
+
+    // ── Regression tests: sunrise/sunset reasonableness ───────────────────
+
+    [Test]
+    public async Task Kathmandu_SunriseIsBetween4AMAnd7AM_AllYear()
+    {
+        // Kathmandu sunrise ranges ~5:10 (June) to ~6:50 (Jan). Allow 4-7 for safety.
+        var fourAm = new TimeOnly(4, 0);
+        var sevenAm = new TimeOnly(7, 0);
+
+        for (int month = 1; month <= 12; month++)
+        {
+            var utc = new DateTime(2025, month, 15, 12, 0, 0, DateTimeKind.Utc);
+            var pos = _service.CalculateKathmandu(utc);
+
+            await Assert.That(pos.SunriseLocal.HasValue).IsTrue();
+            await Assert.That(pos.SunriseLocal!.Value >= fourAm).IsTrue();
+            await Assert.That(pos.SunriseLocal!.Value <= sevenAm).IsTrue();
+        }
+    }
+
+    [Test]
+    public async Task Kathmandu_SunsetIsBetween5PMAnd7PM_AllYear()
+    {
+        // Kathmandu sunset ranges ~5:20 (Dec) to ~6:55 (June). Allow 5PM-7PM.
+        var fivePm = new TimeOnly(17, 0);
+        var sevenPm = new TimeOnly(19, 0);
+
+        for (int month = 1; month <= 12; month++)
+        {
+            var utc = new DateTime(2025, month, 15, 12, 0, 0, DateTimeKind.Utc);
+            var pos = _service.CalculateKathmandu(utc);
+
+            await Assert.That(pos.SunsetLocal.HasValue).IsTrue();
+            await Assert.That(pos.SunsetLocal!.Value >= fivePm).IsTrue();
+            await Assert.That(pos.SunsetLocal!.Value <= sevenPm).IsTrue();
+        }
+    }
+
+    [Test]
+    public async Task Kathmandu_SolarNoonIsBetween1145AMAnd1220PM_AllYear()
+    {
+        // Solar noon in Kathmandu is roughly 12:00-12:15 NST year-round.
+        // Allow a wider window for safety.
+        var earlyNoon = new TimeOnly(11, 45);
+        var lateNoon = new TimeOnly(12, 20);
+
+        for (int month = 1; month <= 12; month++)
+        {
+            var utc = new DateTime(2025, month, 15, 12, 0, 0, DateTimeKind.Utc);
+            var pos = _service.CalculateKathmandu(utc);
+
+            await Assert.That(pos.SolarNoonLocal >= earlyNoon).IsTrue();
+            await Assert.That(pos.SolarNoonLocal <= lateNoon).IsTrue();
+        }
+    }
+
+    [Test]
+    public async Task WesternHemisphere_SunriseAndSunsetAreReasonable()
+    {
+        // New York (40.7°N, 74°W) on March equinox: sunrise ~7AM, sunset ~7PM EDT
+        var utc = new DateTime(2025, 3, 20, 12, 0, 0, DateTimeKind.Utc);
+        var tzOffset = TimeSpan.FromHours(-4); // EDT
+        var pos = _service.Calculate(utc, 40.7128, -74.0060, tzOffset, "New York");
+
+        await Assert.That(pos.SunriseLocal.HasValue).IsTrue();
+        await Assert.That(pos.SunsetLocal.HasValue).IsTrue();
+        await Assert.That(pos.SunriseLocal!.Value < pos.SunsetLocal!.Value).IsTrue();
+
+        // Sunrise should be between 6 and 8 AM local
+        await Assert.That(pos.SunriseLocal!.Value >= new TimeOnly(6, 0)).IsTrue();
+        await Assert.That(pos.SunriseLocal!.Value <= new TimeOnly(8, 0)).IsTrue();
+
+        // Sunset should be between 6 and 8 PM local
+        await Assert.That(pos.SunsetLocal!.Value >= new TimeOnly(18, 0)).IsTrue();
+        await Assert.That(pos.SunsetLocal!.Value <= new TimeOnly(20, 0)).IsTrue();
+    }
 }
 
 
@@ -4426,7 +4645,7 @@ MODIFIED: 03/03/2026 17:33:03
 
 
 ===============================================================================
-EXPORT COMPLETED: 03/03/2026 19:18:49
+EXPORT COMPLETED: 03/03/2026 19:28:15
 Total Files Exported: 46
 Output File: .\docs\llm\dump.txt
 ===============================================================================
