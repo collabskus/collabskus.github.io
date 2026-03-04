@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 03/03/2026 19:14:36
+Generated: 03/03/2026 19:15:12
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -109,32 +109,6 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   GlobalUsings.cs
 |   |   HomePageTests.cs
 |   |   
-|   +---bin
-|   |   \---Debug
-|   |       \---net10.0
-|   +---obj
-|   |   |   CollabsKus.PlaywrightTests.csproj.nuget.dgspec.json
-|   |   |   CollabsKus.PlaywrightTests.csproj.nuget.g.props
-|   |   |   CollabsKus.PlaywrightTests.csproj.nuget.g.targets
-|   |   |   project.assets.json
-|   |   |   project.nuget.cache
-|   |   |   
-|   |   \---Debug
-|   |       \---net10.0
-|   |           |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
-|   |           |   CollabsKus.PlaywrightTests.AssemblyInfo.cs
-|   |           |   CollabsKus.PlaywrightTests.AssemblyInfoInputs.cache
-|   |           |   CollabsKus.PlaywrightTests.assets.cache
-|   |           |   CollabsKus.PlaywrightTests.csproj.AssemblyReference.cache
-|   |           |   CollabsKus.PlaywrightTests.genautoregisteredextensionsinputcache.cache
-|   |           |   CollabsKus.PlaywrightTests.GeneratedMSBuildEditorConfig.editorconfig
-|   |           |   CollabsKus.PlaywrightTests.gentestingplatformentrypointinputcache.cache
-|   |           |   CollabsKus.PlaywrightTests.GlobalUsings.g.cs
-|   |           |   MicrosoftTestingPlatformEntryPoint.cs
-|   |           |   SelfRegisteredExtensions.cs
-|   |           |   
-|   |           +---ref
-|   |           \---refint
 |   \---Properties
 |           launchSettings.json
 |           
@@ -142,34 +116,6 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   CollabsKus.Tests.csproj
 |   |   GlobalUsings.cs
 |   |   
-|   +---bin
-|   |   \---Debug
-|   |       \---net10.0
-|   |               .msCoverageExtensionSourceRootsMapping_CollabsKus.Tests
-|   |               
-|   +---obj
-|   |   |   CollabsKus.Tests.csproj.nuget.dgspec.json
-|   |   |   CollabsKus.Tests.csproj.nuget.g.props
-|   |   |   CollabsKus.Tests.csproj.nuget.g.targets
-|   |   |   project.assets.json
-|   |   |   project.nuget.cache
-|   |   |   
-|   |   \---Debug
-|   |       \---net10.0
-|   |           |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
-|   |           |   CollabsKus.Tests.AssemblyInfo.cs
-|   |           |   CollabsKus.Tests.AssemblyInfoInputs.cache
-|   |           |   CollabsKus.Tests.assets.cache
-|   |           |   CollabsKus.Tests.csproj.AssemblyReference.cache
-|   |           |   CollabsKus.Tests.genautoregisteredextensionsinputcache.cache
-|   |           |   CollabsKus.Tests.GeneratedMSBuildEditorConfig.editorconfig
-|   |           |   CollabsKus.Tests.gentestingplatformentrypointinputcache.cache
-|   |           |   CollabsKus.Tests.GlobalUsings.g.cs
-|   |           |   MicrosoftTestingPlatformEntryPoint.cs
-|   |           |   SelfRegisteredExtensions.cs
-|   |           |   
-|   |           +---ref
-|   |           \---refint
 |   \---Services
 |           KathmanduCalendarServiceTests.cs
 |           MoonPhaseServiceTests.cs
@@ -4504,7 +4450,7 @@ MODIFIED: 03/03/2026 17:33:03
 
 
 ===============================================================================
-EXPORT COMPLETED: 03/03/2026 19:14:37
+EXPORT COMPLETED: 03/03/2026 19:15:13
 Total Files Exported: 46
 Output File: .\docs\llm\dump.txt
 ===============================================================================
