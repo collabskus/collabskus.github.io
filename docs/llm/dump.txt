@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 03/03/2026 19:15:12
+Generated: 03/03/2026 19:16:02
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -30,9 +30,6 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   Program.cs
 |   |   _Imports.razor
 |   |   
-|   +---bin
-|   |   \---Debug
-|   |       \---net10.0
 |   +---Components
 |   |       CalendarGrid.razor
 |   |       CalendarGrid.razor.css
@@ -55,27 +52,6 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |       SolarPosition.cs
 |   |       TimeResponse.cs
 |   |       
-|   +---obj
-|   |   |   CollabsKus.BlazorWebAssembly.csproj.nuget.dgspec.json
-|   |   |   CollabsKus.BlazorWebAssembly.csproj.nuget.g.props
-|   |   |   CollabsKus.BlazorWebAssembly.csproj.nuget.g.targets
-|   |   |   project.assets.json
-|   |   |   project.nuget.cache
-|   |   |   
-|   |   \---Debug
-|   |       \---net10.0
-|   |           |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
-|   |           |   CollabsKus.BlazorWebAssembly.AssemblyInfo.cs
-|   |           |   CollabsKus.BlazorWebAssembly.AssemblyInfoInputs.cache
-|   |           |   CollabsKus.BlazorWebAssembly.assets.cache
-|   |           |   CollabsKus.BlazorWebAssembly.csproj.AssemblyReference.cache
-|   |           |   CollabsKus.BlazorWebAssembly.GeneratedMSBuildEditorConfig.editorconfig
-|   |           |   CollabsKus.BlazorWebAssembly.GlobalUsings.g.cs
-|   |           |   EmbeddedAttribute.cs
-|   |           |   ValidatableTypeAttribute.cs
-|   |           |   
-|   |           +---ref
-|   |           \---refint
 |   +---Pages
 |   |       Home.razor
 |   |       Home.razor.css
@@ -4450,7 +4426,7 @@ MODIFIED: 03/03/2026 17:33:03
 
 
 ===============================================================================
-EXPORT COMPLETED: 03/03/2026 19:15:13
+EXPORT COMPLETED: 03/03/2026 19:16:02
 Total Files Exported: 46
 Output File: .\docs\llm\dump.txt
 ===============================================================================
