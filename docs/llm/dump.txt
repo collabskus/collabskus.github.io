@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 03/03/2026 18:00:05
+Generated: 03/03/2026 19:12:08
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -257,10 +257,10 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |           \---_framework
 |   |   |                   blazor.webassembly.js
 |   |   |                   blazor.webassembly.js.gz
-|   |   |                   CollabsKus.BlazorWebAssembly.09rtq111fn.pdb
-|   |   |                   CollabsKus.BlazorWebAssembly.09rtq111fn.pdb.gz
-|   |   |                   CollabsKus.BlazorWebAssembly.f2i7tr4avq.wasm
-|   |   |                   CollabsKus.BlazorWebAssembly.f2i7tr4avq.wasm.gz
+|   |   |                   CollabsKus.BlazorWebAssembly.fhsj64wsca.pdb
+|   |   |                   CollabsKus.BlazorWebAssembly.fhsj64wsca.pdb.gz
+|   |   |                   CollabsKus.BlazorWebAssembly.kgo9ackjrf.wasm
+|   |   |                   CollabsKus.BlazorWebAssembly.kgo9ackjrf.wasm.gz
 |   |   |                   dotnet.js
 |   |   |                   dotnet.js.gz
 |   |   |                   dotnet.js.map
@@ -761,7 +761,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       2mau3pzxk9-{0}-u0zj27cx7o-u0zj27cx7o.gz
 |   |   |       |       2zxgs4tsnx-{0}-clxrybe26z-clxrybe26z.gz
 |   |   |       |       3eoqy7gj56-{0}-5quh18s9mm-5quh18s9mm.gz
-|   |   |       |       3fggfcmk2o-{0}-m1h2237ooj-m1h2237ooj.gz
+|   |   |       |       3fggfcmk2o-{0}-hlq6ig7itt-hlq6ig7itt.gz
 |   |   |       |       3p6j8oeurv-{0}-9gnjjozbtj-9gnjjozbtj.gz
 |   |   |       |       3rlo0yi078-{0}-66stpp682q-66stpp682q.gz
 |   |   |       |       3uswc3e8aj-{0}-83r2do0ftq-83r2do0ftq.gz
@@ -821,7 +821,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       d3xctdbsm8-{0}-cc45vjr1b8-cc45vjr1b8.gz
 |   |   |       |       d4e2tqfm2s-{0}-st22xvului-st22xvului.gz
 |   |   |       |       d88qnt9z0r-{0}-5s8pq7f6mj-5s8pq7f6mj.gz
-|   |   |       |       dfreyn5klh-{0}-dxxthvnm4u-dxxthvnm4u.gz
+|   |   |       |       dfreyn5klh-{0}-kpg1hultoj-kpg1hultoj.gz
 |   |   |       |       dkj70biooi-{0}-xn7u9hqdzp-xn7u9hqdzp.gz
 |   |   |       |       dmdeonll3k-{0}-qra57zb5iw-qra57zb5iw.gz
 |   |   |       |       dt9uy83tyq-{0}-16sllnulcp-16sllnulcp.gz
@@ -860,7 +860,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       kz9p261qc5-{0}-qpf1k0onwr-qpf1k0onwr.gz
 |   |   |       |       l7rbbbd4fi-{0}-sf458cz82b-sf458cz82b.gz
 |   |   |       |       lbxpns34i1-{0}-jnskqyrki7-jnskqyrki7.gz
-|   |   |       |       lh59ob944f-{0}-f2i7tr4avq-f2i7tr4avq.gz
+|   |   |       |       lh59ob944f-{0}-kgo9ackjrf-kgo9ackjrf.gz
 |   |   |       |       lj3msr1lhw-{0}-ed335v31ay-ed335v31ay.gz
 |   |   |       |       ljeibr96ow-{0}-ul94u1ukws-ul94u1ukws.gz
 |   |   |       |       lm00a84zr9-{0}-4myqtalz7l-4myqtalz7l.gz
@@ -897,7 +897,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       pzqxcw519k-{0}-xq74p7yimf-xq74p7yimf.gz
 |   |   |       |       q3154k5biw-{0}-b22pm24uac-b22pm24uac.gz
 |   |   |       |       q4p940erp4-{0}-befq3iek54-befq3iek54.gz
-|   |   |       |       qapwvyh3s0-{0}-xaanvwo5fn-xaanvwo5fn.gz
+|   |   |       |       qapwvyh3s0-{0}-r5d0fgpfsu-r5d0fgpfsu.gz
 |   |   |       |       qitdg1tdwz-{0}-uakrztahlf-uakrztahlf.gz
 |   |   |       |       qm96gcrzfw-{0}-67mulskwi0-67mulskwi0.gz
 |   |   |       |       qp8xb91mke-{0}-wnrh6t4f3i-wnrh6t4f3i.gz
@@ -942,7 +942,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       w3jaqn3h4o-{0}-78lrbgxr1f-78lrbgxr1f.gz
 |   |   |       |       w3ur6j80u7-{0}-h2nvdx8wws-h2nvdx8wws.gz
 |   |   |       |       wuimozunwv-{0}-piem9h0tr4-piem9h0tr4.gz
-|   |   |       |       x3ikudnee4-{0}-09rtq111fn-09rtq111fn.gz
+|   |   |       |       x3ikudnee4-{0}-fhsj64wsca-fhsj64wsca.gz
 |   |   |       |       x54bdp6f69-{0}-nc02rhe1iy-nc02rhe1iy.gz
 |   |   |       |       x57r4b36iz-{0}-lfu7j35m59-lfu7j35m59.gz
 |   |   |       |       xf1qqu3s0v-{0}-xfor6r3ecm-xfor6r3ecm.gz
@@ -1794,6 +1794,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |           |       log_260303223728579.diag
 |   |           |       log_260303224153100.diag
 |   |           |       log_260303224417373.diag
+|   |           |       log_260304000103652.diag
 |   |           |       
 |   |           +---nl
 |   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
@@ -2080,6 +2081,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |           |       log_260303224153066.diag
 |   |           |       log_260303224416565.diag
 |   |           |       log_260303224417344.diag
+|   |           |       log_260304000103638.diag
 |   |           |       
 |   |           +---nl
 |   |           |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
@@ -6567,7 +6569,7 @@ MODIFIED: 03/03/2026 17:33:03
 
 
 ===============================================================================
-EXPORT COMPLETED: 03/03/2026 18:00:16
+EXPORT COMPLETED: 03/03/2026 19:12:18
 Total Files Exported: 46
 Output File: .\docs\llm\dump.txt
 ===============================================================================
