@@ -3968,3 +3968,53 @@ Please share the dump and I'll give you complete, correct files for everything.
 
 
 
+I've read the entire dump.txt carefully. Let me analyze the issues:
+
+1. **Sunrise/sunset wrong** — The `SolarPositionService.GetDailyEvents()` EoT formula is missing Earth's orbital eccentricity (`e`), causing solar noon to be off by hundreds of minutes.
+2. **Display format** — `hh` is 12-hour format without AM/PM; should be `HH` (24-hour).
+3. **Coordinate display** — Always shows "°N" and "°E" even for negative values.
+4. **Unit test `Sunrise_IsBeforeSunset` failing** — Direct consequence of the EoT bug.
+5. **`dotnet test` from terminal** — .NET 10 requires `TestingPlatformDotnetTestSupport`.
+6. **Playwright tests need auto-start** — Need to start the app process before tests run.
+
+Here are all the full files that need to change:
+
+---
+
+**File 1: `CollabsKus.BlazorWebAssembly/Services/SolarPositionService.cs`****File 2: `CollabsKus.BlazorWebAssembly/Components/Sundisplay.razor`****File 3: `CollabsKus.Tests/CollabsKus.Tests.csproj`****File 4: `CollabsKus.PlaywrightTests/CollabsKus.PlaywrightTests.csproj`****File 5: `CollabsKus.PlaywrightTests/HomePageTests.cs`****File 6: `CollabsKus.PlaywrightTests/Properties/launchSettings.json`****File 7: `CollabsKus.Tests/Services/SolarPositionServiceTests.cs`** — I'm adding a validation test to catch future regressions on sunrise/sunset reasonableness:---
+
+Here's a summary of what was wrong and what each fix does:
+
+**Root cause of wrong sunrise/sunset: Missing orbital eccentricity in EoT formula**
+
+In `SolarPositionService.GetDailyEvents()`, the Equation of Time formula was:
+```csharp
+// BUG: missing eccentricity 'e' factor
+- 2 * Math.Sin(Mr)              // should be: - 2 * e * Math.Sin(Mr)
++ 4 * Math.Sin(Mr) * y * ...    // should be: + 4 * e * y * Math.Sin(Mr) * ...
+- 1.25 * Math.Sin(2 * Mr)       // should be: - 1.25 * e * e * Math.Sin(2 * Mr)
+```
+
+Without the eccentricity (`e ≈ 0.0167`), the `-2 * sin(M)` term was contributing ±2 radians (≈ ±458 minutes!) instead of ±0.033 radians (≈ ±7.6 minutes). This threw solar noon off by hundreds of minutes, cascading into completely wrong sunrise/sunset times.
+
+**All changes made:**
+
+| File | What changed |
+|---|---|
+| `SolarPositionService.cs` | Added `double e = 0.016708634 - T * (...)` and applied it to all three EoT terms |
+| `Sundisplay.razor` | Changed `hh` → `HH` (24-hour time format); fixed coordinate display to show N/S and E/W correctly based on sign; added `FormatTimeShort` helper |
+| `CollabsKus.Tests.csproj` | Added `<TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>` for .NET 10 `dotnet test` compatibility |
+| `CollabsKus.PlaywrightTests.csproj` | Same `TestingPlatformDotnetTestSupport` property |
+| `HomePageTests.cs` | Added `[Before(Class)]`/`[After(Class)]` hooks that auto-start `dotnet run` for the Blazor app and wait for it to respond; if `BASE_URL` env var is set, it skips auto-start |
+| `launchSettings.json` (Playwright) | Removed the `BASE_URL` override so auto-start kicks in by default |
+| `SolarPositionServiceTests.cs` | Added 4 regression tests that validate sunrise, sunset, and solar noon fall within reasonable time ranges for both Kathmandu and western hemisphere locations |
+
+70
+36
+
+
+
+
+
+
+

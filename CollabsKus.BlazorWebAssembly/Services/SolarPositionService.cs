@@ -182,14 +182,19 @@ public class SolarPositionService
         double epsilon = eps0 + 0.00256 * Math.Cos(ToRad(omega));
         double decl = ToDeg(Math.Asin(Math.Sin(ToRad(epsilon)) * Math.Sin(ToRad(lambda))));
 
-        // Equation of time (minutes)
+        // Earth's orbital eccentricity (Meeus eq. 25.4)
+        double e = 0.016708634 - T * (0.000042037 + 0.0000001267 * T);
+
+        // Equation of time (minutes) — Meeus Ch. 28
+        // EoT = y·sin(2L₀) − 2e·sin(M) + 4ey·sin(M)·cos(2L₀) − ½y²·sin(4L₀) − 1.25e²·sin(2M)
+        // Result is in radians; 4·ToDeg converts to minutes of time.
         double y = Math.Pow(Math.Tan(ToRad(epsilon / 2)), 2);
         double eot = 4.0 * ToDeg(
             y * Math.Sin(2 * ToRad(L0))
-            - 2 * Math.Sin(Mr)
-            + 4 * Math.Sin(Mr) * y * Math.Cos(2 * ToRad(L0))
+            - 2.0 * e * Math.Sin(Mr)
+            + 4.0 * e * y * Math.Sin(Mr) * Math.Cos(2 * ToRad(L0))
             - 0.5 * y * y * Math.Sin(4 * ToRad(L0))
-            - 1.25 * Math.Sin(2 * Mr));
+            - 1.25 * e * e * Math.Sin(2 * Mr));
 
         double solarNoonUtc = 720.0 - 4.0 * lng - eot;
 

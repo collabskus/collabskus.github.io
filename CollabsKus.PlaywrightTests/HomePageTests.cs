@@ -1,23 +1,135 @@
+using System.Diagnostics;
+
 namespace CollabsKus.PlaywrightTests;
 
 /// <summary>
 /// End-to-end Playwright tests for the Kathmandu Calendar app.
 ///
+/// The test class automatically starts the Blazor WASM dev server before
+/// any tests run and shuts it down after all tests complete.
+///
 /// Prerequisites:
 ///   1. Install browsers: pwsh bin/Debug/net10.0/playwright.ps1 install
-///   2. Run the app: dotnet run --project CollabsKus.BlazorWebAssembly
-///   3. Run tests: dotnet test CollabsKus.PlaywrightTests
+///   2. Run tests: dotnet test CollabsKus.PlaywrightTests
 ///
 /// Set the BASE_URL environment variable to override the default (http://localhost:5267).
+/// If BASE_URL is set, the server will NOT be auto-started (assumes external server).
 /// </summary>
 public class HomePageTests
 {
-    private static string BaseUrl => Environment.GetEnvironmentVariable("BASE_URL") ?? "http://localhost:5267";
+    private const string DefaultBaseUrl = "http://localhost:5267";
+
+    private static string BaseUrl => Environment.GetEnvironmentVariable("BASE_URL") ?? DefaultBaseUrl;
+    private static bool _shouldManageServer = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("BASE_URL"));
+    private static Process? _serverProcess;
+    private static readonly object _serverLock = new();
 
     private IPlaywright _playwright = null!;
     private IBrowser _browser = null!;
     private IBrowserContext _context = null!;
     private IPage _page = null!;
+
+    // ── Server lifecycle (once per class) ────────────────────────────────
+
+    [Before(Class)]
+    public static async Task StartServer()
+    {
+        if (!_shouldManageServer)
+            return;
+
+        // Resolve the Blazor WASM project path relative to the test output directory.
+        // Test output is: CollabsKus.PlaywrightTests/bin/Debug/net10.0/
+        // We need:        CollabsKus.BlazorWebAssembly/
+        var baseDir = AppContext.BaseDirectory;
+        var projectRoot = Path.GetFullPath(Path.Combine(baseDir, "..", "..", "..", ".."));
+        var blazorProject = Path.Combine(projectRoot, "CollabsKus.BlazorWebAssembly", "CollabsKus.BlazorWebAssembly.csproj");
+
+        if (!File.Exists(blazorProject))
+        {
+            throw new FileNotFoundException(
+                $"Could not find Blazor project at: {blazorProject}. " +
+                $"Resolved from base directory: {baseDir}");
+        }
+
+        lock (_serverLock)
+        {
+            if (_serverProcess != null)
+                return;
+
+            _serverProcess = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "dotnet",
+                    Arguments = $"run --project \"{blazorProject}\" --urls {DefaultBaseUrl} --no-launch-profile",
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                }
+            };
+
+            _serverProcess.Start();
+
+            // Consume stdout/stderr to prevent buffer deadlocks
+            _serverProcess.BeginOutputReadLine();
+            _serverProcess.BeginErrorReadLine();
+        }
+
+        // Wait for the server to respond (up to 120 seconds for initial build + start)
+        using var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
+        var deadline = DateTime.UtcNow.AddSeconds(120);
+
+        while (DateTime.UtcNow < deadline)
+        {
+            try
+            {
+                var response = await httpClient.GetAsync(DefaultBaseUrl);
+                if (response.IsSuccessStatusCode)
+                    return; // Server is ready
+            }
+            catch
+            {
+                // Server not ready yet
+            }
+
+            // Check if the process crashed
+            if (_serverProcess.HasExited)
+            {
+                throw new InvalidOperationException(
+                    $"Blazor dev server exited with code {_serverProcess.ExitCode} before becoming ready.");
+            }
+
+            await Task.Delay(1000);
+        }
+
+        throw new TimeoutException(
+            $"Blazor dev server did not respond at {DefaultBaseUrl} within 120 seconds.");
+    }
+
+    [After(Class)]
+    public static async Task StopServer()
+    {
+        if (_serverProcess == null || _serverProcess.HasExited)
+            return;
+
+        try
+        {
+            _serverProcess.Kill(entireProcessTree: true);
+            await _serverProcess.WaitForExitAsync();
+        }
+        catch
+        {
+            // Best effort cleanup
+        }
+        finally
+        {
+            _serverProcess.Dispose();
+            _serverProcess = null;
+        }
+    }
+
+    // ── Per-test browser lifecycle ────────────────────────────────────────
 
     [Before(Test)]
     public async Task Setup()
@@ -40,6 +152,8 @@ public class HomePageTests
         _playwright.Dispose();
     }
 
+    // ── Tests ─────────────────────────────────────────────────────────────
+
     [Test]
     public async Task Page_HasCorrectTitle()
     {
@@ -60,7 +174,6 @@ public class HomePageTests
     public async Task TimeDisplay_IsVisible()
     {
         await _page.GotoAsync(BaseUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
-        // Wait for Blazor to render (loading state disappears)
         await _page.WaitForSelectorAsync(".time-display", new PageWaitForSelectorOptions { Timeout = 30000 });
         var isVisible = await _page.Locator(".time-display").IsVisibleAsync();
         await Assert.That(isVisible).IsTrue();

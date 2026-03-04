@@ -167,4 +167,81 @@ public class SolarPositionServiceTests
         var pos = _service.CalculateKathmandu(utc);
         await Assert.That(validDirs.Contains(pos.AzimuthCardinal)).IsTrue();
     }
+
+    // ── Regression tests: sunrise/sunset reasonableness ───────────────────
+
+    [Test]
+    public async Task Kathmandu_SunriseIsBetween4AMAnd7AM_AllYear()
+    {
+        // Kathmandu sunrise ranges ~5:10 (June) to ~6:50 (Jan). Allow 4-7 for safety.
+        var fourAm = new TimeOnly(4, 0);
+        var sevenAm = new TimeOnly(7, 0);
+
+        for (int month = 1; month <= 12; month++)
+        {
+            var utc = new DateTime(2025, month, 15, 12, 0, 0, DateTimeKind.Utc);
+            var pos = _service.CalculateKathmandu(utc);
+
+            await Assert.That(pos.SunriseLocal.HasValue).IsTrue();
+            await Assert.That(pos.SunriseLocal!.Value >= fourAm).IsTrue();
+            await Assert.That(pos.SunriseLocal!.Value <= sevenAm).IsTrue();
+        }
+    }
+
+    [Test]
+    public async Task Kathmandu_SunsetIsBetween5PMAnd7PM_AllYear()
+    {
+        // Kathmandu sunset ranges ~5:20 (Dec) to ~6:55 (June). Allow 5PM-7PM.
+        var fivePm = new TimeOnly(17, 0);
+        var sevenPm = new TimeOnly(19, 0);
+
+        for (int month = 1; month <= 12; month++)
+        {
+            var utc = new DateTime(2025, month, 15, 12, 0, 0, DateTimeKind.Utc);
+            var pos = _service.CalculateKathmandu(utc);
+
+            await Assert.That(pos.SunsetLocal.HasValue).IsTrue();
+            await Assert.That(pos.SunsetLocal!.Value >= fivePm).IsTrue();
+            await Assert.That(pos.SunsetLocal!.Value <= sevenPm).IsTrue();
+        }
+    }
+
+    [Test]
+    public async Task Kathmandu_SolarNoonIsBetween1145AMAnd1220PM_AllYear()
+    {
+        // Solar noon in Kathmandu is roughly 12:00-12:15 NST year-round.
+        // Allow a wider window for safety.
+        var earlyNoon = new TimeOnly(11, 45);
+        var lateNoon = new TimeOnly(12, 20);
+
+        for (int month = 1; month <= 12; month++)
+        {
+            var utc = new DateTime(2025, month, 15, 12, 0, 0, DateTimeKind.Utc);
+            var pos = _service.CalculateKathmandu(utc);
+
+            await Assert.That(pos.SolarNoonLocal >= earlyNoon).IsTrue();
+            await Assert.That(pos.SolarNoonLocal <= lateNoon).IsTrue();
+        }
+    }
+
+    [Test]
+    public async Task WesternHemisphere_SunriseAndSunsetAreReasonable()
+    {
+        // New York (40.7°N, 74°W) on March equinox: sunrise ~7AM, sunset ~7PM EDT
+        var utc = new DateTime(2025, 3, 20, 12, 0, 0, DateTimeKind.Utc);
+        var tzOffset = TimeSpan.FromHours(-4); // EDT
+        var pos = _service.Calculate(utc, 40.7128, -74.0060, tzOffset, "New York");
+
+        await Assert.That(pos.SunriseLocal.HasValue).IsTrue();
+        await Assert.That(pos.SunsetLocal.HasValue).IsTrue();
+        await Assert.That(pos.SunriseLocal!.Value < pos.SunsetLocal!.Value).IsTrue();
+
+        // Sunrise should be between 6 and 8 AM local
+        await Assert.That(pos.SunriseLocal!.Value >= new TimeOnly(6, 0)).IsTrue();
+        await Assert.That(pos.SunriseLocal!.Value <= new TimeOnly(8, 0)).IsTrue();
+
+        // Sunset should be between 6 and 8 PM local
+        await Assert.That(pos.SunsetLocal!.Value >= new TimeOnly(18, 0)).IsTrue();
+        await Assert.That(pos.SunsetLocal!.Value <= new TimeOnly(20, 0)).IsTrue();
+    }
 }

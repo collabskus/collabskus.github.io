@@ -20,7 +20,7 @@
 
             <div class="sun-location-header">
                 📍 @pos.LocationName
-                <span class="sun-location-coords">(@pos.Latitude.ToString("F2")°N, @pos.Longitude.ToString("F2")°E)</span>
+                <span class="sun-location-coords">(@FormatCoordinate(pos.Latitude, true), @FormatCoordinate(pos.Longitude, false))</span>
             </div>
 
             <div class="sky-wrap">
@@ -59,7 +59,7 @@
                 </div>
                 <div class="sun-event sun-event--noon">
                     <span class="sun-event-icon">☀️</span>
-                    <div class="sun-event-time">@pos.SolarNoonLocal.ToString("hh\\:mm\\:ss")</div>
+                    <div class="sun-event-time">@pos.SolarNoonLocal.ToString("HH\\:mm\\:ss")</div>
                     <div class="sun-event-label">SOLAR NOON</div>
                 </div>
                 <div class="sun-event">
@@ -103,14 +103,14 @@
                 {
                     <div class="sun-info-item">
                         <div class="sun-info-label">GOLDEN AM</div>
-                        <div class="sun-info-value">@pos.GoldenHourMorningStart.Value.ToString("hh\\:mm")–@FormatTime(pos.GoldenHourMorningEnd)</div>
+                        <div class="sun-info-value">@pos.GoldenHourMorningStart.Value.ToString("HH\\:mm")–@FormatTimeShort(pos.GoldenHourMorningEnd)</div>
                     </div>
                 }
                 @if (pos.GoldenHourEveningStart.HasValue)
                 {
                     <div class="sun-info-item">
                         <div class="sun-info-label">GOLDEN PM</div>
-                        <div class="sun-info-value">@pos.GoldenHourEveningStart.Value.ToString("hh\\:mm")–@FormatTime(pos.GoldenHourEveningEnd)</div>
+                        <div class="sun-info-value">@pos.GoldenHourEveningStart.Value.ToString("HH\\:mm")–@FormatTimeShort(pos.GoldenHourEveningEnd)</div>
                     </div>
                 }
             </div>
@@ -183,9 +183,31 @@
         }
     }
 
+    /// <summary>Format a coordinate value with the correct N/S or E/W suffix.</summary>
+    private static string FormatCoordinate(double value, bool isLatitude)
+    {
+        if (isLatitude)
+        {
+            var suffix = value >= 0 ? "N" : "S";
+            return $"{Math.Abs(value):F2}°{suffix}";
+        }
+        else
+        {
+            var suffix = value >= 0 ? "E" : "W";
+            return $"{Math.Abs(value):F2}°{suffix}";
+        }
+    }
+
+    /// <summary>Format time in 24-hour HH:mm:ss format.</summary>
     private static string FormatTime(TimeOnly? time)
     {
-        return time?.ToString("hh\\:mm\\:ss") ?? "--:--:--";
+        return time?.ToString("HH\\:mm\\:ss") ?? "--:--:--";
+    }
+
+    /// <summary>Format time in 24-hour HH:mm format (short).</summary>
+    private static string FormatTimeShort(TimeOnly? time)
+    {
+        return time?.ToString("HH\\:mm") ?? "--:--";
     }
 
     private static string FormatDateTime(DateTime? dt)
@@ -197,7 +219,7 @@
                        val.Date == today.AddDays(-1) ? " (yesterday)" :
                        val.Date == today.AddDays(1) ? " (tomorrow)" :
                        $" ({val:MMM dd})";
-        return $"{val:hh:mm:ss tt}{dayLabel}";
+        return $"{val:HH:mm:ss}{dayLabel}";
     }
 
     public async ValueTask DisposeAsync()
