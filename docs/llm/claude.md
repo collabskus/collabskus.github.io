@@ -4018,3 +4018,39 @@ Without the eccentricity (`e ≈ 0.0167`), the `-2 * sin(M)` term was contributi
 
 
 
+This sun tracker is good. 
+However, I think we can do better. 
+For example, 
+we should clarify whether we take altitude into account. 
+Kathmandu is in a valley. Does the sunrise take into account that the location is surrounded by hills? 
+Or are we taking the calculated "astronomical" sunrise and sunset -- when the sun crosses the horizon mathematically? 
+Is it even possible to have the elevation data and detailed topographic map of the surroundings for all locations? 
+I imagine it would be prohitively expensive to store this data for a learning sandbox application with no commercial scope. 
+Remember, we make no money buy building this application and it is hosted free of cost by github dot com 
+we should clarify this limitation though, at least in the readme, and preferably in the app itself 
+something like a responsive tooltip I don't know how but it has to work across desktop and mobile 
+we don't want mobile to feel like second class citizen because really most if not all users will experience this app on mobile 
+another point is thesun tracker image has a live icon which is nice 
+however, it feels like the sun is not always showing. 
+for example, I feel like the sun sort of disappears at noon -- almost like the sun goes "over" the fold of the image? 
+not sure if this is true but please make the image taller if necessary
+also the sun disappears entirely at night or shows at the horizon
+instead of doing that it would be nice if we somehow show how far along it is the other side 
+if it is possible at all 
+in other news, it would be nice if the calendar was tappable. I know there isn't much information at the moment when we tap the calendar 
+but maybe we can calculate the sunrise and sunset for that day for the kathmandu location and our location for that day at the end 
+in a concise little thing if we tap? and hide it when we tap again? 
+also at the bottom there is a highlight color difference
+almost like the bottom is lighter color than the rest of the page 
+I think it was initially done for the calendar 
+but I think after we made changes, the highlight crept up more 
+I think we shoulg get rid of it because it doesn't look so nice 
+also please remember to read the whole `dump.txt` in its entirety 
+and please return full files only for all the files that change 
+no need to return a file if there are no changes 
+remember to fix unit tests if there is any code change. 
+lets ignore the playwright tests for now. 
+I don't have the bandwidth to run those for now. 
+we will handle those at a later time 
+please do not hallucinate. 
+
