@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 03/04/2026 20:43:23
+Generated: 03/04/2026 20:47:58
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -6761,8 +6761,8 @@ public class MoonPhaseServiceTests
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.Tests\Services\SolarPositionServiceTests.cs
-SIZE: 11.49 KB
-MODIFIED: 03/04/2026 20:41:00
+SIZE: 11.65 KB
+MODIFIED: 03/04/2026 20:47:13
 ================================================================================
 
 using CollabsKus.BlazorWebAssembly.Services;
@@ -6954,10 +6954,12 @@ public class SolarPositionServiceTests
     }
 
     [Test]
-    public async Task Kathmandu_SunsetIsBetween5PMAnd7PM_AllYear()
+    public async Task Kathmandu_SunsetIsBetween5PMAnd710PM_AllYear()
     {
+        // Kathmandu sunset ranges ~5:20 (Dec) to ~19:03 (June solstice).
+        // Allow 17:00–19:10 for safety margin on the Meeus approximation.
         var fivePm = new TimeOnly(17, 0);
-        var sevenPm = new TimeOnly(19, 0);
+        var lateSunset = new TimeOnly(19, 10);
 
         for (int month = 1; month <= 12; month++)
         {
@@ -6966,7 +6968,7 @@ public class SolarPositionServiceTests
 
             await Assert.That(pos.SunsetLocal.HasValue).IsTrue();
             await Assert.That(pos.SunsetLocal!.Value >= fivePm).IsTrue();
-            await Assert.That(pos.SunsetLocal!.Value <= sevenPm).IsTrue();
+            await Assert.That(pos.SunsetLocal!.Value <= lateSunset).IsTrue();
         }
     }
 
@@ -7082,7 +7084,7 @@ MODIFIED: 03/03/2026 17:33:03
 
 
 ===============================================================================
-EXPORT COMPLETED: 03/04/2026 20:43:31
+EXPORT COMPLETED: 03/04/2026 20:48:04
 Total Files Exported: 46
 Output File: .\docs\llm\dump.txt
 ===============================================================================
