@@ -24,7 +24,11 @@ else
     <DateCards CalendarData="_calendarData?.Res" />
     <MoonDisplay MoonPhase="_moonPhase" IsLive="_isMoonLive" />
     <Sundisplay Position="_sunPosition" UserPosition="_userSunPosition" IsLive="_isSunLive" />
-    <CalendarGrid CalendarData="_calendarData?.Res" />
+    <CalendarGrid CalendarData="_calendarData?.Res"
+                  SolarService="SolarPositionService"
+                  UserLat="_userLat"
+                  UserLng="_userLng"
+                  UserTzOffset="_userTzOffset" />
 }
 
 <div class="footer">

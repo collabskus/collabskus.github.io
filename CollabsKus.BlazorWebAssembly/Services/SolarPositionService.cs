@@ -6,6 +6,12 @@ namespace CollabsKus.BlazorWebAssembly.Services;
 /// Calculates sun position and daily solar events for any location using the
 /// Jean Meeus astronomical algorithm (Astronomical Algorithms, 2nd ed.).
 /// Pure math — no network calls, no JS interop.
+///
+/// NOTE: Sunrise/sunset times are "astronomical" — they assume a perfectly flat,
+/// unobstructed horizon with standard atmospheric refraction (zenith 90.833°).
+/// They do NOT account for local elevation, surrounding hills, or terrain.
+/// In valleys like Kathmandu, actual visible sunrise may be later and sunset
+/// earlier than the times calculated here.
 /// </summary>
 public class SolarPositionService
 {
@@ -42,6 +48,12 @@ public class SolarPositionService
             dayFraction = Math.Clamp((utcMinutes - events.SunriseUtcMinutes.Value) / totalDayMin, 0, 1);
         }
 
+        // Full 24-hour day fraction: 0 = solar midnight, 0.5 = solar noon
+        double utcMin = utcNow.Hour * 60.0 + utcNow.Minute + utcNow.Second / 60.0;
+        double solarMidnightUtc = events.SolarNoonUtcMinutes - 720.0;
+        double fullDayFrac = (utcMin - solarMidnightUtc) / 1440.0;
+        fullDayFrac -= Math.Floor(fullDayFrac); // normalize to [0, 1)
+
         var (prevSr, prevSs, nextSr, nextSs) = ComputePrevNext(utcNow, lat, lng, tzOffset);
 
         return new SolarPosition
@@ -54,6 +66,7 @@ public class SolarPositionService
             Declination = decl,
             HourAngle = ha,
             DayFraction = dayFraction,
+            FullDayFraction = fullDayFrac,
             SunriseLocal = UtcMinutesToLocal(events.SunriseUtcMinutes, tzOffset),
             SolarNoonLocal = UtcMinutesToLocal(events.SolarNoonUtcMinutes, tzOffset)!.Value,
             SunsetLocal = UtcMinutesToLocal(events.SunsetUtcMinutes, tzOffset),
@@ -186,8 +199,6 @@ public class SolarPositionService
         double e = 0.016708634 - T * (0.000042037 + 0.0000001267 * T);
 
         // Equation of time (minutes) — Meeus Ch. 28
-        // EoT = y·sin(2L₀) − 2e·sin(M) + 4ey·sin(M)·cos(2L₀) − ½y²·sin(4L₀) − 1.25e²·sin(2M)
-        // Result is in radians; 4·ToDeg converts to minutes of time.
         double y = Math.Pow(Math.Tan(ToRad(epsilon / 2)), 2);
         double eot = 4.0 * ToDeg(
             y * Math.Sin(2 * ToRad(L0))

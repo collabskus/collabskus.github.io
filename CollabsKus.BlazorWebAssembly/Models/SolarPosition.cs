@@ -33,6 +33,12 @@ public class SolarPosition
     /// <summary>Fraction of the day arc traveled (0 = sunrise, 1 = sunset). -1 if polar night/day.</summary>
     public double DayFraction { get; init; }
 
+    /// <summary>
+    /// Fraction of the full 24-hour solar day (0 = solar midnight, 0.5 = solar noon, ~1 = next solar midnight).
+    /// Used for rendering the sun's position on a full-day elliptical arc including night.
+    /// </summary>
+    public double FullDayFraction { get; init; }
+
     // ── Today's events (in local time for this location) ──────────────────
     /// <summary>Sunrise time in local time. Null during polar phenomena.</summary>
     public TimeOnly? SunriseLocal { get; init; }

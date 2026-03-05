@@ -1,4 +1,5 @@
 @using CollabsKus.BlazorWebAssembly.Models
+@using CollabsKus.BlazorWebAssembly.Services
 
 @if (CalendarData != null)
 {
@@ -10,11 +11,30 @@
             }
         </div>
         <div class="calendar-days">
-            @foreach (var day in CalendarData.Days)
+            @for (int i = 0; i < CalendarData.Days.Count; i++)
             {
-                <div class="calendar-day @(day.Tag ?? "")">
+                var idx = i;
+                var day = CalendarData.Days[idx];
+                <div class="calendar-day @(day.Tag ?? "") @(idx == _selectedDayIndex ? "selected" : "")"
+                     @onclick="() => OnDayTapped(idx)">
                     <div class="bs-date">@day.Bs</div>
                     <div class="ad-date">@day.Ad</div>
+                    @if (idx == _selectedDayIndex && _selectedKtmSun != null)
+                    {
+                        <div class="day-sun-info" @onclick:stopPropagation="true">
+                            <div class="day-sun-row">
+                                <span>🌅 @FormatTimeShort(_selectedKtmSun.SunriseLocal)</span>
+                                <span>🌇 @FormatTimeShort(_selectedKtmSun.SunsetLocal)</span>
+                            </div>
+                            @if (_selectedUserSun != null)
+                            {
+                                <div class="day-sun-row day-sun-user">
+                                    <span>🌅 @FormatTimeShort(_selectedUserSun.SunriseLocal)</span>
+                                    <span>🌇 @FormatTimeShort(_selectedUserSun.SunsetLocal)</span>
+                                </div>
+                            }
+                        </div>
+                    }
                 </div>
             }
         </div>
@@ -24,4 +44,77 @@
 @code {
     [Parameter]
     public CalendarData? CalendarData { get; set; }
+
+    [Parameter]
+    public SolarPositionService? SolarService { get; set; }
+
+    [Parameter]
+    public double? UserLat { get; set; }
+
+    [Parameter]
+    public double? UserLng { get; set; }
+
+    [Parameter]
+    public TimeSpan UserTzOffset { get; set; }
+
+    private int? _selectedDayIndex;
+    private SolarPosition? _selectedKtmSun;
+    private SolarPosition? _selectedUserSun;
+
+    private void OnDayTapped(int index)
+    {
+        if (_selectedDayIndex == index)
+        {
+            _selectedDayIndex = null;
+            _selectedKtmSun = null;
+            _selectedUserSun = null;
+            return;
+        }
+
+        _selectedDayIndex = index;
+        CalculateSunForDay(index);
+    }
+
+    private void CalculateSunForDay(int index)
+    {
+        if (CalendarData == null || SolarService == null) return;
+
+        // Find "today" as an anchor to compute the Gregorian date for any day in the grid
+        int todayIdx = -1;
+        for (int i = 0; i < CalendarData.Days.Count; i++)
+        {
+            if (CalendarData.Days[i].Tag == "today")
+            {
+                todayIdx = i;
+                break;
+            }
+        }
+
+        if (todayIdx < 0) return;
+
+        // Current Kathmandu date (anchor)
+        var kathmanduNow = DateTime.UtcNow + SolarPositionService.NstOffset;
+        var kathmanduToday = kathmanduNow.Date;
+        var targetDate = kathmanduToday.AddDays(index - todayIdx);
+
+        // Use noon UTC on target date for daily events calculation
+        var utcNoon = new DateTime(targetDate.Year, targetDate.Month, targetDate.Day, 6, 15, 0, DateTimeKind.Utc);
+
+        _selectedKtmSun = SolarService.CalculateKathmandu(utcNoon);
+
+        if (UserLat.HasValue && UserLng.HasValue)
+        {
+            _selectedUserSun = SolarService.Calculate(
+                utcNoon, UserLat.Value, UserLng.Value, UserTzOffset, "Your Location");
+        }
+        else
+        {
+            _selectedUserSun = null;
+        }
+    }
+
+    private static string FormatTimeShort(TimeOnly? time)
+    {
+        return time?.ToString("HH\\:mm") ?? "--:--";
+    }
 }

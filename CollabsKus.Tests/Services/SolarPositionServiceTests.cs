@@ -84,7 +84,6 @@ public class SolarPositionServiceTests
     [Test]
     public async Task MaxElevation_IsReasonableForKathmandu()
     {
-        // Kathmandu at ~27.7°N: max elevation should be 60-90° in summer, 35-65° in winter
         var summerUtc = new DateTime(2025, 6, 21, 12, 0, 0, DateTimeKind.Utc);
         var winterUtc = new DateTime(2025, 12, 21, 12, 0, 0, DateTimeKind.Utc);
 
@@ -173,7 +172,6 @@ public class SolarPositionServiceTests
     [Test]
     public async Task Kathmandu_SunriseIsBetween4AMAnd7AM_AllYear()
     {
-        // Kathmandu sunrise ranges ~5:10 (June) to ~6:50 (Jan). Allow 4-7 for safety.
         var fourAm = new TimeOnly(4, 0);
         var sevenAm = new TimeOnly(7, 0);
 
@@ -191,7 +189,6 @@ public class SolarPositionServiceTests
     [Test]
     public async Task Kathmandu_SunsetIsBetween5PMAnd7PM_AllYear()
     {
-        // Kathmandu sunset ranges ~5:20 (Dec) to ~6:55 (June). Allow 5PM-7PM.
         var fivePm = new TimeOnly(17, 0);
         var sevenPm = new TimeOnly(19, 0);
 
@@ -209,8 +206,6 @@ public class SolarPositionServiceTests
     [Test]
     public async Task Kathmandu_SolarNoonIsBetween1145AMAnd1220PM_AllYear()
     {
-        // Solar noon in Kathmandu is roughly 12:00-12:15 NST year-round.
-        // Allow a wider window for safety.
         var earlyNoon = new TimeOnly(11, 45);
         var lateNoon = new TimeOnly(12, 20);
 
@@ -227,7 +222,6 @@ public class SolarPositionServiceTests
     [Test]
     public async Task WesternHemisphere_SunriseAndSunsetAreReasonable()
     {
-        // New York (40.7°N, 74°W) on March equinox: sunrise ~7AM, sunset ~7PM EDT
         var utc = new DateTime(2025, 3, 20, 12, 0, 0, DateTimeKind.Utc);
         var tzOffset = TimeSpan.FromHours(-4); // EDT
         var pos = _service.Calculate(utc, 40.7128, -74.0060, tzOffset, "New York");
@@ -236,12 +230,65 @@ public class SolarPositionServiceTests
         await Assert.That(pos.SunsetLocal.HasValue).IsTrue();
         await Assert.That(pos.SunriseLocal!.Value < pos.SunsetLocal!.Value).IsTrue();
 
-        // Sunrise should be between 6 and 8 AM local
         await Assert.That(pos.SunriseLocal!.Value >= new TimeOnly(6, 0)).IsTrue();
         await Assert.That(pos.SunriseLocal!.Value <= new TimeOnly(8, 0)).IsTrue();
 
-        // Sunset should be between 6 and 8 PM local
         await Assert.That(pos.SunsetLocal!.Value >= new TimeOnly(18, 0)).IsTrue();
         await Assert.That(pos.SunsetLocal!.Value <= new TimeOnly(20, 0)).IsTrue();
+    }
+
+    // ── FullDayFraction tests ─────────────────────────────────────────────
+
+    [Test]
+    public async Task FullDayFraction_IsAlways_Between0And1()
+    {
+        var baseDate = new DateTime(2025, 6, 15, 0, 0, 0, DateTimeKind.Utc);
+        for (int hour = 0; hour < 24; hour++)
+        {
+            var utc = baseDate.AddHours(hour);
+            var pos = _service.CalculateKathmandu(utc);
+            await Assert.That(pos.FullDayFraction).IsGreaterThanOrEqualTo(0.0);
+            await Assert.That(pos.FullDayFraction).IsLessThan(1.0);
+        }
+    }
+
+    [Test]
+    public async Task FullDayFraction_NearNoon_IsAround05()
+    {
+        // Noon NST ≈ 06:15 UTC
+        var utc = new DateTime(2025, 6, 15, 6, 15, 0, DateTimeKind.Utc);
+        var pos = _service.CalculateKathmandu(utc);
+
+        // Should be close to 0.5 (solar noon)
+        await Assert.That(pos.FullDayFraction).IsGreaterThan(0.45);
+        await Assert.That(pos.FullDayFraction).IsLessThan(0.55);
+    }
+
+    [Test]
+    public async Task FullDayFraction_NearMidnight_IsNear0Or1()
+    {
+        // Midnight NST ≈ 18:15 UTC
+        var utc = new DateTime(2025, 6, 15, 18, 15, 0, DateTimeKind.Utc);
+        var pos = _service.CalculateKathmandu(utc);
+
+        // Should be close to 0 or 1 (solar midnight)
+        var nearMidnight = pos.FullDayFraction < 0.05 || pos.FullDayFraction > 0.95;
+        await Assert.That(nearMidnight).IsTrue();
+    }
+
+    [Test]
+    public async Task FullDayFraction_IncreasesOverDay()
+    {
+        // Test that FullDayFraction increases monotonically from morning to evening
+        var morning = new DateTime(2025, 4, 10, 2, 0, 0, DateTimeKind.Utc);   // ~7:45 NST
+        var midday = new DateTime(2025, 4, 10, 6, 15, 0, DateTimeKind.Utc);   // ~12:00 NST
+        var evening = new DateTime(2025, 4, 10, 12, 0, 0, DateTimeKind.Utc);  // ~17:45 NST
+
+        var posMorning = _service.CalculateKathmandu(morning);
+        var posMidday = _service.CalculateKathmandu(midday);
+        var posEvening = _service.CalculateKathmandu(evening);
+
+        await Assert.That(posMidday.FullDayFraction).IsGreaterThan(posMorning.FullDayFraction);
+        await Assert.That(posEvening.FullDayFraction).IsGreaterThan(posMidday.FullDayFraction);
     }
 }

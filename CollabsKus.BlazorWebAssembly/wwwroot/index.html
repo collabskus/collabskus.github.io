@@ -124,21 +124,24 @@
                 if (!canvas) return;
                 var resize = function () {
                     canvas.width = canvas.offsetWidth;
-                    canvas.height = canvas.offsetHeight || 220;
+                    canvas.height = canvas.offsetHeight || 300;
                 };
                 resize();
                 window.addEventListener('resize', resize);
                 this._canvases[canvasId] = { canvas: canvas, resize: resize };
             },
 
-            draw: function (canvasId, altitude, azimuth, dayFraction, isAboveHorizon) {
+            draw: function (canvasId, altitude, azimuth, dayFraction, isAboveHorizon, fullDayFraction) {
                 var entry = this._canvases[canvasId];
                 if (!entry) return;
                 var canvas = entry.canvas;
                 var ctx = canvas.getContext('2d');
                 var W = canvas.width, H = canvas.height;
-                var cx = W / 2, horizY = H * 0.75;
-                var arcRx = W * 0.44, arcRy = H * 0.82;
+                var cx = W / 2;
+                var horizY = H * 0.55;
+                var arcRx = W * 0.44;
+                var arcRyDay = horizY - 15;
+                var arcRyNight = (H - horizY) * 0.6;
 
                 ctx.clearRect(0, 0, W, H);
 
@@ -168,29 +171,47 @@
                     glow.addColorStop(0.4, 'rgba(255,80,20,' + (0.15 * tg) + ')');
                     glow.addColorStop(1, 'rgba(0,0,0,0)');
                     ctx.fillStyle = glow;
-                    ctx.fillRect(0, horizY - H * 0.4, W, H * 0.5);
+                    ctx.fillRect(0, horizY - H * 0.3, W, H * 0.4);
                 }
 
                 // Horizon line
                 ctx.beginPath(); ctx.moveTo(0, horizY); ctx.lineTo(W, horizY);
                 ctx.strokeStyle = 'rgba(240,165,0,0.22)'; ctx.lineWidth = 1; ctx.stroke();
 
-                // Dashed arc path
+                // Dashed day arc path (above horizon)
                 ctx.beginPath();
-                ctx.ellipse(cx, horizY, arcRx, arcRy, 0, Math.PI, 0, false);
+                ctx.ellipse(cx, horizY, arcRx, arcRyDay, 0, Math.PI, 0, false);
                 ctx.strokeStyle = 'rgba(240,165,0,0.10)';
                 ctx.lineWidth = 1;
                 ctx.setLineDash([4, 7]);
                 ctx.stroke();
                 ctx.setLineDash([]);
 
-                // Sun position on arc
-                var frac = Math.max(0, Math.min(1, dayFraction < 0 ? 0.5 : dayFraction));
-                var angle = Math.PI - frac * Math.PI;
-                var sunX = cx + arcRx * Math.cos(angle);
-                var sunY = horizY - arcRy * Math.sin(angle);
+                // Dashed night arc path (below horizon)
+                ctx.beginPath();
+                ctx.ellipse(cx, horizY, arcRx, arcRyNight, 0, 0, Math.PI, false);
+                ctx.strokeStyle = 'rgba(100,140,220,0.06)';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([3, 9]);
+                ctx.stroke();
+                ctx.setLineDash([]);
 
-                if (dayFraction >= 0 && isAboveHorizon) {
+                // Sun position on full 24-hour ellipse using fullDayFraction
+                // 0 = solar midnight (bottom), 0.5 = solar noon (top)
+                var fdf = (fullDayFraction !== undefined && fullDayFraction !== null) ? fullDayFraction : 0.5;
+                var theta = 1.5 * Math.PI - fdf * 2 * Math.PI;
+                var sinT = Math.sin(theta);
+                var cosT = Math.cos(theta);
+                var sunX = cx + arcRx * cosT;
+                var sunY;
+                if (sinT >= 0) {
+                    sunY = horizY - arcRyDay * sinT;
+                } else {
+                    sunY = horizY - arcRyNight * sinT;
+                }
+
+                if (isAboveHorizon) {
+                    // Bright sun with corona
                     var corona = ctx.createRadialGradient(sunX, sunY, 2, sunX, sunY, 42);
                     corona.addColorStop(0, 'rgba(255,220,80,0.92)');
                     corona.addColorStop(0.2, 'rgba(255,180,40,0.5)');
@@ -200,9 +221,15 @@
                     ctx.beginPath(); ctx.arc(sunX, sunY, 42, 0, Math.PI * 2); ctx.fill();
                     ctx.beginPath(); ctx.arc(sunX, sunY, 11, 0, Math.PI * 2);
                     ctx.fillStyle = '#ffe060'; ctx.fill();
-                } else if (dayFraction >= 0) {
-                    ctx.beginPath(); ctx.arc(sunX, sunY, 8, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(255,160,60,0.38)'; ctx.fill();
+                } else {
+                    // Dim sun below horizon
+                    var nightGlow = ctx.createRadialGradient(sunX, sunY, 1, sunX, sunY, 20);
+                    nightGlow.addColorStop(0, 'rgba(255,160,60,0.20)');
+                    nightGlow.addColorStop(1, 'rgba(0,0,0,0)');
+                    ctx.fillStyle = nightGlow;
+                    ctx.beginPath(); ctx.arc(sunX, sunY, 20, 0, Math.PI * 2); ctx.fill();
+                    ctx.beginPath(); ctx.arc(sunX, sunY, 6, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255,160,60,0.35)'; ctx.fill();
                 }
 
                 // Labels

@@ -3,7 +3,22 @@
 @implements IAsyncDisposable
 
 <div id="sun-display-root" class="sun-display">
-    <div class="sun-section-label">☀ SUN TRACKER</div>
+    <div class="sun-section-label">
+        ☀ SUN TRACKER
+        <span class="sun-info-toggle" @onclick="ToggleDisclaimer" title="About these calculations">ⓘ</span>
+    </div>
+
+    @if (_showDisclaimer)
+    {
+        <div class="sun-disclaimer" @onclick="ToggleDisclaimer">
+            Sunrise and sunset times are <strong>astronomical</strong> — calculated for a
+            mathematical flat horizon with standard atmospheric refraction. They do not
+            account for local elevation, surrounding hills, or terrain. Kathmandu sits in
+            a valley surrounded by hills, so actual visible sunrise may be slightly later
+            and sunset slightly earlier than shown here. Storing detailed topographic data
+            for all locations is beyond the scope of this free, open-source application.
+        </div>
+    }
 
     @if (Position == null)
     {
@@ -129,6 +144,9 @@
     public bool IsLive { get; set; }
 
     private bool _canvasInitialized;
+    private bool _showDisclaimer;
+
+    private void ToggleDisclaimer() => _showDisclaimer = !_showDisclaimer;
 
     private IEnumerable<(SolarPosition pos, string canvasId, int idx)> GetLocations()
     {
@@ -167,13 +185,13 @@
             {
                 await JS.InvokeVoidAsync("sunTracker.draw",
                     "sunSkyCanvasKtm", Position.Altitude, Position.Azimuth,
-                    Position.DayFraction, Position.IsAboveHorizon);
+                    Position.DayFraction, Position.IsAboveHorizon, Position.FullDayFraction);
 
                 if (UserPosition != null)
                 {
                     await JS.InvokeVoidAsync("sunTracker.draw",
                         "sunSkyCanvasUser", UserPosition.Altitude, UserPosition.Azimuth,
-                        UserPosition.DayFraction, UserPosition.IsAboveHorizon);
+                        UserPosition.DayFraction, UserPosition.IsAboveHorizon, UserPosition.FullDayFraction);
                 }
             }
             catch
