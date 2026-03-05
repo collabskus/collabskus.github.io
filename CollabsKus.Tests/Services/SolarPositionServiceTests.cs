@@ -187,10 +187,12 @@ public class SolarPositionServiceTests
     }
 
     [Test]
-    public async Task Kathmandu_SunsetIsBetween5PMAnd7PM_AllYear()
+    public async Task Kathmandu_SunsetIsBetween5PMAnd710PM_AllYear()
     {
+        // Kathmandu sunset ranges ~5:20 (Dec) to ~19:03 (June solstice).
+        // Allow 17:00–19:10 for safety margin on the Meeus approximation.
         var fivePm = new TimeOnly(17, 0);
-        var sevenPm = new TimeOnly(19, 0);
+        var lateSunset = new TimeOnly(19, 10);
 
         for (int month = 1; month <= 12; month++)
         {
@@ -199,7 +201,7 @@ public class SolarPositionServiceTests
 
             await Assert.That(pos.SunsetLocal.HasValue).IsTrue();
             await Assert.That(pos.SunsetLocal!.Value >= fivePm).IsTrue();
-            await Assert.That(pos.SunsetLocal!.Value <= sevenPm).IsTrue();
+            await Assert.That(pos.SunsetLocal!.Value <= lateSunset).IsTrue();
         }
     }
 

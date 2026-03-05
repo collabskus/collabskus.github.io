@@ -6217,3 +6217,137 @@ public class SolarPositionServiceTests
 
 33
 48
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+I have made all the changes. 
+You can see what I did in the attached `dump.txt` 
+one unit test is failing 
+ Kathmandu_SunsetIsBetween5PMAnd7PM_AllYear
+   Duration: 26 ms
+  Message: 
+    [Assertion Failure] Expected to be true
+    but found False
+    at Assert.That(pos.SunsetLocal!.Value <= sevenPm).IsTrue()
+  Stack Trace: 
+    Assertion`1.ThrowOrAccumulateFailure(AssertionResult result)
+    Assertion`1.ExecuteCoreAsync()
+    Assertion`1.AssertAsync()
+    SolarPositionServiceTests.Kathmandu_SunsetIsBetween5PMAnd7PM_AllYear() line 202
+    <<get_CreateExecutableTestFactory>b__2>d.MoveNext()
+    --- End of stack trace from previous location ---
+    ExecutableTest.InvokeTestAsync(Object instance, CancellationToken cancellationToken)
+    TestExecutor.ExecuteTestAsync(AbstractExecutableTest executableTest, CancellationToken cancellationToken)
+    <<ExecuteWithTimeoutCoreAsync>b__0>d.MoveNext()
+    --- End of stack trace from previous location ---
+    TimeoutHelper.ExecuteWithTimeoutAsync[T](Func`2 taskFactory, Nullable`1 timeout, CancellationToken cancellationToken, String timeoutMessage)
+    TimeoutHelper.ExecuteWithTimeoutCoreAsync(Func`2 valueTaskFactory, TimeSpan timeout, CancellationToken cancellationToken, String timeoutMessage)
+    TestExecutor.ExecuteAsync(AbstractExecutableTest executableTest, TestInitializer testInitializer, CancellationToken cancellationToken, Nullable`1 testTimeout)
+    TestExecutor.ExecuteAsync(AbstractExecutableTest executableTest, TestInitializer testInitializer, CancellationToken cancellationToken, Nullable`1 testTimeout)
+    TestCoordinator.ExecuteTestLifecycleAsync(AbstractExecutableTest test, CancellationToken cancellationToken)
+    TestCoordinator.ExecuteTestLifecycleAsync(AbstractExecutableTest test, CancellationToken cancellationToken)
+    <<ExecuteTestInternalAsync>b__0>d.MoveNext()
+    --- End of stack trace from previous location ---
+    RetryHelper.ExecuteWithRetry(TestContext testContext, Func`1 action)
+    RetryHelper.ExecuteWithRetry(TestContext testContext, Func`1 action)
+    TestCoordinator.ExecuteTestInternalAsync(AbstractExecutableTest test, CancellationToken cancellationToken)
+Please review and fix as necessary. 
+Please also review all the changes I made for correctness and fix as necessary. 
+
+33
+48
+
+I've read the full dump.txt. The issue is straightforward: Kathmandu's latest sunset (around June solstice) can be approximately 19:01–19:03 NST, which exceeds the `19:00` upper bound in the test. The fix is simply widening that bound.
+
+After reviewing all the other changes for correctness, everything else looks good. Only the one test file needs to change.
+
+**File: `CollabsKus.Tests/Services/SolarPositionServiceTests.cs`**
+
+The only change is on the line that defines `sevenPm` in `Kathmandu_SunsetIsBetween5PMAnd7PM_AllYear` — widened from `19:00` to `19:10` to accommodate June solstice sunsets:Two changes in this file:
+
+1. **Test method renamed** from `Kathmandu_SunsetIsBetween5PMAnd7PM_AllYear` to `Kathmandu_SunsetIsBetween5PMAnd710PM_AllYear` to reflect the actual bound.
+
+2. **Upper bound widened** from `new TimeOnly(19, 0)` to `new TimeOnly(19, 10)`. Kathmandu's latest astronomical sunset (around June solstice) is approximately 19:01–19:03 NST. The Meeus low-precision algorithm can be off by a minute or two, so 19:10 gives a reasonable safety margin while still catching any real regression.
+
+Everything else in the dump.txt looks correct — the `FullDayFraction` calculation, the 24-hour elliptical canvas rendering, the disclaimer toggle, the tappable calendar grid, and the calendar background fix all look good.
+
+79
+56
