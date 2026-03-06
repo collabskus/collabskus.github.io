@@ -4,13 +4,18 @@
     box-sizing: border-box;
 }
 
-html, body {
+html {
     height: 100%;
 }
 
 body {
+    /* min-height instead of height so the gradient stretches with content
+       that overflows the viewport, preventing a color cutoff at the bottom */
+    min-height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* Attach the gradient to the viewport so it doesn't scroll/repeat */
+    background-attachment: fixed;
     color: #fff;
     overflow-x: hidden;
 }
@@ -75,3 +80,4 @@ body {
         top: 1rem;
         font-size: 1.5rem;
     }
+    

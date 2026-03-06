@@ -143,7 +143,10 @@
     [Parameter]
     public bool IsLive { get; set; }
 
-    private bool _canvasInitialized;
+    // Track each canvas independently so the user canvas can be initialized
+    // after geolocation resolves (which happens after first render).
+    private bool _ktmCanvasInitialized;
+    private bool _userCanvasInitialized;
     private bool _showDisclaimer;
 
     private void ToggleDisclaimer() => _showDisclaimer = !_showDisclaimer;
@@ -160,39 +163,59 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender || !_canvasInitialized)
+        // Initialize Kathmandu canvas when Position is available and DOM element exists
+        if (!_ktmCanvasInitialized && Position != null)
         {
-            if (Position != null)
+            try
             {
-                try
-                {
-                    await JS.InvokeVoidAsync("sunTracker.init", "sunSkyCanvasKtm");
-                    if (UserPosition != null)
-                        await JS.InvokeVoidAsync("sunTracker.init", "sunSkyCanvasUser");
-                    _canvasInitialized = true;
-                }
-                catch
-                {
-                    // Graceful degradation — canvas is optional
-                }
+                await JS.InvokeVoidAsync("sunTracker.init", "sunSkyCanvasKtm");
+                _ktmCanvasInitialized = true;
+            }
+            catch
+            {
+                // Graceful degradation — canvas is optional
             }
         }
 
-        // Draw every render cycle
-        if (_canvasInitialized && Position != null)
+        // Initialize user canvas when UserPosition is available and DOM element exists.
+        // This typically happens on a later render after geolocation resolves,
+        // which is why it MUST be tracked independently from the KTM canvas.
+        if (!_userCanvasInitialized && UserPosition != null)
+        {
+            try
+            {
+                await JS.InvokeVoidAsync("sunTracker.init", "sunSkyCanvasUser");
+                _userCanvasInitialized = true;
+            }
+            catch
+            {
+                // Graceful degradation — canvas is optional
+            }
+        }
+
+        // Draw Kathmandu canvas every render cycle
+        if (_ktmCanvasInitialized && Position != null)
         {
             try
             {
                 await JS.InvokeVoidAsync("sunTracker.draw",
                     "sunSkyCanvasKtm", Position.Altitude, Position.Azimuth,
                     Position.DayFraction, Position.IsAboveHorizon, Position.FullDayFraction);
+            }
+            catch
+            {
+                // Ignore draw errors
+            }
+        }
 
-                if (UserPosition != null)
-                {
-                    await JS.InvokeVoidAsync("sunTracker.draw",
-                        "sunSkyCanvasUser", UserPosition.Altitude, UserPosition.Azimuth,
-                        UserPosition.DayFraction, UserPosition.IsAboveHorizon, UserPosition.FullDayFraction);
-                }
+        // Draw user canvas every render cycle
+        if (_userCanvasInitialized && UserPosition != null)
+        {
+            try
+            {
+                await JS.InvokeVoidAsync("sunTracker.draw",
+                    "sunSkyCanvasUser", UserPosition.Altitude, UserPosition.Azimuth,
+                    UserPosition.DayFraction, UserPosition.IsAboveHorizon, UserPosition.FullDayFraction);
             }
             catch
             {

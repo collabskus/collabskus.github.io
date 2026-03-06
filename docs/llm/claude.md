@@ -6351,3 +6351,122 @@ Everything else in the dump.txt looks correct — the `FullDayFraction` calculat
 
 79
 56
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+00
+58
+For example, a few minutes ago, 
+I don't see the sun for my location in the sun tracker 
+running from https://collabskus.github.io/ 
+📍 Your Location (America/New_York) (37.09°N, 76.45°W)
+ALTITUDE
++15.3°
+Daytime
+AZIMUTH
+109.4°
+ESE
+🌅
+06:29:40
+SUNRISE
+☀️
+12:17:02
+SOLAR NOON
+🌇
+18:04:23
+SUNSET
+PREV SUNRISE
+06:29:40
+PREV SUNSET
+18:03:26 (yesterday)
+NEXT SUNRISE
+06:28:15 (tomorrow)
+NEXT SUNSET
+18:04:23
+DAY LENGTH
+11:34:42
+MAX ELEV
+47.4°
+GOLDEN AM
+06:03–07:04
+GOLDEN PM
+17:29–18:30
+please fix all the issues you can find 
+including the background color change near the bottom of the page
+
+19
+61
+
+I've read the full dump.txt carefully. Here are the bugs I found:
+
+**Bug 1: User sun canvas never initialized (race condition)**
+In `Sundisplay.razor`, `_canvasInitialized` is set to `true` after the Kathmandu canvas is initialized. Since geolocation resolves *after* first render, `UserPosition` is still null at that point. Once `_canvasInitialized = true`, the init block is never re-entered, so `sunTracker.init("sunSkyCanvasUser")` is never called. The JS `draw` function silently returns when the canvas isn't in `_canvases`, so the user canvas stays blank.
+
+**Bug 2: Background gradient doesn't cover full page**
+In `app.css`, `html, body { height: 100%; }` limits the body to exactly viewport height. When content is taller than the viewport, the gradient stops and the area below shows a different (default) background color.
+
+**Bug 3: JS `sunTracker.init` leaks resize listeners on re-init**
+Minor, but if init were ever called twice for the same canvas, it would stack up resize listeners.
+
+Here are the three fixed files:Now the `index.html` with the JS `sunTracker.init` made idempotent (cleans up old resize listener before re-initializing):Here's a summary of all the changes:
+
+**File 1: `CollabsKus.BlazorWebAssembly/Components/Sundisplay.razor`**
+
+The root cause of the missing user sun canvas: a single `_canvasInitialized` boolean was set to `true` after the Kathmandu canvas was initialized on first render. Since geolocation resolves *after* first render, `UserPosition` was still null at that point. The init block was never re-entered, so `sunTracker.init("sunSkyCanvasUser")` was never called, and the JS `draw` function silently returned when the canvas wasn't registered.
+
+The fix splits the tracking into `_ktmCanvasInitialized` and `_userCanvasInitialized`, each checked independently on every render. The user canvas gets initialized on the first render where `UserPosition` is non-null (i.e., after geolocation resolves). The draw calls are also separated so a failure on one doesn't skip the other.
+
+**File 2: `CollabsKus.BlazorWebAssembly/wwwroot/css/app.css`**
+
+The background gradient cutoff was caused by `html, body { height: 100%; }` — this constrains the body to exactly viewport height. Content taller than the viewport overflows, and the gradient stops at the viewport boundary showing a different color below.
+
+The fix: `html { height: 100%; }` stays, but `body` gets `min-height: 100%` plus `background-attachment: fixed` so the gradient fills the viewport and stays fixed as you scroll. No more color change at the bottom.
+
+**File 3: `CollabsKus.BlazorWebAssembly/wwwroot/index.html`**
+
+Made `sunTracker.init` idempotent — if called again for an already-registered canvas ID, it first removes the old resize listener before setting up the new one. This prevents event listener leaks if init were ever called multiple times for the same canvas.
+

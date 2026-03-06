@@ -120,6 +120,13 @@
             _canvases: {},
 
             init: function (canvasId) {
+                // Clean up existing entry to prevent resize listener leaks
+                // when init is called again (e.g. after geolocation resolves)
+                if (this._canvases[canvasId]) {
+                    window.removeEventListener('resize', this._canvases[canvasId].resize);
+                    delete this._canvases[canvasId];
+                }
+
                 var canvas = document.getElementById(canvasId);
                 if (!canvas) return;
                 var resize = function () {
