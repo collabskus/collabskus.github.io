@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 03/06/2026 07:53:37
+Generated: 03/06/2026 08:01:48
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -3448,8 +3448,8 @@ MODIFIED: 02/24/2026 09:14:12
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Components\Sundisplay.razor
-SIZE: 10.06 KB
-MODIFIED: 03/04/2026 20:38:52
+SIZE: 10.92 KB
+MODIFIED: 03/06/2026 08:00:41
 ================================================================================
 
 @using CollabsKus.BlazorWebAssembly.Models
@@ -3597,7 +3597,10 @@ MODIFIED: 03/04/2026 20:38:52
     [Parameter]
     public bool IsLive { get; set; }
 
-    private bool _canvasInitialized;
+    // Track each canvas independently so the user canvas can be initialized
+    // after geolocation resolves (which happens after first render).
+    private bool _ktmCanvasInitialized;
+    private bool _userCanvasInitialized;
     private bool _showDisclaimer;
 
     private void ToggleDisclaimer() => _showDisclaimer = !_showDisclaimer;
@@ -3614,39 +3617,59 @@ MODIFIED: 03/04/2026 20:38:52
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender || !_canvasInitialized)
+        // Initialize Kathmandu canvas when Position is available and DOM element exists
+        if (!_ktmCanvasInitialized && Position != null)
         {
-            if (Position != null)
+            try
             {
-                try
-                {
-                    await JS.InvokeVoidAsync("sunTracker.init", "sunSkyCanvasKtm");
-                    if (UserPosition != null)
-                        await JS.InvokeVoidAsync("sunTracker.init", "sunSkyCanvasUser");
-                    _canvasInitialized = true;
-                }
-                catch
-                {
-                    // Graceful degradation — canvas is optional
-                }
+                await JS.InvokeVoidAsync("sunTracker.init", "sunSkyCanvasKtm");
+                _ktmCanvasInitialized = true;
+            }
+            catch
+            {
+                // Graceful degradation — canvas is optional
             }
         }
 
-        // Draw every render cycle
-        if (_canvasInitialized && Position != null)
+        // Initialize user canvas when UserPosition is available and DOM element exists.
+        // This typically happens on a later render after geolocation resolves,
+        // which is why it MUST be tracked independently from the KTM canvas.
+        if (!_userCanvasInitialized && UserPosition != null)
+        {
+            try
+            {
+                await JS.InvokeVoidAsync("sunTracker.init", "sunSkyCanvasUser");
+                _userCanvasInitialized = true;
+            }
+            catch
+            {
+                // Graceful degradation — canvas is optional
+            }
+        }
+
+        // Draw Kathmandu canvas every render cycle
+        if (_ktmCanvasInitialized && Position != null)
         {
             try
             {
                 await JS.InvokeVoidAsync("sunTracker.draw",
                     "sunSkyCanvasKtm", Position.Altitude, Position.Azimuth,
                     Position.DayFraction, Position.IsAboveHorizon, Position.FullDayFraction);
+            }
+            catch
+            {
+                // Ignore draw errors
+            }
+        }
 
-                if (UserPosition != null)
-                {
-                    await JS.InvokeVoidAsync("sunTracker.draw",
-                        "sunSkyCanvasUser", UserPosition.Altitude, UserPosition.Azimuth,
-                        UserPosition.DayFraction, UserPosition.IsAboveHorizon, UserPosition.FullDayFraction);
-                }
+        // Draw user canvas every render cycle
+        if (_userCanvasInitialized && UserPosition != null)
+        {
+            try
+            {
+                await JS.InvokeVoidAsync("sunTracker.draw",
+                    "sunSkyCanvasUser", UserPosition.Altitude, UserPosition.Azimuth,
+                    UserPosition.DayFraction, UserPosition.IsAboveHorizon, UserPosition.FullDayFraction);
             }
             catch
             {
@@ -5718,8 +5741,8 @@ MODIFIED: 02/08/2026 10:28:53
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\wwwroot\css\app.css
-SIZE: 1.61 KB
-MODIFIED: 02/08/2026 10:56:57
+SIZE: 1.88 KB
+MODIFIED: 03/06/2026 08:00:53
 ================================================================================
 
 * {
@@ -5728,13 +5751,18 @@ MODIFIED: 02/08/2026 10:56:57
     box-sizing: border-box;
 }
 
-html, body {
+html {
     height: 100%;
 }
 
 body {
+    /* min-height instead of height so the gradient stretches with content
+       that overflows the viewport, preventing a color cutoff at the bottom */
+    min-height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* Attach the gradient to the viewport so it doesn't scroll/repeat */
+    background-attachment: fixed;
     color: #fff;
     overflow-x: hidden;
 }
@@ -5799,13 +5827,13 @@ body {
         top: 1rem;
         font-size: 1.5rem;
     }
-
+    
 
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\wwwroot\index.html
-SIZE: 11.51 KB
-MODIFIED: 03/04/2026 20:39:38
+SIZE: 11.87 KB
+MODIFIED: 03/06/2026 08:01:07
 ================================================================================
 
 <!DOCTYPE html>
@@ -5930,6 +5958,13 @@ MODIFIED: 03/04/2026 20:39:38
             _canvases: {},
 
             init: function (canvasId) {
+                // Clean up existing entry to prevent resize listener leaks
+                // when init is called again (e.g. after geolocation resolves)
+                if (this._canvases[canvasId]) {
+                    window.removeEventListener('resize', this._canvases[canvasId].resize);
+                    delete this._canvases[canvasId];
+                }
+
                 var canvas = document.getElementById(canvasId);
                 if (!canvas) return;
                 var resize = function () {
@@ -7084,7 +7119,7 @@ MODIFIED: 03/03/2026 17:33:03
 
 
 ===============================================================================
-EXPORT COMPLETED: 03/06/2026 07:53:55
+EXPORT COMPLETED: 03/06/2026 08:02:19
 Total Files Exported: 46
 Output File: .\docs\llm\dump.txt
 ===============================================================================
