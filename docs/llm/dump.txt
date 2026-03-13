@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 03/06/2026 13:31:42
+Generated: 03/13/2026 15:31:42
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -29,6 +29,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   CollabsKus.BlazorWebAssembly.csproj
 |   |   CollabsKus.BlazorWebAssembly.csproj.user
 |   |   Program.cs
+|   |   README.md
 |   |   _Imports.razor
 |   |   
 |   +---bin
@@ -7119,7 +7120,7 @@ MODIFIED: 03/03/2026 17:33:03
 
 
 ===============================================================================
-EXPORT COMPLETED: 03/06/2026 13:31:48
+EXPORT COMPLETED: 03/13/2026 15:31:51
 Total Files Exported: 46
 Output File: .\docs\llm\dump.txt
 ===============================================================================
