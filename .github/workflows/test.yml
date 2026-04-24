@@ -25,8 +25,11 @@ jobs:
       - name: Install wasm-tools workload
         run: dotnet workload install wasm-tools
 
+      - name: Build
+        run: dotnet build CollabsKus.Tests/CollabsKus.Tests.csproj
+
       - name: Run unit tests
-        run: dotnet test CollabsKus.Tests/CollabsKus.Tests.csproj
+        run: dotnet test CollabsKus.Tests/CollabsKus.Tests.csproj --no-build
 
   e2e-tests:
     name: E2E Tests (Playwright / Chromium)
@@ -44,8 +47,6 @@ jobs:
       - name: Install wasm-tools workload
         run: dotnet workload install wasm-tools
 
-      # Build the Blazor app first so the dev server can start with --no-build,
-      # skipping the slow compilation step inside the test runner's StartServer().
       - name: Build Blazor app
         run: dotnet build CollabsKus.BlazorWebAssembly/CollabsKus.BlazorWebAssembly.csproj
 
@@ -55,8 +56,9 @@ jobs:
       - name: Install Playwright browsers
         run: pwsh CollabsKus.PlaywrightTests/bin/Debug/net10.0/playwright.ps1 install --with-deps chromium
 
-      # Start the Kestrel dev server in the background and wait until it responds.
-      # Setting BASE_URL tells the test class not to launch its own server process.
+      # Start the Kestrel dev server in the background with --no-build (already built above),
+      # then wait up to 60 s for it to respond. Setting BASE_URL tells the test class not to
+      # launch its own server process.
       - name: Start dev server
         run: |
           dotnet run \
@@ -68,6 +70,6 @@ jobs:
           echo "Dev server is ready"
 
       - name: Run E2E tests
-        run: dotnet test CollabsKus.PlaywrightTests/CollabsKus.PlaywrightTests.csproj
+        run: dotnet test CollabsKus.PlaywrightTests/CollabsKus.PlaywrightTests.csproj --no-build
         env:
           BASE_URL: http://localhost:5267

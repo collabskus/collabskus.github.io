@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <!--
+      Required for `dotnet test` to use Microsoft.Testing.Platform (TUnit) instead of VSTest.
+      Must live in Directory.Build.props, not individual .csproj files: the CollabsKus.Tests
+      project references the Blazor WASM project, which causes MSBuild to enter an outer/
+      multi-targeting build phase. In that phase, .csproj-level properties are not yet
+      evaluated, so dotnet test falls back to the VSTest path and the error fires.
+      Directory.Build.props is imported before everything else and is visible in all phases.
+    -->
+    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+  </PropertyGroup>
+</Project>

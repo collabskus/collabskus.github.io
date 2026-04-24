@@ -1,0 +1,35 @@
+<Project>
+  <!--
+    Workaround for a bug in microsoft.testing.platform.msbuild 2.1.0 on .NET 10 SDK.
+
+    The package's _MTPBeforeVSTest target (BeforeTargets="VSTest") throws an error for any
+    MTP project on .NET 10+ SDK:
+
+        Condition="'$(IsTestingPlatformApplication)'=='true'
+                   AND '$(TargetFramework)'!=''
+                   AND '$(_SupportsGlobalJsonTestRunner)'=='true'"
+
+    The condition is missing the TestingPlatformDotnetTestSupport check. When that property
+    is true, the VSTest target is correctly overridden to call InvokeTestingPlatform, so
+    VSTest being called is intentional — not an error. But the error fires anyway.
+
+    Directory.Build.targets is imported after all NuGet package targets, so this
+    redefinition wins over the one in the package. We reproduce the original logic exactly
+    but add the missing AND clause to the error condition.
+  -->
+  <Target Name="_MTPBeforeVSTest" BeforeTargets="VSTest">
+    <PropertyGroup>
+      <_SdkMajorVersion>$(NETCoreSdkVersion.Split('.')[0])</_SdkMajorVersion>
+      <_SupportsGlobalJsonTestRunner Condition="'$(NETCoreSdkVersion)' != '' AND '$(_SdkMajorVersion)' >= '10'">true</_SupportsGlobalJsonTestRunner>
+    </PropertyGroup>
+
+    <Error
+      Text="Testing with VSTest target is no longer supported by Microsoft.Testing.Platform on .NET 10 SDK and later. If you use dotnet test, you should opt-in to the new dotnet test experience. For more information, see https://aka.ms/dotnet-test-mtp-error"
+      Condition="'$(IsTestingPlatformApplication)'=='true'
+                 AND '$(TargetFramework)'!=''
+                 AND '$(_SupportsGlobalJsonTestRunner)'=='true'
+                 AND '$(TestingPlatformDotnetTestSupport)'!='true'" />
+
+    <CallTarget Condition="'$(VSTestNoBuild)' != 'true' AND '$(TargetFramework)'!=''" Targets="BuildProject" />
+  </Target>
+</Project>
