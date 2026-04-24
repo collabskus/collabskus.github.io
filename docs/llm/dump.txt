@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 03/13/2026 15:31:42
+Generated: 04/24/2026 09:20:37
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -13,6 +13,7 @@ Volume serial number is 2A9E-9DAE
 D:\DEV\PERSONAL\COLLABSKUS
 |   .gitattributes
 |   .gitignore
+|   CLAUDE.md
 |   CollabsKus.slnx
 |   Directory.Packages.props
 |   Export.ps1
@@ -27,6 +28,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 +---CollabsKus.BlazorWebAssembly
 |   |   App.razor
 |   |   CollabsKus.BlazorWebAssembly.csproj
+|   |   CollabsKus.BlazorWebAssembly.csproj.lscache
 |   |   CollabsKus.BlazorWebAssembly.csproj.user
 |   |   Program.cs
 |   |   README.md
@@ -1245,6 +1247,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |               
 +---CollabsKus.PlaywrightTests
 |   |   CollabsKus.PlaywrightTests.csproj
+|   |   CollabsKus.PlaywrightTests.csproj.lscache
 |   |   GlobalUsings.cs
 |   |   HomePageTests.cs
 |   |   
@@ -1961,6 +1964,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |           
 +---CollabsKus.Tests
 |   |   CollabsKus.Tests.csproj
+|   |   CollabsKus.Tests.csproj.lscache
 |   |   GlobalUsings.cs
 |   |   
 |   +---bin
@@ -2451,8 +2455,8 @@ jobs:
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\.gitignore
-SIZE: 6.43 KB
-MODIFIED: 02/08/2026 10:21:22
+SIZE: 6.45 KB
+MODIFIED: 04/24/2026 09:18:16
 ================================================================================
 
 ## Ignore Visual Studio temporary files, build results, and
@@ -2818,6 +2822,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+*.lscache 
+
 
 
 ================================================================================
@@ -7120,7 +7127,7 @@ MODIFIED: 03/03/2026 17:33:03
 
 
 ===============================================================================
-EXPORT COMPLETED: 03/13/2026 15:31:51
+EXPORT COMPLETED: 04/24/2026 09:20:43
 Total Files Exported: 46
 Output File: .\docs\llm\dump.txt
 ===============================================================================
