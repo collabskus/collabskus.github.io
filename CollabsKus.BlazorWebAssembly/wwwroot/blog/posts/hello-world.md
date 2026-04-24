@@ -1,8 +1,8 @@
 ---
-title: Hello World
+title: Bikram Sambat and Nepal Sambat: A Comprehensive Guide to Nepal's Calendars, Their Mathematics, and What They Mean for Programmers
 date: 2026-04-24
 author: collabskus
-excerpt: Welcome to the CollabsKus blog! This is our first post, where we introduce ourselves and share our vision.
+excerpt: A deep-dive into the Bikram Sambat and Nepal Sambat calendar systems — their origins, mathematics, month structures, astronomical foundations, regional variations, new year celebrations, and practical date-time conversion guidance for software developers. Published on the eve of Nepali New Year 2083 BS.
 ---
 
 # Hello World
