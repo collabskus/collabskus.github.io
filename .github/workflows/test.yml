@@ -1,0 +1,73 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Install wasm-tools workload
+        run: dotnet workload install wasm-tools
+
+      - name: Run unit tests
+        run: dotnet test CollabsKus.Tests/CollabsKus.Tests.csproj
+
+  e2e-tests:
+    name: E2E Tests (Playwright / Chromium)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Install wasm-tools workload
+        run: dotnet workload install wasm-tools
+
+      # Build the Blazor app first so the dev server can start with --no-build,
+      # skipping the slow compilation step inside the test runner's StartServer().
+      - name: Build Blazor app
+        run: dotnet build CollabsKus.BlazorWebAssembly/CollabsKus.BlazorWebAssembly.csproj
+
+      - name: Build Playwright test project
+        run: dotnet build CollabsKus.PlaywrightTests/CollabsKus.PlaywrightTests.csproj
+
+      - name: Install Playwright browsers
+        run: pwsh CollabsKus.PlaywrightTests/bin/Debug/net10.0/playwright.ps1 install --with-deps chromium
+
+      # Start the Kestrel dev server in the background and wait until it responds.
+      # Setting BASE_URL tells the test class not to launch its own server process.
+      - name: Start dev server
+        run: |
+          dotnet run \
+            --project CollabsKus.BlazorWebAssembly/CollabsKus.BlazorWebAssembly.csproj \
+            --no-build \
+            --no-launch-profile \
+            --urls http://localhost:5267 &
+          timeout 60 bash -c 'until curl -sf http://localhost:5267 > /dev/null 2>&1; do sleep 1; done'
+          echo "Dev server is ready"
+
+      - name: Run E2E tests
+        run: dotnet test CollabsKus.PlaywrightTests/CollabsKus.PlaywrightTests.csproj
+        env:
+          BASE_URL: http://localhost:5267

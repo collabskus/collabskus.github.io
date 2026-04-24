@@ -160,7 +160,13 @@ public class HomePageTests
     [Test]
     public async Task Footer_ShowsLastUpdated()
     {
-        await NavigateAsync();
+        await _page.GotoAsync(BaseUrl, new PageGotoOptions
+        {
+            WaitUntil = WaitUntilState.Load,
+            Timeout = AppReadyTimeoutMs
+        });
+        // .footer is rendered outside the @if (_isLoading) gate — present as soon as Blazor
+        // bootstraps, before the external calendar API responds. No need to wait for data.
         var footer = await _page.Locator(".footer").TextContentAsync();
         await Assert.That(footer!.Contains("Last updated")).IsTrue();
     }
