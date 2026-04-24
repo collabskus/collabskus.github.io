@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 04/24/2026 13:56:29
+Generated: 04/24/2026 15:18:27
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -265,10 +265,10 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |           \---_framework
 |   |   |                   blazor.webassembly.js
 |   |   |                   blazor.webassembly.js.gz
-|   |   |                   CollabsKus.BlazorWebAssembly.043bqa8wc7.wasm
-|   |   |                   CollabsKus.BlazorWebAssembly.043bqa8wc7.wasm.gz
-|   |   |                   CollabsKus.BlazorWebAssembly.ssjp1mtvuw.pdb
-|   |   |                   CollabsKus.BlazorWebAssembly.ssjp1mtvuw.pdb.gz
+|   |   |                   CollabsKus.BlazorWebAssembly.fgt6tu423r.pdb
+|   |   |                   CollabsKus.BlazorWebAssembly.fgt6tu423r.pdb.gz
+|   |   |                   CollabsKus.BlazorWebAssembly.vssswc52db.wasm
+|   |   |                   CollabsKus.BlazorWebAssembly.vssswc52db.wasm.gz
 |   |   |                   dotnet.js
 |   |   |                   dotnet.js.gz
 |   |   |                   dotnet.js.map
@@ -752,6 +752,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |   staticwebassets.development.json
 |   |   |       |   staticwebassets.references.upToDateCheck.txt
 |   |   |       |   staticwebassets.removed.txt
+|   |   |       |   staticwebassets.upToDateCheck.txt
 |   |   |       |   swae.build.ex.cache
 |   |   |       |   ValidatableTypeAttribute.cs
 |   |   |       |   
@@ -773,7 +774,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       2mau3pzxk9-{0}-u0zj27cx7o-u0zj27cx7o.gz
 |   |   |       |       2zxgs4tsnx-{0}-ioyv3k3ryq-ioyv3k3ryq.gz
 |   |   |       |       3eoqy7gj56-{0}-tu6bwlqdmh-tu6bwlqdmh.gz
-|   |   |       |       3fggfcmk2o-{0}-l9b6uch727-l9b6uch727.gz
+|   |   |       |       3fggfcmk2o-{0}-ifjzueugdg-ifjzueugdg.gz
 |   |   |       |       3p6j8oeurv-{0}-ifztmx601s-ifztmx601s.gz
 |   |   |       |       3rlo0yi078-{0}-66stpp682q-66stpp682q.gz
 |   |   |       |       3uswc3e8aj-{0}-t3vlx2mrmh-t3vlx2mrmh.gz
@@ -833,7 +834,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       d3xctdbsm8-{0}-jdbqe5ui30-jdbqe5ui30.gz
 |   |   |       |       d4e2tqfm2s-{0}-mqpvajhq9e-mqpvajhq9e.gz
 |   |   |       |       d88qnt9z0r-{0}-yveu20rr0o-yveu20rr0o.gz
-|   |   |       |       dfreyn5klh-{0}-15tjhdnfw9-15tjhdnfw9.gz
+|   |   |       |       dfreyn5klh-{0}-z6grjg7kkq-z6grjg7kkq.gz
 |   |   |       |       dkj70biooi-{0}-qlqjvnsqyk-qlqjvnsqyk.gz
 |   |   |       |       dmdeonll3k-{0}-983oy63p2u-983oy63p2u.gz
 |   |   |       |       dt9uy83tyq-{0}-qo0gqezltx-qo0gqezltx.gz
@@ -851,6 +852,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       h1y6b5mt0i-{0}-mjtwe7v2dy-mjtwe7v2dy.gz
 |   |   |       |       h2wzv8iut0-{0}-3cg6eqwr34-3cg6eqwr34.gz
 |   |   |       |       h3nih8h9ur-{0}-ertx8s608b-ertx8s608b.gz
+|   |   |       |       hgqrv5guzs-{0}-gd2nf4upqx-gd2nf4upqx.gz
 |   |   |       |       hrjml8rnq5-{0}-eeqmj78v18-eeqmj78v18.gz
 |   |   |       |       hvoxex7kkn-{0}-rkpf6rdawt-rkpf6rdawt.gz
 |   |   |       |       i5ajtya2i1-{0}-y4c3d0ze0j-y4c3d0ze0j.gz
@@ -873,7 +875,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       kz9p261qc5-{0}-5yzdk58bfs-5yzdk58bfs.gz
 |   |   |       |       l7rbbbd4fi-{0}-3vdd2q52ug-3vdd2q52ug.gz
 |   |   |       |       lbxpns34i1-{0}-jnskqyrki7-jnskqyrki7.gz
-|   |   |       |       lh59ob944f-{0}-043bqa8wc7-043bqa8wc7.gz
+|   |   |       |       lh59ob944f-{0}-vssswc52db-vssswc52db.gz
 |   |   |       |       lj3msr1lhw-{0}-ez50zcwqu7-ez50zcwqu7.gz
 |   |   |       |       ljeibr96ow-{0}-7ndf74kqat-7ndf74kqat.gz
 |   |   |       |       lm00a84zr9-{0}-q4vcd8ksy1-q4vcd8ksy1.gz
@@ -910,7 +912,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       pzqxcw519k-{0}-nh7kpsvl4q-nh7kpsvl4q.gz
 |   |   |       |       q3154k5biw-{0}-l9hhyns4md-l9hhyns4md.gz
 |   |   |       |       q4p940erp4-{0}-4zyobjtzg3-4zyobjtzg3.gz
-|   |   |       |       qapwvyh3s0-{0}-2psh0rpvot-2psh0rpvot.gz
+|   |   |       |       qapwvyh3s0-{0}-cpwh02fdij-cpwh02fdij.gz
 |   |   |       |       qd7fer2fo0-{0}-wgi8vt4vkq-wgi8vt4vkq.gz
 |   |   |       |       qitdg1tdwz-{0}-8d6wziiigr-8d6wziiigr.gz
 |   |   |       |       qm96gcrzfw-{0}-3wkoxykbtn-3wkoxykbtn.gz
@@ -934,7 +936,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       sy44tf32kn-{0}-u8axice94p-u8axice94p.gz
 |   |   |       |       syt0dqw1ux-{0}-ntxel56uew-ntxel56uew.gz
 |   |   |       |       t2kz3thrps-{0}-f4b1oiwlzh-f4b1oiwlzh.gz
-|   |   |       |       t9kyxruzq6-{0}-c08o99d5vs-c08o99d5vs.gz
+|   |   |       |       t9kyxruzq6-{0}-k5xumx9lf7-k5xumx9lf7.gz
 |   |   |       |       tbjuh26x5v-{0}-9fyz8vui1v-9fyz8vui1v.gz
 |   |   |       |       tcd8qxaqk5-{0}-yli8mx0eos-yli8mx0eos.gz
 |   |   |       |       to3gdc9v7t-{0}-zh9llui9wt-zh9llui9wt.gz
@@ -958,7 +960,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       w3jaqn3h4o-{0}-ssnr0got66-ssnr0got66.gz
 |   |   |       |       w3ur6j80u7-{0}-h2nvdx8wws-h2nvdx8wws.gz
 |   |   |       |       wuimozunwv-{0}-i2dmbmhe5n-i2dmbmhe5n.gz
-|   |   |       |       x3ikudnee4-{0}-ssjp1mtvuw-ssjp1mtvuw.gz
+|   |   |       |       x3ikudnee4-{0}-fgt6tu423r-fgt6tu423r.gz
 |   |   |       |       x54bdp6f69-{0}-mdh3gtv71n-mdh3gtv71n.gz
 |   |   |       |       x57r4b36iz-{0}-lfu7j35m59-lfu7j35m59.gz
 |   |   |       |       xf1qqu3s0v-{0}-i1mry81p89-i1mry81p89.gz
@@ -1271,6 +1273,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |       |   |       collabskus.json
 |       |   |       
 |       |   \---posts
+|       |           2026-04-24-sambat.md
 |       |           hello-world.md
 |       |           
 |       \---css
@@ -1849,6 +1852,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       log_260424171303237.diag
 |   |   |       |       log_260424171310051.diag
 |   |   |       |       log_260424171432687.diag
+|   |   |       |       log_260424191400545.diag
 |   |   |       |       
 |   |   |       +---nl
 |   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
@@ -11867,7 +11871,7 @@ MODIFIED: 04/24/2026 11:35:51
 
 
 ===============================================================================
-EXPORT COMPLETED: 04/24/2026 13:56:36
+EXPORT COMPLETED: 04/24/2026 15:18:34
 Total Files Exported: 64
 Output File: .\docs\llm\dump.txt
 ===============================================================================
