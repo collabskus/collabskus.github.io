@@ -1,0 +1,11 @@
+{
+  "posts": [
+    {
+      "slug": "hello-world",
+      "title": "Hello World",
+      "date": "2026-04-24",
+      "author": "collabskus",
+      "excerpt": "Welcome to the CollabsKus blog! This is our first post, where we introduce ourselves and share our vision."
+    }
+  ]
+}

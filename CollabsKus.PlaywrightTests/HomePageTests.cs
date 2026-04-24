@@ -1,20 +1,17 @@
-using System.Diagnostics;
-
 namespace CollabsKus.PlaywrightTests;
 
 public class HomePageTests
 {
-    private const string DefaultBaseUrl = "http://localhost:5267";
+    private static readonly bool ShouldManageServer =
+        string.IsNullOrEmpty(Environment.GetEnvironmentVariable("BASE_URL"));
+
+    private static string BaseUrl =>
+        Environment.GetEnvironmentVariable("BASE_URL") ?? TestServerManager.DefaultBaseUrl;
+
     // Blazor WASM downloads the .NET runtime then calls an external calendar API before
     // rendering — allow enough time for both before timing out element waits.
     private const int AppReadyTimeoutMs = 60_000;
 
-    private static string BaseUrl => Environment.GetEnvironmentVariable("BASE_URL") ?? DefaultBaseUrl;
-    private static readonly bool ShouldManageServer =
-        string.IsNullOrEmpty(Environment.GetEnvironmentVariable("BASE_URL"));
-
-    private static Process? _serverProcess;
-    private static readonly object ServerLock = new();
     private static IPlaywright _playwright = null!;
     private static IBrowser _browser = null!;
 
@@ -27,7 +24,7 @@ public class HomePageTests
     public static async Task StartInfrastructure()
     {
         if (ShouldManageServer)
-            await StartServer();
+            await TestServerManager.AcquireAsync();
 
         _playwright = await Playwright.CreateAsync();
         _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
@@ -40,7 +37,7 @@ public class HomePageTests
         _playwright.Dispose();
 
         if (ShouldManageServer)
-            await StopServer();
+            await TestServerManager.ReleaseAsync();
     }
 
     // ── Test lifecycle: fresh isolated context + page per test ─────────────
@@ -172,6 +169,33 @@ public class HomePageTests
     }
 
     [Test]
+    public async Task Footer_HasGitHubLink()
+    {
+        await _page.GotoAsync(BaseUrl, new PageGotoOptions
+        {
+            WaitUntil = WaitUntilState.Load,
+            Timeout = AppReadyTimeoutMs
+        });
+        // .footer renders as soon as Blazor bootstraps; WaitForAsync auto-waits for it.
+        var githubLink = _page.Locator(".footer a[href*='github.com']");
+        await githubLink.WaitForAsync(new LocatorWaitForOptions { State = WaitForSelectorState.Visible });
+        await Assert.That(await githubLink.IsVisibleAsync()).IsTrue();
+    }
+
+    [Test]
+    public async Task Footer_HasBlogLink()
+    {
+        await _page.GotoAsync(BaseUrl, new PageGotoOptions
+        {
+            WaitUntil = WaitUntilState.Load,
+            Timeout = AppReadyTimeoutMs
+        });
+        var blogLink = _page.Locator(".footer a[href='/blog']");
+        await blogLink.WaitForAsync(new LocatorWaitForOptions { State = WaitForSelectorState.Visible });
+        await Assert.That(await blogLink.IsVisibleAsync()).IsTrue();
+    }
+
+    [Test]
     public async Task MoonLiveIndicator_IsVisible()
     {
         await NavigateAsync();
@@ -227,78 +251,6 @@ public class HomePageTests
         catch (TimeoutException)
         {
             // Geolocation may not resolve in all headless / CI environments
-        }
-    }
-
-    // ── Server management ──────────────────────────────────────────────────
-
-    private static async Task StartServer()
-    {
-        var baseDir = AppContext.BaseDirectory;
-        var projectRoot = Path.GetFullPath(Path.Combine(baseDir, "..", "..", "..", ".."));
-        var blazorProject = Path.Combine(
-            projectRoot, "CollabsKus.BlazorWebAssembly", "CollabsKus.BlazorWebAssembly.csproj");
-
-        if (!File.Exists(blazorProject))
-            throw new FileNotFoundException(
-                $"Blazor project not found at: {blazorProject} (resolved from {baseDir})");
-
-        lock (ServerLock)
-        {
-            if (_serverProcess != null) return;
-
-            _serverProcess = new Process
-            {
-                StartInfo = new ProcessStartInfo
-                {
-                    FileName = "dotnet",
-                    Arguments = $"run --project \"{blazorProject}\" --urls {DefaultBaseUrl} --no-launch-profile",
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    CreateNoWindow = true
-                }
-            };
-            _serverProcess.Start();
-            _serverProcess.BeginOutputReadLine();
-            _serverProcess.BeginErrorReadLine();
-        }
-
-        using var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
-        var deadline = DateTime.UtcNow.AddSeconds(120);
-
-        while (DateTime.UtcNow < deadline)
-        {
-            try
-            {
-                var response = await httpClient.GetAsync(DefaultBaseUrl);
-                if (response.IsSuccessStatusCode) return;
-            }
-            catch { }
-
-            if (_serverProcess.HasExited)
-                throw new InvalidOperationException(
-                    $"Dev server exited with code {_serverProcess.ExitCode} before becoming ready.");
-
-            await Task.Delay(1000);
-        }
-
-        throw new TimeoutException($"Dev server did not respond at {DefaultBaseUrl} within 120 s.");
-    }
-
-    private static async Task StopServer()
-    {
-        if (_serverProcess == null || _serverProcess.HasExited) return;
-        try
-        {
-            _serverProcess.Kill(entireProcessTree: true);
-            await _serverProcess.WaitForExitAsync();
-        }
-        catch { }
-        finally
-        {
-            _serverProcess.Dispose();
-            _serverProcess = null;
         }
     }
 }

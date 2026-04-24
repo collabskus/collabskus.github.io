@@ -1,0 +1,56 @@
+@page "/blog"
+
+<PageTitle>Blog — CollabsKus</PageTitle>
+
+<div class="blog-list">
+    <div class="blog-header">
+        <h1>Blog</h1>
+        <p class="blog-subtitle">Thoughts and updates from the CollabsKus team</p>
+    </div>
+
+    @if (_isLoading)
+    {
+        <div class="loading">Loading posts...</div>
+    }
+    else if (_posts.Count == 0)
+    {
+        <div class="no-posts">No posts yet. Check back soon!</div>
+    }
+    else
+    {
+        <div class="post-list">
+            @foreach (var post in _posts)
+            {
+                <a href="/blog/@post.Slug" class="post-card">
+                    <div class="post-date">@FormatDate(post.Date)</div>
+                    <h2 class="post-title">@post.Title</h2>
+                    @if (!string.IsNullOrEmpty(post.Excerpt))
+                    {
+                        <p class="post-excerpt">@post.Excerpt</p>
+                    }
+                    <span class="post-read-more">Read more →</span>
+                </a>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    [Inject] private BlogService BlogService { get; set; } = default!;
+
+    private List<BlogPostSummary> _posts = new();
+    private bool _isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _posts = await BlogService.GetPostsAsync();
+        _isLoading = false;
+    }
+
+    private static string FormatDate(string isoDate)
+    {
+        if (DateOnly.TryParse(isoDate, out var d))
+            return d.ToString("MMMM d, yyyy");
+        return isoDate;
+    }
+}

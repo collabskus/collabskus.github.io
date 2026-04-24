@@ -14,5 +14,6 @@ builder.Services.AddScoped<KathmanduCalendarService>();
 builder.Services.AddScoped<MoonPhaseService>();
 builder.Services.AddSingleton<SolarPositionService>();
 builder.Services.AddScoped<ApiLoggerService>();
+builder.Services.AddScoped<BlogService>();
 
 await builder.Build().RunAsync();

@@ -1,0 +1,77 @@
+.blog-list {
+    padding: 20px 0;
+}
+
+.blog-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.blog-header h1 {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin: 0 0 8px;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.blog-subtitle {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.post-card {
+    display: block;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.post-card:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.20);
+}
+
+.post-date {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.40);
+    margin-bottom: 6px;
+}
+
+.post-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0 0 8px;
+    color: rgba(255, 255, 255, 0.90);
+}
+
+.post-excerpt {
+    font-size: 0.87rem;
+    color: rgba(255, 255, 255, 0.58);
+    margin: 0 0 12px;
+    line-height: 1.55;
+}
+
+.post-read-more {
+    font-size: 0.80rem;
+    color: rgba(180, 140, 255, 0.75);
+}
+
+.loading,
+.no-posts {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.45);
+    padding: 40px 0;
+    font-size: 0.9rem;
+}

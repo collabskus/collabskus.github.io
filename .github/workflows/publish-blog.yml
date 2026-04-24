@@ -1,0 +1,44 @@
+name: Publish Scheduled Blog Posts
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # daily at midnight UTC
+  workflow_dispatch:      # allow manual trigger
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-blog
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish due posts
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run manifest update
+        run: python scripts/update-blog-manifest.py
+
+      - name: Commit and push if manifest changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add CollabsKus.BlazorWebAssembly/wwwroot/blog/manifest.json
+          if git diff --staged --quiet; then
+            echo "No new posts to publish today."
+          else
+            git commit -m "publish scheduled blog posts [skip ci]"
+            git push
+          fi

@@ -1,0 +1,56 @@
+@page "/blog/{Slug}"
+
+<PageTitle>@(_post?.Title ?? "Post") — CollabsKus</PageTitle>
+
+@if (_isLoading)
+{
+    <div class="loading">Loading post...</div>
+}
+else if (_post == null)
+{
+    <div class="not-found">
+        <p>Post not found.</p>
+        <a href="/blog" class="back-link">← Back to blog</a>
+    </div>
+}
+else
+{
+    <article class="blog-post">
+        <div class="post-meta">
+            <a href="/blog" class="back-link">← Blog</a>
+            <span class="post-date">@FormatDate(_post.Date)</span>
+        </div>
+        <h1 class="post-title">@_post.Title</h1>
+        @if (_author != null)
+        {
+            <div class="post-author">by @_author.Name</div>
+        }
+        <div class="post-content">
+            @((MarkupString)_post.ContentHtml)
+        </div>
+    </article>
+}
+
+@code {
+    [Parameter] public string Slug { get; set; } = string.Empty;
+    [Inject] private BlogService BlogService { get; set; } = default!;
+
+    private BlogPost? _post;
+    private BlogAuthor? _author;
+    private bool _isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _post = await BlogService.GetPostAsync(Slug);
+        if (_post != null && !string.IsNullOrEmpty(_post.Author))
+            _author = await BlogService.GetAuthorAsync(_post.Author);
+        _isLoading = false;
+    }
+
+    private static string FormatDate(string isoDate)
+    {
+        if (DateOnly.TryParse(isoDate, out var d))
+            return d.ToString("MMMM d, yyyy");
+        return isoDate;
+    }
+}
