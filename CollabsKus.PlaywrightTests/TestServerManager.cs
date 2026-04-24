@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Net.NetworkInformation;
 
 namespace CollabsKus.PlaywrightTests;
 
@@ -11,6 +12,7 @@ namespace CollabsKus.PlaywrightTests;
 internal static class TestServerManager
 {
     internal const string DefaultBaseUrl = "http://localhost:5267";
+    private const int Port = 5267;
 
     private static Process? _process;
     private static int _refCount;
@@ -48,6 +50,10 @@ internal static class TestServerManager
 
     private static async Task StartAsync()
     {
+        // Kill any stale server left over from a previous aborted test run so it
+        // doesn't accept our port-poll and serve a different version of the app.
+        KillPortOccupant();
+
         var baseDir = AppContext.BaseDirectory;
         var projectRoot = Path.GetFullPath(Path.Combine(baseDir, "..", "..", "..", ".."));
         var blazorProject = Path.Combine(
@@ -62,7 +68,9 @@ internal static class TestServerManager
             StartInfo = new ProcessStartInfo
             {
                 FileName = "dotnet",
-                Arguments = $"run --project \"{blazorProject}\" --urls {DefaultBaseUrl} --no-launch-profile",
+                // --no-hot-reload prevents the server from restarting when source
+                // files change during a test run, which would cause intermittent failures.
+                Arguments = $"run --project \"{blazorProject}\" --urls {DefaultBaseUrl} --no-launch-profile --no-hot-reload",
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
@@ -109,5 +117,64 @@ internal static class TestServerManager
             _process.Dispose();
             _process = null;
         }
+    }
+
+    /// <summary>
+    /// Kills any process currently listening on the server port.
+    /// Prevents a stale dotnet run from a previous test run from
+    /// masquerading as a healthy server.
+    /// </summary>
+    private static void KillPortOccupant()
+    {
+        try
+        {
+            // Use IPGlobalProperties to find the TCP listener PID on our port.
+            // On Linux/macOS this works via /proc; on Windows it uses Win32 APIs.
+            var listeners = IPGlobalProperties.GetIPGlobalProperties()
+                .GetActiveTcpListeners();
+
+            var isOccupied = listeners.Any(ep => ep.Port == Port);
+            if (!isOccupied) return;
+
+            // Fall back to netstat-style process enumeration via dotnet Process API.
+            // We can't get the PID from IPGlobalProperties directly, so look for
+            // any dotnet process that owns the port using platform commands.
+            KillPortOccupantViaPlatformCommand();
+        }
+        catch
+        {
+            // Non-fatal — if we can't kill the occupant the server start will fail
+            // with a clear "address in use" error.
+        }
+    }
+
+    private static void KillPortOccupantViaPlatformCommand()
+    {
+        string? cmd;
+        string args;
+
+        if (OperatingSystem.IsWindows())
+        {
+            // netstat -ano on Windows lists PID for each connection
+            cmd = "cmd.exe";
+            args = $"/c for /f \"tokens=5\" %a in ('netstat -ano ^| findstr :{Port}.*LISTENING') do taskkill /PID %a /F";
+        }
+        else
+        {
+            cmd = "/bin/sh";
+            args = $"-c \"fuser -k {Port}/tcp 2>/dev/null || true\"";
+        }
+
+        using var p = Process.Start(new ProcessStartInfo
+        {
+            FileName = cmd,
+            Arguments = args,
+            UseShellExecute = false,
+            CreateNoWindow = true
+        });
+        p?.WaitForExit(5000);
+
+        // Give the OS a moment to release the port.
+        Thread.Sleep(500);
     }
 }

@@ -10,14 +10,22 @@ else if (_post == null)
 {
     <div class="not-found">
         <p>Post not found.</p>
-        <a href="/blog" class="back-link">← Back to blog</a>
+        <div class="not-found-nav">
+            <a href="/" class="back-link">← Home</a>
+            <span class="nav-sep">·</span>
+            <a href="/blog" class="back-link">Blog</a>
+        </div>
     </div>
 }
 else
 {
     <article class="blog-post">
         <div class="post-meta">
-            <a href="/blog" class="back-link">← Blog</a>
+            <div class="post-nav">
+                <a href="/" class="blog-home-link">Home</a>
+                <span class="nav-sep">·</span>
+                <a href="/blog" class="back-link">← Blog</a>
+            </div>
             <span class="post-date">@FormatDate(_post.Date)</span>
         </div>
         <h1 class="post-title">@_post.Title</h1>

@@ -137,20 +137,54 @@ public class BlogTests
     public async Task BlogDetail_HasBackLink()
     {
         await NavigateToBlogDetailAsync("hello-world");
+        // .back-link is the "← Blog" link; .blog-home-link is the "Home" link
         var backLink = _page.Locator(".back-link");
+        await backLink.WaitForAsync(new LocatorWaitForOptions { State = WaitForSelectorState.Visible });
         await Assert.That(await backLink.IsVisibleAsync()).IsTrue();
+    }
+
+    [Test]
+    public async Task BlogDetail_HasHomeLink()
+    {
+        await NavigateToBlogDetailAsync("hello-world");
+        var homeLink = _page.Locator(".blog-home-link");
+        await homeLink.WaitForAsync(new LocatorWaitForOptions { State = WaitForSelectorState.Visible });
+        await Assert.That(await homeLink.IsVisibleAsync()).IsTrue();
     }
 
     [Test]
     public async Task BlogDetail_BackLinkNavigatesToList()
     {
         await NavigateToBlogDetailAsync("hello-world");
-        await _page.Locator(".back-link").ClickAsync();
+        // Target the Blog link specifically — the post-nav also contains a Home link
+        await _page.Locator(".back-link[href='/blog']").ClickAsync();
         await _page.Locator(".blog-list").WaitForAsync(new LocatorWaitForOptions
         {
             State = WaitForSelectorState.Visible
         });
         await Assert.That(await _page.Locator(".blog-list").IsVisibleAsync()).IsTrue();
+    }
+
+    [Test]
+    public async Task BlogList_HasHomeLink()
+    {
+        await NavigateToBlogListAsync();
+        var homeLink = _page.Locator(".blog-home-link");
+        await homeLink.WaitForAsync(new LocatorWaitForOptions { State = WaitForSelectorState.Visible });
+        await Assert.That(await homeLink.IsVisibleAsync()).IsTrue();
+    }
+
+    [Test]
+    public async Task BlogList_HomeLinkNavigatesHome()
+    {
+        await NavigateToBlogListAsync();
+        await _page.Locator(".blog-home-link").ClickAsync();
+        // Home page renders .footer immediately after Blazor bootstraps
+        await _page.Locator(".footer").WaitForAsync(new LocatorWaitForOptions
+        {
+            State = WaitForSelectorState.Visible
+        });
+        await Assert.That(await _page.TitleAsync()).IsEqualTo("Kathmandu Calendar & Time");
     }
 
     [Test]

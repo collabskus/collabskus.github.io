@@ -2,6 +2,18 @@
     padding: 20px 0;
 }
 
+.blog-home-link {
+    display: inline-block;
+    margin-bottom: 18px;
+    font-size: 0.83rem;
+    color: rgba(180, 140, 255, 0.78);
+    text-decoration: none;
+}
+
+.blog-home-link:hover {
+    color: rgba(200, 170, 255, 0.95);
+}
+
 .blog-header {
     text-align: center;
     margin-bottom: 30px;
