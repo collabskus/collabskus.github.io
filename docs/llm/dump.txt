@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 05/21/2026 10:19:02
+Generated: 05/21/2026 10:43:24
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -265,10 +265,10 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |           \---_framework
 |   |   |                   blazor.webassembly.js
 |   |   |                   blazor.webassembly.js.gz
-|   |   |                   CollabsKus.BlazorWebAssembly.2x71fy4fuv.wasm
-|   |   |                   CollabsKus.BlazorWebAssembly.2x71fy4fuv.wasm.gz
-|   |   |                   CollabsKus.BlazorWebAssembly.gsdpt6tc9w.pdb
-|   |   |                   CollabsKus.BlazorWebAssembly.gsdpt6tc9w.pdb.gz
+|   |   |                   CollabsKus.BlazorWebAssembly.6e925v3g87.wasm
+|   |   |                   CollabsKus.BlazorWebAssembly.6e925v3g87.wasm.gz
+|   |   |                   CollabsKus.BlazorWebAssembly.96dcfycgd0.pdb
+|   |   |                   CollabsKus.BlazorWebAssembly.96dcfycgd0.pdb.gz
 |   |   |                   dotnet.js
 |   |   |                   dotnet.js.gz
 |   |   |                   dotnet.js.map
@@ -773,7 +773,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       2mau3pzxk9-{0}-u0zj27cx7o-u0zj27cx7o.gz
 |   |   |       |       2zxgs4tsnx-{0}-2ngkfg3yg5-2ngkfg3yg5.gz
 |   |   |       |       3eoqy7gj56-{0}-lxz73xefgr-lxz73xefgr.gz
-|   |   |       |       3fggfcmk2o-{0}-v7nesfc6qn-v7nesfc6qn.gz
+|   |   |       |       3fggfcmk2o-{0}-6bxu4fwjsh-6bxu4fwjsh.gz
 |   |   |       |       3k967h63eo-{0}-99zm1jdh75-99zm1jdh75.gz
 |   |   |       |       3p6j8oeurv-{0}-9oa5tdl9t1-9oa5tdl9t1.gz
 |   |   |       |       3rlo0yi078-{0}-66stpp682q-66stpp682q.gz
@@ -834,7 +834,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       d3xctdbsm8-{0}-0b02oc3xxl-0b02oc3xxl.gz
 |   |   |       |       d4e2tqfm2s-{0}-0z6z3qehfj-0z6z3qehfj.gz
 |   |   |       |       d88qnt9z0r-{0}-mxlchglgtf-mxlchglgtf.gz
-|   |   |       |       dfreyn5klh-{0}-wxar61eqmk-wxar61eqmk.gz
+|   |   |       |       dfreyn5klh-{0}-603x8zmpfa-603x8zmpfa.gz
 |   |   |       |       dkj70biooi-{0}-57f5avnxib-57f5avnxib.gz
 |   |   |       |       dmdeonll3k-{0}-588xedxy5a-588xedxy5a.gz
 |   |   |       |       dt9uy83tyq-{0}-esxdiea9kf-esxdiea9kf.gz
@@ -874,7 +874,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       kz9p261qc5-{0}-vl7kxd1eod-vl7kxd1eod.gz
 |   |   |       |       l7rbbbd4fi-{0}-l55n8xe8ey-l55n8xe8ey.gz
 |   |   |       |       lbxpns34i1-{0}-jnskqyrki7-jnskqyrki7.gz
-|   |   |       |       lh59ob944f-{0}-2x71fy4fuv-2x71fy4fuv.gz
+|   |   |       |       lh59ob944f-{0}-6e925v3g87-6e925v3g87.gz
 |   |   |       |       lj3msr1lhw-{0}-ket5dpzngd-ket5dpzngd.gz
 |   |   |       |       ljeibr96ow-{0}-vlhcpghauv-vlhcpghauv.gz
 |   |   |       |       lm00a84zr9-{0}-4pq9r9o93w-4pq9r9o93w.gz
@@ -911,7 +911,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       pzqxcw519k-{0}-xlg8rg3fxp-xlg8rg3fxp.gz
 |   |   |       |       q3154k5biw-{0}-qcuh5cf2g5-qcuh5cf2g5.gz
 |   |   |       |       q4p940erp4-{0}-f749u69f30-f749u69f30.gz
-|   |   |       |       qapwvyh3s0-{0}-15ibrev2s6-15ibrev2s6.gz
+|   |   |       |       qapwvyh3s0-{0}-w2v9n3hrt7-w2v9n3hrt7.gz
 |   |   |       |       qd7fer2fo0-{0}-wgi8vt4vkq-wgi8vt4vkq.gz
 |   |   |       |       qitdg1tdwz-{0}-v53w8pdu58-v53w8pdu58.gz
 |   |   |       |       qm96gcrzfw-{0}-icwur878un-icwur878un.gz
@@ -959,7 +959,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       w3jaqn3h4o-{0}-ls03k4cqrg-ls03k4cqrg.gz
 |   |   |       |       w3ur6j80u7-{0}-h2nvdx8wws-h2nvdx8wws.gz
 |   |   |       |       wuimozunwv-{0}-xh8xs1r8y9-xh8xs1r8y9.gz
-|   |   |       |       x3ikudnee4-{0}-gsdpt6tc9w-gsdpt6tc9w.gz
+|   |   |       |       x3ikudnee4-{0}-96dcfycgd0-96dcfycgd0.gz
 |   |   |       |       x54bdp6f69-{0}-d2ow5hc679-d2ow5hc679.gz
 |   |   |       |       x57r4b36iz-{0}-lfu7j35m59-lfu7j35m59.gz
 |   |   |       |       xf1qqu3s0v-{0}-0zgy5v1s7p-0zgy5v1s7p.gz
@@ -1861,6 +1861,8 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       log_260506173006236.diag
 |   |   |       |       log_260521134830888.diag
 |   |   |       |       log_260521134835769.diag
+|   |   |       |       log_260521141959381.diag
+|   |   |       |       log_260521142315801.diag
 |   |   |       |       
 |   |   |       +---nl
 |   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
@@ -2192,6 +2194,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       log_260506173006227.diag
 |   |   |       |       log_260521134830868.diag
 |   |   |       |       log_260521134835738.diag
+|   |   |       |       log_260521141959357.diag
 |   |   |       |       
 |   |   |       +---nl
 |   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
@@ -11979,7 +11982,7 @@ MODIFIED: 04/24/2026 11:06:21
 ================================================================================
 FILE: :\DEV\personal\collabskus\Directory.Packages.props
 SIZE: 0.54 KB
-MODIFIED: 04/24/2026 11:35:51
+MODIFIED: 05/21/2026 10:33:29
 ================================================================================
 
 <Project>
@@ -11987,17 +11990,17 @@ MODIFIED: 04/24/2026 11:35:51
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Markdig" Version="0.38.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.3" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.3" />
-    <PackageVersion Include="TUnit" Version="1.18.9" />
-    <PackageVersion Include="Microsoft.Playwright" Version="1.58.0" />
+    <PackageVersion Include="Markdig" Version="1.2.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.8" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.8" />
+    <PackageVersion Include="TUnit" Version="1.45.22" />
+    <PackageVersion Include="Microsoft.Playwright" Version="1.59.0" />
   </ItemGroup>
 </Project>
 
 
 ===============================================================================
-EXPORT COMPLETED: 05/21/2026 10:19:14
+EXPORT COMPLETED: 05/21/2026 10:43:35
 Total Files Exported: 64
 Output File: .\docs\llm\dump.txt
 ===============================================================================
