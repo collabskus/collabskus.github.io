@@ -9,10 +9,22 @@ public class KathmanduCalendarService(HttpClient httpClient, ApiLoggerService lo
     private DateTime? _calendarCacheTime;
     private TimeResponse? _cachedTimeData;
     private DateTime? _timeCacheTime;
-    private TimeSpan _serverTimeOffset = TimeSpan.Zero;
+
+    // Seed the offset with Nepal's fixed UTC+5:45. The /api/time endpoint refines
+    // this to second-precision (drift-corrected) when it responds, but if that
+    // endpoint is slow or unreachable, GetCurrentKathmanduTime() still returns a
+    // usable Kathmandu time from the moment the service is constructed. This
+    // unblocks the UI from waiting on an external dependency to render its clock.
+    private TimeSpan _serverTimeOffset = SolarPositionService.NstOffset;
 
     private const string TodayApiUrl = "https://calendar.bloggernepal.com/api/today";
     private const string TimeApiUrl = "https://calendar.bloggernepal.com/api/time";
+
+    // Bound external HTTP work to keep the UI responsive when the upstream
+    // calendar API is slow. The default HttpClient timeout (~100s) is too long
+    // for an interactive page; if a refresh takes longer than this we let it
+    // fail and try again on the next scheduled tick.
+    private static readonly TimeSpan ApiTimeout = TimeSpan.FromSeconds(10);
 
     public async Task<CalendarResponse?> GetTodayDataAsync()
     {
@@ -26,7 +38,8 @@ public class KathmanduCalendarService(HttpClient httpClient, ApiLoggerService lo
 
         try
         {
-            var data = await httpClient.GetFromJsonAsync<CalendarResponse>(TodayApiUrl);
+            using var cts = new CancellationTokenSource(ApiTimeout);
+            var data = await httpClient.GetFromJsonAsync<CalendarResponse>(TodayApiUrl, cts.Token);
             if (data != null)
             {
                 _cachedCalendarData = data;
@@ -55,7 +68,8 @@ public class KathmanduCalendarService(HttpClient httpClient, ApiLoggerService lo
         try
         {
             var beforeFetch = DateTime.UtcNow;
-            var data = await httpClient.GetFromJsonAsync<TimeResponse>(TimeApiUrl);
+            using var cts = new CancellationTokenSource(ApiTimeout);
+            var data = await httpClient.GetFromJsonAsync<TimeResponse>(TimeApiUrl, cts.Token);
             var afterFetch = DateTime.UtcNow;
 
             if (data != null)

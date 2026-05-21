@@ -8,12 +8,22 @@ public class BlogTests
     private static string BaseUrl =>
         Environment.GetEnvironmentVariable("BASE_URL") ?? TestServerManager.DefaultBaseUrl;
 
-    private const int TimeoutMs = 30_000;
+    // 60s ceiling for the first cold-start navigation (WASM download + bootstrap).
+    // Once the shared context's HTTP cache is warm — after the first test in the
+    // class — every navigation completes in a second or so. The previous 30s
+    // value was sometimes too tight on slower CI runners during the cold start
+    // and was the root cause of the persistent BlogTests timeouts.
+    private const int TimeoutMs = 60_000;
 
     private static IPlaywright _playwright = null!;
     private static IBrowser _browser = null!;
 
-    private IBrowserContext _context = null!;
+    // See HomePageTests for the rationale on shared contexts. Reusing one
+    // IBrowserContext across all tests in this class lets Chromium reuse the
+    // WASM/ICU download cache so only the first test pays the full cold-start
+    // cost; the rest navigate near-instantly.
+    private static IBrowserContext _sharedContext = null!;
+
     private IPage _page = null!;
 
     // ── Class lifecycle ────────────────────────────────────────────────────
@@ -26,11 +36,13 @@ public class BlogTests
 
         _playwright = await Playwright.CreateAsync();
         _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
+        _sharedContext = await _browser.NewContextAsync();
     }
 
     [After(Class)]
     public static async Task StopInfrastructure()
     {
+        await _sharedContext.CloseAsync();
         await _browser.CloseAsync();
         _playwright.Dispose();
 
@@ -43,15 +55,14 @@ public class BlogTests
     [Before(Test)]
     public async Task SetupPage()
     {
-        _context = await _browser.NewContextAsync();
-        _page = await _context.NewPageAsync();
+        _page = await _sharedContext.NewPageAsync();
         _page.SetDefaultTimeout(TimeoutMs);
     }
 
     [After(Test)]
     public async Task TeardownPage()
     {
-        await _context.CloseAsync();
+        await _page.CloseAsync();
     }
 
     // ── Tests ──────────────────────────────────────────────────────────────
@@ -192,7 +203,7 @@ public class BlogTests
     {
         await _page.GotoAsync($"{BaseUrl}/blog/this-post-does-not-exist", new PageGotoOptions
         {
-            WaitUntil = WaitUntilState.Load,
+            WaitUntil = WaitUntilState.DOMContentLoaded,
             Timeout = TimeoutMs
         });
         await _page.Locator(".not-found").WaitForAsync(new LocatorWaitForOptions
@@ -212,18 +223,22 @@ public class BlogTests
 
     // ── Navigation helpers ─────────────────────────────────────────────────
 
+    // See HomePageTests.NavigateAsync for the rationale on DOMContentLoaded —
+    // same reasoning applies here. We then auto-wait on .blog-list which
+    // marks "Blazor has bootstrapped and the BlogList component has rendered".
     private async Task NavigateToBlogListAsync()
     {
         await _page.GotoAsync($"{BaseUrl}/blog", new PageGotoOptions
         {
-            WaitUntil = WaitUntilState.Load,
+            WaitUntil = WaitUntilState.DOMContentLoaded,
             Timeout = TimeoutMs
         });
         await _page.Locator(".blog-list").WaitForAsync(new LocatorWaitForOptions
         {
             State = WaitForSelectorState.Visible
         });
-        // Wait for either post list or the empty state to appear
+        // Wait for either the post list or the empty state to appear — the
+        // initial render shows "Loading..." until BlogService.GetPostsAsync resolves.
         await _page.WaitForFunctionAsync(
             "() => document.querySelector('.post-list') || document.querySelector('.no-posts')",
             null,
@@ -235,7 +250,7 @@ public class BlogTests
     {
         await _page.GotoAsync($"{BaseUrl}/blog/{slug}", new PageGotoOptions
         {
-            WaitUntil = WaitUntilState.Load,
+            WaitUntil = WaitUntilState.DOMContentLoaded,
             Timeout = TimeoutMs
         });
         await _page.Locator(".blog-post, .not-found").WaitForAsync(new LocatorWaitForOptions

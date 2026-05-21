@@ -10,26 +10,20 @@
     <div class="subtitle">Kathmandu, Nepal</div>
 </div>
 
-@if (_isLoading)
-{
-    <div class="loading">Loading...</div>
-}
-else if (_error != null)
+@if (_error != null)
 {
     <div class="error">@_error</div>
 }
-else
-{
-    <TimeDisplay CurrentTime="_currentTime" />
-    <DateCards CalendarData="_calendarData?.Res" />
-    <MoonDisplay MoonPhase="_moonPhase" IsLive="_isMoonLive" />
-    <Sundisplay Position="_sunPosition" UserPosition="_userSunPosition" IsLive="_isSunLive" />
-    <CalendarGrid CalendarData="_calendarData?.Res"
-                  SolarService="SolarPositionService"
-                  UserLat="_userLat"
-                  UserLng="_userLng"
-                  UserTzOffset="_userTzOffset" />
-}
+
+<TimeDisplay CurrentTime="_currentTime" />
+<DateCards CalendarData="_calendarData?.Res" />
+<MoonDisplay MoonPhase="_moonPhase" IsLive="_isMoonLive" />
+<Sundisplay Position="_sunPosition" UserPosition="_userSunPosition" IsLive="_isSunLive" />
+<CalendarGrid CalendarData="_calendarData?.Res"
+              SolarService="SolarPositionService"
+              UserLat="_userLat"
+              UserLng="_userLng"
+              UserTzOffset="_userTzOffset" />
 
 <div class="footer">
     Last updated: <span>@_lastUpdate</span>
@@ -51,9 +45,8 @@ else
     private MoonPhase? _moonPhase;
     private SolarPosition? _sunPosition;
     private SolarPosition? _userSunPosition;
-    private DateTime _currentTime = DateTime.Now;
+    private DateTime _currentTime;
     private string _lastUpdate = "--";
-    private bool _isLoading = true;
     private string? _error;
     private System.Threading.Timer? _clockTimer;
     private System.Threading.Timer? _timeApiTimer;
@@ -77,45 +70,82 @@ else
     // First-calc logging
     private bool _hasLoggedFirstSolarCalc;
 
-    protected override async Task OnInitializedAsync()
+    protected override Task OnInitializedAsync()
+    {
+        // ────────────────────────────────────────────────────────────────────
+        // IMPORTANT: Do NOT block initial render on the external calendar API.
+        //
+        // Previously this method awaited LoadDataAsync() which fetches data
+        // from https://calendar.bloggernepal.com. When that host is slow or
+        // unreachable (CI, restricted networks, throttled connections), the
+        // page would hang on "Loading..." until HttpClient timed out (~100s
+        // by default). E2E tests waiting for .time-display would time out and
+        // intermittent flakiness was observed even when the API was healthy.
+        //
+        // We now compute everything that depends only on the local clock
+        // synchronously (current time, moon phase, sun positions) and render
+        // immediately. The external API is fired in the background and the
+        // UI is updated when it responds. The KathmanduCalendarService is
+        // seeded with the fixed Nepal UTC+5:45 offset so GetCurrentKathmanduTime
+        // returns sensible values even before the time-sync API replies.
+        // ────────────────────────────────────────────────────────────────────
+
+        // Seed the UI with locally-computable values so the page renders
+        // immediately, even if the external API is slow or unreachable.
+        _currentTime = CalendarService.GetCurrentKathmanduTime();
+        UpdateMoonPhase();
+        UpdateSunPositions();
+        UpdateLastUpdateTime();
+
+        // Start the per-second tick driving the live clock and live indicators.
+        _clockTimer = new System.Threading.Timer(async _ =>
+        {
+            _currentTime = CalendarService.GetCurrentKathmanduTime();
+
+            if (_isMoonLive)
+            {
+                UpdateMoonPhase();
+            }
+
+            if (_isSunLive)
+            {
+                UpdateSunPositions();
+            }
+
+            await InvokeAsync(StateHasChanged);
+        }, null, TimeSpan.Zero, TimeSpan.FromSeconds(0.01));
+
+        _timeApiTimer = new System.Threading.Timer(async _ =>
+        {
+            await LoadTimeDataAsync();
+        }, null, TimeSpan.FromHours(1), TimeSpan.FromHours(1));
+
+        _calendarApiTimer = new System.Threading.Timer(async _ =>
+        {
+            await LoadCalendarDataAsync();
+        }, null, TimeSpan.FromHours(24), TimeSpan.FromHours(24));
+
+        // Kick off the initial external API loads in the background. We do not
+        // await them: if they fail or are slow, the UI is already rendered with
+        // locally-computed approximations and will refine when data arrives.
+        _ = LoadDataInBackgroundAsync();
+
+        return Task.CompletedTask;
+    }
+
+    private async Task LoadDataInBackgroundAsync()
     {
         try
         {
-            await LoadDataAsync();
-
-            _clockTimer = new System.Threading.Timer(async _ =>
-            {
-                _currentTime = CalendarService.GetCurrentKathmanduTime();
-
-                if (_isMoonLive)
-                {
-                    UpdateMoonPhase();
-                }
-
-                if (_isSunLive)
-                {
-                    UpdateSunPositions();
-                }
-
-                await InvokeAsync(StateHasChanged);
-            }, null, TimeSpan.Zero, TimeSpan.FromSeconds(0.01));
-
-            _timeApiTimer = new System.Threading.Timer(async _ =>
-            {
-                await LoadTimeDataAsync();
-            }, null, TimeSpan.FromHours(1), TimeSpan.FromHours(1));
-
-            _calendarApiTimer = new System.Threading.Timer(async _ =>
-            {
-                await LoadCalendarDataAsync();
-            }, null, TimeSpan.FromHours(24), TimeSpan.FromHours(24));
-
-            _isLoading = false;
+            await Task.WhenAll(LoadCalendarDataAsync(), LoadTimeDataAsync());
         }
         catch (Exception ex)
         {
-            _error = $"Failed to load data: {ex.Message}";
-            _isLoading = false;
+            // Show a non-fatal error banner but keep the page usable. Local
+            // calculations (time, moon, sun) still work because they are based
+            // on DateTime.UtcNow and the fixed Nepal offset.
+            _error = $"Could not refresh calendar data: {ex.Message}";
+            await InvokeAsync(StateHasChanged);
         }
     }
 
@@ -206,14 +236,6 @@ else
             UpdateSunPositions();
             InvokeAsync(StateHasChanged);
         }
-    }
-
-    private async Task LoadDataAsync()
-    {
-        await Task.WhenAll(LoadCalendarDataAsync(), LoadTimeDataAsync());
-        UpdateMoonPhase();
-        UpdateSunPositions();
-        UpdateLastUpdateTime();
     }
 
     private async Task LoadCalendarDataAsync()
