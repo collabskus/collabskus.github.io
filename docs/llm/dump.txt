@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 05/21/2026 09:59:01
+Generated: 05/21/2026 10:19:02
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -2376,6 +2376,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |           
 +---docs
 |   \---llm
+|           claude-conversation.md
 |           claude.md
 |           dump.txt
 |           instructions.txt
@@ -5135,8 +5136,8 @@ MODIFIED: 04/24/2026 13:25:59
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Pages\Home.razor
-SIZE: 9.63 KB
-MODIFIED: 04/24/2026 11:36:33
+SIZE: 11.59 KB
+MODIFIED: 05/21/2026 14:17:12
 ================================================================================
 
 @page "/"
@@ -5151,26 +5152,20 @@ MODIFIED: 04/24/2026 11:36:33
     <div class="subtitle">Kathmandu, Nepal</div>
 </div>
 
-@if (_isLoading)
-{
-    <div class="loading">Loading...</div>
-}
-else if (_error != null)
+@if (_error != null)
 {
     <div class="error">@_error</div>
 }
-else
-{
-    <TimeDisplay CurrentTime="_currentTime" />
-    <DateCards CalendarData="_calendarData?.Res" />
-    <MoonDisplay MoonPhase="_moonPhase" IsLive="_isMoonLive" />
-    <Sundisplay Position="_sunPosition" UserPosition="_userSunPosition" IsLive="_isSunLive" />
-    <CalendarGrid CalendarData="_calendarData?.Res"
-                  SolarService="SolarPositionService"
-                  UserLat="_userLat"
-                  UserLng="_userLng"
-                  UserTzOffset="_userTzOffset" />
-}
+
+<TimeDisplay CurrentTime="_currentTime" />
+<DateCards CalendarData="_calendarData?.Res" />
+<MoonDisplay MoonPhase="_moonPhase" IsLive="_isMoonLive" />
+<Sundisplay Position="_sunPosition" UserPosition="_userSunPosition" IsLive="_isSunLive" />
+<CalendarGrid CalendarData="_calendarData?.Res"
+              SolarService="SolarPositionService"
+              UserLat="_userLat"
+              UserLng="_userLng"
+              UserTzOffset="_userTzOffset" />
 
 <div class="footer">
     Last updated: <span>@_lastUpdate</span>
@@ -5192,9 +5187,8 @@ else
     private MoonPhase? _moonPhase;
     private SolarPosition? _sunPosition;
     private SolarPosition? _userSunPosition;
-    private DateTime _currentTime = DateTime.Now;
+    private DateTime _currentTime;
     private string _lastUpdate = "--";
-    private bool _isLoading = true;
     private string? _error;
     private System.Threading.Timer? _clockTimer;
     private System.Threading.Timer? _timeApiTimer;
@@ -5218,45 +5212,82 @@ else
     // First-calc logging
     private bool _hasLoggedFirstSolarCalc;
 
-    protected override async Task OnInitializedAsync()
+    protected override Task OnInitializedAsync()
+    {
+        // ────────────────────────────────────────────────────────────────────
+        // IMPORTANT: Do NOT block initial render on the external calendar API.
+        //
+        // Previously this method awaited LoadDataAsync() which fetches data
+        // from https://calendar.bloggernepal.com. When that host is slow or
+        // unreachable (CI, restricted networks, throttled connections), the
+        // page would hang on "Loading..." until HttpClient timed out (~100s
+        // by default). E2E tests waiting for .time-display would time out and
+        // intermittent flakiness was observed even when the API was healthy.
+        //
+        // We now compute everything that depends only on the local clock
+        // synchronously (current time, moon phase, sun positions) and render
+        // immediately. The external API is fired in the background and the
+        // UI is updated when it responds. The KathmanduCalendarService is
+        // seeded with the fixed Nepal UTC+5:45 offset so GetCurrentKathmanduTime
+        // returns sensible values even before the time-sync API replies.
+        // ────────────────────────────────────────────────────────────────────
+
+        // Seed the UI with locally-computable values so the page renders
+        // immediately, even if the external API is slow or unreachable.
+        _currentTime = CalendarService.GetCurrentKathmanduTime();
+        UpdateMoonPhase();
+        UpdateSunPositions();
+        UpdateLastUpdateTime();
+
+        // Start the per-second tick driving the live clock and live indicators.
+        _clockTimer = new System.Threading.Timer(async _ =>
+        {
+            _currentTime = CalendarService.GetCurrentKathmanduTime();
+
+            if (_isMoonLive)
+            {
+                UpdateMoonPhase();
+            }
+
+            if (_isSunLive)
+            {
+                UpdateSunPositions();
+            }
+
+            await InvokeAsync(StateHasChanged);
+        }, null, TimeSpan.Zero, TimeSpan.FromSeconds(0.01));
+
+        _timeApiTimer = new System.Threading.Timer(async _ =>
+        {
+            await LoadTimeDataAsync();
+        }, null, TimeSpan.FromHours(1), TimeSpan.FromHours(1));
+
+        _calendarApiTimer = new System.Threading.Timer(async _ =>
+        {
+            await LoadCalendarDataAsync();
+        }, null, TimeSpan.FromHours(24), TimeSpan.FromHours(24));
+
+        // Kick off the initial external API loads in the background. We do not
+        // await them: if they fail or are slow, the UI is already rendered with
+        // locally-computed approximations and will refine when data arrives.
+        _ = LoadDataInBackgroundAsync();
+
+        return Task.CompletedTask;
+    }
+
+    private async Task LoadDataInBackgroundAsync()
     {
         try
         {
-            await LoadDataAsync();
-
-            _clockTimer = new System.Threading.Timer(async _ =>
-            {
-                _currentTime = CalendarService.GetCurrentKathmanduTime();
-
-                if (_isMoonLive)
-                {
-                    UpdateMoonPhase();
-                }
-
-                if (_isSunLive)
-                {
-                    UpdateSunPositions();
-                }
-
-                await InvokeAsync(StateHasChanged);
-            }, null, TimeSpan.Zero, TimeSpan.FromSeconds(0.01));
-
-            _timeApiTimer = new System.Threading.Timer(async _ =>
-            {
-                await LoadTimeDataAsync();
-            }, null, TimeSpan.FromHours(1), TimeSpan.FromHours(1));
-
-            _calendarApiTimer = new System.Threading.Timer(async _ =>
-            {
-                await LoadCalendarDataAsync();
-            }, null, TimeSpan.FromHours(24), TimeSpan.FromHours(24));
-
-            _isLoading = false;
+            await Task.WhenAll(LoadCalendarDataAsync(), LoadTimeDataAsync());
         }
         catch (Exception ex)
         {
-            _error = $"Failed to load data: {ex.Message}";
-            _isLoading = false;
+            // Show a non-fatal error banner but keep the page usable. Local
+            // calculations (time, moon, sun) still work because they are based
+            // on DateTime.UtcNow and the fixed Nepal offset.
+            _error = $"Could not refresh calendar data: {ex.Message}";
+            await InvokeAsync(StateHasChanged);
         }
     }
 
@@ -5347,14 +5378,6 @@ else
             UpdateSunPositions();
             InvokeAsync(StateHasChanged);
         }
-    }
-
-    private async Task LoadDataAsync()
-    {
-        await Task.WhenAll(LoadCalendarDataAsync(), LoadTimeDataAsync());
-        UpdateMoonPhase();
-        UpdateSunPositions();
-        UpdateLastUpdateTime();
     }
 
     private async Task LoadCalendarDataAsync()
@@ -5549,8 +5572,8 @@ MODIFIED: 02/08/2026 10:27:06
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Program.cs
-SIZE: 0.75 KB
-MODIFIED: 04/24/2026 11:36:02
+SIZE: 1.26 KB
+MODIFIED: 05/21/2026 14:17:12
 ================================================================================
 
 using Microsoft.AspNetCore.Components.Web;
@@ -5562,7 +5585,17 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+// Cap the global HttpClient timeout. The default (~100s) is far too long for
+// any of our calls: blog manifest is a local static file, blog posts are local
+// markdown, and the calendar/time/logger endpoints either respond quickly or
+// not at all from a UX perspective. A 15s ceiling prevents stuck requests from
+// keeping connections alive forever and surfaces real network problems faster.
+// Individual call sites that want a shorter bound use their own CancellationToken.
+builder.Services.AddScoped(sp => new HttpClient
+{
+    BaseAddress = new Uri(builder.HostEnvironment.BaseAddress),
+    Timeout = TimeSpan.FromSeconds(15)
+});
 
 // Register our services
 builder.Services.AddScoped<KathmanduCalendarService>();
@@ -5822,8 +5855,8 @@ public class BlogService(HttpClient httpClient)
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\KathmanduCalendarService.cs
-SIZE: 4.98 KB
-MODIFIED: 03/03/2026 10:07:51
+SIZE: 5.9 KB
+MODIFIED: 05/21/2026 14:17:12
 ================================================================================
 
 using System.Net.Http.Json;
@@ -5837,10 +5870,22 @@ public class KathmanduCalendarService(HttpClient httpClient, ApiLoggerService lo
     private DateTime? _calendarCacheTime;
     private TimeResponse? _cachedTimeData;
     private DateTime? _timeCacheTime;
-    private TimeSpan _serverTimeOffset = TimeSpan.Zero;
+
+    // Seed the offset with Nepal's fixed UTC+5:45. The /api/time endpoint refines
+    // this to second-precision (drift-corrected) when it responds, but if that
+    // endpoint is slow or unreachable, GetCurrentKathmanduTime() still returns a
+    // usable Kathmandu time from the moment the service is constructed. This
+    // unblocks the UI from waiting on an external dependency to render its clock.
+    private TimeSpan _serverTimeOffset = SolarPositionService.NstOffset;
 
     private const string TodayApiUrl = "https://calendar.bloggernepal.com/api/today";
     private const string TimeApiUrl = "https://calendar.bloggernepal.com/api/time";
+
+    // Bound external HTTP work to keep the UI responsive when the upstream
+    // calendar API is slow. The default HttpClient timeout (~100s) is too long
+    // for an interactive page; if a refresh takes longer than this we let it
+    // fail and try again on the next scheduled tick.
+    private static readonly TimeSpan ApiTimeout = TimeSpan.FromSeconds(10);
 
     public async Task<CalendarResponse?> GetTodayDataAsync()
     {
@@ -5854,7 +5899,8 @@ public class KathmanduCalendarService(HttpClient httpClient, ApiLoggerService lo
 
         try
         {
-            var data = await httpClient.GetFromJsonAsync<CalendarResponse>(TodayApiUrl);
+            using var cts = new CancellationTokenSource(ApiTimeout);
+            var data = await httpClient.GetFromJsonAsync<CalendarResponse>(TodayApiUrl, cts.Token);
             if (data != null)
             {
                 _cachedCalendarData = data;
@@ -5883,7 +5929,8 @@ public class KathmanduCalendarService(HttpClient httpClient, ApiLoggerService lo
         try
         {
             var beforeFetch = DateTime.UtcNow;
-            var data = await httpClient.GetFromJsonAsync<TimeResponse>(TimeApiUrl);
+            using var cts = new CancellationTokenSource(ApiTimeout);
+            var data = await httpClient.GetFromJsonAsync<TimeResponse>(TimeApiUrl, cts.Token);
             var afterFetch = DateTime.UtcNow;
 
             if (data != null)
@@ -7133,8 +7180,8 @@ async function onFetch(event) {
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.PlaywrightTests\BlogTests.cs
-SIZE: 8.67 KB
-MODIFIED: 04/24/2026 13:26:32
+SIZE: 9.75 KB
+MODIFIED: 05/21/2026 14:17:12
 ================================================================================
 
 namespace CollabsKus.PlaywrightTests;
@@ -7147,12 +7194,22 @@ public class BlogTests
     private static string BaseUrl =>
         Environment.GetEnvironmentVariable("BASE_URL") ?? TestServerManager.DefaultBaseUrl;
 
-    private const int TimeoutMs = 30_000;
+    // 60s ceiling for the first cold-start navigation (WASM download + bootstrap).
+    // Once the shared context's HTTP cache is warm — after the first test in the
+    // class — every navigation completes in a second or so. The previous 30s
+    // value was sometimes too tight on slower CI runners during the cold start
+    // and was the root cause of the persistent BlogTests timeouts.
+    private const int TimeoutMs = 60_000;
 
     private static IPlaywright _playwright = null!;
     private static IBrowser _browser = null!;
 
-    private IBrowserContext _context = null!;
+    // See HomePageTests for the rationale on shared contexts. Reusing one
+    // IBrowserContext across all tests in this class lets Chromium reuse the
+    // WASM/ICU download cache so only the first test pays the full cold-start
+    // cost; the rest navigate near-instantly.
+    private static IBrowserContext _sharedContext = null!;
+
     private IPage _page = null!;
 
     // ── Class lifecycle ────────────────────────────────────────────────────
@@ -7165,11 +7222,13 @@ public class BlogTests
 
         _playwright = await Playwright.CreateAsync();
         _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
+        _sharedContext = await _browser.NewContextAsync();
     }
 
     [After(Class)]
     public static async Task StopInfrastructure()
     {
+        await _sharedContext.CloseAsync();
         await _browser.CloseAsync();
         _playwright.Dispose();
 
@@ -7182,15 +7241,14 @@ public class BlogTests
     [Before(Test)]
     public async Task SetupPage()
     {
-        _context = await _browser.NewContextAsync();
-        _page = await _context.NewPageAsync();
+        _page = await _sharedContext.NewPageAsync();
         _page.SetDefaultTimeout(TimeoutMs);
     }
 
     [After(Test)]
     public async Task TeardownPage()
     {
-        await _context.CloseAsync();
+        await _page.CloseAsync();
     }
 
     // ── Tests ──────────────────────────────────────────────────────────────
@@ -7331,7 +7389,7 @@ public class BlogTests
     {
         await _page.GotoAsync($"{BaseUrl}/blog/this-post-does-not-exist", new PageGotoOptions
         {
-            WaitUntil = WaitUntilState.Load,
+            WaitUntil = WaitUntilState.DOMContentLoaded,
             Timeout = TimeoutMs
         });
         await _page.Locator(".not-found").WaitForAsync(new LocatorWaitForOptions
@@ -7351,18 +7409,22 @@ public class BlogTests
 
     // ── Navigation helpers ─────────────────────────────────────────────────
 
+    // See HomePageTests.NavigateAsync for the rationale on DOMContentLoaded —
+    // same reasoning applies here. We then auto-wait on .blog-list which
+    // marks "Blazor has bootstrapped and the BlogList component has rendered".
     private async Task NavigateToBlogListAsync()
     {
         await _page.GotoAsync($"{BaseUrl}/blog", new PageGotoOptions
         {
-            WaitUntil = WaitUntilState.Load,
+            WaitUntil = WaitUntilState.DOMContentLoaded,
             Timeout = TimeoutMs
         });
         await _page.Locator(".blog-list").WaitForAsync(new LocatorWaitForOptions
         {
             State = WaitForSelectorState.Visible
         });
-        // Wait for either post list or the empty state to appear
+        // Wait for either the post list or the empty state to appear — the
+        // initial render shows "Loading..." until BlogService.GetPostsAsync resolves.
         await _page.WaitForFunctionAsync(
             "() => document.querySelector('.post-list') || document.querySelector('.no-posts')",
             null,
@@ -7374,7 +7436,7 @@ public class BlogTests
     {
         await _page.GotoAsync($"{BaseUrl}/blog/{slug}", new PageGotoOptions
         {
-            WaitUntil = WaitUntilState.Load,
+            WaitUntil = WaitUntilState.DOMContentLoaded,
             Timeout = TimeoutMs
         });
         await _page.Locator(".blog-post, .not-found").WaitForAsync(new LocatorWaitForOptions
@@ -7424,8 +7486,8 @@ global using Microsoft.Playwright;
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.PlaywrightTests\HomePageTests.cs
-SIZE: 8.94 KB
-MODIFIED: 04/24/2026 11:49:49
+SIZE: 11.81 KB
+MODIFIED: 05/21/2026 14:17:12
 ================================================================================
 
 namespace CollabsKus.PlaywrightTests;
@@ -7438,17 +7500,35 @@ public class HomePageTests
     private static string BaseUrl =>
         Environment.GetEnvironmentVariable("BASE_URL") ?? TestServerManager.DefaultBaseUrl;
 
-    // Blazor WASM downloads the .NET runtime then calls an external calendar API before
-    // rendering — allow enough time for both before timing out element waits.
+    // Blazor WASM downloads the .NET runtime then bootstraps before rendering —
+    // allow enough time for the first cold-start navigation. After the first
+    // test in this class warms the shared browser context's cache, subsequent
+    // navigations finish in well under a second.
     private const int AppReadyTimeoutMs = 60_000;
 
     private static IPlaywright _playwright = null!;
     private static IBrowser _browser = null!;
 
-    private IBrowserContext _context = null!;
+    // ────────────────────────────────────────────────────────────────────────
+    // A single IBrowserContext is shared across every test in this class. Each
+    // test previously created a fresh context, which gave it an empty HTTP
+    // cache and forced Chromium to re-download ~5-15 MB of WASM + ICU data on
+    // every single test. That cold-start cost — multiplied across ~14 tests —
+    // was the root cause of the timeouts observed on slower machines / CI.
+    //
+    // Reusing the context preserves the HTTP cache so only the first test
+    // pays the cold-start cost; the rest navigate almost instantly. The page
+    // (and its DOM, JS state, etc.) is still recreated per test so tests
+    // remain isolated.
+    //
+    // The geolocation test creates its own ephemeral context because it needs
+    // different permissions than this shared one.
+    // ────────────────────────────────────────────────────────────────────────
+    private static IBrowserContext _sharedContext = null!;
+
     private IPage _page = null!;
 
-    // ── Class lifecycle: server + browser shared across all tests ──────────
+    // ── Class lifecycle: server + browser + shared context ─────────────────
 
     [Before(Class)]
     public static async Task StartInfrastructure()
@@ -7458,11 +7538,17 @@ public class HomePageTests
 
         _playwright = await Playwright.CreateAsync();
         _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
+
+        _sharedContext = await _browser.NewContextAsync(new BrowserNewContextOptions
+        {
+            Permissions = []   // deny geolocation → Kathmandu-only mode
+        });
     }
 
     [After(Class)]
     public static async Task StopInfrastructure()
     {
+        await _sharedContext.CloseAsync();
         await _browser.CloseAsync();
         _playwright.Dispose();
 
@@ -7470,37 +7556,42 @@ public class HomePageTests
             await TestServerManager.ReleaseAsync();
     }
 
-    // ── Test lifecycle: fresh isolated context + page per test ─────────────
+    // ── Test lifecycle: fresh page per test, shared context ────────────────
 
     [Before(Test)]
     public async Task SetupPage()
     {
-        _context = await _browser.NewContextAsync(new BrowserNewContextOptions
-        {
-            Permissions = []   // deny geolocation → Kathmandu-only mode
-        });
-        _page = await _context.NewPageAsync();
+        _page = await _sharedContext.NewPageAsync();
         _page.SetDefaultTimeout(AppReadyTimeoutMs);
     }
 
     [After(Test)]
     public async Task TeardownPage()
     {
-        await _context.CloseAsync();
+        await _page.CloseAsync();
     }
 
     // ── Navigation helper ──────────────────────────────────────────────────
 
-    // WaitUntilState.Load (not NetworkIdle): Blazor WASM makes background API calls
-    // to an external calendar service and sends telemetry to Cloudflare Workers —
-    // those prevent NetworkIdle from ever firing within a reasonable timeout.
-    // We then wait for .time-display, which only renders once _isLoading clears and
-    // calendar data has been successfully fetched.
+    // WaitUntilState.DOMContentLoaded (not Load or NetworkIdle):
+    //   - NetworkIdle never fires reliably: the page makes background calls to
+    //     an external calendar service and sends telemetry to Cloudflare Workers.
+    //   - Load waits for every sub-resource (CSS, fonts, the full Blazor WASM
+    //     payload, every dynamically-imported assembly) which adds noticeable
+    //     latency without adding correctness.
+    //   - DOMContentLoaded fires as soon as the HTML shell is parsed. After
+    //     that, we explicitly wait for .time-display, which means "Blazor is
+    //     bootstrapped and the Home component has rendered". That is the real
+    //     signal that the app is ready, regardless of how long any external
+    //     resource takes.
+    //
+    // .time-display renders as soon as the Home component initializes — it no
+    // longer waits on the external calendar API.
     private async Task NavigateAsync()
     {
         await _page.GotoAsync(BaseUrl, new PageGotoOptions
         {
-            WaitUntil = WaitUntilState.Load,
+            WaitUntil = WaitUntilState.DOMContentLoaded,
             Timeout = AppReadyTimeoutMs
         });
         await _page.Locator(".time-display").WaitForAsync(new LocatorWaitForOptions
@@ -7516,7 +7607,7 @@ public class HomePageTests
     {
         await _page.GotoAsync(BaseUrl, new PageGotoOptions
         {
-            WaitUntil = WaitUntilState.Load,
+            WaitUntil = WaitUntilState.DOMContentLoaded,
             Timeout = AppReadyTimeoutMs
         });
         await Assert.That(await _page.TitleAsync()).IsEqualTo("Kathmandu Calendar & Time");
@@ -7527,10 +7618,14 @@ public class HomePageTests
     {
         await _page.GotoAsync(BaseUrl, new PageGotoOptions
         {
-            WaitUntil = WaitUntilState.Load,
+            WaitUntil = WaitUntilState.DOMContentLoaded,
             Timeout = AppReadyTimeoutMs
         });
-        var h1 = await _page.Locator("h1").TextContentAsync();
+        // Wait for Blazor to render the <h1> before reading it — it lives inside
+        // the Home component, not in the static index.html shell.
+        var h1Locator = _page.Locator("h1");
+        await h1Locator.WaitForAsync(new LocatorWaitForOptions { State = WaitForSelectorState.Visible });
+        var h1 = await h1Locator.TextContentAsync();
         await Assert.That(h1).IsEqualTo("काठमाडौं");
     }
 
@@ -7580,7 +7675,15 @@ public class HomePageTests
     public async Task CalendarGrid_RendersSevenDayColumns()
     {
         await NavigateAsync();
-        var dayNames = await _page.Locator(".calendar-header .day-name").CountAsync();
+        // CalendarGrid renders only after the external calendar API has returned
+        // (it gates on CalendarData != null). Auto-wait on the locator handles
+        // that latency; in practice the API responds well within our timeout.
+        var dayNameLocator = _page.Locator(".calendar-header .day-name");
+        await dayNameLocator.First.WaitForAsync(new LocatorWaitForOptions
+        {
+            State = WaitForSelectorState.Visible
+        });
+        var dayNames = await dayNameLocator.CountAsync();
         await Assert.That(dayNames).IsEqualTo(7);
     }
 
@@ -7589,13 +7692,14 @@ public class HomePageTests
     {
         await _page.GotoAsync(BaseUrl, new PageGotoOptions
         {
-            WaitUntil = WaitUntilState.Load,
+            WaitUntil = WaitUntilState.DOMContentLoaded,
             Timeout = AppReadyTimeoutMs
         });
-        // .footer is rendered outside the @if (_isLoading) gate — present as soon as Blazor
-        // bootstraps, before the external calendar API responds. No need to wait for data.
-        var footer = await _page.Locator(".footer").TextContentAsync();
-        await Assert.That(footer!.Contains("Last updated")).IsTrue();
+        // .footer is rendered by the Home component itself — wait for it.
+        var footer = _page.Locator(".footer");
+        await footer.WaitForAsync(new LocatorWaitForOptions { State = WaitForSelectorState.Visible });
+        var text = await footer.TextContentAsync();
+        await Assert.That(text!.Contains("Last updated")).IsTrue();
     }
 
     [Test]
@@ -7603,10 +7707,9 @@ public class HomePageTests
     {
         await _page.GotoAsync(BaseUrl, new PageGotoOptions
         {
-            WaitUntil = WaitUntilState.Load,
+            WaitUntil = WaitUntilState.DOMContentLoaded,
             Timeout = AppReadyTimeoutMs
         });
-        // .footer renders as soon as Blazor bootstraps; WaitForAsync auto-waits for it.
         var githubLink = _page.Locator(".footer a[href*='github.com']");
         await githubLink.WaitForAsync(new LocatorWaitForOptions { State = WaitForSelectorState.Visible });
         await Assert.That(await githubLink.IsVisibleAsync()).IsTrue();
@@ -7617,7 +7720,7 @@ public class HomePageTests
     {
         await _page.GotoAsync(BaseUrl, new PageGotoOptions
         {
-            WaitUntil = WaitUntilState.Load,
+            WaitUntil = WaitUntilState.DOMContentLoaded,
             Timeout = AppReadyTimeoutMs
         });
         var blogLink = _page.Locator(".footer a[href='/blog']");
@@ -7649,6 +7752,9 @@ public class HomePageTests
     [Test]
     public async Task WithGeolocation_ShowsUserSunTracker()
     {
+        // This test needs different permissions than the shared context, so
+        // spin up its own short-lived context. The first navigation pays the
+        // cold-start cost again here because this context has its own cache.
         await using var geoContext = await _browser.NewContextAsync(new BrowserNewContextOptions
         {
             Permissions = ["geolocation"],
@@ -7660,7 +7766,7 @@ public class HomePageTests
 
         await geoPage.GotoAsync(BaseUrl, new PageGotoOptions
         {
-            WaitUntil = WaitUntilState.Load,
+            WaitUntil = WaitUntilState.DOMContentLoaded,
             Timeout = AppReadyTimeoutMs
         });
         await geoPage.Locator(".time-display").WaitForAsync(new LocatorWaitForOptions
@@ -11891,7 +11997,7 @@ MODIFIED: 04/24/2026 11:35:51
 
 
 ===============================================================================
-EXPORT COMPLETED: 05/21/2026 09:59:15
+EXPORT COMPLETED: 05/21/2026 10:19:14
 Total Files Exported: 64
 Output File: .\docs\llm\dump.txt
 ===============================================================================
