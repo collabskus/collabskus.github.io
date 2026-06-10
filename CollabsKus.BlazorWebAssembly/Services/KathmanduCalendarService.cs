@@ -1,148 +1,148 @@
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using CollabsKus.BlazorWebAssembly.Models;
 
 namespace CollabsKus.BlazorWebAssembly.Services;
 
 public class KathmanduCalendarService(HttpClient httpClient, ApiLoggerService logger)
 {
-    private CalendarResponse? _cachedCalendarData;
-    private DateTime? _calendarCacheTime;
-    private TimeResponse? _cachedTimeData;
-    private DateTime? _timeCacheTime;
+   private CalendarResponse? _cachedCalendarData;
+   private DateTime? _calendarCacheTime;
+   private TimeResponse? _cachedTimeData;
+   private DateTime? _timeCacheTime;
 
-    // Seed the offset with Nepal's fixed UTC+5:45. The /api/time endpoint refines
-    // this to second-precision (drift-corrected) when it responds, but if that
-    // endpoint is slow or unreachable, GetCurrentKathmanduTime() still returns a
-    // usable Kathmandu time from the moment the service is constructed. This
-    // unblocks the UI from waiting on an external dependency to render its clock.
-    private TimeSpan _serverTimeOffset = SolarPositionService.NstOffset;
+   // Seed the offset with Nepal's fixed UTC+5:45. The /api/time endpoint refines
+   // this to second-precision (drift-corrected) when it responds, but if that
+   // endpoint is slow or unreachable, GetCurrentKathmanduTime() still returns a
+   // usable Kathmandu time from the moment the service is constructed. This
+   // unblocks the UI from waiting on an external dependency to render its clock.
+   private TimeSpan _serverTimeOffset = SolarPositionService.NstOffset;
 
-    private const string TodayApiUrl = "https://calendar.bloggernepal.com/api/today";
-    private const string TimeApiUrl = "https://calendar.bloggernepal.com/api/time";
+   private const string TodayApiUrl = "https://calendar.bloggernepal.com/api/today";
+   private const string TimeApiUrl = "https://calendar.bloggernepal.com/api/time";
 
-    // Bound external HTTP work to keep the UI responsive when the upstream
-    // calendar API is slow. The default HttpClient timeout (~100s) is too long
-    // for an interactive page; if a refresh takes longer than this we let it
-    // fail and try again on the next scheduled tick.
-    private static readonly TimeSpan ApiTimeout = TimeSpan.FromSeconds(10);
+   // Bound external HTTP work to keep the UI responsive when the upstream
+   // calendar API is slow. The default HttpClient timeout (~100s) is too long
+   // for an interactive page; if a refresh takes longer than this we let it
+   // fail and try again on the next scheduled tick.
+   private static readonly TimeSpan ApiTimeout = TimeSpan.FromSeconds(10);
 
-    public async Task<CalendarResponse?> GetTodayDataAsync()
-    {
-        // Cache for 1 hour
-        if (_cachedCalendarData != null && _calendarCacheTime.HasValue &&
-            DateTime.UtcNow - _calendarCacheTime.Value < TimeSpan.FromHours(1))
-        {
-            await logger.LogApiRequestAsync(TodayApiUrl, _cachedCalendarData, true, ApiLoggerService.GetOptions());
-            return _cachedCalendarData;
-        }
+   public async Task<CalendarResponse?> GetTodayDataAsync()
+   {
+      // Cache for 1 hour
+      if (_cachedCalendarData != null && _calendarCacheTime.HasValue &&
+          DateTime.UtcNow - _calendarCacheTime.Value < TimeSpan.FromHours(1))
+      {
+         await logger.LogApiRequestAsync(TodayApiUrl, _cachedCalendarData, true, ApiLoggerService.GetOptions());
+         return _cachedCalendarData;
+      }
 
-        try
-        {
-            using var cts = new CancellationTokenSource(ApiTimeout);
-            var data = await httpClient.GetFromJsonAsync<CalendarResponse>(TodayApiUrl, cts.Token);
-            if (data != null)
+      try
+      {
+         using var cts = new CancellationTokenSource(ApiTimeout);
+         var data = await httpClient.GetFromJsonAsync<CalendarResponse>(TodayApiUrl, cts.Token);
+         if (data != null)
+         {
+            _cachedCalendarData = data;
+            _calendarCacheTime = DateTime.UtcNow;
+            await logger.LogApiRequestAsync(TodayApiUrl, data, false, ApiLoggerService.GetOptions());
+         }
+         return data;
+      }
+      catch (Exception ex)
+      {
+         await logger.LogApiRequestAsync(TodayApiUrl, new { error = ex.Message, failed = true }, false, ApiLoggerService.GetOptions());
+         throw;
+      }
+   }
+
+   public async Task<TimeResponse?> GetTimeDataAsync()
+   {
+      // Cache for 5 minutes
+      if (_cachedTimeData != null && _timeCacheTime.HasValue &&
+          DateTime.UtcNow - _timeCacheTime.Value < TimeSpan.FromMinutes(5))
+      {
+         await logger.LogApiRequestAsync(TimeApiUrl, _cachedTimeData, true, ApiLoggerService.GetOptions());
+         return _cachedTimeData;
+      }
+
+      try
+      {
+         var beforeFetch = DateTime.UtcNow;
+         using var cts = new CancellationTokenSource(ApiTimeout);
+         var data = await httpClient.GetFromJsonAsync<TimeResponse>(TimeApiUrl, cts.Token);
+         var afterFetch = DateTime.UtcNow;
+
+         if (data != null)
+         {
+            _cachedTimeData = data;
+            _timeCacheTime = DateTime.UtcNow;
+
+            // Calculate server time offset
+            var serverHour = int.Parse(data.Hour);
+            var serverMin = int.Parse(data.Min);
+            var serverSec = int.Parse(data.Sec);
+            var isPM = data.ApOrPm == "PM";
+
+            if (isPM && serverHour != 12) serverHour += 12;
+            if (!isPM && serverHour == 12) serverHour = 0;
+
+            var serverTime = new DateTime(
+                DateTime.UtcNow.Year,
+                DateTime.UtcNow.Month,
+                DateTime.UtcNow.Day,
+                serverHour,
+                serverMin,
+                serverSec
+            );
+
+            var localTime = beforeFetch + (afterFetch - beforeFetch) / 2;
+            _serverTimeOffset = serverTime - localTime;
+
+            // FIX: Date boundary crossing.
+            // The API returns Kathmandu local time (UTC+5:45), but we attached it
+            // to the UTC date above. When UTC is late evening (e.g. 23:00 UTC =
+            // 04:45 next day in Kathmandu), the API returns 04:45 but we put it on
+            // today's UTC date, making _serverTimeOffset roughly -18h instead of +5h45m.
+            // Since Nepal is a fixed UTC+5:45 (no DST), a valid offset must be close
+            // to +5h45m. Any offset beyond ±12h from that expected value indicates a
+            // day boundary crossing that needs correction.
+            if (_serverTimeOffset.TotalHours < -12)
             {
-                _cachedCalendarData = data;
-                _calendarCacheTime = DateTime.UtcNow;
-                await logger.LogApiRequestAsync(TodayApiUrl, data, false, ApiLoggerService.GetOptions());
+               _serverTimeOffset += TimeSpan.FromHours(24);
             }
-            return data;
-        }
-        catch (Exception ex)
-        {
-            await logger.LogApiRequestAsync(TodayApiUrl, new { error = ex.Message, failed = true }, false, ApiLoggerService.GetOptions());
-            throw;
-        }
-    }
-
-    public async Task<TimeResponse?> GetTimeDataAsync()
-    {
-        // Cache for 5 minutes
-        if (_cachedTimeData != null && _timeCacheTime.HasValue &&
-            DateTime.UtcNow - _timeCacheTime.Value < TimeSpan.FromMinutes(5))
-        {
-            await logger.LogApiRequestAsync(TimeApiUrl, _cachedTimeData, true, ApiLoggerService.GetOptions());
-            return _cachedTimeData;
-        }
-
-        try
-        {
-            var beforeFetch = DateTime.UtcNow;
-            using var cts = new CancellationTokenSource(ApiTimeout);
-            var data = await httpClient.GetFromJsonAsync<TimeResponse>(TimeApiUrl, cts.Token);
-            var afterFetch = DateTime.UtcNow;
-
-            if (data != null)
+            else if (_serverTimeOffset.TotalHours > 12)
             {
-                _cachedTimeData = data;
-                _timeCacheTime = DateTime.UtcNow;
-
-                // Calculate server time offset
-                var serverHour = int.Parse(data.Hour);
-                var serverMin = int.Parse(data.Min);
-                var serverSec = int.Parse(data.Sec);
-                var isPM = data.ApOrPm == "PM";
-
-                if (isPM && serverHour != 12) serverHour += 12;
-                if (!isPM && serverHour == 12) serverHour = 0;
-
-                var serverTime = new DateTime(
-                    DateTime.UtcNow.Year,
-                    DateTime.UtcNow.Month,
-                    DateTime.UtcNow.Day,
-                    serverHour,
-                    serverMin,
-                    serverSec
-                );
-
-                var localTime = beforeFetch + (afterFetch - beforeFetch) / 2;
-                _serverTimeOffset = serverTime - localTime;
-
-                // FIX: Date boundary crossing.
-                // The API returns Kathmandu local time (UTC+5:45), but we attached it
-                // to the UTC date above. When UTC is late evening (e.g. 23:00 UTC =
-                // 04:45 next day in Kathmandu), the API returns 04:45 but we put it on
-                // today's UTC date, making _serverTimeOffset roughly -18h instead of +5h45m.
-                // Since Nepal is a fixed UTC+5:45 (no DST), a valid offset must be close
-                // to +5h45m. Any offset beyond ±12h from that expected value indicates a
-                // day boundary crossing that needs correction.
-                if (_serverTimeOffset.TotalHours < -12)
-                {
-                    _serverTimeOffset += TimeSpan.FromHours(24);
-                }
-                else if (_serverTimeOffset.TotalHours > 12)
-                {
-                    _serverTimeOffset -= TimeSpan.FromHours(24);
-                }
-
-                await logger.LogApiRequestAsync(TimeApiUrl, data, false, ApiLoggerService.GetOptions());
+               _serverTimeOffset -= TimeSpan.FromHours(24);
             }
-            return data;
-        }
-        catch (Exception ex)
-        {
-            await logger.LogApiRequestAsync(TimeApiUrl, new { error = ex.Message, failed = true }, false, ApiLoggerService.GetOptions());
-            throw;
-        }
-    }
 
-    public DateTime GetCurrentKathmanduTime()
-    {
-        return DateTime.UtcNow + _serverTimeOffset;
-    }
+            await logger.LogApiRequestAsync(TimeApiUrl, data, false, ApiLoggerService.GetOptions());
+         }
+         return data;
+      }
+      catch (Exception ex)
+      {
+         await logger.LogApiRequestAsync(TimeApiUrl, new { error = ex.Message, failed = true }, false, ApiLoggerService.GetOptions());
+         throw;
+      }
+   }
 
-    public static string ToNepaliDigits(int number)
-    {
-        var nepaliDigits = new[] { "०", "१", "२", "३", "४", "५", "६", "७", "८", "९" };
-        var numStr = number.ToString("D2");
-        var result = "";
-        foreach (var digit in numStr)
-        {
-            if (char.IsDigit(digit))
-            {
-                result += nepaliDigits[digit - '0'];
-            }
-        }
-        return result;
-    }
+   public DateTime GetCurrentKathmanduTime()
+   {
+      return DateTime.UtcNow + _serverTimeOffset;
+   }
+
+   public static string ToNepaliDigits(int number)
+   {
+      var nepaliDigits = new[] { "०", "१", "२", "३", "४", "५", "६", "७", "८", "९" };
+      var numStr = number.ToString("D2");
+      var result = "";
+      foreach (var digit in numStr)
+      {
+         if (char.IsDigit(digit))
+         {
+            result += nepaliDigits[digit - '0'];
+         }
+      }
+      return result;
+   }
 }

@@ -1,4 +1,4 @@
-using CollabsKus.BlazorWebAssembly.Models;
+﻿using CollabsKus.BlazorWebAssembly.Models;
 
 namespace CollabsKus.BlazorWebAssembly.Services;
 
@@ -13,14 +13,14 @@ namespace CollabsKus.BlazorWebAssembly.Services;
 /// </summary>
 public class MoonPhaseService
 {
-    private const double SynodicMonth = 29.53058770576; // mean synodic month in days (IAU)
-    private const double Rad = Math.PI / 180.0;
-    private const double Deg = 180.0 / Math.PI;
+   private const double SynodicMonth = 29.53058770576; // mean synodic month in days (IAU)
+   private const double Rad = Math.PI / 180.0;
+   private const double Deg = 180.0 / Math.PI;
 
-    // ── Phase name definitions (by ecliptic longitude difference 0–360°) ─────
-    private static readonly (string Name, string Icon, double Min, double Max)[] Phases =
-    [
-        ("New Moon",        "🌑",   0.0,   22.5),
+   // ── Phase name definitions (by ecliptic longitude difference 0–360°) ─────
+   private static readonly (string Name, string Icon, double Min, double Max)[] Phases =
+   [
+       ("New Moon",        "🌑",   0.0,   22.5),
         ("Waxing Crescent", "🌒",  22.5,   67.5),
         ("First Quarter",   "🌓",  67.5,  112.5),
         ("Waxing Gibbous",  "🌔", 112.5,  157.5),
@@ -31,206 +31,206 @@ public class MoonPhaseService
         ("New Moon",        "🌑", 337.5,  360.0),
     ];
 
-    // Tithi names: indices 0–13 are the first 14 tithis of each paksha.
-    // The 15th tithi (index 14) is handled separately: Purnima for Shukla, Amavasya for Krishna.
-    private static readonly string[] TithiNames =
-    [
-        "Pratipada", "Dwitiya",    "Tritiya",    "Chaturthi", "Panchami",
+   // Tithi names: indices 0–13 are the first 14 tithis of each paksha.
+   // The 15th tithi (index 14) is handled separately: Purnima for Shukla, Amavasya for Krishna.
+   private static readonly string[] TithiNames =
+   [
+       "Pratipada", "Dwitiya",    "Tritiya",    "Chaturthi", "Panchami",
         "Shashthi",  "Saptami",    "Ashtami",    "Navami",    "Dashami",
         "Ekadashi",  "Dwadashi",   "Trayodashi", "Chaturdashi"
-    ];
+   ];
 
-    // ── Public entry point ────────────────────────────────────────────────────
+   // ── Public entry point ────────────────────────────────────────────────────
 
-    /// <summary>
-    /// Calculate the current moon phase. Pass DateTime.UtcNow for real-time use.
-    /// The date MUST be true UTC — do not pass local/Kathmandu time.
-    /// </summary>
-    public static MoonPhase CalculateMoonPhase(DateTime utcDate)
-    {
-        // Ensure we're working with true UTC
-        var utc = utcDate.Kind switch
-        {
-            DateTimeKind.Utc => utcDate,
-            DateTimeKind.Local => utcDate.ToUniversalTime(),
-            _ => DateTime.SpecifyKind(utcDate, DateTimeKind.Utc) // Unspecified: assume UTC
-        };
+   /// <summary>
+   /// Calculate the current moon phase. Pass DateTime.UtcNow for real-time use.
+   /// The date MUST be true UTC — do not pass local/Kathmandu time.
+   /// </summary>
+   public static MoonPhase CalculateMoonPhase(DateTime utcDate)
+   {
+      // Ensure we're working with true UTC
+      var utc = utcDate.Kind switch
+      {
+         DateTimeKind.Utc => utcDate,
+         DateTimeKind.Local => utcDate.ToUniversalTime(),
+         _ => DateTime.SpecifyKind(utcDate, DateTimeKind.Utc) // Unspecified: assume UTC
+      };
 
-        var jd = ToJulianDay(utc);
+      var jd = ToJulianDay(utc);
 
-        // Meeus core quantities
-        var T = (jd - 2451545.0) / 36525.0;  // Julian centuries from J2000.0
+      // Meeus core quantities
+      var T = (jd - 2451545.0) / 36525.0;  // Julian centuries from J2000.0
 
-        // Moon's mean longitude (°)
-        var L0 = NormDeg(218.3164477
-                       + 481267.88123421 * T
-                       - 0.0015786 * T * T
-                       + T * T * T / 538841.0
-                       - T * T * T * T / 65194000.0);
+      // Moon's mean longitude (°)
+      var L0 = NormDeg(218.3164477
+                     + 481267.88123421 * T
+                     - 0.0015786 * T * T
+                     + T * T * T / 538841.0
+                     - T * T * T * T / 65194000.0);
 
-        // Moon's mean anomaly (°)
-        var M1 = NormDeg(134.9633964
-                       + 477198.8676313 * T
-                       + 0.0089970 * T * T
-                       + T * T * T / 69699.0
-                       - T * T * T * T / 14712000.0);
+      // Moon's mean anomaly (°)
+      var M1 = NormDeg(134.9633964
+                     + 477198.8676313 * T
+                     + 0.0089970 * T * T
+                     + T * T * T / 69699.0
+                     - T * T * T * T / 14712000.0);
 
-        // Sun's mean anomaly (°)
-        var M0 = NormDeg(357.5291092
-                       + 35999.0502909 * T
-                       - 0.0001536 * T * T
-                       + T * T * T / 24490000.0);
+      // Sun's mean anomaly (°)
+      var M0 = NormDeg(357.5291092
+                     + 35999.0502909 * T
+                     - 0.0001536 * T * T
+                     + T * T * T / 24490000.0);
 
-        // Moon's argument of latitude (°)
-        var F = NormDeg(93.2720950
-                       + 483202.0175233 * T
-                       - 0.0036539 * T * T
-                       - T * T * T / 3526000.0
-                       + T * T * T * T / 863310000.0);
+      // Moon's argument of latitude (°)
+      var F = NormDeg(93.2720950
+                     + 483202.0175233 * T
+                     - 0.0036539 * T * T
+                     - T * T * T / 3526000.0
+                     + T * T * T * T / 863310000.0);
 
-        // Moon's mean elongation (°)
-        var D = NormDeg(297.8501921
-                       + 445267.1114034 * T
-                       - 0.0018819 * T * T
-                       + T * T * T / 545868.0
-                       - T * T * T * T / 113065000.0);
+      // Moon's mean elongation (°)
+      var D = NormDeg(297.8501921
+                     + 445267.1114034 * T
+                     - 0.0018819 * T * T
+                     + T * T * T / 545868.0
+                     - T * T * T * T / 113065000.0);
 
-        // Eccentricity correction for Sun's anomaly terms
-        var E = 1.0 - 0.002516 * T - 0.0000074 * T * T;
+      // Eccentricity correction for Sun's anomaly terms
+      var E = 1.0 - 0.002516 * T - 0.0000074 * T * T;
 
-        // ── Longitude corrections (Meeus Table 47.A, major terms) ─────────────
-        var dL = LongitudeCorrections(D, M0, M1, F, E);
+      // ── Longitude corrections (Meeus Table 47.A, major terms) ─────────────
+      var dL = LongitudeCorrections(D, M0, M1, F, E);
 
-        // ── Apparent geocentric longitude of Moon (°) ─────────────────────────
-        var moonLon = NormDeg(L0 + dL / 1000000.0);
+      // ── Apparent geocentric longitude of Moon (°) ─────────────────────────
+      var moonLon = NormDeg(L0 + dL / 1000000.0);
 
-        // ── Apparent geocentric longitude of Sun (°) ──────────────────────────
-        var sunLon = SunApparentLongitude(T);
+      // ── Apparent geocentric longitude of Sun (°) ──────────────────────────
+      var sunLon = SunApparentLongitude(T);
 
-        // ── Ecliptic longitude difference → phase angle 0–360° ───────────────
-        var elongation = NormDeg(moonLon - sunLon);   // 0 = new, 180 = full
+      // ── Ecliptic longitude difference → phase angle 0–360° ───────────────
+      var elongation = NormDeg(moonLon - sunLon);   // 0 = new, 180 = full
 
-        // ── Illumination fraction (Meeus §48) ─────────────────────────────────
-        // i = (1 - cos(elongation)) / 2  — exact for uniform disk
-        var illumination = (1.0 - Math.Cos(elongation * Rad)) / 2.0 * 100.0;
+      // ── Illumination fraction (Meeus §48) ─────────────────────────────────
+      // i = (1 - cos(elongation)) / 2  — exact for uniform disk
+      var illumination = (1.0 - Math.Cos(elongation * Rad)) / 2.0 * 100.0;
 
-        // ── Moon age in days (fraction of synodic month × SynodicMonth) ───────
-        var moonAge = elongation / 360.0 * SynodicMonth;
+      // ── Moon age in days (fraction of synodic month × SynodicMonth) ───────
+      var moonAge = elongation / 360.0 * SynodicMonth;
 
-        // ── Phase name / icon ─────────────────────────────────────────────────
-        var (phaseName, phaseIcon) = GetPhase(elongation);
+      // ── Phase name / icon ─────────────────────────────────────────────────
+      var (phaseName, phaseIcon) = GetPhase(elongation);
 
-        // ── Days until/since key events ───────────────────────────────────────
-        var halfMonth = SynodicMonth / 2.0;
+      // ── Days until/since key events ───────────────────────────────────────
+      var halfMonth = SynodicMonth / 2.0;
 
-        var daysSinceNew = moonAge;
-        var daysUntilNew = SynodicMonth - moonAge;
+      var daysSinceNew = moonAge;
+      var daysUntilNew = SynodicMonth - moonAge;
 
-        // Days since/until full moon:
-        // Full moon occurs at moonAge ≈ halfMonth (elongation 180°)
-        double daysSinceFull;
-        double daysUntilFull;
+      // Days since/until full moon:
+      // Full moon occurs at moonAge ≈ halfMonth (elongation 180°)
+      double daysSinceFull;
+      double daysUntilFull;
 
-        if (moonAge >= halfMonth)
-        {
-            // Waning: we've passed full moon this cycle
-            daysSinceFull = moonAge - halfMonth;
-            daysUntilFull = SynodicMonth - moonAge + halfMonth;
-        }
-        else
-        {
-            // Waxing: full moon hasn't happened yet this cycle
-            // "since full" = time since LAST cycle's full moon
-            daysSinceFull = moonAge + halfMonth;
-            daysUntilFull = halfMonth - moonAge;
-        }
+      if (moonAge >= halfMonth)
+      {
+         // Waning: we've passed full moon this cycle
+         daysSinceFull = moonAge - halfMonth;
+         daysUntilFull = SynodicMonth - moonAge + halfMonth;
+      }
+      else
+      {
+         // Waxing: full moon hasn't happened yet this cycle
+         // "since full" = time since LAST cycle's full moon
+         daysSinceFull = moonAge + halfMonth;
+         daysUntilFull = halfMonth - moonAge;
+      }
 
-        // ── Tithi (Hindu lunar day, 1–30) ─────────────────────────────────────
-        // Each tithi = 12° of elongation (360° / 30 = 12°)
-        var tithiRaw = elongation / 12.0;             // 0–30
-        var tithiIndex = Math.Min((int)tithiRaw, 29); // 0-based, 0–29
+      // ── Tithi (Hindu lunar day, 1–30) ─────────────────────────────────────
+      // Each tithi = 12° of elongation (360° / 30 = 12°)
+      var tithiRaw = elongation / 12.0;             // 0–30
+      var tithiIndex = Math.Min((int)tithiRaw, 29); // 0-based, 0–29
 
-        string paksha;
-        int tithiNumber;
-        string tithiName;
+      string paksha;
+      int tithiNumber;
+      string tithiName;
 
-        if (tithiIndex < 15)
-        {
-            // Shukla Paksha (bright/waxing fortnight): tithis 1–15
-            paksha = "Shukla Paksha";
-            tithiNumber = tithiIndex + 1;
+      if (tithiIndex < 15)
+      {
+         // Shukla Paksha (bright/waxing fortnight): tithis 1–15
+         paksha = "Shukla Paksha";
+         tithiNumber = tithiIndex + 1;
 
-            if (tithiIndex == 14)
-                tithiName = "Purnima";         // 15th tithi = Full Moon
-            else
-                tithiName = TithiNames[tithiIndex]; // indices 0–13
-        }
-        else
-        {
-            // Krishna Paksha (dark/waning fortnight): tithis 1–15
-            paksha = "Krishna Paksha";
-            tithiNumber = tithiIndex - 14;     // maps 15→1, 16→2, ..., 29→15
+         if (tithiIndex == 14)
+            tithiName = "Purnima";         // 15th tithi = Full Moon
+         else
+            tithiName = TithiNames[tithiIndex]; // indices 0–13
+      }
+      else
+      {
+         // Krishna Paksha (dark/waning fortnight): tithis 1–15
+         paksha = "Krishna Paksha";
+         tithiNumber = tithiIndex - 14;     // maps 15→1, 16→2, ..., 29→15
 
-            if (tithiIndex == 29)
-                tithiName = "Amavasya";        // 15th tithi = New Moon
-            else
-                tithiName = TithiNames[tithiIndex - 15]; // indices 0–13
-        }
+         if (tithiIndex == 29)
+            tithiName = "Amavasya";        // 15th tithi = New Moon
+         else
+            tithiName = TithiNames[tithiIndex - 15]; // indices 0–13
+      }
 
-        return new MoonPhase
-        {
-            Name = phaseName,
-            Icon = phaseIcon,
-            Illumination = illumination,
-            Age = Math.Round(moonAge, 6),
-            DaysSinceNewMoon = Math.Round(daysSinceNew, 4),
-            DaysSinceFullMoon = Math.Round(daysSinceFull, 4),
-            DaysUntilNewMoon = Math.Round(daysUntilNew, 4),
-            DaysUntilFullMoon = Math.Round(daysUntilFull, 4),
-            TithiNumber = tithiNumber,
-            TithiName = tithiName,
-            Paksha = paksha
-        };
-    }
+      return new MoonPhase
+      {
+         Name = phaseName,
+         Icon = phaseIcon,
+         Illumination = illumination,
+         Age = Math.Round(moonAge, 6),
+         DaysSinceNewMoon = Math.Round(daysSinceNew, 4),
+         DaysSinceFullMoon = Math.Round(daysSinceFull, 4),
+         DaysUntilNewMoon = Math.Round(daysUntilNew, 4),
+         DaysUntilFullMoon = Math.Round(daysUntilFull, 4),
+         TithiNumber = tithiNumber,
+         TithiName = tithiName,
+         Paksha = paksha
+      };
+   }
 
-    // ── Helpers ───────────────────────────────────────────────────────────────
+   // ── Helpers ───────────────────────────────────────────────────────────────
 
-    /// <summary>Convert DateTime (UTC) to Julian Day Number (continuous).</summary>
-    private static double ToJulianDay(DateTime utc)
-    {
-        var y = utc.Year;
-        var mo = utc.Month;
-        var d = utc.Day
-               + utc.Hour / 24.0
-               + utc.Minute / 1440.0
-               + utc.Second / 86400.0
-               + utc.Millisecond / 86400000.0;  // sub-second granularity
+   /// <summary>Convert DateTime (UTC) to Julian Day Number (continuous).</summary>
+   private static double ToJulianDay(DateTime utc)
+   {
+      var y = utc.Year;
+      var mo = utc.Month;
+      var d = utc.Day
+             + utc.Hour / 24.0
+             + utc.Minute / 1440.0
+             + utc.Second / 86400.0
+             + utc.Millisecond / 86400000.0;  // sub-second granularity
 
-        if (mo <= 2) { y--; mo += 12; }
-        var A = y / 100;
-        var B = 2 - A + A / 4;
-        return Math.Floor(365.25 * (y + 4716))
-             + Math.Floor(30.6001 * (mo + 1))
-             + d + B - 1524.5;
-    }
+      if (mo <= 2) { y--; mo += 12; }
+      var A = y / 100;
+      var B = 2 - A + A / 4;
+      return Math.Floor(365.25 * (y + 4716))
+           + Math.Floor(30.6001 * (mo + 1))
+           + d + B - 1524.5;
+   }
 
-    /// <summary>Normalize degrees to [0, 360).</summary>
-    private static double NormDeg(double d)
-    {
-        d %= 360.0;
-        return d < 0 ? d + 360.0 : d;
-    }
+   /// <summary>Normalize degrees to [0, 360).</summary>
+   private static double NormDeg(double d)
+   {
+      d %= 360.0;
+      return d < 0 ? d + 360.0 : d;
+   }
 
-    /// <summary>
-    /// Longitude perturbation sum (Meeus Table 47.A – 60 principal terms).
-    /// Returns correction in units of 1e-6 degrees.
-    /// </summary>
-    private static double LongitudeCorrections(double D, double M, double Mm, double F, double E)
-    {
-        // Each row: multiplier for [D, M, Mm, F], coefficient (×10⁻⁶ °)
-        // Source: Meeus Table 47.A (first 30 terms cover >99.9% of the effect)
-        var terms = new (int d, int m, int mm, int f, double coef)[]
-        {
+   /// <summary>
+   /// Longitude perturbation sum (Meeus Table 47.A – 60 principal terms).
+   /// Returns correction in units of 1e-6 degrees.
+   /// </summary>
+   private static double LongitudeCorrections(double D, double M, double Mm, double F, double E)
+   {
+      // Each row: multiplier for [D, M, Mm, F], coefficient (×10⁻⁶ °)
+      // Source: Meeus Table 47.A (first 30 terms cover >99.9% of the effect)
+      var terms = new (int d, int m, int mm, int f, double coef)[]
+      {
             ( 0,  0,  1,  0,  6288774),
             ( 2,  0, -1,  0,  1274027),
             ( 2,  0,  0,  0,   658314),
@@ -291,43 +291,43 @@ public class MoonPhaseService
             ( 1,  1, -1,  0,      299),
             ( 2,  0,  3,  0,      294),
             ( 2,  0, -1, -2,        0),
-        };
+      };
 
-        var sum = 0.0;
-        foreach (var (d, m, mm, f, coef) in terms)
-        {
-            var arg = (d * D + m * M + mm * Mm + f * F) * Rad;
-            var eCorr = Math.Abs(m) == 1 ? E : Math.Abs(m) == 2 ? E * E : 1.0;
-            sum += coef * eCorr * Math.Sin(arg);
-        }
-        return sum;
-    }
+      var sum = 0.0;
+      foreach (var (d, m, mm, f, coef) in terms)
+      {
+         var arg = (d * D + m * M + mm * Mm + f * F) * Rad;
+         var eCorr = Math.Abs(m) == 1 ? E : Math.Abs(m) == 2 ? E * E : 1.0;
+         sum += coef * eCorr * Math.Sin(arg);
+      }
+      return sum;
+   }
 
-    /// <summary>
-    /// Apparent geocentric longitude of the Sun (Meeus Ch. 25, low-precision but
-    /// sufficient — error &lt;0.01° over ±50 years).
-    /// </summary>
-    private static double SunApparentLongitude(double T)
-    {
-        var L0 = NormDeg(280.46646 + 36000.76983 * T + 0.0003032 * T * T);
-        var M = NormDeg(357.52911 + 35999.05029 * T - 0.0001537 * T * T);
-        var Mr = M * Rad;
+   /// <summary>
+   /// Apparent geocentric longitude of the Sun (Meeus Ch. 25, low-precision but
+   /// sufficient — error &lt;0.01° over ±50 years).
+   /// </summary>
+   private static double SunApparentLongitude(double T)
+   {
+      var L0 = NormDeg(280.46646 + 36000.76983 * T + 0.0003032 * T * T);
+      var M = NormDeg(357.52911 + 35999.05029 * T - 0.0001537 * T * T);
+      var Mr = M * Rad;
 
-        var C = (1.914602 - 0.004817 * T - 0.000014 * T * T) * Math.Sin(Mr)
-               + (0.019993 - 0.000101 * T) * Math.Sin(2 * Mr)
-               + 0.000289 * Math.Sin(3 * Mr);
+      var C = (1.914602 - 0.004817 * T - 0.000014 * T * T) * Math.Sin(Mr)
+             + (0.019993 - 0.000101 * T) * Math.Sin(2 * Mr)
+             + 0.000289 * Math.Sin(3 * Mr);
 
-        var sunTrue = L0 + C;
-        var omega = 125.04 - 1934.136 * T;
-        var apparent = sunTrue - 0.00569 - 0.00478 * Math.Sin(omega * Rad);
-        return NormDeg(apparent);
-    }
+      var sunTrue = L0 + C;
+      var omega = 125.04 - 1934.136 * T;
+      var apparent = sunTrue - 0.00569 - 0.00478 * Math.Sin(omega * Rad);
+      return NormDeg(apparent);
+   }
 
-    private static (string Name, string Icon) GetPhase(double elongation)
-    {
-        foreach (var (name, icon, min, max) in Phases)
-            if (elongation >= min && elongation < max)
-                return (name, icon);
-        return ("New Moon", "🌑");
-    }
+   private static (string Name, string Icon) GetPhase(double elongation)
+   {
+      foreach (var (name, icon, min, max) in Phases)
+         if (elongation >= min && elongation < max)
+            return (name, icon);
+      return ("New Moon", "🌑");
+   }
 }

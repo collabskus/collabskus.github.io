@@ -1,7 +1,7 @@
+﻿using CollabsKus.BlazorWebAssembly;
+using CollabsKus.BlazorWebAssembly.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using CollabsKus.BlazorWebAssembly;
-using CollabsKus.BlazorWebAssembly.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -15,8 +15,8 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 // Individual call sites that want a shorter bound use their own CancellationToken.
 builder.Services.AddScoped(sp => new HttpClient
 {
-    BaseAddress = new Uri(builder.HostEnvironment.BaseAddress),
-    Timeout = TimeSpan.FromSeconds(15)
+   BaseAddress = new Uri(builder.HostEnvironment.BaseAddress),
+   Timeout = TimeSpan.FromSeconds(15)
 });
 
 // Register our services
