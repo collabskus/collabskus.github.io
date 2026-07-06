@@ -1,5 +1,7 @@
 # CollabsKus — Kathmandu Calendar & Time
 
+![screenshot](docs/llm/kathmandu-time.png)
+
 A Blazor WebAssembly (.NET 10) single-page application that displays real-time Kathmandu information: clock, Bikram Sambat calendar, moon phase, solar position, and a blog. Deployed to GitHub Pages at [collabskus.github.io](https://collabskus.github.io).
 
 > **Note:** This repository contains code generated with the assistance of LLMs such as Claude (Anthropic). Human review and testing is applied throughout.
