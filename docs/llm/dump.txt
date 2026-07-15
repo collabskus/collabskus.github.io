@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 07/15/2026 08:44:08
+Generated: 07/15/2026 08:49:16
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -9,7 +9,7 @@ DIRECTORY STRUCTURE:
 ===================
 
 Folder PATH listing
-Volume serial number is 00000286 2A9E:9DAE
+Volume serial number is 000001BE 2A9E:9DAE
 D:\DEV\PERSONAL\COLLABSKUS
 |   .editorconfig
 |   .gitattributes
@@ -11956,7 +11956,7 @@ MODIFIED: 04/24/2026 11:06:21
 ================================================================================
 FILE: :\DEV\personal\collabskus\Directory.Packages.props
 SIZE: 0.54 KB
-MODIFIED: 07/06/2026 11:09:07
+MODIFIED: 07/15/2026 08:44:55
 ================================================================================
 
 <Project>
@@ -11965,9 +11965,9 @@ MODIFIED: 07/06/2026 11:09:07
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Markdig" Version="1.3.2" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.9" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.9" />
-    <PackageVersion Include="TUnit" Version="1.58.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.10" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.10" />
+    <PackageVersion Include="TUnit" Version="1.60.0" />
     <PackageVersion Include="Microsoft.Playwright" Version="1.61.0" />
   </ItemGroup>
 </Project>
@@ -14772,7 +14772,7 @@ init();
 
 
 ===============================================================================
-EXPORT COMPLETED: 07/15/2026 08:44:15
+EXPORT COMPLETED: 07/15/2026 08:49:23
 Total Files Exported: 66
 Output File: .\docs\llm\dump.txt
 ===============================================================================
