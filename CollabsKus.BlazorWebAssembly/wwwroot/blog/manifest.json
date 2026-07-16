@@ -1,6 +1,13 @@
 {
   "posts": [
     {
+      "slug": "2026-07-15-good-morning",
+      "title": "Good morning",
+      "date": "2026-07-15",
+      "author": "collabskus",
+      "excerpt": "Good morning! How are you?"
+    },
+    {
       "slug": "hello-world",
       "title": "Hello World",
       "date": "2026-04-24",
