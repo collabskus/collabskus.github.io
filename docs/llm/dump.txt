@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 08/13/2026 14:19:18
+Generated: 08/13/2026 14:31:03
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -9,7 +9,7 @@ DIRECTORY STRUCTURE:
 ===================
 
 Folder PATH listing
-Volume serial number is 0000026F 2A9E:9DAE
+Volume serial number is 000001CA 2A9E:9DAE
 D:\DEV\PERSONAL\COLLABSKUS
 |   .editorconfig
 |   .gitattributes
@@ -2469,7 +2469,7 @@ MODIFIED: 02/08/2026 10:21:22
 ================================================================================
 FILE: :\DEV\personal\collabskus\.github\workflows\deploy.yml
 SIZE: 2.72 KB
-MODIFIED: 04/24/2026 09:23:41
+MODIFIED: 08/13/2026 14:28:01
 ================================================================================
 
 name: Build and Deploy Blazor WASM to GitHub Pages
@@ -2626,7 +2626,7 @@ jobs:
 ================================================================================
 FILE: :\DEV\personal\collabskus\.github\workflows\test.yml
 SIZE: 2.19 KB
-MODIFIED: 04/24/2026 10:58:14
+MODIFIED: 08/13/2026 14:27:07
 ================================================================================
 
 name: Tests
@@ -18145,7 +18145,7 @@ MODIFIED: 08/05/2026 13:37:07
 
 
 ===============================================================================
-EXPORT COMPLETED: 08/13/2026 14:19:30
+EXPORT COMPLETED: 08/13/2026 14:31:28
 Total Files Exported: 69
 Output File: .\docs\llm\dump.txt
 ===============================================================================
