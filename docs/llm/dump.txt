@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 08/13/2026 14:31:03
+Generated: 08/13/2026 15:19:39
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -9,7 +9,7 @@ DIRECTORY STRUCTURE:
 ===================
 
 Folder PATH listing
-Volume serial number is 000001CA 2A9E:9DAE
+Volume serial number is 00000237 2A9E:9DAE
 D:\DEV\PERSONAL\COLLABSKUS
 |   .editorconfig
 |   .gitattributes
@@ -18145,7 +18145,7 @@ MODIFIED: 08/05/2026 13:37:07
 
 
 ===============================================================================
-EXPORT COMPLETED: 08/13/2026 14:31:28
+EXPORT COMPLETED: 08/13/2026 15:19:47
 Total Files Exported: 69
 Output File: .\docs\llm\dump.txt
 ===============================================================================
