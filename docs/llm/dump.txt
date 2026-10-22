@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 10/21/2026 15:38:17
+Generated: 10/22/2026 13:44:04
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -2020,6 +2020,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |           instructions.txt
 |           kathmandu-time.png
 |           memory.md
+|           Reset-SSMS-CurrentUser.ps1
 |           
 +---scripts
 |       update-blog-manifest.py
@@ -8664,7 +8665,7 @@ MODIFIED: 10/14/2026 14:15:56
 
 
 ===============================================================================
-EXPORT COMPLETED: 10/21/2026 15:38:32
+EXPORT COMPLETED: 10/22/2026 13:44:25
 Total Files Exported: 63
 Output File: .\docs\llm\dump.txt
 ===============================================================================
