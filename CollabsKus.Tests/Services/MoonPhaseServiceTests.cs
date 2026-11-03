@@ -72,7 +72,7 @@ public class MoonPhaseServiceTests
       {
          var date = baseDate.AddDays(i);
          var phase = MoonPhaseService.CalculateMoonPhase(date);
-         var validPaksha = phase.Paksha == "Shukla Paksha" || phase.Paksha == "Krishna Paksha";
+         bool validPaksha = phase.Paksha == "Shukla Paksha" || phase.Paksha == "Krishna Paksha";
          await Assert.That(validPaksha).IsTrue();
       }
    }
@@ -99,7 +99,7 @@ public class MoonPhaseServiceTests
    {
       var date = new DateTime(2025, 8, 12, 8, 0, 0, DateTimeKind.Utc);
       var phase = MoonPhaseService.CalculateMoonPhase(date);
-      var total = phase.DaysSinceNewMoon + phase.DaysUntilNewMoon;
+      double total = phase.DaysSinceNewMoon + phase.DaysUntilNewMoon;
       await Assert.That(Math.Abs(total - SynodicMonth)).IsLessThan(0.01);
    }
 

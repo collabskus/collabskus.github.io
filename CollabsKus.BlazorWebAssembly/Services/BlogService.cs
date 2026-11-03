@@ -29,7 +29,7 @@ public class BlogService(HttpClient httpClient)
 
       try
       {
-         var raw = await httpClient.GetStringAsync($"blog/posts/{slug}.md");
+         string raw = await httpClient.GetStringAsync($"blog/posts/{slug}.md");
          var post = ParsePost(slug, raw);
          _postCache[slug] = post;
          return post;
@@ -80,7 +80,7 @@ public class BlogService(HttpClient httpClient)
    public static BlogPost ParsePost(string slug, string raw)
    {
       var (front, body) = SplitFrontmatter(raw);
-      var contentHtml = Markdown.ToHtml(body.Trim(), Pipeline);
+      string contentHtml = Markdown.ToHtml(body.Trim(), Pipeline);
 
       return new BlogPost
       {
@@ -100,19 +100,19 @@ public class BlogService(HttpClient httpClient)
       if (!raw.StartsWith("---"))
          return (front, raw);
 
-      var end = raw.IndexOf("\n---", 3);
+      int end = raw.IndexOf("\n---", 3);
       if (end < 0)
          return (front, raw);
 
-      var yaml = raw[3..end].Trim();
-      var body = raw[(end + 4)..];
+      string yaml = raw[3..end].Trim();
+      string body = raw[(end + 4)..];
 
-      foreach (var line in yaml.Split('\n'))
+      foreach (string line in yaml.Split('\n'))
       {
-         var colonIdx = line.IndexOf(':');
+         int colonIdx = line.IndexOf(':');
          if (colonIdx < 0) continue;
-         var key = line[..colonIdx].Trim();
-         var val = line[(colonIdx + 1)..].Trim();
+         string key = line[..colonIdx].Trim();
+         string val = line[(colonIdx + 1)..].Trim();
          if (!string.IsNullOrEmpty(key))
             front[key] = val;
       }

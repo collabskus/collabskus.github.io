@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Net.NetworkInformation;
 
 namespace CollabsKus.PlaywrightTests;
@@ -54,9 +54,9 @@ internal static class TestServerManager
       // doesn't accept our port-poll and serve a different version of the app.
       KillPortOccupant();
 
-      var baseDir = AppContext.BaseDirectory;
-      var projectRoot = Path.GetFullPath(Path.Combine(baseDir, "..", "..", "..", ".."));
-      var blazorProject = Path.Combine(
+      string baseDir = AppContext.BaseDirectory;
+      string projectRoot = Path.GetFullPath(Path.Combine(baseDir, "..", "..", "..", ".."));
+      string blazorProject = Path.Combine(
           projectRoot, "CollabsKus.BlazorWebAssembly", "CollabsKus.BlazorWebAssembly.csproj");
 
       if (!File.Exists(blazorProject))
@@ -133,7 +133,7 @@ internal static class TestServerManager
          var listeners = IPGlobalProperties.GetIPGlobalProperties()
              .GetActiveTcpListeners();
 
-         var isOccupied = listeners.Any(ep => ep.Port == Port);
+         bool isOccupied = listeners.Any(ep => ep.Port == Port);
          if (!isOccupied) return;
 
          // Fall back to netstat-style process enumeration via dotnet Process API.

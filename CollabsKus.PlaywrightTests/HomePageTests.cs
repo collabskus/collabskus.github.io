@@ -133,7 +133,7 @@ public class HomePageTests
       // the Home component, not in the static index.html shell.
       var h1Locator = _page.Locator("h1");
       await h1Locator.WaitForAsync(new LocatorWaitForOptions { State = WaitForSelectorState.Visible });
-      var h1 = await h1Locator.TextContentAsync();
+      string? h1 = await h1Locator.TextContentAsync();
       await Assert.That(h1).IsEqualTo("काठमाडौं");
    }
 
@@ -149,10 +149,10 @@ public class HomePageTests
    {
       await NavigateAsync();
 
-      var moonIcon = await _page.Locator(".moon-icon").TextContentAsync();
+      string? moonIcon = await _page.Locator(".moon-icon").TextContentAsync();
       await Assert.That(string.IsNullOrWhiteSpace(moonIcon)).IsFalse();
 
-      var phaseName = await _page.Locator(".moon-phase-name").TextContentAsync();
+      string? phaseName = await _page.Locator(".moon-phase-name").TextContentAsync();
       await Assert.That(string.IsNullOrWhiteSpace(phaseName)).IsFalse();
    }
 
@@ -167,7 +167,7 @@ public class HomePageTests
    public async Task SunDisplay_ShowsKathmanduLocation()
    {
       await NavigateAsync();
-      var header = await _page.Locator(".sun-location-header").First.TextContentAsync();
+      string? header = await _page.Locator(".sun-location-header").First.TextContentAsync();
       await Assert.That(header!.Contains("Kathmandu")).IsTrue();
    }
 
@@ -175,7 +175,7 @@ public class HomePageTests
    public async Task DateCards_ShowBikramSambat()
    {
       await NavigateAsync();
-      var cards = await _page.Locator(".date-card").CountAsync();
+      int cards = await _page.Locator(".date-card").CountAsync();
       await Assert.That(cards).IsGreaterThanOrEqualTo(2);
    }
 
@@ -191,7 +191,7 @@ public class HomePageTests
       {
          State = WaitForSelectorState.Visible
       });
-      var dayNames = await dayNameLocator.CountAsync();
+      int dayNames = await dayNameLocator.CountAsync();
       await Assert.That(dayNames).IsEqualTo(7);
    }
 
@@ -206,7 +206,7 @@ public class HomePageTests
       // .footer is rendered by the Home component itself — wait for it.
       var footer = _page.Locator(".footer");
       await footer.WaitForAsync(new LocatorWaitForOptions { State = WaitForSelectorState.Visible });
-      var text = await footer.TextContentAsync();
+      string? text = await footer.TextContentAsync();
       await Assert.That(text!.Contains("Last updated")).IsTrue();
    }
 

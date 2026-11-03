@@ -274,7 +274,7 @@ public class SolarPositionServiceTests
       var pos = _service.CalculateKathmandu(utc);
 
       // Should be close to 0 or 1 (solar midnight)
-      var nearMidnight = pos.FullDayFraction < 0.05 || pos.FullDayFraction > 0.95;
+      bool nearMidnight = pos.FullDayFraction < 0.05 || pos.FullDayFraction > 0.95;
       await Assert.That(nearMidnight).IsTrue();
    }
 

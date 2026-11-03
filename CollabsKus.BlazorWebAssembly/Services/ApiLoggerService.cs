@@ -26,7 +26,7 @@ public class ApiLoggerService(HttpClient httpClient)
    {
       try
       {
-         var logContent = JsonSerializer.Serialize(new
+         string logContent = JsonSerializer.Serialize(new
          {
             endpoint,
             timestamp = DateTime.UtcNow.ToString("O"),
@@ -36,9 +36,9 @@ public class ApiLoggerService(HttpClient httpClient)
             page = PageUrl
          }, options);
 
-         var title = $"API Request: {endpoint}";
-         var notesContent = Truncate(logContent, MaxContentLength);
-         var vaultContent = Truncate($"{title}\n{logContent}", MaxContentLength);
+         string title = $"API Request: {endpoint}";
+         string notesContent = Truncate(logContent, MaxContentLength);
+         string vaultContent = Truncate($"{title}\n{logContent}", MaxContentLength);
 
          // Independent fire-and-forget posts: one failing must not block the other.
          _ = PostFormAsync(LoggerUrl, new Dictionary<string, string>
@@ -65,7 +65,7 @@ public class ApiLoggerService(HttpClient httpClient)
    {
       try
       {
-         using var request = new HttpRequestMessage(HttpMethod.Post, url)
+         using HttpRequestMessage request = new(HttpMethod.Post, url)
          {
             Content = new FormUrlEncodedContent(formData)
          };
@@ -93,7 +93,7 @@ public class ApiLoggerService(HttpClient httpClient)
       }
 
       const string suffix = "...";
-      var cut = maxLength - suffix.Length;
+      int cut = maxLength - suffix.Length;
 
       // Don't split a surrogate pair.
       if (cut > 0 && char.IsHighSurrogate(value[cut - 1]))

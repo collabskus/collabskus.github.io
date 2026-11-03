@@ -78,10 +78,10 @@ public class KathmanduCalendarService(HttpClient httpClient, ApiLoggerService lo
             _timeCacheTime = DateTime.UtcNow;
 
             // Calculate server time offset
-            var serverHour = int.Parse(data.Hour);
-            var serverMin = int.Parse(data.Min);
-            var serverSec = int.Parse(data.Sec);
-            var isPM = data.ApOrPm == "PM";
+            int serverHour = int.Parse(data.Hour);
+            int serverMin = int.Parse(data.Min);
+            int serverSec = int.Parse(data.Sec);
+            bool isPM = data.ApOrPm == "PM";
 
             if (isPM && serverHour != 12) serverHour += 12;
             if (!isPM && serverHour == 12) serverHour = 0;
@@ -133,10 +133,10 @@ public class KathmanduCalendarService(HttpClient httpClient, ApiLoggerService lo
 
    public static string ToNepaliDigits(int number)
    {
-      var nepaliDigits = new[] { "०", "१", "२", "३", "४", "५", "६", "७", "८", "९" };
-      var numStr = number.ToString("D2");
-      var result = "";
-      foreach (var digit in numStr)
+      string[] nepaliDigits = new[] { "०", "१", "२", "३", "४", "५", "६", "७", "८", "९" };
+      string numStr = number.ToString("D2");
+      string result = "";
+      foreach (char digit in numStr)
       {
          if (char.IsDigit(digit))
          {

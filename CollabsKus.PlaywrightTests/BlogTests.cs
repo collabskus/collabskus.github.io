@@ -1,4 +1,4 @@
-namespace CollabsKus.PlaywrightTests;
+﻿namespace CollabsKus.PlaywrightTests;
 
 public class BlogTests
 {
@@ -80,7 +80,7 @@ public class BlogTests
    public async Task BlogList_ShowsPostList()
    {
       await NavigateToBlogListAsync();
-      var count = await _page.Locator(".post-card").CountAsync();
+      int count = await _page.Locator(".post-card").CountAsync();
       await Assert.That(count).IsGreaterThan(0);
    }
 
@@ -96,7 +96,7 @@ public class BlogTests
    public async Task BlogList_PostCardHasExcerpt()
    {
       await NavigateToBlogListAsync();
-      var excerpt = await _page.Locator(".post-excerpt").First.TextContentAsync();
+      string? excerpt = await _page.Locator(".post-excerpt").First.TextContentAsync();
       await Assert.That(string.IsNullOrWhiteSpace(excerpt)).IsFalse();
    }
 
@@ -104,7 +104,7 @@ public class BlogTests
    public async Task BlogList_PostCardHasDate()
    {
       await NavigateToBlogListAsync();
-      var date = await _page.Locator(".post-date").First.TextContentAsync();
+      string? date = await _page.Locator(".post-date").First.TextContentAsync();
       await Assert.That(string.IsNullOrWhiteSpace(date)).IsFalse();
    }
 
@@ -124,7 +124,7 @@ public class BlogTests
    public async Task BlogDetail_ShowsPostTitle()
    {
       await NavigateToBlogDetailAsync("hello-world");
-      var title = await _page.Locator(".post-title").TextContentAsync();
+      string? title = await _page.Locator(".post-title").TextContentAsync();
       await Assert.That(title!.Contains("Hello World")).IsTrue();
    }
 
@@ -132,7 +132,7 @@ public class BlogTests
    public async Task BlogDetail_ShowsPostContent()
    {
       await NavigateToBlogDetailAsync("hello-world");
-      var content = await _page.Locator(".post-content").TextContentAsync();
+      string? content = await _page.Locator(".post-content").TextContentAsync();
       await Assert.That(string.IsNullOrWhiteSpace(content)).IsFalse();
    }
 
@@ -140,7 +140,7 @@ public class BlogTests
    public async Task BlogDetail_ShowsAuthor()
    {
       await NavigateToBlogDetailAsync("hello-world");
-      var author = await _page.Locator(".post-author").TextContentAsync();
+      string? author = await _page.Locator(".post-author").TextContentAsync();
       await Assert.That(author!.Contains("CollabsKus")).IsTrue();
    }
 
@@ -217,7 +217,7 @@ public class BlogTests
    public async Task BlogDetail_HasCorrectPageTitle()
    {
       await NavigateToBlogDetailAsync("hello-world");
-      var title = await _page.TitleAsync();
+      string title = await _page.TitleAsync();
       await Assert.That(title.Contains("Hello World")).IsTrue();
    }
 
