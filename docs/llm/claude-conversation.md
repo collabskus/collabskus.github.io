@@ -298,3 +298,682 @@ The geolocation test correctly keeps its own ephemeral context because it needs 
 
 
 
+this is from an old conversation 
+
+Claude
+/
+
+I have a connection string here 
+
+InstrumentationKey=c109b795-348a-4fe0-92c7-0815a3cf2a66;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/;ApplicationId=606d432f-1e0e-408c-9aeb-68d52afcec79
+
+what is the best way to add this app insights to my client side only github page blazor web assembly application?
+Read a file, ran a command
+
+I now have enough context. Let me think through the recommendation.
+
+Analysis:
+
+The user has a client-side-only Blazor WebAssembly app hosted on GitHub Pages. They want to add Application Insights using a connection string. Key considerations:
+
+    No server side — only the browser can send telemetry. So the official Microsoft.ApplicationInsights.AspNetCore server SDK doesn’t fit. There’s no official .NET Application Insights SDK for Blazor WASM client-side.
+    Best fit: Microsoft’s official Application Insights JavaScript SDK (@microsoft/applicationinsights-web) loaded via the npm-distributed snippet directly in index.html. This is what Microsoft themselves recommend for Blazor WASM client-only scenarios — see the docs at learn.microsoft.com/azure/azure-monitor/app/javascript-sdk. It runs entirely in the browser, no server needed, no API key in the app (the connection string is meant to be public — it only contains an ingestion key, not credentials).
+    Connection string is OK to commit — it’s an ingestion-only key by design. But for a slightly better story, I can put it in appsettings.json so it’s not buried in HTML, and have Program.cs push it to JS via interop. However, since the JS snippet runs before Blazor boots (you want to capture the page load itself), the simpler and recommended approach is to put the connection string directly in index.html. This is what Microsoft’s quickstart does.
+    Architecture I’ll deliver:
+        Add the AppInsights JS snippet to index.html (loads before Blazor, captures page views, exceptions, dependencies automatically).
+        Add a small window.appInsights wrapper with trackEvent, trackException, trackPageView, setAuthenticatedUser.
+        Add a TelemetryService.cs in C# that calls into JS via IJSRuntime.
+        Register it in Program.cs.
+        Wire navigation tracking via NavigationManager.LocationChanged so SPA route changes get tracked as page views (auto-tracking only catches the initial load).
+        Add a global unhandled-exception hook so Blazor exceptions also get reported.
+    Service worker consideration — the current service-worker.js is dev-mode (no caching), and there’s a service-worker.published.js. I should make sure the AppInsights CDN isn’t broken by SW caching — but since the snippet loads from js.monitor.azure.com, that’s a cross-origin request the SW shouldn’t intercept. I’ll check briefly but likely no change needed.
+
+Let me check the published service worker:
+View service-worker.published.jsdump.txt
+View service-worker.published.js dump.txt
+
+Good — the service worker’s manifestUrlList only contains same-origin assets, so cross-origin requests to js.monitor.azure.com and eastus-8.in.applicationinsights.azure.com will fall through to network. No changes needed there.
+
+Now I have everything I need. Let me write the response.
+Adding Application Insights to your Blazor WASM (client-only, GitHub Pages)
+TL;DR — the recommendation
+
+There is no official .NET Application Insights SDK for client-side Blazor WebAssembly. The right answer is the official Application Insights JavaScript SDK (@microsoft/applicationinsights-web), loaded via Microsoft’s snippet directly in index.html, then exposed to C# through a thin IJSRuntime wrapper. This is exactly what Microsoft recommends for browser-only scenarios.
+
+A few important notes about your specific situation:
+
+    The connection string is safe to commit to a public repo. It is an ingestion key, not a credential — the entire AppInsights JS SDK is designed to ship it to browsers. Anyone running the site can read it from DevTools anyway. So no GitHub Secret juggling is needed. (If abuse ever becomes a concern, you can rotate the key in Azure or add sampling/throttling.)
+    Load order matters. The snippet loads before blazor.webassembly.js so it can capture the WASM download as a dependency and the initial page load as a page view.
+    SPA navigations need manual tracking. AppInsights auto-tracks the initial page view; for Blazor’s client-side route changes you hook NavigationManager.LocationChanged and call trackPageView yourself.
+    Your existing service worker is fine — the offline-cache matcher only caches same-origin URLs from service-worker-assets.js. Cross-origin AppInsights traffic falls through to the network.
+    Your existing ApiLoggerService keeps working — this is purely additive.
+
+Files that change
+
+Four files change, one is new:
+
+    wwwroot/index.html — add the AppInsights snippet + a tiny window.appInsights wrapper.
+    wwwroot/appsettings.json — store the connection string here (optional but cleaner than hardcoding the string in two places if you ever want to fork the repo).
+    Services/TelemetryService.cs — new C# wrapper for trackEvent/trackException/trackPageView.
+    Program.cs — register TelemetryService, push the connection string to JS, wire LocationChanged for SPA page views, and hook unhandled exceptions.
+    App.razor — wrap the router so unhandled component errors are reported.
+
+That’s it. The 6 service files, 8 component files, deploy.yml, etc. stay untouched.
+Full files
+CollabsKus.BlazorWebAssembly/wwwroot/index.html
+html
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kathmandu Calendar & Time</title>
+    <base href="/" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="CollabsKus.BlazorWebAssembly.styles.css" rel="stylesheet" />
+    <link href="manifest.webmanifest" rel="manifest" />
+    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
+
+    <!--
+      Application Insights JavaScript SDK (official snippet).
+      Loaded in <head> BEFORE Blazor so it can capture the WASM
+      download as a dependency and the initial page view.
+      The connection string is an ingestion key, not a secret —
+      it is designed to be sent to browsers.
+    -->
+    <script type="text/javascript">
+        !(function (cfg) {
+            function e() { cfg.onInit && cfg.onInit(n) }
+            var x, w, D, t, E, n, C = window, O = document, b = C.location, q = "script", I = "ingestionendpoint", L = "disableExceptionTracking", j = "ai.device.";
+            "instrumentationKey" [(t = "crossOrigin")] && "POST" === (E = "POST") && (cfg.endpointUrl && (cfg.endpointUrl = cfg.endpointUrl.replace(/^http:/, "https:")));
+            var s = (cfg.sv || cfg.version || "8"), S = cfg.useXhr, T = C.AwaUserContext;
+            (n = C[(D = "appInsightsSDK") + (cfg.name || "")] = C[D + (cfg.name || "")] || {
+                initialize: !0, queue: [], sv: s, version: 2, config: cfg
+            }),
+                (function (n) {
+                    var i = "https://js.monitor.azure.com/scripts/b/ai." + n.sv + ".gbl.min.js";
+                    n.queue && 0 === n.queue.length && (n.queue.push(function () {
+                        n.core && n.core._notifyInternalMessage && n.core._notifyInternalMessage(400, "Endpoint url if needed will be overridden by setting connectionString")
+                    }),
+                        function (n, i, t) {
+                            var e, a = O, l = a.createElement(q);
+                            l.src = i; t && (l.integrity = t);
+                            l.crossOrigin = "anonymous";
+                            n.ld < 0 ? a.getElementsByTagName("head")[0].appendChild(l) : setTimeout(function () { a.getElementsByTagName(q)[0].parentNode.appendChild(l) }, n.ld || 0);
+                            try { l.onload = e } catch (s) { }
+                        }(n, cfg.src || i, cfg.cr));
+                    try { (n.cookie = O.cookie) } catch (h) { }
+                    function p(e) { for (; e.length;) !function (i) { n[i] = function () { var e = arguments; n.queue.push(function () { n[i].apply(n, e) }) } }(e.pop()) }
+                    var u = "track", c = "TrackPage", f = "TrackEvent";
+                    p([u + "Event", u + "PageView", u + "Exception", u + "Trace", u + "DependencyData", u + "Metric", u + c + "View", "start" + c + "View", "start" + c + "View", "stop" + c + "View", "start" + f, "stop" + f, "addTelemetryInitializer", "setAuthenticatedUserContext", "clearAuthenticatedUserContext", "flush"]);
+                    n.SeverityLevel = { Verbose: 0, Information: 1, Warning: 2, Error: 3, Critical: 4 };
+                    var d = (cfg.extensionConfig || {}).ApplicationInsightsAnalytics || {};
+                    if (!0 !== cfg[L] && !0 !== d[L]) {
+                        p(["_" + (x = "onerror")]);
+                        var g = C[x];
+                        C[x] = function (e, i, a, t, r) {
+                            var s = g && g(e, i, a, t, r);
+                            return !0 !== s && n["_" + x]({ message: e, url: i, lineNumber: a, columnNumber: t, error: r, evt: C.event }), s
+                        };
+                        cfg.autoExceptionInstrumented = !0
+                    }
+                })(n)
+        })({
+            // Connection string is set at runtime by Blazor in Program.cs via
+            // window.appInsights.boot(connectionString). We pass an empty one
+            // here so the snippet initialises; the real value arrives before
+            // any telemetry call (we queue everything until boot completes).
+            connectionString: ""
+        });
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <svg class="loading-progress">
+            <circle r="40%" cx="50%" cy="50%" />
+            <circle r="40%" cx="50%" cy="50%" />
+        </svg>
+        <div class="loading-progress-text"></div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="." class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+
+    <script>
+        // Restore URL after GitHub Pages 404.html SPA redirect.
+        // 404.html encodes the real path as /?/blog/foo; we restore it here
+        // before Blazor initialises so the router sees the correct URL.
+        (function (l) {
+            if (l.search[1] === '/') {
+                var decoded = l.search.slice(1).split('&').map(function (s) {
+                    return s.replace(/~and~/g, '&');
+                }).join('?');
+                window.history.replaceState(null, null,
+                    l.pathname.slice(0, -1) + decoded + l.hash
+                );
+            }
+        }(window.location));
+    </script>
+
+    <script>
+        // ── Application Insights wrapper ─────────────────────────────────────
+        // Blazor calls window.appInsights.boot(connectionString) from Program.cs
+        // once configuration is loaded. The snippet above already queues calls,
+        // so anything that fires before boot is replayed once the SDK is ready.
+        window.appInsights = {
+            _booted: false,
+            _connectionString: null,
+
+            boot: function (connectionString) {
+                if (this._booted) return;
+                if (!connectionString) {
+                    console.warn('appInsights.boot: no connection string supplied; telemetry disabled.');
+                    return;
+                }
+                this._connectionString = connectionString;
+                var sdk = window.appInsightsSDK;
+                if (!sdk) {
+                    console.warn('appInsights.boot: SDK not present.');
+                    return;
+                }
+                // Update config so the snippet uses the real endpoint.
+                sdk.config.connectionString = connectionString;
+                // Track the initial page view (the snippet auto-tracks only
+                // after the script tag finishes downloading; this is safe
+                // either way because the SDK dedupes).
+                try { sdk.trackPageView(); } catch (e) { }
+                this._booted = true;
+            },
+
+            trackEvent: function (name, properties) {
+                var sdk = window.appInsightsSDK;
+                if (!sdk) return;
+                try {
+                    sdk.trackEvent({ name: name }, properties || undefined);
+                } catch (e) { /* swallow */ }
+            },
+
+            trackPageView: function (name, uri) {
+                var sdk = window.appInsightsSDK;
+                if (!sdk) return;
+                try {
+                    var pv = {};
+                    if (name) pv.name = name;
+                    if (uri) pv.uri = uri;
+                    sdk.trackPageView(pv);
+                } catch (e) { /* swallow */ }
+            },
+
+            trackException: function (message, stack, properties) {
+                var sdk = window.appInsightsSDK;
+                if (!sdk) return;
+                try {
+                    var err = new Error(message || 'Unknown error');
+                    if (stack) err.stack = stack;
+                    sdk.trackException({ exception: err }, properties || undefined);
+                } catch (e) { /* swallow */ }
+            },
+
+            trackTrace: function (message, severity, properties) {
+                var sdk = window.appInsightsSDK;
+                if (!sdk) return;
+                try {
+                    sdk.trackTrace({ message: message, severityLevel: severity }, properties || undefined);
+                } catch (e) { /* swallow */ }
+            },
+
+            flush: function () {
+                var sdk = window.appInsightsSDK;
+                if (!sdk) return;
+                try { sdk.flush(); } catch (e) { /* swallow */ }
+            }
+        };
+
+        // ── Unified visibility tracking (Page Visibility API + IntersectionObserver) ──
+        window.visibilityTracker = {
+            _observers: {},
+            _dotNetRef: null,
+            _visHandler: null,
+
+            init: function (dotNetRef) {
+                this._dotNetRef = dotNetRef;
+
+                // Page Visibility API — detect tab focus/blur
+                this._visHandler = function () {
+                    var isVisible = !document.hidden;
+                    dotNetRef.invokeMethodAsync('OnVisibilityChanged', isVisible);
+                };
+                document.addEventListener('visibilitychange', this._visHandler);
+
+                // Return a reference so Blazor can call dispose
+                return {
+                    dispose: function () {
+                        window.visibilityTracker.dispose();
+                    }
+                };
+            },
+
+            observeElement: function (elementId, callbackName) {
+                var target = document.getElementById(elementId);
+                var ref = this._dotNetRef;
+                if (target && ref && 'IntersectionObserver' in window) {
+                    var observer = new IntersectionObserver(function (entries) {
+                        var isInView = entries[0].isIntersecting;
+                        ref.invokeMethodAsync(callbackName, isInView);
+                    }, { threshold: 0.0 });
+                    observer.observe(target);
+                    this._observers[elementId] = observer;
+                }
+            },
+
+            dispose: function () {
+                if (this._visHandler) {
+                    document.removeEventListener('visibilitychange', this._visHandler);
+                    this._visHandler = null;
+                }
+                for (var id in this._observers) {
+                    if (this._observers.hasOwnProperty(id)) {
+                        this._observers[id].disconnect();
+                    }
+                }
+                this._observers = {};
+                this._dotNetRef = null;
+            }
+        };
+
+        // ── Geolocation helpers ──────────────────────────────────────────────
+        window.getGeolocation = function () {
+            return new Promise(function (resolve) {
+                if (!navigator.geolocation) {
+                    resolve(null);
+                    return;
+                }
+                navigator.geolocation.getCurrentPosition(
+                    function (pos) {
+                        resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+                    },
+                    function () {
+                        resolve(null);
+                    },
+                    { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
+                );
+            });
+        };
+
+        window.getTimezoneOffsetMinutes = function () {
+            return new Date().getTimezoneOffset();
+        };
+
+        window.getTimezoneName = function () {
+            try {
+                return Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+            } catch (e) {
+                return '';
+            }
+        };
+
+        // ── Sun tracker canvas ───────────────────────────────────────────────
+        window.sunTracker = {
+            _canvases: {},
+
+            init: function (canvasId) {
+                // Clean up existing entry to prevent resize listener leaks
+                // when init is called again (e.g. after geolocation resolves)
+                if (this._canvases[canvasId]) {
+                    window.removeEventListener('resize', this._canvases[canvasId].resize);
+                    delete this._canvases[canvasId];
+                }
+
+                var canvas = document.getElementById(canvasId);
+                if (!canvas) return;
+                var resize = function () {
+                    canvas.width = canvas.offsetWidth;
+                    canvas.height = canvas.offsetHeight || 300;
+                };
+                resize();
+                window.addEventListener('resize', resize);
+                this._canvases[canvasId] = { canvas: canvas, resize: resize };
+            },
+
+            draw: function (canvasId, altitude, azimuth, dayFraction, isAboveHorizon, fullDayFraction) {
+                var entry = this._canvases[canvasId];
+                if (!entry) return;
+                var canvas = entry.canvas;
+                var ctx = canvas.getContext('2d');
+                var W = canvas.width, H = canvas.height;
+                var cx = W / 2;
+                var horizY = H * 0.55;
+                var arcRx = W * 0.44;
+                var arcRyDay = horizY - 15;
+                var arcRyNight = (H - horizY) * 0.6;
+
+                ctx.clearRect(0, 0, W, H);
+
+                // Sky gradient
+                var skyTop, skyBot;
+                if (altitude > 15) { skyTop = '#061228'; skyBot = '#0d2040'; }
+                else if (altitude > 0) { var t = altitude / 15; skyTop = lerpHex('#0f2050', '#061228', t); skyBot = lerpHex('#3a1a08', '#0d2040', t); }
+                else if (altitude > -6) { var t2 = (altitude + 6) / 6; skyTop = lerpHex('#0a0e18', '#0f2050', t2); skyBot = lerpHex('#1a0e04', '#3a1a08', t2); }
+                else { skyTop = '#04080f'; skyBot = '#080c16'; }
+
+                var skyGrad = ctx.createLinearGradient(0, 0, 0, horizY);
+                skyGrad.addColorStop(0, skyTop); skyGrad.addColorStop(1, skyBot);
+                ctx.fillStyle = skyGrad;
+                ctx.fillRect(0, 0, W, horizY);
+
+                // Ground
+                var gnd = ctx.createLinearGradient(0, horizY, 0, H);
+                gnd.addColorStop(0, '#0e180e'); gnd.addColorStop(1, '#060c06');
+                ctx.fillStyle = gnd;
+                ctx.fillRect(0, horizY, W, H - horizY);
+
+                // Horizon glow
+                if (altitude > -8 && altitude < 20) {
+                    var tg = Math.max(0, 1 - Math.abs(altitude) / 20);
+                    var glow = ctx.createRadialGradient(cx, horizY, 0, cx, horizY, W * 0.5);
+                    glow.addColorStop(0, 'rgba(255,120,40,' + (0.38 * tg) + ')');
+                    glow.addColorStop(0.4, 'rgba(255,80,20,' + (0.15 * tg) + ')');
+                    glow.addColorStop(1, 'rgba(0,0,0,0)');
+                    ctx.fillStyle = glow;
+                    ctx.fillRect(0, horizY - H * 0.3, W, H * 0.4);
+                }
+
+                // Horizon line
+                ctx.beginPath(); ctx.moveTo(0, horizY); ctx.lineTo(W, horizY);
+                ctx.strokeStyle = 'rgba(240,165,0,0.22)'; ctx.lineWidth = 1; ctx.stroke();
+
+                // Dashed day arc path (above horizon)
+                ctx.beginPath();
+                ctx.ellipse(cx, horizY, arcRx, arcRyDay, 0, Math.PI, 0, false);
+                ctx.strokeStyle = 'rgba(240,165,0,0.10)';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([4, 7]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Dashed night arc path (below horizon)
+                ctx.beginPath();
+                ctx.ellipse(cx, horizY, arcRx, arcRyNight, 0, 0, Math.PI, false);
+                ctx.strokeStyle = 'rgba(100,140,220,0.06)';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([3, 9]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Sun position on full 24-hour ellipse using fullDayFraction
+                // 0 = solar midnight (bottom), 0.5 = solar noon (top)
+                var fdf = (fullDayFraction !== undefined && fullDayFraction !== null) ? fullDayFraction : 0.5;
+                var theta = 1.5 * Math.PI - fdf * 2 * Math.PI;
+                var sinT = Math.sin(theta);
+                var cosT = Math.cos(theta);
+                var sunX = cx + arcRx * cosT;
+                var sunY;
+                if (sinT >= 0) {
+                    sunY = horizY - arcRyDay * sinT;
+                } else {
+                    sunY = horizY - arcRyNight * sinT;
+                }
+
+                if (isAboveHorizon) {
+                    // Bright sun with corona
+                    var corona = ctx.createRadialGradient(sunX, sunY, 2, sunX, sunY, 42);
+                    corona.addColorStop(0, 'rgba(255,220,80,0.92)');
+                    corona.addColorStop(0.2, 'rgba(255,180,40,0.5)');
+                    corona.addColorStop(0.6, 'rgba(255,140,20,0.14)');
+                    corona.addColorStop(1, 'rgba(0,0,0,0)');
+                    ctx.fillStyle = corona;
+                    ctx.beginPath(); ctx.arc(sunX, sunY, 42, 0, Math.PI * 2); ctx.fill();
+                    ctx.beginPath(); ctx.arc(sunX, sunY, 11, 0, Math.PI * 2);
+                    ctx.fillStyle = '#ffe060'; ctx.fill();
+                } else {
+                    // Dim sun below horizon
+                    var nightGlow = ctx.createRadialGradient(sunX, sunY, 1, sunX, sunY, 20);
+                    nightGlow.addColorStop(0, 'rgba(255,160,60,0.20)');
+                    nightGlow.addColorStop(1, 'rgba(0,0,0,0)');
+                    ctx.fillStyle = nightGlow;
+                    ctx.beginPath(); ctx.arc(sunX, sunY, 20, 0, Math.PI * 2); ctx.fill();
+                    ctx.beginPath(); ctx.arc(sunX, sunY, 6, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255,160,60,0.35)'; ctx.fill();
+                }
+
+                // Labels
+                ctx.font = '10px "Courier New", monospace';
+                ctx.fillStyle = 'rgba(240,165,0,0.55)';
+                ctx.textAlign = 'left';
+                ctx.fillText('ALT ' + (altitude >= 0 ? '+' : '') + altitude.toFixed(1) + '\u00B0', 12, H - 10);
+                ctx.textAlign = 'right';
+                ctx.fillText('AZ ' + azimuth.toFixed(1) + '\u00B0', W - 12, H - 10);
+                ctx.fillStyle = 'rgba(255,255,255,0.18)';
+                ctx.textAlign = 'left'; ctx.fillText('E', 12, horizY - 5);
+                ctx.textAlign = 'right'; ctx.fillText('W', W - 12, horizY - 5);
+                ctx.textAlign = 'center'; ctx.fillText('S', cx, horizY - 5);
+            },
+
+            dispose: function (canvasId) {
+                var entry = this._canvases[canvasId];
+                if (!entry) return;
+                window.removeEventListener('resize', entry.resize);
+                delete this._canvases[canvasId];
+            }
+        };
+
+        function lerpHex(c1, c2, t) {
+            var r1 = parseInt(c1.slice(1, 3), 16), g1 = parseInt(c1.slice(3, 5), 16), b1 = parseInt(c1.slice(5, 7), 16);
+            var r2 = parseInt(c2.slice(1, 3), 16), g2 = parseInt(c2.slice(3, 5), 16), b2 = parseInt(c2.slice(5, 7), 16);
+            var r = Math.round(r1 + (r2 - r1) * t), g = Math.round(g1 + (g2 - g1) * t), b = Math.round(b1 + (b2 - b1) * t);
+            return 'rgb(' + r + ',' + g + ',' + b + ')';
+        }
+    </script>
+</body>
+
+</html>
+
+CollabsKus.BlazorWebAssembly/wwwroot/appsettings.json
+json
+
+{
+  "ApplicationInsights": {
+    "ConnectionString": "InstrumentationKey=c109b795-348a-4fe0-92c7-0815a3cf2a66;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/;ApplicationId=606d432f-1e0e-408c-9aeb-68d52afcec79"
+  }
+}
+
+CollabsKus.BlazorWebAssembly/Services/TelemetryService.cs (new)
+csharp
+
+using Microsoft.JSInterop;
+
+namespace CollabsKus.BlazorWebAssembly.Services;
+
+/// <summary>
+/// Thin wrapper around the Application Insights JavaScript SDK loaded in index.html.
+/// All methods are fire-and-forget: telemetry failures must never break the app.
+/// </summary>
+public class TelemetryService(IJSRuntime jsRuntime)
+{
+    private bool _booted;
+
+    /// <summary>
+    /// Pass the connection string to the JS SDK. Called once from Program.cs
+    /// after the WebAssemblyHost is built and configuration is available.
+    /// </summary>
+    public async Task BootAsync(string? connectionString)
+    {
+        if (_booted) return;
+        if (string.IsNullOrWhiteSpace(connectionString)) return;
+        try
+        {
+            await jsRuntime.InvokeVoidAsync("appInsights.boot", connectionString);
+            _booted = true;
+        }
+        catch
+        {
+            // Silent — telemetry is non-critical.
+        }
+    }
+
+    public async Task TrackEventAsync(string name, IDictionary<string, string>? properties = null)
+    {
+        try
+        {
+            await jsRuntime.InvokeVoidAsync("appInsights.trackEvent", name, properties);
+        }
+        catch { }
+    }
+
+    public async Task TrackPageViewAsync(string? name, string? uri)
+    {
+        try
+        {
+            await jsRuntime.InvokeVoidAsync("appInsights.trackPageView", name, uri);
+        }
+        catch { }
+    }
+
+    public async Task TrackExceptionAsync(Exception ex, IDictionary<string, string>? properties = null)
+    {
+        try
+        {
+            await jsRuntime.InvokeVoidAsync(
+                "appInsights.trackException",
+                ex.Message,
+                ex.ToString(),
+                properties);
+        }
+        catch { }
+    }
+
+    public async Task TrackTraceAsync(string message, int severityLevel = 1, IDictionary<string, string>? properties = null)
+    {
+        // Severity: 0=Verbose, 1=Information, 2=Warning, 3=Error, 4=Critical
+        try
+        {
+            await jsRuntime.InvokeVoidAsync("appInsights.trackTrace", message, severityLevel, properties);
+        }
+        catch { }
+    }
+
+    public async Task FlushAsync()
+    {
+        try
+        {
+            await jsRuntime.InvokeVoidAsync("appInsights.flush");
+        }
+        catch { }
+    }
+}
+
+CollabsKus.BlazorWebAssembly/Program.cs
+csharp
+
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.JSInterop;
+using CollabsKus.BlazorWebAssembly;
+using CollabsKus.BlazorWebAssembly.Services;
+
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
+builder.RootComponents.Add<App>("#app");
+builder.RootComponents.Add<HeadOutlet>("head::after");
+
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+// Register our services
+builder.Services.AddScoped<KathmanduCalendarService>();
+builder.Services.AddScoped<MoonPhaseService>();
+builder.Services.AddSingleton<SolarPositionService>();
+builder.Services.AddScoped<ApiLoggerService>();
+builder.Services.AddScoped<BlogService>();
+builder.Services.AddScoped<TelemetryService>();
+
+var host = builder.Build();
+
+// ── Application Insights bootstrap ───────────────────────────────────────────
+// Push the connection string from appsettings.json into the JS SDK loaded in
+// index.html. The snippet queues calls until boot completes, so anything that
+// fires before this point (including the initial page view auto-tracked by
+// the snippet) gets the right endpoint once boot runs.
+var connectionString = builder.Configuration["ApplicationInsights:ConnectionString"];
+var telemetry = host.Services.GetRequiredService<TelemetryService>();
+await telemetry.BootAsync(connectionString);
+
+// ── SPA navigation tracking ──────────────────────────────────────────────────
+// The snippet auto-tracks the initial page view; Blazor's client-side route
+// changes are not browser navigations, so we hook LocationChanged and call
+// trackPageView manually.
+var nav = host.Services.GetRequiredService<Microsoft.AspNetCore.Components.NavigationManager>();
+nav.LocationChanged += (sender, args) =>
+{
+    // Fire-and-forget — TrackPageViewAsync swallows its own exceptions.
+    _ = telemetry.TrackPageViewAsync(name: null, uri: args.Location);
+};
+
+// ── Unhandled-exception reporting ────────────────────────────────────────────
+// Catches anything raised on the WASM main thread that nothing else handles.
+AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
+{
+    if (args.ExceptionObject is Exception ex)
+    {
+        _ = telemetry.TrackExceptionAsync(ex, new Dictionary<string, string>
+        {
+            { "source", "AppDomain.UnhandledException" },
+            { "isTerminating", args.IsTerminating.ToString() }
+        });
+    }
+};
+
+TaskScheduler.UnobservedTaskException += (sender, args) =>
+{
+    _ = telemetry.TrackExceptionAsync(args.Exception, new Dictionary<string, string>
+    {
+        { "source", "TaskScheduler.UnobservedTaskException" }
+    });
+};
+
+await host.RunAsync();
+
+CollabsKus.BlazorWebAssembly/App.razor
+razor
+
+@inject CollabsKus.BlazorWebAssembly.Services.TelemetryService Telemetry
+
+<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <PageTitle>Not found</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p role="alert">Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
+</Router>
+
+(App.razor only gained the @inject line — the routing markup is identical. The injection lets you grow into adding an ErrorBoundary later if you want; the global handlers in Program.cs already cover most cases.)
+How to verify it works
+
+    Build and run locally — open DevTools → Network, filter on dc.services.visualstudio.com or applicationinsights.azure.com, navigate around, you should see POST /v2/track calls with 200 responses.
+    In the Azure portal → your Application Insights resource → Live Metrics, you should see traffic within ~30 seconds.
+    After ~3–5 minutes, Logs → pageViews and customEvents will start showing data.
+
+Things you could optionally add later (not in scope right now)
+
+    Adaptive sampling in the snippet config (set samplingPercentage: 50 etc.) if traffic grows.
+    A TelemetryInitializer (added via sdk.addTelemetryInitializer in the wrapper) to attach the Nepali Sambat date to every event for nicer querying.
+    A [Parameter] on TelemetryService to skip telemetry on localhost so dev noise stays out of prod data — easy with builder.HostEnvironment.IsDevelopment().
+
+No changes are needed to deploy.yml, the .csproj, Directory.Packages.props, the service worker, or any component/service you haven’t seen above.
+
+
+Claude is AI and can make mistakes. Please double-check responses.
+
