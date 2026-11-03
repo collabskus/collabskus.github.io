@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 11/03/2026 12:42:41
+Generated: 11/03/2026 12:48:47
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -5546,8 +5546,8 @@ MODIFIED: 04/24/2026 13:19:19
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\ApiLoggerService.cs
-SIZE: 1.89 KB
-MODIFIED: 06/10/2026 13:25:17
+SIZE: 1.9 KB
+MODIFIED: 11/03/2026 12:48:04
 ================================================================================
 
 using System.Text.Json;
@@ -5556,7 +5556,7 @@ namespace CollabsKus.BlazorWebAssembly.Services;
 
 public class ApiLoggerService(HttpClient httpClient)
 {
-   private const string LoggerUrl = "https://my-api.2w7sp317.workers.dev/ui/create";
+   private const string LoggerUrl = "https://my-api.2w7sp317.workers.dev/ui/notes/create";
 
    public static JsonSerializerOptions GetOptions()
    {
@@ -9181,7 +9181,7 @@ MODIFIED: 11/03/2026 11:53:36
 
 
 ===============================================================================
-EXPORT COMPLETED: 11/03/2026 12:43:07
+EXPORT COMPLETED: 11/03/2026 12:49:11
 Total Files Exported: 71
 Output File: .\docs\llm\dump.txt
 ===============================================================================
