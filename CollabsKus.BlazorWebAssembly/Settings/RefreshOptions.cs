@@ -1,4 +1,4 @@
-namespace CollabsKus.BlazorWebAssembly.Settings;
+﻿namespace CollabsKus.BlazorWebAssembly.Settings;
 
 public sealed class RefreshOptions : IAppOptions
 {
@@ -18,9 +18,9 @@ public sealed class RefreshOptions : IAppOptions
 
    public IEnumerable<string> Validate()
    {
-      if (ClockTickMilliseconds is < 50 or > 60000)
+      if (ClockTickMilliseconds is < 20 or > 60000)
       {
-         yield return "ClockTickMilliseconds must be between 50 and 60000.";
+         yield return "ClockTickMilliseconds must be between 20 and 60000.";
       }
 
       if (ClockSyncCheckMinutes is < 1 or > 1440)
