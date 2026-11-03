@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics;
+using System.Text.Json;
 
 namespace CollabsKus.BlazorWebAssembly.Services;
 
@@ -6,122 +7,100 @@ public class ApiLoggerService(HttpClient httpClient)
 {
    private const string LoggerUrl = "https://my-api.2w7sp317.workers.dev/ui/notes/create";
    private const string VaultUrl = "https://my-api.2w7sp317.workers.dev/api/vault";
+   private const string PageUrl = "https://collabskus.github.io";
+   private const string UserAgentLabel = "Blazor WebAssembly";
+   private const int MaxContentLength = 1000;
 
-   public static JsonSerializerOptions GetOptions()
+   private static readonly JsonSerializerOptions DefaultOptions = new()
    {
-      return new JsonSerializerOptions
-      {
-         WriteIndented = true
-      };
-   }
+      WriteIndented = true
+   };
 
-   public async Task LogApiRequestAsync(string endpoint, object data, bool fromCache, JsonSerializerOptions options)
+   public static JsonSerializerOptions GetOptions() => DefaultOptions;
+
+   /// <summary>
+   /// Builds the log payload synchronously, then posts it to both endpoints
+   /// in the background. Returns immediately; failures are non-fatal.
+   /// </summary>
+   public Task LogApiRequestAsync(string endpoint, object data, bool fromCache, JsonSerializerOptions options)
    {
       try
       {
-         var logData = new
+         var logContent = JsonSerializer.Serialize(new
          {
             endpoint,
             timestamp = DateTime.UtcNow.ToString("O"),
             fromCache,
             data,
-            userAgent = "Blazor WebAssembly",
-            page = "https://collabskus.github.io"
-         };
+            userAgent = UserAgentLabel,
+            page = PageUrl
+         }, options);
 
-         var logContent = JsonSerializer.Serialize(logData, options);
+         var title = $"API Request: {endpoint}";
+         var notesContent = Truncate(logContent, MaxContentLength);
+         var vaultContent = Truncate($"{title}\n{logContent}", MaxContentLength);
 
-         // Truncate to 1000 chars
-         if (logContent.Length > 1000)
+         // Independent fire-and-forget posts: one failing must not block the other.
+         _ = PostFormAsync(LoggerUrl, new Dictionary<string, string>
          {
-            logContent = string.Concat(logContent.AsSpan(0, 997), "...");
-         }
+            ["title"] = title,
+            ["content"] = notesContent
+         });
 
-         var formData = new Dictionary<string, string>
-            {
-                { "title", $"API Request: {endpoint}" },
-                { "content", logContent }
-            };
-
-         var content = new FormUrlEncodedContent(formData);
-
-         // Fire and forget - don't await
-         _ = Task.Run(async () =>
+         _ = PostFormAsync(VaultUrl, new Dictionary<string, string>
          {
-            try
-            {
-               var request = new HttpRequestMessage(HttpMethod.Post, LoggerUrl)
-               {
-                  Content = content
-               };
-               request.Headers.Add("Accept", "application/json");
-
-               await httpClient.SendAsync(request);
-               await LogVaultApiRequestAsync(endpoint, data, fromCache, options);
-            }
-            catch
-            {
-               // Silent fail - logging is non-critical
-            }
+            ["content"] = vaultContent
          });
       }
-      catch
+      catch (Exception ex)
       {
-         // Silent fail - don't let logging break the app
+         // Serialization failed; logging is non-critical.
+         Debug.WriteLine($"ApiLoggerService: failed to build log payload: {ex.Message}");
       }
+
+      return Task.CompletedTask;
    }
 
-   private async Task LogVaultApiRequestAsync(string endpoint, object data, bool fromCache, JsonSerializerOptions options)
+   private async Task PostFormAsync(string url, Dictionary<string, string> formData)
    {
       try
       {
-         var logData = new
+         using var request = new HttpRequestMessage(HttpMethod.Post, url)
          {
-            endpoint,
-            timestamp = DateTime.UtcNow.ToString("O"),
-            fromCache,
-            data,
-            userAgent = "Blazor WebAssembly",
-            page = "https://collabskus.github.io"
+            Content = new FormUrlEncodedContent(formData)
          };
+         request.Headers.Add("Accept", "application/json");
 
-         var logContent = JsonSerializer.Serialize(logData, options);
+         using var response = await httpClient.SendAsync(request);
 
-         // Truncate to 1000 chars
-         if (logContent.Length > 1000)
+         if (!response.IsSuccessStatusCode)
          {
-            logContent = $"API Request: {endpoint}" + string.Concat(logContent.AsSpan(0, 997), "...");
+            Debug.WriteLine($"ApiLoggerService: {url} returned {(int)response.StatusCode}");
          }
-
-         var formData = new Dictionary<string, string>
-            {
-                { "content", logContent }
-            };
-
-         var content = new FormUrlEncodedContent(formData);
-
-         // Fire and forget - don't await
-         _ = Task.Run(async () =>
-         {
-            try
-            {
-               var request = new HttpRequestMessage(HttpMethod.Post, VaultUrl)
-               {
-                  Content = content
-               };
-               request.Headers.Add("Accept", "application/json");
-
-               await httpClient.SendAsync(request);
-            }
-            catch
-            {
-               // Silent fail - logging is non-critical
-            }
-         });
       }
-      catch
+      catch (Exception ex)
       {
-         // Silent fail - don't let logging break the app
+         // Logging is non-critical, but leave a trace for debugging.
+         Debug.WriteLine($"ApiLoggerService: post to {url} failed: {ex.Message}");
       }
+   }
+
+   private static string Truncate(string value, int maxLength)
+   {
+      if (value.Length <= maxLength)
+      {
+         return value;
+      }
+
+      const string suffix = "...";
+      var cut = maxLength - suffix.Length;
+
+      // Don't split a surrogate pair.
+      if (cut > 0 && char.IsHighSurrogate(value[cut - 1]))
+      {
+         cut--;
+      }
+
+      return string.Concat(value.AsSpan(0, cut), suffix);
    }
 }
