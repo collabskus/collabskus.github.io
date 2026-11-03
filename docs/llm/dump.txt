@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 11/03/2026 13:45:06
+Generated: 11/03/2026 13:51:06
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -5546,8 +5546,8 @@ MODIFIED: 04/24/2026 13:19:19
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\ApiLoggerService.cs
-SIZE: 3.21 KB
-MODIFIED: 11/03/2026 13:43:46
+SIZE: 3.22 KB
+MODIFIED: 11/03/2026 13:48:08
 ================================================================================
 
 using System.Diagnostics;
@@ -5578,7 +5578,7 @@ public class ApiLoggerService(HttpClient httpClient)
    {
       try
       {
-         var logContent = JsonSerializer.Serialize(new
+         string logContent = JsonSerializer.Serialize(new
          {
             endpoint,
             timestamp = DateTime.UtcNow.ToString("O"),
@@ -5588,9 +5588,9 @@ public class ApiLoggerService(HttpClient httpClient)
             page = PageUrl
          }, options);
 
-         var title = $"API Request: {endpoint}";
-         var notesContent = Truncate(logContent, MaxContentLength);
-         var vaultContent = Truncate($"{title}\n{logContent}", MaxContentLength);
+         string title = $"API Request: {endpoint}";
+         string notesContent = Truncate(logContent, MaxContentLength);
+         string vaultContent = Truncate($"{title}\n{logContent}", MaxContentLength);
 
          // Independent fire-and-forget posts: one failing must not block the other.
          _ = PostFormAsync(LoggerUrl, new Dictionary<string, string>
@@ -5617,7 +5617,7 @@ public class ApiLoggerService(HttpClient httpClient)
    {
       try
       {
-         using var request = new HttpRequestMessage(HttpMethod.Post, url)
+         using HttpRequestMessage request = new(HttpMethod.Post, url)
          {
             Content = new FormUrlEncodedContent(formData)
          };
@@ -5645,7 +5645,7 @@ public class ApiLoggerService(HttpClient httpClient)
       }
 
       const string suffix = "...";
-      var cut = maxLength - suffix.Length;
+      int cut = maxLength - suffix.Length;
 
       // Don't split a surrogate pair.
       if (cut > 0 && char.IsHighSurrogate(value[cut - 1]))
@@ -5661,8 +5661,8 @@ public class ApiLoggerService(HttpClient httpClient)
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\BlogService.cs
-SIZE: 3.5 KB
-MODIFIED: 06/10/2026 13:06:07
+SIZE: 3.52 KB
+MODIFIED: 11/03/2026 13:47:42
 ================================================================================
 
 using System.Net.Http.Json;
@@ -5696,7 +5696,7 @@ public class BlogService(HttpClient httpClient)
 
       try
       {
-         var raw = await httpClient.GetStringAsync($"blog/posts/{slug}.md");
+         string raw = await httpClient.GetStringAsync($"blog/posts/{slug}.md");
          var post = ParsePost(slug, raw);
          _postCache[slug] = post;
          return post;
@@ -5747,7 +5747,7 @@ public class BlogService(HttpClient httpClient)
    public static BlogPost ParsePost(string slug, string raw)
    {
       var (front, body) = SplitFrontmatter(raw);
-      var contentHtml = Markdown.ToHtml(body.Trim(), Pipeline);
+      string contentHtml = Markdown.ToHtml(body.Trim(), Pipeline);
 
       return new BlogPost
       {
@@ -5767,19 +5767,19 @@ public class BlogService(HttpClient httpClient)
       if (!raw.StartsWith("---"))
          return (front, raw);
 
-      var end = raw.IndexOf("\n---", 3);
+      int end = raw.IndexOf("\n---", 3);
       if (end < 0)
          return (front, raw);
 
-      var yaml = raw[3..end].Trim();
-      var body = raw[(end + 4)..];
+      string yaml = raw[3..end].Trim();
+      string body = raw[(end + 4)..];
 
-      foreach (var line in yaml.Split('\n'))
+      foreach (string line in yaml.Split('\n'))
       {
-         var colonIdx = line.IndexOf(':');
+         int colonIdx = line.IndexOf(':');
          if (colonIdx < 0) continue;
-         var key = line[..colonIdx].Trim();
-         var val = line[(colonIdx + 1)..].Trim();
+         string key = line[..colonIdx].Trim();
+         string val = line[(colonIdx + 1)..].Trim();
          if (!string.IsNullOrEmpty(key))
             front[key] = val;
       }
@@ -5817,8 +5817,8 @@ public interface ITelemetryService
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\KathmanduCalendarService.cs
-SIZE: 5.72 KB
-MODIFIED: 06/10/2026 13:25:16
+SIZE: 5.74 KB
+MODIFIED: 11/03/2026 13:47:42
 ================================================================================
 
 using System.Net.Http.Json;
@@ -5901,10 +5901,10 @@ public class KathmanduCalendarService(HttpClient httpClient, ApiLoggerService lo
             _timeCacheTime = DateTime.UtcNow;
 
             // Calculate server time offset
-            var serverHour = int.Parse(data.Hour);
-            var serverMin = int.Parse(data.Min);
-            var serverSec = int.Parse(data.Sec);
-            var isPM = data.ApOrPm == "PM";
+            int serverHour = int.Parse(data.Hour);
+            int serverMin = int.Parse(data.Min);
+            int serverSec = int.Parse(data.Sec);
+            bool isPM = data.ApOrPm == "PM";
 
             if (isPM && serverHour != 12) serverHour += 12;
             if (!isPM && serverHour == 12) serverHour = 0;
@@ -5956,10 +5956,10 @@ public class KathmanduCalendarService(HttpClient httpClient, ApiLoggerService lo
 
    public static string ToNepaliDigits(int number)
    {
-      var nepaliDigits = new[] { "०", "१", "२", "३", "४", "५", "६", "७", "८", "९" };
-      var numStr = number.ToString("D2");
-      var result = "";
-      foreach (var digit in numStr)
+      string[] nepaliDigits = new[] { "०", "१", "२", "३", "४", "५", "६", "७", "८", "९" };
+      string numStr = number.ToString("D2");
+      string result = "";
+      foreach (char digit in numStr)
       {
          if (char.IsDigit(digit))
          {
@@ -5974,8 +5974,8 @@ public class KathmanduCalendarService(HttpClient httpClient, ApiLoggerService lo
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\MoonPhaseService.cs
-SIZE: 13.17 KB
-MODIFIED: 06/10/2026 13:25:16
+SIZE: 13.26 KB
+MODIFIED: 11/03/2026 13:47:42
 ================================================================================
 
 using CollabsKus.BlazorWebAssembly.Models;
@@ -6036,75 +6036,75 @@ public class MoonPhaseService
          _ => DateTime.SpecifyKind(utcDate, DateTimeKind.Utc) // Unspecified: assume UTC
       };
 
-      var jd = ToJulianDay(utc);
+      double jd = ToJulianDay(utc);
 
       // Meeus core quantities
-      var T = (jd - 2451545.0) / 36525.0;  // Julian centuries from J2000.0
+      double T = (jd - 2451545.0) / 36525.0;  // Julian centuries from J2000.0
 
       // Moon's mean longitude (°)
-      var L0 = NormDeg(218.3164477
+      double L0 = NormDeg(218.3164477
                      + 481267.88123421 * T
                      - 0.0015786 * T * T
                      + T * T * T / 538841.0
                      - T * T * T * T / 65194000.0);
 
       // Moon's mean anomaly (°)
-      var M1 = NormDeg(134.9633964
+      double M1 = NormDeg(134.9633964
                      + 477198.8676313 * T
                      + 0.0089970 * T * T
                      + T * T * T / 69699.0
                      - T * T * T * T / 14712000.0);
 
       // Sun's mean anomaly (°)
-      var M0 = NormDeg(357.5291092
+      double M0 = NormDeg(357.5291092
                      + 35999.0502909 * T
                      - 0.0001536 * T * T
                      + T * T * T / 24490000.0);
 
       // Moon's argument of latitude (°)
-      var F = NormDeg(93.2720950
+      double F = NormDeg(93.2720950
                      + 483202.0175233 * T
                      - 0.0036539 * T * T
                      - T * T * T / 3526000.0
                      + T * T * T * T / 863310000.0);
 
       // Moon's mean elongation (°)
-      var D = NormDeg(297.8501921
+      double D = NormDeg(297.8501921
                      + 445267.1114034 * T
                      - 0.0018819 * T * T
                      + T * T * T / 545868.0
                      - T * T * T * T / 113065000.0);
 
       // Eccentricity correction for Sun's anomaly terms
-      var E = 1.0 - 0.002516 * T - 0.0000074 * T * T;
+      double E = 1.0 - 0.002516 * T - 0.0000074 * T * T;
 
       // ── Longitude corrections (Meeus Table 47.A, major terms) ─────────────
-      var dL = LongitudeCorrections(D, M0, M1, F, E);
+      double dL = LongitudeCorrections(D, M0, M1, F, E);
 
       // ── Apparent geocentric longitude of Moon (°) ─────────────────────────
-      var moonLon = NormDeg(L0 + dL / 1000000.0);
+      double moonLon = NormDeg(L0 + dL / 1000000.0);
 
       // ── Apparent geocentric longitude of Sun (°) ──────────────────────────
-      var sunLon = SunApparentLongitude(T);
+      double sunLon = SunApparentLongitude(T);
 
       // ── Ecliptic longitude difference → phase angle 0–360° ───────────────
-      var elongation = NormDeg(moonLon - sunLon);   // 0 = new, 180 = full
+      double elongation = NormDeg(moonLon - sunLon);   // 0 = new, 180 = full
 
       // ── Illumination fraction (Meeus §48) ─────────────────────────────────
       // i = (1 - cos(elongation)) / 2  — exact for uniform disk
-      var illumination = (1.0 - Math.Cos(elongation * Rad)) / 2.0 * 100.0;
+      double illumination = (1.0 - Math.Cos(elongation * Rad)) / 2.0 * 100.0;
 
       // ── Moon age in days (fraction of synodic month × SynodicMonth) ───────
-      var moonAge = elongation / 360.0 * SynodicMonth;
+      double moonAge = elongation / 360.0 * SynodicMonth;
 
       // ── Phase name / icon ─────────────────────────────────────────────────
       var (phaseName, phaseIcon) = GetPhase(elongation);
 
       // ── Days until/since key events ───────────────────────────────────────
-      var halfMonth = SynodicMonth / 2.0;
+      double halfMonth = SynodicMonth / 2.0;
 
-      var daysSinceNew = moonAge;
-      var daysUntilNew = SynodicMonth - moonAge;
+      double daysSinceNew = moonAge;
+      double daysUntilNew = SynodicMonth - moonAge;
 
       // Days since/until full moon:
       // Full moon occurs at moonAge ≈ halfMonth (elongation 180°)
@@ -6127,8 +6127,8 @@ public class MoonPhaseService
 
       // ── Tithi (Hindu lunar day, 1–30) ─────────────────────────────────────
       // Each tithi = 12° of elongation (360° / 30 = 12°)
-      var tithiRaw = elongation / 12.0;             // 0–30
-      var tithiIndex = Math.Min((int)tithiRaw, 29); // 0-based, 0–29
+      double tithiRaw = elongation / 12.0;             // 0–30
+      int tithiIndex = Math.Min((int)tithiRaw, 29); // 0-based, 0–29
 
       string paksha;
       int tithiNumber;
@@ -6178,17 +6178,17 @@ public class MoonPhaseService
    /// <summary>Convert DateTime (UTC) to Julian Day Number (continuous).</summary>
    private static double ToJulianDay(DateTime utc)
    {
-      var y = utc.Year;
-      var mo = utc.Month;
-      var d = utc.Day
+      int y = utc.Year;
+      int mo = utc.Month;
+      double d = utc.Day
              + utc.Hour / 24.0
              + utc.Minute / 1440.0
              + utc.Second / 86400.0
              + utc.Millisecond / 86400000.0;  // sub-second granularity
 
       if (mo <= 2) { y--; mo += 12; }
-      var A = y / 100;
-      var B = 2 - A + A / 4;
+      int A = y / 100;
+      int B = 2 - A + A / 4;
       return Math.Floor(365.25 * (y + 4716))
            + Math.Floor(30.6001 * (mo + 1))
            + d + B - 1524.5;
@@ -6273,11 +6273,11 @@ public class MoonPhaseService
             ( 2,  0, -1, -2,        0),
       };
 
-      var sum = 0.0;
+      double sum = 0.0;
       foreach (var (d, m, mm, f, coef) in terms)
       {
-         var arg = (d * D + m * M + mm * Mm + f * F) * Rad;
-         var eCorr = Math.Abs(m) == 1 ? E : Math.Abs(m) == 2 ? E * E : 1.0;
+         double arg = (d * D + m * M + mm * Mm + f * F) * Rad;
+         double eCorr = Math.Abs(m) == 1 ? E : Math.Abs(m) == 2 ? E * E : 1.0;
          sum += coef * eCorr * Math.Sin(arg);
       }
       return sum;
@@ -6289,17 +6289,17 @@ public class MoonPhaseService
    /// </summary>
    private static double SunApparentLongitude(double T)
    {
-      var L0 = NormDeg(280.46646 + 36000.76983 * T + 0.0003032 * T * T);
-      var M = NormDeg(357.52911 + 35999.05029 * T - 0.0001537 * T * T);
-      var Mr = M * Rad;
+      double L0 = NormDeg(280.46646 + 36000.76983 * T + 0.0003032 * T * T);
+      double M = NormDeg(357.52911 + 35999.05029 * T - 0.0001537 * T * T);
+      double Mr = M * Rad;
 
-      var C = (1.914602 - 0.004817 * T - 0.000014 * T * T) * Math.Sin(Mr)
+      double C = (1.914602 - 0.004817 * T - 0.000014 * T * T) * Math.Sin(Mr)
              + (0.019993 - 0.000101 * T) * Math.Sin(2 * Mr)
              + 0.000289 * Math.Sin(3 * Mr);
 
-      var sunTrue = L0 + C;
-      var omega = 125.04 - 1934.136 * T;
-      var apparent = sunTrue - 0.00569 - 0.00478 * Math.Sin(omega * Rad);
+      double sunTrue = L0 + C;
+      double omega = 125.04 - 1934.136 * T;
+      double apparent = sunTrue - 0.00569 - 0.00478 * Math.Sin(omega * Rad);
       return NormDeg(apparent);
    }
 
@@ -7440,8 +7440,8 @@ async function onFetch(event) {
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.PlaywrightTests\BlogTests.cs
-SIZE: 9.66 KB
-MODIFIED: 06/10/2026 13:25:16
+SIZE: 9.69 KB
+MODIFIED: 11/03/2026 13:47:42
 ================================================================================
 
 namespace CollabsKus.PlaywrightTests;
@@ -7526,7 +7526,7 @@ public class BlogTests
    public async Task BlogList_ShowsPostList()
    {
       await NavigateToBlogListAsync();
-      var count = await _page.Locator(".post-card").CountAsync();
+      int count = await _page.Locator(".post-card").CountAsync();
       await Assert.That(count).IsGreaterThan(0);
    }
 
@@ -7542,7 +7542,7 @@ public class BlogTests
    public async Task BlogList_PostCardHasExcerpt()
    {
       await NavigateToBlogListAsync();
-      var excerpt = await _page.Locator(".post-excerpt").First.TextContentAsync();
+      string? excerpt = await _page.Locator(".post-excerpt").First.TextContentAsync();
       await Assert.That(string.IsNullOrWhiteSpace(excerpt)).IsFalse();
    }
 
@@ -7550,7 +7550,7 @@ public class BlogTests
    public async Task BlogList_PostCardHasDate()
    {
       await NavigateToBlogListAsync();
-      var date = await _page.Locator(".post-date").First.TextContentAsync();
+      string? date = await _page.Locator(".post-date").First.TextContentAsync();
       await Assert.That(string.IsNullOrWhiteSpace(date)).IsFalse();
    }
 
@@ -7570,7 +7570,7 @@ public class BlogTests
    public async Task BlogDetail_ShowsPostTitle()
    {
       await NavigateToBlogDetailAsync("hello-world");
-      var title = await _page.Locator(".post-title").TextContentAsync();
+      string? title = await _page.Locator(".post-title").TextContentAsync();
       await Assert.That(title!.Contains("Hello World")).IsTrue();
    }
 
@@ -7578,7 +7578,7 @@ public class BlogTests
    public async Task BlogDetail_ShowsPostContent()
    {
       await NavigateToBlogDetailAsync("hello-world");
-      var content = await _page.Locator(".post-content").TextContentAsync();
+      string? content = await _page.Locator(".post-content").TextContentAsync();
       await Assert.That(string.IsNullOrWhiteSpace(content)).IsFalse();
    }
 
@@ -7586,7 +7586,7 @@ public class BlogTests
    public async Task BlogDetail_ShowsAuthor()
    {
       await NavigateToBlogDetailAsync("hello-world");
-      var author = await _page.Locator(".post-author").TextContentAsync();
+      string? author = await _page.Locator(".post-author").TextContentAsync();
       await Assert.That(author!.Contains("CollabsKus")).IsTrue();
    }
 
@@ -7663,7 +7663,7 @@ public class BlogTests
    public async Task BlogDetail_HasCorrectPageTitle()
    {
       await NavigateToBlogDetailAsync("hello-world");
-      var title = await _page.TitleAsync();
+      string title = await _page.TitleAsync();
       await Assert.That(title.Contains("Hello World")).IsTrue();
    }
 
@@ -7746,8 +7746,8 @@ global using TUnit.Core;
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.PlaywrightTests\HomePageTests.cs
-SIZE: 11.68 KB
-MODIFIED: 06/10/2026 13:25:16
+SIZE: 11.7 KB
+MODIFIED: 11/03/2026 13:47:42
 ================================================================================
 
 namespace CollabsKus.PlaywrightTests;
@@ -7885,7 +7885,7 @@ public class HomePageTests
       // the Home component, not in the static index.html shell.
       var h1Locator = _page.Locator("h1");
       await h1Locator.WaitForAsync(new LocatorWaitForOptions { State = WaitForSelectorState.Visible });
-      var h1 = await h1Locator.TextContentAsync();
+      string? h1 = await h1Locator.TextContentAsync();
       await Assert.That(h1).IsEqualTo("काठमाडौं");
    }
 
@@ -7901,10 +7901,10 @@ public class HomePageTests
    {
       await NavigateAsync();
 
-      var moonIcon = await _page.Locator(".moon-icon").TextContentAsync();
+      string? moonIcon = await _page.Locator(".moon-icon").TextContentAsync();
       await Assert.That(string.IsNullOrWhiteSpace(moonIcon)).IsFalse();
 
-      var phaseName = await _page.Locator(".moon-phase-name").TextContentAsync();
+      string? phaseName = await _page.Locator(".moon-phase-name").TextContentAsync();
       await Assert.That(string.IsNullOrWhiteSpace(phaseName)).IsFalse();
    }
 
@@ -7919,7 +7919,7 @@ public class HomePageTests
    public async Task SunDisplay_ShowsKathmanduLocation()
    {
       await NavigateAsync();
-      var header = await _page.Locator(".sun-location-header").First.TextContentAsync();
+      string? header = await _page.Locator(".sun-location-header").First.TextContentAsync();
       await Assert.That(header!.Contains("Kathmandu")).IsTrue();
    }
 
@@ -7927,7 +7927,7 @@ public class HomePageTests
    public async Task DateCards_ShowBikramSambat()
    {
       await NavigateAsync();
-      var cards = await _page.Locator(".date-card").CountAsync();
+      int cards = await _page.Locator(".date-card").CountAsync();
       await Assert.That(cards).IsGreaterThanOrEqualTo(2);
    }
 
@@ -7943,7 +7943,7 @@ public class HomePageTests
       {
          State = WaitForSelectorState.Visible
       });
-      var dayNames = await dayNameLocator.CountAsync();
+      int dayNames = await dayNameLocator.CountAsync();
       await Assert.That(dayNames).IsEqualTo(7);
    }
 
@@ -7958,7 +7958,7 @@ public class HomePageTests
       // .footer is rendered by the Home component itself — wait for it.
       var footer = _page.Locator(".footer");
       await footer.WaitForAsync(new LocatorWaitForOptions { State = WaitForSelectorState.Visible });
-      var text = await footer.TextContentAsync();
+      string? text = await footer.TextContentAsync();
       await Assert.That(text!.Contains("Last updated")).IsTrue();
    }
 
@@ -8071,8 +8071,8 @@ MODIFIED: 03/03/2026 19:27:30
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.PlaywrightTests\TestServerManager.cs
-SIZE: 5.46 KB
-MODIFIED: 06/10/2026 13:25:16
+SIZE: 5.47 KB
+MODIFIED: 11/03/2026 13:47:42
 ================================================================================
 
 using System.Diagnostics;
@@ -8131,9 +8131,9 @@ internal static class TestServerManager
       // doesn't accept our port-poll and serve a different version of the app.
       KillPortOccupant();
 
-      var baseDir = AppContext.BaseDirectory;
-      var projectRoot = Path.GetFullPath(Path.Combine(baseDir, "..", "..", "..", ".."));
-      var blazorProject = Path.Combine(
+      string baseDir = AppContext.BaseDirectory;
+      string projectRoot = Path.GetFullPath(Path.Combine(baseDir, "..", "..", "..", ".."));
+      string blazorProject = Path.Combine(
           projectRoot, "CollabsKus.BlazorWebAssembly", "CollabsKus.BlazorWebAssembly.csproj");
 
       if (!File.Exists(blazorProject))
@@ -8210,7 +8210,7 @@ internal static class TestServerManager
          var listeners = IPGlobalProperties.GetIPGlobalProperties()
              .GetActiveTcpListeners();
 
-         var isOccupied = listeners.Any(ep => ep.Port == Port);
+         bool isOccupied = listeners.Any(ep => ep.Port == Port);
          if (!isOccupied) return;
 
          // Fall back to netstat-style process enumeration via dotnet Process API.
@@ -8297,8 +8297,8 @@ global using TUnit.Core;
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.Tests\Services\BlogServiceTests.cs
-SIZE: 5.27 KB
-MODIFIED: 06/10/2026 13:25:16
+SIZE: 5.31 KB
+MODIFIED: 11/03/2026 13:47:42
 ================================================================================
 
 using CollabsKus.BlazorWebAssembly.Services;
@@ -8312,7 +8312,7 @@ public class BlogServiceTests
    [Test]
    public async Task SplitFrontmatter_NoDelimiters_ReturnsEmptyFrontAndFullBody()
    {
-      var raw = "# Hello\n\nNo frontmatter here.";
+      string raw = "# Hello\n\nNo frontmatter here.";
       var (front, body) = BlogService.SplitFrontmatter(raw);
       await Assert.That(front.Count).IsEqualTo(0);
       await Assert.That(body).IsEqualTo(raw);
@@ -8321,7 +8321,7 @@ public class BlogServiceTests
    [Test]
    public async Task SplitFrontmatter_ValidFrontmatter_ExtractsKeys()
    {
-      var raw = "---\ntitle: Hello World\ndate: 2026-04-24\nauthor: collabskus\n---\n\n# Body";
+      string raw = "---\ntitle: Hello World\ndate: 2026-04-24\nauthor: collabskus\n---\n\n# Body";
       var (front, body) = BlogService.SplitFrontmatter(raw);
       await Assert.That(front["title"]).IsEqualTo("Hello World");
       await Assert.That(front["date"]).IsEqualTo("2026-04-24");
@@ -8331,7 +8331,7 @@ public class BlogServiceTests
    [Test]
    public async Task SplitFrontmatter_ValidFrontmatter_BodyExcludesDelimiters()
    {
-      var raw = "---\ntitle: Test\n---\n\nBody content.";
+      string raw = "---\ntitle: Test\n---\n\nBody content.";
       var (_, body) = BlogService.SplitFrontmatter(raw);
       await Assert.That(body.Contains("---")).IsFalse();
       await Assert.That(body.Trim()).IsEqualTo("Body content.");
@@ -8340,7 +8340,7 @@ public class BlogServiceTests
    [Test]
    public async Task SplitFrontmatter_KeysAreCaseInsensitive()
    {
-      var raw = "---\nTitle: My Post\n---\n\nContent.";
+      string raw = "---\nTitle: My Post\n---\n\nContent.";
       var (front, _) = BlogService.SplitFrontmatter(raw);
       await Assert.That(front.ContainsKey("title")).IsTrue();
       await Assert.That(front["title"]).IsEqualTo("My Post");
@@ -8349,7 +8349,7 @@ public class BlogServiceTests
    [Test]
    public async Task SplitFrontmatter_ValueWithColon_PreservesRemainder()
    {
-      var raw = "---\nexcerpt: See https://example.com for more\n---\n\nContent.";
+      string raw = "---\nexcerpt: See https://example.com for more\n---\n\nContent.";
       var (front, _) = BlogService.SplitFrontmatter(raw);
       await Assert.That(front["excerpt"]).IsEqualTo("See https://example.com for more");
    }
@@ -8357,7 +8357,7 @@ public class BlogServiceTests
    [Test]
    public async Task SplitFrontmatter_MissingClosingDelimiter_ReturnsEmptyFrontAndFullBody()
    {
-      var raw = "---\ntitle: Test\n\nContent with no closing delimiter.";
+      string raw = "---\ntitle: Test\n\nContent with no closing delimiter.";
       var (front, body) = BlogService.SplitFrontmatter(raw);
       await Assert.That(front.Count).IsEqualTo(0);
       await Assert.That(body).IsEqualTo(raw);
@@ -8368,7 +8368,7 @@ public class BlogServiceTests
    [Test]
    public async Task ParsePost_ExtractsTitle()
    {
-      var md = "---\ntitle: Hello World\ndate: 2026-04-24\nauthor: collabskus\nexcerpt: Test.\n---\n\n# Hello\n";
+      string md = "---\ntitle: Hello World\ndate: 2026-04-24\nauthor: collabskus\nexcerpt: Test.\n---\n\n# Hello\n";
       var post = BlogService.ParsePost("hello-world", md);
       await Assert.That(post.Title).IsEqualTo("Hello World");
    }
@@ -8376,7 +8376,7 @@ public class BlogServiceTests
    [Test]
    public async Task ParsePost_ExtractsSlug()
    {
-      var md = "---\ntitle: Hello World\n---\n\nContent.";
+      string md = "---\ntitle: Hello World\n---\n\nContent.";
       var post = BlogService.ParsePost("hello-world", md);
       await Assert.That(post.Slug).IsEqualTo("hello-world");
    }
@@ -8384,7 +8384,7 @@ public class BlogServiceTests
    [Test]
    public async Task ParsePost_ExtractsDate()
    {
-      var md = "---\ntitle: T\ndate: 2026-04-24\n---\n\nContent.";
+      string md = "---\ntitle: T\ndate: 2026-04-24\n---\n\nContent.";
       var post = BlogService.ParsePost("test", md);
       await Assert.That(post.Date).IsEqualTo("2026-04-24");
    }
@@ -8392,7 +8392,7 @@ public class BlogServiceTests
    [Test]
    public async Task ParsePost_ExtractsExcerpt()
    {
-      var md = "---\ntitle: T\nexcerpt: Short summary here.\n---\n\nContent.";
+      string md = "---\ntitle: T\nexcerpt: Short summary here.\n---\n\nContent.";
       var post = BlogService.ParsePost("test", md);
       await Assert.That(post.Excerpt).IsEqualTo("Short summary here.");
    }
@@ -8400,7 +8400,7 @@ public class BlogServiceTests
    [Test]
    public async Task ParsePost_RendersMarkdownToHtml()
    {
-      var md = "---\ntitle: T\n---\n\n# Heading\n\nParagraph text.";
+      string md = "---\ntitle: T\n---\n\n# Heading\n\nParagraph text.";
       var post = BlogService.ParsePost("test", md);
       await Assert.That(post.ContentHtml.Contains("<h1>")).IsTrue();
       await Assert.That(post.ContentHtml.Contains("<p>")).IsTrue();
@@ -8409,7 +8409,7 @@ public class BlogServiceTests
    [Test]
    public async Task ParsePost_RendersStrongEmphasis()
    {
-      var md = "---\ntitle: T\n---\n\n**bold** and *italic*";
+      string md = "---\ntitle: T\n---\n\n**bold** and *italic*";
       var post = BlogService.ParsePost("test", md);
       await Assert.That(post.ContentHtml.Contains("<strong>")).IsTrue();
       await Assert.That(post.ContentHtml.Contains("<em>")).IsTrue();
@@ -8418,7 +8418,7 @@ public class BlogServiceTests
    [Test]
    public async Task ParsePost_NoFrontmatter_SlugUsedAsTitle()
    {
-      var md = "# Just Content\n\nNo frontmatter.";
+      string md = "# Just Content\n\nNo frontmatter.";
       var post = BlogService.ParsePost("my-slug", md);
       await Assert.That(post.Title).IsEqualTo("my-slug");
       await Assert.That(post.Slug).IsEqualTo("my-slug");
@@ -8427,7 +8427,7 @@ public class BlogServiceTests
    [Test]
    public async Task ParsePost_RendersLists()
    {
-      var md = "---\ntitle: T\n---\n\n- Item one\n- Item two\n";
+      string md = "---\ntitle: T\n---\n\n- Item one\n- Item two\n";
       var post = BlogService.ParsePost("test", md);
       await Assert.That(post.ContentHtml.Contains("<ul>") || post.ContentHtml.Contains("<li>")).IsTrue();
    }
@@ -8435,7 +8435,7 @@ public class BlogServiceTests
    [Test]
    public async Task ParsePost_RendersLinks()
    {
-      var md = "---\ntitle: T\n---\n\n[Click here](https://example.com)";
+      string md = "---\ntitle: T\n---\n\n[Click here](https://example.com)";
       var post = BlogService.ParsePost("test", md);
       await Assert.That(post.ContentHtml.Contains("<a ")).IsTrue();
       await Assert.That(post.ContentHtml.Contains("https://example.com")).IsTrue();
@@ -8446,8 +8446,8 @@ public class BlogServiceTests
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.Tests\Services\KathmanduCalendarServiceTests.cs
-SIZE: 1.57 KB
-MODIFIED: 06/10/2026 13:25:16
+SIZE: 1.6 KB
+MODIFIED: 11/03/2026 13:47:42
 ================================================================================
 
 using CollabsKus.BlazorWebAssembly.Services;
@@ -8459,21 +8459,21 @@ public class KathmanduCalendarServiceTests
    [Test]
    public async Task ToNepaliDigits_Zero_Returns_DoubleZero()
    {
-      var result = KathmanduCalendarService.ToNepaliDigits(0);
+      string result = KathmanduCalendarService.ToNepaliDigits(0);
       await Assert.That(result).IsEqualTo("००");
    }
 
    [Test]
    public async Task ToNepaliDigits_SingleDigit_ReturnsPaddedNepali()
    {
-      var result = KathmanduCalendarService.ToNepaliDigits(5);
+      string result = KathmanduCalendarService.ToNepaliDigits(5);
       await Assert.That(result).IsEqualTo("०५");
    }
 
    [Test]
    public async Task ToNepaliDigits_TwoDigitNumber_ReturnsCorrectNepali()
    {
-      var result = KathmanduCalendarService.ToNepaliDigits(12);
+      string result = KathmanduCalendarService.ToNepaliDigits(12);
       await Assert.That(result).IsEqualTo("१२");
    }
 
@@ -8481,10 +8481,10 @@ public class KathmanduCalendarServiceTests
    public async Task ToNepaliDigits_AllDigits_MapCorrectly()
    {
       // Test each digit 0-9
-      var expected = new[] { "००", "०१", "०२", "०३", "०४", "०५", "०६", "०७", "०८", "०९" };
+      string[] expected = new[] { "००", "०१", "०२", "०३", "०४", "०५", "०६", "०७", "०८", "०९" };
       for (int i = 0; i < 10; i++)
       {
-         var result = KathmanduCalendarService.ToNepaliDigits(i);
+         string result = KathmanduCalendarService.ToNepaliDigits(i);
          await Assert.That(result).IsEqualTo(expected[i]);
       }
    }
@@ -8492,14 +8492,14 @@ public class KathmanduCalendarServiceTests
    [Test]
    public async Task ToNepaliDigits_59_Returns_Correct()
    {
-      var result = KathmanduCalendarService.ToNepaliDigits(59);
+      string result = KathmanduCalendarService.ToNepaliDigits(59);
       await Assert.That(result).IsEqualTo("५९");
    }
 
    [Test]
    public async Task ToNepaliDigits_10_Returns_Correct()
    {
-      var result = KathmanduCalendarService.ToNepaliDigits(10);
+      string result = KathmanduCalendarService.ToNepaliDigits(10);
       await Assert.That(result).IsEqualTo("१०");
    }
 }
@@ -8508,8 +8508,8 @@ public class KathmanduCalendarServiceTests
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.Tests\Services\MoonPhaseServiceTests.cs
-SIZE: 5.32 KB
-MODIFIED: 06/10/2026 13:25:16
+SIZE: 5.33 KB
+MODIFIED: 11/03/2026 13:47:42
 ================================================================================
 
 using CollabsKus.BlazorWebAssembly.Services;
@@ -8586,7 +8586,7 @@ public class MoonPhaseServiceTests
       {
          var date = baseDate.AddDays(i);
          var phase = MoonPhaseService.CalculateMoonPhase(date);
-         var validPaksha = phase.Paksha == "Shukla Paksha" || phase.Paksha == "Krishna Paksha";
+         bool validPaksha = phase.Paksha == "Shukla Paksha" || phase.Paksha == "Krishna Paksha";
          await Assert.That(validPaksha).IsTrue();
       }
    }
@@ -8613,7 +8613,7 @@ public class MoonPhaseServiceTests
    {
       var date = new DateTime(2025, 8, 12, 8, 0, 0, DateTimeKind.Utc);
       var phase = MoonPhaseService.CalculateMoonPhase(date);
-      var total = phase.DaysSinceNewMoon + phase.DaysUntilNewMoon;
+      double total = phase.DaysSinceNewMoon + phase.DaysUntilNewMoon;
       await Assert.That(Math.Abs(total - SynodicMonth)).IsLessThan(0.01);
    }
 
@@ -8664,7 +8664,7 @@ public class MoonPhaseServiceTests
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.Tests\Services\SolarPositionServiceTests.cs
 SIZE: 11.25 KB
-MODIFIED: 06/10/2026 13:25:16
+MODIFIED: 11/03/2026 13:47:42
 ================================================================================
 
 using CollabsKus.BlazorWebAssembly.Services;
@@ -8943,7 +8943,7 @@ public class SolarPositionServiceTests
       var pos = _service.CalculateKathmandu(utc);
 
       // Should be close to 0 or 1 (solar midnight)
-      var nearMidnight = pos.FullDayFraction < 0.05 || pos.FullDayFraction > 0.95;
+      bool nearMidnight = pos.FullDayFraction < 0.05 || pos.FullDayFraction > 0.95;
       await Assert.That(nearMidnight).IsTrue();
    }
 
@@ -9216,7 +9216,7 @@ MODIFIED: 11/03/2026 11:53:36
 
 
 ===============================================================================
-EXPORT COMPLETED: 11/03/2026 13:45:31
+EXPORT COMPLETED: 11/03/2026 13:51:44
 Total Files Exported: 71
 Output File: .\docs\llm\dump.txt
 ===============================================================================
