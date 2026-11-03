@@ -4,7 +4,8 @@ namespace CollabsKus.BlazorWebAssembly.Services;
 
 public class ApiLoggerService(HttpClient httpClient)
 {
-   private const string LoggerUrl = "https://my-api.2w7sp317.workers.dev/ui/notes/create";
+   private const string LoggerUrl = "https://my-api.2w7sp317.workers.dev/api/notes/create";
+   private const string VaultUrl = "https://my-api.2w7sp317.workers.dev/api/vault";
 
    public static JsonSerializerOptions GetOptions()
    {
