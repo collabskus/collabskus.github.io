@@ -12,57 +12,6 @@
    <link href="manifest.webmanifest" rel="manifest" />
    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
-
-   <!--
-     Application Insights JavaScript SDK (official snippet).
-     Loaded in <head> BEFORE Blazor so it can capture the WASM
-     download as a dependency and the initial page view.
-     The connection string is an ingestion key, not a secret —
-     it is designed to be sent to browsers.
-   -->
-   <script type="text/javascript">!(function (cfg) {
-            function e() { cfg.onInit && cfg.onInit(n) }
-            var x, w, D, t, E, n, C = window, O = document, b = C.location, q = "script", I = "ingestionendpoint", L = "disableExceptionTracking", j = "ai.device.";
-            "instrumentationKey" [(t = "crossOrigin")] && "POST" === (E = "POST") && (cfg.endpointUrl && (cfg.endpointUrl = cfg.endpointUrl.replace(/^http:/, "https:")));
-            var s = (cfg.sv || cfg.version || "8"), S = cfg.useXhr, T = C.AwaUserContext;
-            (n = C[(D = "appInsightsSDK") + (cfg.name || "")] = C[D + (cfg.name || "")] || {
-                initialize: !0, queue: [], sv: s, version: 2, config: cfg
-            }),
-                (function (n) {
-                    var i = "https://js.monitor.azure.com/scripts/b/ai." + n.sv + ".gbl.min.js";
-                    n.queue && 0 === n.queue.length && (n.queue.push(function () {
-                        n.core && n.core._notifyInternalMessage && n.core._notifyInternalMessage(400, "Endpoint url if needed will be overridden by setting connectionString")
-                    }),
-                        function (n, i, t) {
-                            var e, a = O, l = a.createElement(q);
-                            l.src = i; t && (l.integrity = t);
-                            l.crossOrigin = "anonymous";
-                            n.ld < 0 ? a.getElementsByTagName("head")[0].appendChild(l) : setTimeout(function () { a.getElementsByTagName(q)[0].parentNode.appendChild(l) }, n.ld || 0);
-                            try { l.onload = e } catch (s) { }
-                        }(n, cfg.src || i, cfg.cr));
-                    try { (n.cookie = O.cookie) } catch (h) { }
-                    function p(e) { for (; e.length;) !function (i) { n[i] = function () { var e = arguments; n.queue.push(function () { n[i].apply(n, e) }) } }(e.pop()) }
-                    var u = "track", c = "TrackPage", f = "TrackEvent";
-                    p([u + "Event", u + "PageView", u + "Exception", u + "Trace", u + "DependencyData", u + "Metric", u + c + "View", "start" + c + "View", "start" + c + "View", "stop" + c + "View", "start" + f, "stop" + f, "addTelemetryInitializer", "setAuthenticatedUserContext", "clearAuthenticatedUserContext", "flush"]);
-                    n.SeverityLevel = { Verbose: 0, Information: 1, Warning: 2, Error: 3, Critical: 4 };
-                    var d = (cfg.extensionConfig || {}).ApplicationInsightsAnalytics || {};
-                    if (!0 !== cfg[L] && !0 !== d[L]) {
-                        p(["_" + (x = "onerror")]);
-                        var g = C[x];
-                        C[x] = function (e, i, a, t, r) {
-                            var s = g && g(e, i, a, t, r);
-                            return !0 !== s && n["_" + x]({ message: e, url: i, lineNumber: a, columnNumber: t, error: r, evt: C.event }), s
-                        };
-                        cfg.autoExceptionInstrumented = !0
-                    }
-                })(n)
-        })({
-            // Connection string is set at runtime by Blazor in Program.cs via
-            // window.appInsights.boot(connectionString). We pass an empty one
-            // here so the snippet initialises; the real value arrives before
-            // any telemetry call (we queue everything until boot completes).
-            connectionString: ""
-        });</script>
 </head>
 
 <body>
@@ -96,80 +45,7 @@
             }
         }(window.location));</script>
 
-   <script>// ── Application Insights wrapper ─────────────────────────────────────
-        // Blazor calls window.appInsights.boot(connectionString) from Program.cs
-        // once configuration is loaded. The snippet above already queues calls,
-        // so anything that fires before boot is replayed once the SDK is ready.
-        window.appInsights = {
-            _booted: false,
-            _connectionString: null,
-
-            boot: function (connectionString) {
-                if (this._booted) return;
-                if (!connectionString) {
-                    console.warn('appInsights.boot: no connection string supplied; telemetry disabled.');
-                    return;
-                }
-                this._connectionString = connectionString;
-                var sdk = window.appInsightsSDK;
-                if (!sdk) {
-                    console.warn('appInsights.boot: SDK not present.');
-                    return;
-                }
-                // Update config so the snippet uses the real endpoint.
-                sdk.config.connectionString = connectionString;
-                // Track the initial page view (the snippet auto-tracks only
-                // after the script tag finishes downloading; this is safe
-                // either way because the SDK dedupes).
-                try { sdk.trackPageView(); } catch (e) { }
-                this._booted = true;
-            },
-
-            trackEvent: function (name, properties) {
-                var sdk = window.appInsightsSDK;
-                if (!sdk) return;
-                try {
-                    sdk.trackEvent({ name: name }, properties || undefined);
-                } catch (e) { /* swallow */ }
-            },
-
-            trackPageView: function (name, uri) {
-                var sdk = window.appInsightsSDK;
-                if (!sdk) return;
-                try {
-                    var pv = {};
-                    if (name) pv.name = name;
-                    if (uri) pv.uri = uri;
-                    sdk.trackPageView(pv);
-                } catch (e) { /* swallow */ }
-            },
-
-            trackException: function (message, stack, properties) {
-                var sdk = window.appInsightsSDK;
-                if (!sdk) return;
-                try {
-                    var err = new Error(message || 'Unknown error');
-                    if (stack) err.stack = stack;
-                    sdk.trackException({ exception: err }, properties || undefined);
-                } catch (e) { /* swallow */ }
-            },
-
-            trackTrace: function (message, severity, properties) {
-                var sdk = window.appInsightsSDK;
-                if (!sdk) return;
-                try {
-                    sdk.trackTrace({ message: message, severityLevel: severity }, properties || undefined);
-                } catch (e) { /* swallow */ }
-            },
-
-            flush: function () {
-                var sdk = window.appInsightsSDK;
-                if (!sdk) return;
-                try { sdk.flush(); } catch (e) { /* swallow */ }
-            }
-        };
-
-        // ── Unified visibility tracking (Page Visibility API + IntersectionObserver) ──
+   <script>// ── Unified visibility tracking (Page Visibility API + IntersectionObserver) ──
         window.visibilityTracker = {
             _observers: {},
             _dotNetRef: null,
