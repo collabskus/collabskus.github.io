@@ -1,4 +1,6 @@
-﻿using Microsoft.JSInterop;
+using CollabsKus.BlazorWebAssembly.Settings;
+using Microsoft.Extensions.Options;
+using Microsoft.JSInterop;
 
 namespace CollabsKus.BlazorWebAssembly.Services;
 
@@ -9,15 +11,22 @@ public sealed class TelemetryService : ITelemetryService, IAsyncDisposable
    private readonly TelemetryOptions _options;
    private readonly Lazy<Task<IJSObjectReference>> _module;
 
-   public TelemetryService(IJSRuntime jsRuntime, TelemetryOptions options)
+   public TelemetryService(IJSRuntime jsRuntime, IOptions<TelemetryOptions> options)
    {
-      _options = options;
+      _options = ResolveOptions(options);
       _module = new Lazy<Task<IJSObjectReference>>(
          () => jsRuntime.InvokeAsync<IJSObjectReference>("import", ModulePath).AsTask());
    }
 
    public Task InitializeAsync() =>
-      InvokeAsync("init", _options.ConnectionString, _options.Environment);
+      InvokeAsync("init", new
+      {
+         connectionString = _options.ConnectionString,
+         environment = _options.Environment,
+         sdkUrl = _options.SdkUrl,
+         cloudRole = _options.CloudRole,
+         maxQueueLength = _options.MaxQueueLength
+      });
 
    public Task TrackPageViewAsync(string? name, string? uri) =>
       InvokeAsync("trackPageView", name, uri);
@@ -47,6 +56,18 @@ public sealed class TelemetryService : ITelemetryService, IAsyncDisposable
       }
       catch
       {
+      }
+   }
+
+   private static TelemetryOptions ResolveOptions(IOptions<TelemetryOptions> options)
+   {
+      try
+      {
+         return options.Value;
+      }
+      catch (OptionsValidationException)
+      {
+         return new TelemetryOptions();
       }
    }
 

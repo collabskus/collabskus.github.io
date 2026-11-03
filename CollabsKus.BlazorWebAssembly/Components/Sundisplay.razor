@@ -1,4 +1,3 @@
-﻿@using CollabsKus.BlazorWebAssembly.Models
 @inject IJSRuntime JS
 @implements IAsyncDisposable
 
@@ -51,7 +50,6 @@
                 <div class="sun-night-banner">☽ The sun is below the horizon</div>
             }
 
-            @* ── Stats row ── *@
             <div class="sun-stats-row">
                 <div class="sun-stat @(pos.IsAboveHorizon ? "sun-stat--lit" : "")">
                     <div class="sun-stat-label">ALTITUDE</div>
@@ -65,7 +63,6 @@
                 </div>
             </div>
 
-            @* ── Events row (today) ── *@
             <div class="sun-events-row">
                 <div class="sun-event">
                     <span class="sun-event-icon">🌅</span>
@@ -84,27 +81,25 @@
                 </div>
             </div>
 
-            @* ── Previous / Next row ── *@
             <div class="sun-prev-next-row">
                 <div class="sun-prev-next-item">
                     <div class="sun-prev-next-label">PREV SUNRISE</div>
-                    <div class="sun-prev-next-value">@FormatDateTime(pos.PreviousSunrise)</div>
+                    <div class="sun-prev-next-value">@FormatDateTime(pos.PreviousSunrise, pos.LocalTime)</div>
                 </div>
                 <div class="sun-prev-next-item">
                     <div class="sun-prev-next-label">PREV SUNSET</div>
-                    <div class="sun-prev-next-value">@FormatDateTime(pos.PreviousSunset)</div>
+                    <div class="sun-prev-next-value">@FormatDateTime(pos.PreviousSunset, pos.LocalTime)</div>
                 </div>
                 <div class="sun-prev-next-item">
                     <div class="sun-prev-next-label">NEXT SUNRISE</div>
-                    <div class="sun-prev-next-value">@FormatDateTime(pos.NextSunrise)</div>
+                    <div class="sun-prev-next-value">@FormatDateTime(pos.NextSunrise, pos.LocalTime)</div>
                 </div>
                 <div class="sun-prev-next-item">
                     <div class="sun-prev-next-label">NEXT SUNSET</div>
-                    <div class="sun-prev-next-value">@FormatDateTime(pos.NextSunset)</div>
+                    <div class="sun-prev-next-value">@FormatDateTime(pos.NextSunset, pos.LocalTime)</div>
                 </div>
             </div>
 
-            @* ── Info bar ── *@
             <div class="sun-info-bar">
                 <div class="sun-info-item">
                     <div class="sun-info-label">DAY LENGTH</div>
@@ -134,6 +129,9 @@
 </div>
 
 @code {
+    private const string HomeCanvasId = "sunSkyCanvasKtm";
+    private const string UserCanvasId = "sunSkyCanvasUser";
+
     [Parameter]
     public SolarPosition? Position { get; set; }
 
@@ -143,9 +141,7 @@
     [Parameter]
     public bool IsLive { get; set; }
 
-    // Track each canvas independently so the user canvas can be initialized
-    // after geolocation resolves (which happens after first render).
-    private bool _ktmCanvasInitialized;
+    private bool _homeCanvasInitialized;
     private bool _userCanvasInitialized;
     private bool _showDisclaimer;
 
@@ -153,109 +149,70 @@
 
     private IEnumerable<(SolarPosition pos, string canvasId, int idx)> GetLocations()
     {
-        var list = new List<(SolarPosition, string, int)>();
         if (Position != null)
-            list.Add((Position, "sunSkyCanvasKtm", 0));
+            yield return (Position, HomeCanvasId, 0);
         if (UserPosition != null)
-            list.Add((UserPosition, "sunSkyCanvasUser", 1));
-        return list;
+            yield return (UserPosition, UserCanvasId, 1);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        // Initialize Kathmandu canvas when Position is available and DOM element exists
-        if (!_ktmCanvasInitialized && Position != null)
+        if (!_homeCanvasInitialized && Position != null)
         {
-            try
-            {
-                await JS.InvokeVoidAsync("sunTracker.init", "sunSkyCanvasKtm");
-                _ktmCanvasInitialized = true;
-            }
-            catch
-            {
-                // Graceful degradation — canvas is optional
-            }
+            _homeCanvasInitialized = await TryInvokeAsync("sunTracker.init", HomeCanvasId);
         }
 
-        // Initialize user canvas when UserPosition is available and DOM element exists.
-        // This typically happens on a later render after geolocation resolves,
-        // which is why it MUST be tracked independently from the KTM canvas.
         if (!_userCanvasInitialized && UserPosition != null)
         {
-            try
-            {
-                await JS.InvokeVoidAsync("sunTracker.init", "sunSkyCanvasUser");
-                _userCanvasInitialized = true;
-            }
-            catch
-            {
-                // Graceful degradation — canvas is optional
-            }
+            _userCanvasInitialized = await TryInvokeAsync("sunTracker.init", UserCanvasId);
         }
 
-        // Draw Kathmandu canvas every render cycle
-        if (_ktmCanvasInitialized && Position != null)
+        if (_homeCanvasInitialized && Position != null)
         {
-            try
-            {
-                await JS.InvokeVoidAsync("sunTracker.draw",
-                    "sunSkyCanvasKtm", Position.Altitude, Position.Azimuth,
-                    Position.DayFraction, Position.IsAboveHorizon, Position.FullDayFraction);
-            }
-            catch
-            {
-                // Ignore draw errors
-            }
+            await DrawAsync(HomeCanvasId, Position);
         }
 
-        // Draw user canvas every render cycle
         if (_userCanvasInitialized && UserPosition != null)
         {
-            try
-            {
-                await JS.InvokeVoidAsync("sunTracker.draw",
-                    "sunSkyCanvasUser", UserPosition.Altitude, UserPosition.Azimuth,
-                    UserPosition.DayFraction, UserPosition.IsAboveHorizon, UserPosition.FullDayFraction);
-            }
-            catch
-            {
-                // Ignore draw errors
-            }
+            await DrawAsync(UserCanvasId, UserPosition);
         }
     }
 
-    /// <summary>Format a coordinate value with the correct N/S or E/W suffix.</summary>
+    private Task<bool> DrawAsync(string canvasId, SolarPosition position) =>
+        TryInvokeAsync("sunTracker.draw",
+            canvasId, position.Altitude, position.Azimuth,
+            position.DayFraction, position.IsAboveHorizon, position.FullDayFraction);
+
+    private async Task<bool> TryInvokeAsync(string identifier, params object?[] args)
+    {
+        try
+        {
+            await JS.InvokeVoidAsync(identifier, args);
+            return true;
+        }
+        catch (JSException)
+        {
+            return false;
+        }
+    }
+
     private static string FormatCoordinate(double value, bool isLatitude)
     {
-        if (isLatitude)
-        {
-            var suffix = value >= 0 ? "N" : "S";
-            return $"{Math.Abs(value):F2}°{suffix}";
-        }
-        else
-        {
-            var suffix = value >= 0 ? "E" : "W";
-            return $"{Math.Abs(value):F2}°{suffix}";
-        }
+        var suffix = isLatitude
+            ? (value >= 0 ? "N" : "S")
+            : (value >= 0 ? "E" : "W");
+        return $"{Math.Abs(value):F2}°{suffix}";
     }
 
-    /// <summary>Format time in 24-hour HH:mm:ss format.</summary>
-    private static string FormatTime(TimeOnly? time)
-    {
-        return time?.ToString("HH\\:mm\\:ss") ?? "--:--:--";
-    }
+    private static string FormatTime(TimeOnly? time) => time?.ToString("HH\\:mm\\:ss") ?? "--:--:--";
 
-    /// <summary>Format time in 24-hour HH:mm format (short).</summary>
-    private static string FormatTimeShort(TimeOnly? time)
-    {
-        return time?.ToString("HH\\:mm") ?? "--:--";
-    }
+    private static string FormatTimeShort(TimeOnly? time) => time?.ToString("HH\\:mm") ?? "--:--";
 
-    private static string FormatDateTime(DateTime? dt)
+    private static string FormatDateTime(DateTime? dt, DateTime localNow)
     {
         if (!dt.HasValue) return "—";
         var val = dt.Value;
-        var today = DateTime.Now.Date; // approximate — good enough for labeling
+        var today = localNow.Date;
         var dayLabel = val.Date == today ? "" :
                        val.Date == today.AddDays(-1) ? " (yesterday)" :
                        val.Date == today.AddDays(1) ? " (tomorrow)" :
@@ -265,14 +222,7 @@
 
     public async ValueTask DisposeAsync()
     {
-        try
-        {
-            await JS.InvokeVoidAsync("sunTracker.dispose", "sunSkyCanvasKtm");
-            await JS.InvokeVoidAsync("sunTracker.dispose", "sunSkyCanvasUser");
-        }
-        catch
-        {
-            // Ignore disposal errors
-        }
+        await TryInvokeAsync("sunTracker.dispose", HomeCanvasId);
+        await TryInvokeAsync("sunTracker.dispose", UserCanvasId);
     }
 }

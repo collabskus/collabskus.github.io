@@ -1,10 +1,9 @@
-﻿using CollabsKus.BlazorWebAssembly.Services;
+using CollabsKus.BlazorWebAssembly.Services;
 
 namespace CollabsKus.Tests.Services;
 
 public class BlogServiceTests
 {
-   // ── SplitFrontmatter ──────────────────────────────────────────────────
 
    [Test]
    public async Task SplitFrontmatter_NoDelimiters_ReturnsEmptyFrontAndFullBody()
@@ -59,8 +58,6 @@ public class BlogServiceTests
       await Assert.That(front.Count).IsEqualTo(0);
       await Assert.That(body).IsEqualTo(raw);
    }
-
-   // ── ParsePost ─────────────────────────────────────────────────────────
 
    [Test]
    public async Task ParsePost_ExtractsTitle()
@@ -136,5 +133,25 @@ public class BlogServiceTests
       var post = BlogService.ParsePost("test", md);
       await Assert.That(post.ContentHtml.Contains("<a ")).IsTrue();
       await Assert.That(post.ContentHtml.Contains("https://example.com")).IsTrue();
+   }
+
+   [Test]
+   [Arguments("hello-world")]
+   [Arguments("2026-04-24-sambat")]
+   [Arguments("author_1")]
+   public async Task IsValidSlug_SafeSlug_ReturnsTrue(string slug)
+   {
+      await Assert.That(BlogService.IsValidSlug(slug)).IsTrue();
+   }
+
+   [Test]
+   [Arguments("")]
+   [Arguments("   ")]
+   [Arguments("../appsettings")]
+   [Arguments("posts/hello")]
+   [Arguments("hello world")]
+   public async Task IsValidSlug_UnsafeSlug_ReturnsFalse(string slug)
+   {
+      await Assert.That(BlogService.IsValidSlug(slug)).IsFalse();
    }
 }

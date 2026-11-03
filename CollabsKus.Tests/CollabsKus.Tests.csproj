@@ -4,7 +4,6 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <OutputType>Exe</OutputType>
-    <!-- Required for .NET 10+: use Microsoft Testing Platform instead of VSTest -->
     <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
   </PropertyGroup>
   <ItemGroup>
@@ -12,5 +11,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CollabsKus.BlazorWebAssembly\CollabsKus.BlazorWebAssembly.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\CollabsKus.BlazorWebAssembly\wwwroot\appsettings.json" Link="TestData\appsettings.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

@@ -4,45 +4,42 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Blazor WebAssembly (.NET 10) single-page app displaying a Kathmandu Calendar & Time with Bikram Sambat calendar, real-time clock, moon phase calculations, and solar position tracking. Deploys automatically to GitHub Pages.
+Blazor WebAssembly (.NET 10) single-page app displaying a Kathmandu Calendar & Time with Bikram Sambat calendar, real-time clock, moon phase calculations, and solar position tracking. Deploys automatically to GitHub Pages and works offline as a PWA after the first visit.
 
 ## Commands
 
 ```bash
-# Develop
 dotnet run --project CollabsKus.BlazorWebAssembly
-
-# Build
 dotnet build CollabsKus.BlazorWebAssembly/CollabsKus.BlazorWebAssembly.csproj --configuration Release
-
-# Publish
 dotnet publish CollabsKus.BlazorWebAssembly/CollabsKus.BlazorWebAssembly.csproj -c Release -o publish --no-build
-
-# Run unit tests
 dotnet test CollabsKus.Tests/CollabsKus.Tests.csproj
-
-# Run E2E tests (requires running app)
 dotnet test CollabsKus.PlaywrightTests/CollabsKus.PlaywrightTests.csproj
 ```
 
-Dev server runs at `https://localhost:7212`.
+Dev server runs at `http://localhost:5267` / `https://localhost:7212`.
 
 ## Architecture
 
-**Component hierarchy**: `App.razor` → `MainLayout.razor` → `Home.razor` → UI components (`TimeDisplay`, `DateCards`, `MoonDisplay`, `Sundisplay`, `CalendarGrid`). Each component has a paired `.razor.css` for scoped styles.
+**Configuration**: no magic constants. All tunables live in `wwwroot/appsettings.json`, bound to classes in `Settings/` that implement `IAppOptions` (static `SectionName` + `Validate()`), registered with `AddAppOptions<T>()`. Add new settings the same way and extend `AppSettingsTests`.
 
-**`Home.razor` is the state hub** — it owns all data, runs three concurrent timers (10ms clock, 1-hour time API sync, 24-hour calendar refresh), and passes data down via parameters. It uses JS interop for tab visibility and geolocation, and implements `IAsyncDisposable` for cleanup.
+**Component hierarchy**: `App.razor` → `MainLayout.razor` → `Home.razor` → `TimeDisplay`, `DateCards`, `MoonDisplay`, `Sundisplay`, `CalendarGrid`. Each component has a paired `.razor.css`.
+
+**`Home.razor` is the state hub**: renders immediately from local calculations, then runs cancellable `PeriodicTimer` loops (clock tick, clock sync check, calendar check) configured by `Refresh`. Refreshes are gated against overlap and also triggered by online/visibility events and Kathmandu day rollover.
 
 **Services** (registered in `Program.cs`):
-- `KathmanduCalendarService` — API client with TTL caching (calendar: 1 hour, time: 5 min). Calculates server time offset so the clock stays accurate between API calls.
-- `MoonPhaseService` — Stateless astronomical calculator using Jean Meeus "Astronomical Algorithms" (Julian Day Number, lunar age, illumination, tithi/paksha).
-- `SolarPositionService` — Stateless singleton computing altitude, azimuth, sunrise/sunset, solar noon, and golden hour windows for a given lat/lon.
-- `ApiLoggerService` — Fire-and-forget telemetry to Cloudflare Workers; silent on failure.
+- `KathmanduCalendarService` — calendar and clock offset; checks memory, then `ILocalCache`, then the API; projects or marks saved calendars stale when offline.
+- `LocalCache` / `BrowserKeyValueStore` — versioned, timestamped JSON in `localStorage` via `window.appStorage`.
+- `ClockOffsetCalculator`, `CalendarProjection` — pure, unit-tested helpers.
+- `MoonPhaseService` — static Meeus calculator; always pass true UTC.
+- `SolarPositionService` — stateless; takes a `GeoLocation`.
+- `GeolocationService`, `ApiLoggerService` (`IApiLogger`), `BlogService`, `TelemetryService`.
 
-**No external JS libraries or CSS frameworks** — all styling is hand-written, all astronomical math is in C#, and JS interop is limited to geolocation and visibility detection.
+**JavaScript**: `js/interop.js` (page monitor, geolocation, storage, sun canvas), `js/pwa.js` (service worker registration and update banner), `js/telemetry.js` (Application Insights module).
 
-**Package versions** are managed centrally in `Directory.Packages.props` (do not specify versions in individual `.csproj` files).
+**Testing**: TUnit with async assertions. Use `ManualTimeProvider`, `InMemoryKeyValueStore`, `StubHttpMessageHandler`, `RecordingApiLogger` from `CollabsKus.Tests/Support`.
+
+**Package versions** are managed centrally in `Directory.Packages.props`.
 
 ## Deployment
 
-CI/CD is in `.github/workflows/deploy.yml`. On push to `main`/`master` it builds, publishes, and deploys to GitHub Pages. The workflow detects whether it's a user site or project site to set the correct base path for Blazor's routing.
+`.github/workflows/deploy.yml` builds, publishes and deploys to GitHub Pages on push to `main`/`master`, setting the base path for user vs project sites.

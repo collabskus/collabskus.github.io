@@ -9,12 +9,9 @@ html {
 }
 
 body {
-    /* min-height instead of height so the gradient stretches with content
-       that overflows the viewport, preventing a color cutoff at the bottom */
     min-height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    /* Attach the gradient to the viewport so it doesn't scroll/repeat */
     background-attachment: fixed;
     color: #fff;
     overflow-x: hidden;
@@ -24,7 +21,6 @@ body {
     min-height: 100vh;
 }
 
-/* Loading indicator */
 .loading-progress {
     position: relative;
     display: block;
@@ -58,7 +54,6 @@ body {
         content: var(--blazor-load-percentage-text, "Loading");
     }
 
-/* Loading and Error States */
 #blazor-error-ui {
     background: linear-gradient(135deg, #f56565, #ed8936);
     color: white;
@@ -80,4 +75,40 @@ body {
         top: 1rem;
         font-size: 1.5rem;
     }
-    
+
+.app-update {
+    position: fixed;
+    left: 50%;
+    bottom: 1rem;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    background: rgba(20, 20, 50, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    font-size: 0.85rem;
+    z-index: 1500;
+    max-width: calc(100% - 2rem);
+}
+
+    .app-update[hidden] {
+        display: none;
+    }
+
+.app-update-reload {
+    padding: 4px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+    .app-update-reload:disabled {
+        opacity: 0.6;
+        cursor: default;
+    }

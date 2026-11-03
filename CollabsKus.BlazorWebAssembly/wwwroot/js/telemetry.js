@@ -1,12 +1,9 @@
-const sdkUrl = "https://js.monitor.azure.com/scripts/b/ai.3.gbl.min.js";
-const cloudRole = "collabskus-web";
-const maxQueueLength = 250;
-
 const State = Object.freeze({ Idle: "idle", Loading: "loading", Ready: "ready", Disabled: "disabled" });
 
 let state = State.Idle;
 let sdk = null;
 let queue = [];
+let maxQueueLength = Number.POSITIVE_INFINITY;
 
 function loadScript(src) {
     return new Promise((resolve, reject) => {
@@ -42,24 +39,24 @@ function enqueue(action) {
     }
 }
 
-async function start(connectionString, environment) {
+async function start(config) {
     try {
-        await loadScript(sdkUrl);
+        await loadScript(config.sdkUrl);
         const ns = window.Microsoft && window.Microsoft.ApplicationInsights;
         if (!ns || typeof ns.ApplicationInsights !== "function") {
             throw new Error("Application Insights SDK namespace not found");
         }
         sdk = new ns.ApplicationInsights({
             config: {
-                connectionString: connectionString,
+                connectionString: config.connectionString,
                 enableAutoRouteTracking: false
             }
         });
         sdk.addTelemetryInitializer(envelope => {
             envelope.tags = envelope.tags || {};
-            envelope.tags["ai.cloud.role"] = cloudRole;
+            envelope.tags["ai.cloud.role"] = config.cloudRole;
             envelope.data = envelope.data || {};
-            envelope.data.environment = environment;
+            envelope.data.environment = config.environment;
         });
         sdk.loadAppInsights();
         sdk.trackPageView();
@@ -72,16 +69,31 @@ async function start(connectionString, environment) {
     }
 }
 
-export function init(connectionString, environment) {
+export function init(config) {
     if (state !== State.Idle) {
         return;
     }
-    if (!connectionString) {
+    if (!config || !config.connectionString) {
         disable("no connection string configured");
         return;
     }
+    if (!config.sdkUrl) {
+        disable("no SDK URL configured");
+        return;
+    }
+    if (navigator.onLine === false) {
+        disable("browser is offline");
+        return;
+    }
+    maxQueueLength = config.maxQueueLength > 0 ? config.maxQueueLength : 0;
+    queue = queue.slice(0, maxQueueLength);
     state = State.Loading;
-    start(connectionString, environment || "Production");
+    start({
+        connectionString: config.connectionString,
+        environment: config.environment || "Production",
+        sdkUrl: config.sdkUrl,
+        cloudRole: config.cloudRole || ""
+    });
 }
 
 export function trackPageView(name, uri) {

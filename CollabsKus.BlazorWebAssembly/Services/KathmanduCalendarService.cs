@@ -1,148 +1,213 @@
-﻿using System.Net.Http.Json;
+using System.Net.Http.Json;
 using CollabsKus.BlazorWebAssembly.Models;
+using CollabsKus.BlazorWebAssembly.Settings;
+using Microsoft.Extensions.Options;
 
 namespace CollabsKus.BlazorWebAssembly.Services;
 
-public class KathmanduCalendarService(HttpClient httpClient, ApiLoggerService logger)
+public sealed class KathmanduCalendarService
 {
-   private CalendarResponse? _cachedCalendarData;
-   private DateTime? _calendarCacheTime;
-   private TimeResponse? _cachedTimeData;
-   private DateTime? _timeCacheTime;
+   private const string CalendarCacheKey = "calendar";
+   private const string ClockOffsetCacheKey = "clock-offset";
 
-   // Seed the offset with Nepal's fixed UTC+5:45. The /api/time endpoint refines
-   // this to second-precision (drift-corrected) when it responds, but if that
-   // endpoint is slow or unreachable, GetCurrentKathmanduTime() still returns a
-   // usable Kathmandu time from the moment the service is constructed. This
-   // unblocks the UI from waiting on an external dependency to render its clock.
-   private TimeSpan _serverTimeOffset = SolarPositionService.NstOffset;
+   private readonly HttpClient _httpClient;
+   private readonly IApiLogger _logger;
+   private readonly ILocalCache _cache;
+   private readonly TimeProvider _timeProvider;
+   private readonly CalendarApiOptions _api;
+   private readonly TimeSpan _expectedOffset;
 
-   private const string TodayApiUrl = "https://calendar.bloggernepal.com/api/today";
-   private const string TimeApiUrl = "https://calendar.bloggernepal.com/api/time";
+   private TimeSpan _clockOffset;
+   private CacheEntry<CalendarCacheRecord>? _calendar;
+   private bool _calendarFromNetwork;
 
-   // Bound external HTTP work to keep the UI responsive when the upstream
-   // calendar API is slow. The default HttpClient timeout (~100s) is too long
-   // for an interactive page; if a refresh takes longer than this we let it
-   // fail and try again on the next scheduled tick.
-   private static readonly TimeSpan ApiTimeout = TimeSpan.FromSeconds(10);
-
-   public async Task<CalendarResponse?> GetTodayDataAsync()
+   public KathmanduCalendarService(
+      HttpClient httpClient,
+      IApiLogger logger,
+      ILocalCache cache,
+      TimeProvider timeProvider,
+      IOptions<CalendarApiOptions> apiOptions,
+      IOptions<LocationOptions> locationOptions)
    {
-      // Cache for 1 hour
-      if (_cachedCalendarData != null && _calendarCacheTime.HasValue &&
-          DateTime.UtcNow - _calendarCacheTime.Value < TimeSpan.FromHours(1))
+      _httpClient = httpClient;
+      _logger = logger;
+      _cache = cache;
+      _timeProvider = timeProvider;
+      _api = apiOptions.Value;
+      _expectedOffset = locationOptions.Value.UtcOffset;
+      _clockOffset = _expectedOffset;
+   }
+
+   public DateTimeOffset? LastClockSync { get; private set; }
+
+   public DateTime GetCurrentKathmanduTime() => _timeProvider.GetUtcNow().UtcDateTime + _clockOffset;
+
+   public DateOnly GetKathmanduToday() => DateOnly.FromDateTime(GetCurrentKathmanduTime());
+
+   public async Task<bool> SyncClockAsync(CancellationToken cancellationToken = default)
+   {
+      DateTimeOffset now = _timeProvider.GetUtcNow();
+      if (IsClockOffsetFresh(LastClockSync, now))
       {
-         await logger.LogApiRequestAsync(TodayApiUrl, _cachedCalendarData, true, ApiLoggerService.GetOptions());
-         return _cachedCalendarData;
+         return true;
       }
+
+      CacheEntry<long>? cached = await _cache.GetAsync<long>(ClockOffsetCacheKey);
+      if (cached is not null && IsClockOffsetFresh(cached.StoredAt, now))
+      {
+         ApplyClockOffset(TimeSpan.FromTicks(cached.Value), cached.StoredAt);
+         _logger.LogApiRequest(_api.TimeUrl, new { offsetMinutes = _clockOffset.TotalMinutes }, fromCache: true);
+         return true;
+      }
+
+      TimeSpan? fetched = await FetchClockOffsetAsync(cancellationToken);
+      if (fetched is null)
+      {
+         return false;
+      }
+
+      ApplyClockOffset(fetched.Value, now);
+      await _cache.SetAsync(ClockOffsetCacheKey, _clockOffset.Ticks);
+      return true;
+   }
+
+   public async Task<CalendarSnapshot?> GetCalendarAsync(CancellationToken cancellationToken = default)
+   {
+      DateOnly today = GetKathmanduToday();
+      CacheEntry<CalendarCacheRecord>? stored = await GetStoredCalendarAsync();
+
+      if (stored is not null && stored.Value.ForDate == today)
+      {
+         CalendarDataSource source = _calendarFromNetwork ? CalendarDataSource.Network : CalendarDataSource.Cache;
+         return new CalendarSnapshot(stored.Value.Response.Res, today, source, stored.StoredAt);
+      }
+
+      CacheEntry<CalendarCacheRecord>? fetched = await FetchCalendarAsync(today, cancellationToken);
+      if (fetched is not null)
+      {
+         return new CalendarSnapshot(fetched.Value.Response.Res, today, CalendarDataSource.Network, fetched.StoredAt);
+      }
+
+      return BuildFallback(stored, today);
+   }
+
+   private static CalendarSnapshot? BuildFallback(CacheEntry<CalendarCacheRecord>? stored, DateOnly today)
+   {
+      if (stored is null)
+      {
+         return null;
+      }
+
+      CalendarCacheRecord record = stored.Value;
+      CalendarData? projected = CalendarProjection.TryProject(record.Response.Res, record.ForDate, today);
+
+      return projected is not null
+         ? new CalendarSnapshot(projected, today, CalendarDataSource.Projected, stored.StoredAt)
+         : new CalendarSnapshot(CalendarProjection.WithoutToday(record.Response.Res), record.ForDate, CalendarDataSource.Stale, stored.StoredAt);
+   }
+
+   private async ValueTask<CacheEntry<CalendarCacheRecord>?> GetStoredCalendarAsync()
+   {
+      if (_calendar is not null)
+      {
+         return _calendar;
+      }
+
+      CacheEntry<CalendarCacheRecord>? entry = await _cache.GetAsync<CalendarCacheRecord>(CalendarCacheKey);
+      if (entry is null || !HasDays(entry.Value.Response))
+      {
+         return null;
+      }
+
+      _calendar = entry;
+      _calendarFromNetwork = false;
+      _logger.LogApiRequest(_api.TodayUrl, entry.Value.Response, fromCache: true);
+      return entry;
+   }
+
+   private async Task<CacheEntry<CalendarCacheRecord>?> FetchCalendarAsync(DateOnly today, CancellationToken cancellationToken)
+   {
+      using var timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+      timeout.CancelAfter(_api.RequestTimeout);
 
       try
       {
-         using var cts = new CancellationTokenSource(ApiTimeout);
-         var data = await httpClient.GetFromJsonAsync<CalendarResponse>(TodayApiUrl, cts.Token);
-         if (data != null)
+         CalendarResponse? response = await _httpClient.GetFromJsonAsync<CalendarResponse>(_api.TodayUrl, timeout.Token);
+         if (response is null || !HasDays(response))
          {
-            _cachedCalendarData = data;
-            _calendarCacheTime = DateTime.UtcNow;
-            await logger.LogApiRequestAsync(TodayApiUrl, data, false, ApiLoggerService.GetOptions());
+            _logger.LogApiRequest(_api.TodayUrl, new { error = "Calendar response contained no days", failed = true }, fromCache: false);
+            return null;
          }
-         return data;
+
+         var record = new CalendarCacheRecord { ForDate = today, Response = response };
+         var entry = new CacheEntry<CalendarCacheRecord>(record, _timeProvider.GetUtcNow());
+         _calendar = entry;
+         _calendarFromNetwork = true;
+         await _cache.SetAsync(CalendarCacheKey, record);
+         _logger.LogApiRequest(_api.TodayUrl, response, fromCache: false);
+         return entry;
+      }
+      catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+      {
+         throw;
       }
       catch (Exception ex)
       {
-         await logger.LogApiRequestAsync(TodayApiUrl, new { error = ex.Message, failed = true }, false, ApiLoggerService.GetOptions());
-         throw;
+         _logger.LogApiRequest(_api.TodayUrl, new { error = ex.Message, failed = true }, fromCache: false);
+         return null;
       }
    }
 
-   public async Task<TimeResponse?> GetTimeDataAsync()
+   private async Task<TimeSpan?> FetchClockOffsetAsync(CancellationToken cancellationToken)
    {
-      // Cache for 5 minutes
-      if (_cachedTimeData != null && _timeCacheTime.HasValue &&
-          DateTime.UtcNow - _timeCacheTime.Value < TimeSpan.FromMinutes(5))
-      {
-         await logger.LogApiRequestAsync(TimeApiUrl, _cachedTimeData, true, ApiLoggerService.GetOptions());
-         return _cachedTimeData;
-      }
+      using var timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+      timeout.CancelAfter(_api.RequestTimeout);
 
       try
       {
-         var beforeFetch = DateTime.UtcNow;
-         using var cts = new CancellationTokenSource(ApiTimeout);
-         var data = await httpClient.GetFromJsonAsync<TimeResponse>(TimeApiUrl, cts.Token);
-         var afterFetch = DateTime.UtcNow;
+         DateTime requestStartUtc = _timeProvider.GetUtcNow().UtcDateTime;
+         TimeResponse? response = await _httpClient.GetFromJsonAsync<TimeResponse>(_api.TimeUrl, timeout.Token);
+         DateTime responseUtc = _timeProvider.GetUtcNow().UtcDateTime;
 
-         if (data != null)
+         TimeSpan? offset = response is null
+            ? null
+            : ClockOffsetCalculator.Calculate(response, requestStartUtc, responseUtc, _expectedOffset);
+
+         if (offset is null)
          {
-            _cachedTimeData = data;
-            _timeCacheTime = DateTime.UtcNow;
-
-            // Calculate server time offset
-            int serverHour = int.Parse(data.Hour);
-            int serverMin = int.Parse(data.Min);
-            int serverSec = int.Parse(data.Sec);
-            bool isPM = data.ApOrPm == "PM";
-
-            if (isPM && serverHour != 12) serverHour += 12;
-            if (!isPM && serverHour == 12) serverHour = 0;
-
-            var serverTime = new DateTime(
-                DateTime.UtcNow.Year,
-                DateTime.UtcNow.Month,
-                DateTime.UtcNow.Day,
-                serverHour,
-                serverMin,
-                serverSec
-            );
-
-            var localTime = beforeFetch + (afterFetch - beforeFetch) / 2;
-            _serverTimeOffset = serverTime - localTime;
-
-            // FIX: Date boundary crossing.
-            // The API returns Kathmandu local time (UTC+5:45), but we attached it
-            // to the UTC date above. When UTC is late evening (e.g. 23:00 UTC =
-            // 04:45 next day in Kathmandu), the API returns 04:45 but we put it on
-            // today's UTC date, making _serverTimeOffset roughly -18h instead of +5h45m.
-            // Since Nepal is a fixed UTC+5:45 (no DST), a valid offset must be close
-            // to +5h45m. Any offset beyond ±12h from that expected value indicates a
-            // day boundary crossing that needs correction.
-            if (_serverTimeOffset.TotalHours < -12)
-            {
-               _serverTimeOffset += TimeSpan.FromHours(24);
-            }
-            else if (_serverTimeOffset.TotalHours > 12)
-            {
-               _serverTimeOffset -= TimeSpan.FromHours(24);
-            }
-
-            await logger.LogApiRequestAsync(TimeApiUrl, data, false, ApiLoggerService.GetOptions());
+            _logger.LogApiRequest(_api.TimeUrl, new { error = "Time response could not be parsed", failed = true }, fromCache: false);
+            return null;
          }
-         return data;
+
+         _logger.LogApiRequest(_api.TimeUrl, response, fromCache: false);
+         return offset;
+      }
+      catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+      {
+         throw;
       }
       catch (Exception ex)
       {
-         await logger.LogApiRequestAsync(TimeApiUrl, new { error = ex.Message, failed = true }, false, ApiLoggerService.GetOptions());
-         throw;
+         _logger.LogApiRequest(_api.TimeUrl, new { error = ex.Message, failed = true }, fromCache: false);
+         return null;
       }
    }
 
-   public DateTime GetCurrentKathmanduTime()
+   private void ApplyClockOffset(TimeSpan offset, DateTimeOffset syncedAt)
    {
-      return DateTime.UtcNow + _serverTimeOffset;
+      _clockOffset = ClockOffsetCalculator.Normalize(offset, _expectedOffset);
+      LastClockSync = syncedAt;
    }
 
-   public static string ToNepaliDigits(int number)
+   private bool IsClockOffsetFresh(DateTimeOffset? syncedAt, DateTimeOffset now) =>
+      syncedAt is { } at && now >= at && now - at < _api.ClockOffsetCacheDuration;
+
+   private static bool HasDays(CalendarResponse? response) => response?.Res?.Days is { Count: > 0 };
+
+   private sealed class CalendarCacheRecord
    {
-      string[] nepaliDigits = new[] { "०", "१", "२", "३", "४", "५", "६", "७", "८", "९" };
-      string numStr = number.ToString("D2");
-      string result = "";
-      foreach (char digit in numStr)
-      {
-         if (char.IsDigit(digit))
-         {
-            result += nepaliDigits[digit - '0'];
-         }
-      }
-      return result;
+      public DateOnly ForDate { get; set; }
+
+      public CalendarResponse Response { get; set; } = new();
    }
 }

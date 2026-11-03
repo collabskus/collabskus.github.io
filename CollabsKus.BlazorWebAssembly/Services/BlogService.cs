@@ -1,20 +1,24 @@
-﻿using System.Net.Http.Json;
+using System.Net.Http.Json;
+using System.Text.Json;
 using CollabsKus.BlazorWebAssembly.Models;
+using CollabsKus.BlazorWebAssembly.Settings;
 using Markdig;
+using Microsoft.Extensions.Options;
 
 namespace CollabsKus.BlazorWebAssembly.Services;
 
-public class BlogService(HttpClient httpClient)
+public class BlogService(HttpClient httpClient, IOptions<BlogOptions> options, TimeProvider timeProvider)
 {
-   private BlogManifest? _cachedManifest;
-   private DateTime? _manifestCacheTime;
-   private readonly Dictionary<string, BlogPost> _postCache = new();
-   private readonly Dictionary<string, BlogAuthor> _authorCache = new();
-
    private static readonly MarkdownPipeline Pipeline = new MarkdownPipelineBuilder()
        .UseAutoLinks()
        .UseEmphasisExtras()
        .Build();
+
+   private readonly BlogOptions _options = options.Value;
+   private readonly Dictionary<string, BlogPost> _postCache = new(StringComparer.Ordinal);
+   private readonly Dictionary<string, BlogAuthor> _authorCache = new(StringComparer.Ordinal);
+   private BlogManifest? _cachedManifest;
+   private DateTimeOffset _manifestCachedAt;
 
    public async Task<List<BlogPostSummary>> GetPostsAsync()
    {
@@ -24,17 +28,20 @@ public class BlogService(HttpClient httpClient)
 
    public async Task<BlogPost?> GetPostAsync(string slug)
    {
+      if (!IsValidSlug(slug))
+         return null;
+
       if (_postCache.TryGetValue(slug, out var cached))
          return cached;
 
       try
       {
-         string raw = await httpClient.GetStringAsync($"blog/posts/{slug}.md");
+         string raw = await httpClient.GetStringAsync(CombinePath(_options.PostsPath, $"{slug}.md"));
          var post = ParsePost(slug, raw);
          _postCache[slug] = post;
          return post;
       }
-      catch
+      catch (Exception ex) when (IsRecoverable(ex))
       {
          return null;
       }
@@ -42,40 +49,28 @@ public class BlogService(HttpClient httpClient)
 
    public async Task<BlogAuthor?> GetAuthorAsync(string authorId)
    {
+      if (!IsValidSlug(authorId))
+         return null;
+
       if (_authorCache.TryGetValue(authorId, out var cached))
          return cached;
 
       try
       {
-         var author = await httpClient.GetFromJsonAsync<BlogAuthor>($"blog/authors/{authorId}.json");
+         var author = await httpClient.GetFromJsonAsync<BlogAuthor>(CombinePath(_options.AuthorsPath, $"{authorId}.json"));
          if (author != null)
             _authorCache[authorId] = author;
          return author;
       }
-      catch
+      catch (Exception ex) when (IsRecoverable(ex))
       {
          return null;
       }
    }
 
-   private async Task<BlogManifest> GetManifestAsync()
-   {
-      if (_cachedManifest != null && _manifestCacheTime.HasValue &&
-          DateTime.UtcNow - _manifestCacheTime.Value < TimeSpan.FromMinutes(5))
-         return _cachedManifest;
-
-      try
-      {
-         var manifest = await httpClient.GetFromJsonAsync<BlogManifest>("blog/manifest.json");
-         _cachedManifest = manifest ?? new BlogManifest();
-      }
-      catch
-      {
-         _cachedManifest = new BlogManifest();
-      }
-      _manifestCacheTime = DateTime.UtcNow;
-      return _cachedManifest;
-   }
+   public static bool IsValidSlug(string? value) =>
+      !string.IsNullOrWhiteSpace(value)
+      && value.All(c => char.IsAsciiLetterOrDigit(c) || c is '-' or '_');
 
    public static BlogPost ParsePost(string slug, string raw)
    {
@@ -119,4 +114,32 @@ public class BlogService(HttpClient httpClient)
 
       return (front, body);
    }
+
+   private async Task<BlogManifest> GetManifestAsync()
+   {
+      var now = timeProvider.GetUtcNow();
+      if (_cachedManifest != null && now - _manifestCachedAt < _options.ManifestCacheDuration)
+         return _cachedManifest;
+
+      try
+      {
+         var manifest = await httpClient.GetFromJsonAsync<BlogManifest>(_options.ManifestPath);
+         if (manifest != null)
+         {
+            _cachedManifest = manifest;
+            _manifestCachedAt = now;
+            return manifest;
+         }
+      }
+      catch (Exception ex) when (IsRecoverable(ex))
+      {
+      }
+
+      return _cachedManifest ?? new BlogManifest();
+   }
+
+   private static string CombinePath(string basePath, string fileName) => $"{basePath.TrimEnd('/')}/{fileName}";
+
+   private static bool IsRecoverable(Exception ex) =>
+      ex is HttpRequestException or JsonException or NotSupportedException or TaskCanceledException;
 }

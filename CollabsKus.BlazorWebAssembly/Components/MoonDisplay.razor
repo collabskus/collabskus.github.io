@@ -1,5 +1,3 @@
-@using CollabsKus.BlazorWebAssembly.Models
-
 <div id="moon-display-root" class="moon-display">
     <div class="label">MOON PHASE</div>
     <div class="moon-icon @(IsLive ? "moon-icon-live" : "")">@MoonPhase?.Icon</div>
@@ -13,16 +11,14 @@
         </div>
 
         <div class="moon-context">
-            @if (MoonPhase.Age < 14.765)
+            @if (MoonPhase.IsWaxing)
             {
-                // Waxing half: show "since new moon" and "until full moon"
                 <span>New moon @FormatDays(MoonPhase.DaysSinceNewMoon) ago</span>
                 <span> · </span>
                 <span>Full moon in @FormatDays(MoonPhase.DaysUntilFullMoon)</span>
             }
             else
             {
-                // Waning half: show "since full moon" and "until new moon"
                 <span>Full moon @FormatDays(MoonPhase.DaysSinceFullMoon) ago</span>
                 <span> · </span>
                 <span>New moon in @FormatDays(MoonPhase.DaysUntilNewMoon)</span>
@@ -46,13 +42,17 @@
 </div>
 
 @code {
+    private const double SecondsPerDay = 86400.0;
+    private const double SecondsPerHour = 3600.0;
+    private const double SecondsPerMinute = 60.0;
+
     [Parameter]
     public MoonPhase? MoonPhase { get; set; }
 
     [Parameter]
     public bool IsLive { get; set; }
 
-    private string FormatDays(double days)
+    private static string FormatDays(double days)
     {
         if (days < 0.5)
             return "today";
@@ -61,14 +61,14 @@
         return $"{days:F1} days";
     }
 
-    private string FormatPreciseDays(double days)
+    private static string FormatPreciseDays(double days)
     {
-        var totalSeconds = days * 86400.0;
+        var totalSeconds = days * SecondsPerDay;
         var d = (int)days;
-        var remainingSeconds = totalSeconds - (d * 86400.0);
-        var h = (int)(remainingSeconds / 3600.0);
-        var m = (int)((remainingSeconds % 3600.0) / 60.0);
-        var s = (int)(remainingSeconds % 60.0);
+        var remainingSeconds = totalSeconds - (d * SecondsPerDay);
+        var h = (int)(remainingSeconds / SecondsPerHour);
+        var m = (int)((remainingSeconds % SecondsPerHour) / SecondsPerMinute);
+        var s = (int)(remainingSeconds % SecondsPerMinute);
 
         if (d > 0)
             return $"{d}d {h}h {m}m {s}s";
@@ -77,9 +77,5 @@
         return $"{m}m {s}s";
     }
 
-    private string FormatIllumination(double illumination)
-    {
-        // Show all the decimal places for precision — updates every second
-        return $"{illumination}%";
-    }
+    private static string FormatIllumination(double illumination) => $"{illumination}%";
 }

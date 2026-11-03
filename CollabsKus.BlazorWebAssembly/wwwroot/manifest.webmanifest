@@ -1,11 +1,13 @@
 {
-  "name": "CollabsKus.BlazorWebAssembly",
-  "short_name": "CollabsKus.BlazorWebAssembly",
+  "name": "Kathmandu Calendar & Time",
+  "short_name": "Kathmandu",
+  "description": "Bikram Sambat calendar, Nepal time, moon phase and sun tracker. Works offline.",
   "id": "./",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#03173d",
+  "background_color": "#667eea",
+  "theme_color": "#667eea",
   "prefer_related_applications": false,
   "icons": [
     {

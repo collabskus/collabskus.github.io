@@ -1,7 +1,15 @@
 @page "/"
-@using CollabsKus.BlazorWebAssembly.Models
-@using CollabsKus.BlazorWebAssembly.Services
+@using Microsoft.Extensions.Logging
 @implements IAsyncDisposable
+@inject KathmanduCalendarService CalendarService
+@inject SolarPositionService SolarPositionService
+@inject IGeolocationService GeolocationService
+@inject IApiLogger ApiLogger
+@inject TimeProvider TimeProvider
+@inject IJSRuntime JS
+@inject IOptions<RefreshOptions> RefreshConfig
+@inject IOptions<LocationOptions> LocationConfig
+@inject ILogger<Home> Log
 
 <PageTitle>Kathmandu Calendar & Time</PageTitle>
 
@@ -10,23 +18,24 @@
     <div class="subtitle">Kathmandu, Nepal</div>
 </div>
 
-@if (_error != null)
+@if (StatusMessage is { } message)
 {
-    <div class="error">@_error</div>
+    <div class="notice" role="status">@message</div>
 }
 
 <TimeDisplay CurrentTime="_currentTime" />
-<DateCards CalendarData="_calendarData?.Res" />
-<MoonDisplay MoonPhase="_moonPhase" IsLive="_isMoonLive" />
-<Sundisplay Position="_sunPosition" UserPosition="_userSunPosition" IsLive="_isSunLive" />
-<CalendarGrid CalendarData="_calendarData?.Res"
-              SolarService="SolarPositionService"
-              UserLat="_userLat"
-              UserLng="_userLng"
-              UserTzOffset="_userTzOffset" />
+<DateCards CalendarData="_calendar?.Data" />
+<MoonDisplay MoonPhase="_moonPhase" IsLive="IsMoonLive" />
+<Sundisplay Position="_sunPosition" UserPosition="_userSunPosition" IsLive="IsSunLive" />
+<CalendarGrid CalendarData="_calendar?.Data" Today="Today" UserLocation="_userLocation" />
 
 <div class="footer">
     Last updated: <span>@_lastUpdate</span>
+    @if (!_isOnline)
+    {
+        <span class="footer-sep">·</span>
+        <span class="offline-badge">Offline</span>
+    }
     <span class="footer-sep">·</span>
     <a href="/blog" class="footer-link">Blog</a>
     <span class="footer-sep">·</span>
@@ -34,305 +43,326 @@
 </div>
 
 @code {
-    [Inject] private SolarPositionService SolarPositionService { get; set; } = default!;
-    [Inject] private KathmanduCalendarService CalendarService { get; set; } = default!;
-    [Inject] private MoonPhaseService MoonPhaseService { get; set; } = default!;
-    [Inject] private ApiLoggerService Logger { get; set; } = default!;
-    [Inject] private IJSRuntime JS { get; set; } = default!;
+    private const string MoonElementId = "moon-display-root";
+    private const string SunElementId = "sun-display-root";
 
-    private CalendarResponse? _calendarData;
-    private TimeResponse? _timeData;
+    private readonly CancellationTokenSource _lifetime = new();
+    private readonly SemaphoreSlim _calendarGate = new(1, 1);
+    private readonly SemaphoreSlim _clockGate = new(1, 1);
+
+    private GeoLocation _homeLocation = default!;
+    private GeoLocation? _userLocation;
+    private CalendarSnapshot? _calendar;
+    private bool _calendarUnavailable;
+    private DateOnly _lastCalendarCheck;
     private MoonPhase? _moonPhase;
     private SolarPosition? _sunPosition;
     private SolarPosition? _userSunPosition;
     private DateTime _currentTime;
     private string _lastUpdate = "--";
-    private string? _error;
-    private System.Threading.Timer? _clockTimer;
-    private System.Threading.Timer? _timeApiTimer;
-    private System.Threading.Timer? _calendarApiTimer;
-
-    // User geolocation
-    private double? _userLat;
-    private double? _userLng;
-    private TimeSpan _userTzOffset = TimeSpan.Zero;
-    private string _userLocationName = "Your Location";
-
-    // Visibility + intersection tracking
+    private bool _isOnline = true;
     private bool _isTabVisible = true;
     private bool _isMoonInView = true;
     private bool _isSunInView = true;
-    private bool _isMoonLive => _isTabVisible && _isMoonInView;
-    private bool _isSunLive => _isTabVisible && _isSunInView;
-    private DotNetObjectReference<Home>? _dotNetRef;
-    private IJSObjectReference? _jsModule;
-
-    // First-calc logging
     private bool _hasLoggedFirstSolarCalc;
+    private bool _disposed;
+    private DotNetObjectReference<Home>? _dotNetRef;
+    private IJSObjectReference? _pageMonitor;
 
-    protected override Task OnInitializedAsync()
+    private bool IsMoonLive => _isTabVisible && _isMoonInView;
+
+    private bool IsSunLive => _isTabVisible && _isSunInView;
+
+    private DateOnly Today => DateOnly.FromDateTime(_currentTime);
+
+    private string? StatusMessage => _calendar switch
     {
-        // ────────────────────────────────────────────────────────────────────
-        // IMPORTANT: Do NOT block initial render on the external calendar API.
-        //
-        // Previously this method awaited LoadDataAsync() which fetches data
-        // from https://calendar.bloggernepal.com. When that host is slow or
-        // unreachable (CI, restricted networks, throttled connections), the
-        // page would hang on "Loading..." until HttpClient timed out (~100s
-        // by default). E2E tests waiting for .time-display would time out and
-        // intermittent flakiness was observed even when the API was healthy.
-        //
-        // We now compute everything that depends only on the local clock
-        // synchronously (current time, moon phase, sun positions) and render
-        // immediately. The external API is fired in the background and the
-        // UI is updated when it responds. The KathmanduCalendarService is
-        // seeded with the fixed Nepal UTC+5:45 offset so GetCurrentKathmanduTime
-        // returns sensible values even before the time-sync API replies.
-        // ────────────────────────────────────────────────────────────────────
+        { Source: CalendarDataSource.Stale } stale =>
+            $"Calendar could not be updated. Showing saved data from {stale.ForDate:MMMM d, yyyy}.",
+        null when _calendarUnavailable =>
+            "Calendar data is unavailable right now. Time, moon and sun keep working offline.",
+        _ => null
+    };
 
-        // Seed the UI with locally-computable values so the page renders
-        // immediately, even if the external API is slow or unreachable.
+    protected override void OnInitialized()
+    {
+        _homeLocation = LocationConfig.Value.ToGeoLocation();
         _currentTime = CalendarService.GetCurrentKathmanduTime();
         UpdateMoonPhase();
         UpdateSunPositions();
-        UpdateLastUpdateTime();
 
-        // Start the per-second tick driving the live clock and live indicators.
-        _clockTimer = new System.Threading.Timer(async _ =>
-        {
-            _currentTime = CalendarService.GetCurrentKathmanduTime();
-
-            if (_isMoonLive)
-            {
-                UpdateMoonPhase();
-            }
-
-            if (_isSunLive)
-            {
-                UpdateSunPositions();
-            }
-
-            await InvokeAsync(StateHasChanged);
-        }, null, TimeSpan.Zero, TimeSpan.FromSeconds(0.01));
-
-        _timeApiTimer = new System.Threading.Timer(async _ =>
-        {
-            await LoadTimeDataAsync();
-        }, null, TimeSpan.FromHours(1), TimeSpan.FromHours(1));
-
-        _calendarApiTimer = new System.Threading.Timer(async _ =>
-        {
-            await LoadCalendarDataAsync();
-        }, null, TimeSpan.FromHours(24), TimeSpan.FromHours(24));
-
-        // Kick off the initial external API loads in the background. We do not
-        // await them: if they fail or are slow, the UI is already rendered with
-        // locally-computed approximations and will refine when data arrives.
-        _ = LoadDataInBackgroundAsync();
-
-        return Task.CompletedTask;
-    }
-
-    private async Task LoadDataInBackgroundAsync()
-    {
-        try
-        {
-            await Task.WhenAll(LoadCalendarDataAsync(), LoadTimeDataAsync());
-        }
-        catch (Exception ex)
-        {
-            // Show a non-fatal error banner but keep the page usable. Local
-            // calculations (time, moon, sun) still work because they are based
-            // on DateTime.UtcNow and the fixed Nepal offset.
-            _error = $"Could not refresh calendar data: {ex.Message}";
-            await InvokeAsync(StateHasChanged);
-        }
+        var refresh = RefreshConfig.Value;
+        _ = RunPeriodicAsync(refresh.ClockTickInterval, OnClockTickAsync);
+        _ = RunPeriodicAsync(refresh.ClockSyncCheckInterval, SyncClockAsync);
+        _ = RunPeriodicAsync(refresh.CalendarCheckInterval, RefreshCalendarAsync);
+        _ = LoadDataAsync();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        if (!firstRender)
         {
-            _dotNetRef = DotNetObjectReference.Create(this);
-            try
-            {
-                // Initialize visibility tracking for moon and sun
-                _jsModule = await JS.InvokeAsync<IJSObjectReference>(
-                    "visibilityTracker.init", _dotNetRef);
-
-                // Observe moon element
-                await JS.InvokeVoidAsync("visibilityTracker.observeElement",
-                    "moon-display-root", "OnMoonInViewChanged");
-
-                // Observe sun element
-                await JS.InvokeVoidAsync("visibilityTracker.observeElement",
-                    "sun-display-root", "OnSunInViewChanged");
-            }
-            catch
-            {
-                _isTabVisible = true;
-                _isMoonInView = true;
-                _isSunInView = true;
-            }
-
-            // Request geolocation
-            try
-            {
-                var geo = await JS.InvokeAsync<GeoResult?>("getGeolocation");
-                if (geo != null)
-                {
-                    _userLat = geo.Lat;
-                    _userLng = geo.Lng;
-
-                    // Get browser timezone offset (minutes from UTC, negative = ahead)
-                    var offsetMinutes = await JS.InvokeAsync<int>("getTimezoneOffsetMinutes");
-                    _userTzOffset = TimeSpan.FromMinutes(-offsetMinutes);
-
-                    // Get timezone name
-                    var tzName = await JS.InvokeAsync<string>("getTimezoneName");
-                    if (!string.IsNullOrEmpty(tzName))
-                        _userLocationName = $"Your Location ({tzName})";
-
-                    UpdateSunPositions();
-                    await InvokeAsync(StateHasChanged);
-                }
-            }
-            catch
-            {
-                // Geolocation denied or unavailable — Kathmandu-only mode
-            }
+            return;
         }
+
+        _dotNetRef = DotNetObjectReference.Create(this);
+        await InitializePageMonitorAsync();
+        await ResolveUserLocationAsync();
     }
 
     [JSInvokable]
-    public void OnVisibilityChanged(bool isVisible)
+    public Task OnVisibilityChanged(bool isVisible)
     {
         _isTabVisible = isVisible;
         if (isVisible)
         {
+            _currentTime = CalendarService.GetCurrentKathmanduTime();
             UpdateMoonPhase();
             UpdateSunPositions();
-            InvokeAsync(StateHasChanged);
+            _ = LoadDataAsync();
         }
+        return RenderAsync();
     }
 
     [JSInvokable]
-    public void OnMoonInViewChanged(bool isInView)
+    public Task OnConnectivityChanged(bool isOnline)
+    {
+        _isOnline = isOnline;
+        if (isOnline)
+        {
+            _ = LoadDataAsync();
+        }
+        return RenderAsync();
+    }
+
+    [JSInvokable]
+    public Task OnMoonInViewChanged(bool isInView)
     {
         _isMoonInView = isInView;
-        if (isInView && _isTabVisible)
+        if (IsMoonLive)
         {
             UpdateMoonPhase();
-            InvokeAsync(StateHasChanged);
         }
+        return RenderAsync();
     }
 
     [JSInvokable]
-    public void OnSunInViewChanged(bool isInView)
+    public Task OnSunInViewChanged(bool isInView)
     {
         _isSunInView = isInView;
-        if (isInView && _isTabVisible)
+        if (IsSunLive)
         {
             UpdateSunPositions();
-            InvokeAsync(StateHasChanged);
+        }
+        return RenderAsync();
+    }
+
+    private async Task InitializePageMonitorAsync()
+    {
+        try
+        {
+            _pageMonitor = await JS.InvokeAsync<IJSObjectReference>("pageMonitor.init", _dotNetRef);
+            _isOnline = await _pageMonitor.InvokeAsync<bool>("isOnline");
+            await _pageMonitor.InvokeVoidAsync("observe", MoonElementId, nameof(OnMoonInViewChanged));
+            await _pageMonitor.InvokeVoidAsync("observe", SunElementId, nameof(OnSunInViewChanged));
+        }
+        catch (JSException ex)
+        {
+            Log.LogWarning(ex, "Page monitor unavailable; live updates stay on.");
+            _isTabVisible = true;
+            _isMoonInView = true;
+            _isSunInView = true;
         }
     }
 
-    private async Task LoadCalendarDataAsync()
+    private async Task ResolveUserLocationAsync()
     {
-        _calendarData = await CalendarService.GetTodayDataAsync();
-        await InvokeAsync(StateHasChanged);
+        var location = await GeolocationService.GetCurrentLocationAsync(_lifetime.Token);
+        if (location is null || _disposed)
+        {
+            return;
+        }
+
+        _userLocation = location;
+        UpdateSunPositions();
+        await RenderAsync();
     }
 
-    private async Task LoadTimeDataAsync()
+    private async Task RunPeriodicAsync(TimeSpan interval, Func<Task> action)
     {
-        _timeData = await CalendarService.GetTimeDataAsync();
+        try
+        {
+            using var timer = new PeriodicTimer(interval);
+            while (await timer.WaitForNextTickAsync(_lifetime.Token))
+            {
+                try
+                {
+                    await action();
+                }
+                catch (Exception ex) when (ex is not OperationCanceledException)
+                {
+                    Log.LogError(ex, "Periodic update failed.");
+                }
+            }
+        }
+        catch (OperationCanceledException)
+        {
+        }
+    }
+
+    private Task OnClockTickAsync()
+    {
         _currentTime = CalendarService.GetCurrentKathmanduTime();
-        UpdateMoonPhase();
-        UpdateSunPositions();
-        UpdateLastUpdateTime();
-        await InvokeAsync(StateHasChanged);
+
+        if (IsMoonLive)
+        {
+            UpdateMoonPhase();
+        }
+
+        if (IsSunLive)
+        {
+            UpdateSunPositions();
+        }
+
+        if (Today != _lastCalendarCheck)
+        {
+            _ = RefreshCalendarAsync();
+        }
+
+        return RenderAsync();
+    }
+
+    private Task LoadDataAsync() => Task.WhenAll(SyncClockAsync(), RefreshCalendarAsync());
+
+    private async Task SyncClockAsync()
+    {
+        if (!await _clockGate.WaitAsync(0))
+        {
+            return;
+        }
+
+        try
+        {
+            if (await CalendarService.SyncClockAsync(_lifetime.Token))
+            {
+                _currentTime = CalendarService.GetCurrentKathmanduTime();
+                UpdateLastUpdated();
+                await RenderAsync();
+            }
+        }
+        catch (OperationCanceledException) when (_lifetime.IsCancellationRequested)
+        {
+        }
+        finally
+        {
+            _clockGate.Release();
+        }
+    }
+
+    private async Task RefreshCalendarAsync()
+    {
+        if (!await _calendarGate.WaitAsync(0))
+        {
+            return;
+        }
+
+        try
+        {
+            _lastCalendarCheck = Today;
+            var snapshot = await CalendarService.GetCalendarAsync(_lifetime.Token);
+            if (snapshot is not null)
+            {
+                _calendar = snapshot;
+            }
+
+            _calendarUnavailable = _calendar is null;
+            UpdateLastUpdated();
+            await RenderAsync();
+        }
+        catch (OperationCanceledException) when (_lifetime.IsCancellationRequested)
+        {
+        }
+        finally
+        {
+            _calendarGate.Release();
+        }
     }
 
     private void UpdateMoonPhase()
     {
-        _moonPhase = MoonPhaseService.CalculateMoonPhase(DateTime.UtcNow);
+        _moonPhase = MoonPhaseService.CalculateMoonPhase(TimeProvider.GetUtcNow().UtcDateTime);
     }
 
     private void UpdateSunPositions()
     {
-        var utcNow = DateTime.UtcNow;
-        _sunPosition = SolarPositionService.CalculateKathmandu(utcNow);
+        var utcNow = TimeProvider.GetUtcNow().UtcDateTime;
+        _sunPosition = SolarPositionService.Calculate(utcNow, _homeLocation);
+        _userSunPosition = _userLocation is null ? null : SolarPositionService.Calculate(utcNow, _userLocation);
 
-        if (_userLat.HasValue && _userLng.HasValue)
-        {
-            _userSunPosition = SolarPositionService.Calculate(
-                utcNow, _userLat.Value, _userLng.Value, _userTzOffset, _userLocationName);
-        }
-
-        // Log first calculation after app start
-        if (!_hasLoggedFirstSolarCalc && _sunPosition != null)
+        if (!_hasLoggedFirstSolarCalc)
         {
             _hasLoggedFirstSolarCalc = true;
-            _ = LogFirstSolarCalcAsync();
+            LogFirstSolarCalculation(utcNow);
         }
     }
 
-    private async Task LogFirstSolarCalcAsync()
+    private void LogFirstSolarCalculation(DateTime utcNow)
     {
-        try
+        ApiLogger.LogApiRequest("SolarPosition/FirstCalc", new
         {
-            var logPayload = new
-            {
-                kathmanduAltitude = _sunPosition?.Altitude,
-                kathmanduAzimuth = _sunPosition?.Azimuth,
-                kathmanduSunrise = _sunPosition?.SunriseLocal?.ToString("HH:mm:ss"),
-                kathmanduSunset = _sunPosition?.SunsetLocal?.ToString("HH:mm:ss"),
-                userLat = _userLat,
-                userLng = _userLng,
-                userAltitude = _userSunPosition?.Altitude,
-                userAzimuth = _userSunPosition?.Azimuth,
-                utcTimestamp = DateTime.UtcNow.ToString("O")
-            };
-            await Logger.LogApiRequestAsync("SolarPosition/FirstCalc", logPayload, false, ApiLoggerService.GetOptions());
-        }
-        catch
-        {
-            // Non-critical
-        }
+            kathmanduAltitude = _sunPosition?.Altitude,
+            kathmanduAzimuth = _sunPosition?.Azimuth,
+            kathmanduSunrise = _sunPosition?.SunriseLocal?.ToString("HH:mm:ss"),
+            kathmanduSunset = _sunPosition?.SunsetLocal?.ToString("HH:mm:ss"),
+            userLat = _userLocation?.Latitude,
+            userLng = _userLocation?.Longitude,
+            userAltitude = _userSunPosition?.Altitude,
+            userAzimuth = _userSunPosition?.Azimuth,
+            utcTimestamp = utcNow.ToString("O")
+        }, fromCache: false);
     }
 
-    private void UpdateLastUpdateTime()
+    private void UpdateLastUpdated()
     {
-        _lastUpdate = DateTime.Now.ToString("hh:mm:ss tt");
+        DateTimeOffset? calendarFetched = _calendar?.FetchedAt;
+        DateTimeOffset? clockSynced = CalendarService.LastClockSync;
+        DateTimeOffset? latest = calendarFetched > clockSynced || clockSynced is null ? calendarFetched : clockSynced;
+
+        if (latest is null)
+        {
+            return;
+        }
+
+        var local = latest.Value.ToLocalTime();
+        _lastUpdate = local.Date == DateTimeOffset.Now.Date
+            ? local.ToString("hh:mm:ss tt")
+            : local.ToString("MMM d, hh:mm tt");
     }
+
+    private Task RenderAsync() => _disposed ? Task.CompletedTask : InvokeAsync(StateHasChanged);
 
     public async ValueTask DisposeAsync()
     {
-        _clockTimer?.Dispose();
-        _timeApiTimer?.Dispose();
-        _calendarApiTimer?.Dispose();
+        if (_disposed)
+        {
+            return;
+        }
 
-        if (_jsModule is not null)
+        _disposed = true;
+        _lifetime.Cancel();
+
+        if (_pageMonitor is not null)
         {
             try
             {
-                await _jsModule.InvokeVoidAsync("dispose");
-                await _jsModule.DisposeAsync();
+                await _pageMonitor.InvokeVoidAsync("dispose");
+                await _pageMonitor.DisposeAsync();
             }
-            catch
+            catch (JSException)
             {
-                // Ignore disposal errors during navigation
             }
         }
 
         _dotNetRef?.Dispose();
-    }
-
-    // JS interop model for geolocation result
-    private class GeoResult
-    {
-        public double Lat { get; set; }
-        public double Lng { get; set; }
     }
 }
