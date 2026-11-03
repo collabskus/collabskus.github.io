@@ -2098,3 +2098,33 @@ Claude finished the response
 
 
 
+17
+14
+
+The code is functional but needs major clean up 
+now that we are using appsettings.json 
+any "magical" constants should be injected from appsettings 
+use local storage to store data from API and check local storage before making API requests 
+do everything possible so the site remains resilient and available as much as possible
+if possible, the site should continue working on a user's phone even after they have disconnected from the Internet 
+assuming they had loaded the page before they got disconnected 
+there isn't much that requires this page to be constantly connected to the Internet 
+the calendar is steady 
+the sun and moon positions are calculated 
+
+please review the attached dump thoroughly 
+as we do all of this 
+please be mindful to use best engineering practices 
+and solid principles 
+Use your best judgment
+If only a few files (under five or there about) need to change, give me the full path of the files that need to change and the FULL file 
+if there are a lot of files that need to change 
+    Delivery
+    Whole project as one zip, unambiguous file placement
+    do not include any file that has not changed 
+    Any files to delete on updates called out explicitly
+    No bespoke sed/patch scripts — full files only for anything that changes
+    Docs updated alongside code changes
+    Low verbosity, no code comments
+
+
