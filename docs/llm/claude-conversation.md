@@ -2498,3 +2498,35 @@ Claude finished the response
 
 
 
+15:28:41:894	Clean started at 3:28 PM...
+15:28:42:572	------ Clean started: Project: CollabsKus.Tests, Configuration: Debug Any CPU ------
+15:28:44:372	------ Clean started: Project: CollabsKus.PlaywrightTests, Configuration: Debug Any CPU ------
+15:28:45:131	------ Clean started: Project: CollabsKus.BlazorWebAssembly, Configuration: Debug Any CPU ------
+15:28:46:491	========== Clean: 3 succeeded, 0 failed, 0 skipped ==========
+15:28:46:491	========== Clean completed at 3:28 PM and took 05.522 seconds ==========
+15:37:38:972	Rebuild started at 3:37 PM...
+15:37:39:347	Restored D:\DEV\personal\collabskus\CollabsKus.PlaywrightTests\CollabsKus.PlaywrightTests.csproj (in 106 ms).
+15:37:39:348	Restored D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\CollabsKus.BlazorWebAssembly.csproj (in 112 ms).
+15:37:39:348	Restored D:\DEV\personal\collabskus\CollabsKus.Tests\CollabsKus.Tests.csproj (in 109 ms).
+15:37:39:558	------ Rebuild All started: Project: CollabsKus.BlazorWebAssembly, Configuration: Debug Any CPU ------
+15:37:41:368	D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\TelemetryService.cs(26,28,26,34): error CS1061: 'TelemetryOptions' does not contain a definition for 'SdkUrl' and no accessible extension method 'SdkUrl' accepting a first argument of type 'TelemetryOptions' could be found (are you missing a using directive or an assembly reference?)
+15:37:41:368	D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\TelemetryService.cs(27,31,27,40): error CS1061: 'TelemetryOptions' does not contain a definition for 'CloudRole' and no accessible extension method 'CloudRole' accepting a first argument of type 'TelemetryOptions' could be found (are you missing a using directive or an assembly reference?)
+15:37:41:368	D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\TelemetryService.cs(28,36,28,50): error CS1061: 'TelemetryOptions' does not contain a definition for 'MaxQueueLength' and no accessible extension method 'MaxQueueLength' accepting a first argument of type 'TelemetryOptions' could be found (are you missing a using directive or an assembly reference?)
+15:37:41:368	D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\TelemetryService.cs(70,21,70,37): error CS7036: There is no argument given that corresponds to the required parameter 'ConnectionString' of 'TelemetryOptions.TelemetryOptions(string?, string)'
+15:37:41:368	D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Program.cs(22,19,22,35): error CS0104: 'TelemetryOptions' is an ambiguous reference between 'CollabsKus.BlazorWebAssembly.Services.TelemetryOptions' and 'CollabsKus.BlazorWebAssembly.Settings.TelemetryOptions'
+15:37:41:368	D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Program.cs(23,32,23,48): error CS0104: 'TelemetryOptions' is an ambiguous reference between 'CollabsKus.BlazorWebAssembly.Services.TelemetryOptions' and 'CollabsKus.BlazorWebAssembly.Settings.TelemetryOptions'
+15:37:41:570	------ Rebuild All started: Project: CollabsKus.PlaywrightTests, Configuration: Debug Any CPU ------
+15:37:43:473	  CollabsKus.PlaywrightTests -> D:\DEV\personal\collabskus\CollabsKus.PlaywrightTests\bin\Debug\net10.0\CollabsKus.PlaywrightTests.dll
+15:37:43:739	------ Rebuild All started: Project: CollabsKus.Tests, Configuration: Debug Any CPU ------
+15:37:44:168	CSC : error CS0006: Metadata file 'D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\obj\Debug\net10.0\ref\CollabsKus.BlazorWebAssembly.dll' could not be found
+15:37:44:382	========== Rebuild All: 1 succeeded, 2 failed, 0 skipped ==========
+15:37:44:382	========== Rebuild completed at 3:37 PM and took 05.528 seconds ==========
+
+Severity	Code	Description	Project	File	Line	Suppression State	Details
+Error (active)	CS0006	Metadata file 'D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\obj\Debug\net10.0\ref\CollabsKus.BlazorWebAssembly.dll' could not be found	CollabsKus.Tests	D:\DEV\personal\collabskus\CollabsKus.Tests\CSC	1		
+Error (active)	CS0104	'TelemetryOptions' is an ambiguous reference between 'CollabsKus.BlazorWebAssembly.Services.TelemetryOptions' and 'CollabsKus.BlazorWebAssembly.Settings.TelemetryOptions'	CollabsKus.BlazorWebAssembly	D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Program.cs	22		
+Error (active)	CS0104	'TelemetryOptions' is an ambiguous reference between 'CollabsKus.BlazorWebAssembly.Services.TelemetryOptions' and 'CollabsKus.BlazorWebAssembly.Settings.TelemetryOptions'	CollabsKus.BlazorWebAssembly	D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Program.cs	23		
+Error (active)	CS1061	'TelemetryOptions' does not contain a definition for 'SdkUrl' and no accessible extension method 'SdkUrl' accepting a first argument of type 'TelemetryOptions' could be found (are you missing a using directive or an assembly reference?)	CollabsKus.BlazorWebAssembly	D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\TelemetryService.cs	26		
+Error (active)	CS1061	'TelemetryOptions' does not contain a definition for 'CloudRole' and no accessible extension method 'CloudRole' accepting a first argument of type 'TelemetryOptions' could be found (are you missing a using directive or an assembly reference?)	CollabsKus.BlazorWebAssembly	D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\TelemetryService.cs	27		
+Error (active)	CS1061	'TelemetryOptions' does not contain a definition for 'MaxQueueLength' and no accessible extension method 'MaxQueueLength' accepting a first argument of type 'TelemetryOptions' could be found (are you missing a using directive or an assembly reference?)	CollabsKus.BlazorWebAssembly	D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\TelemetryService.cs	28		
+Error (active)	CS7036	There is no argument given that corresponds to the required parameter 'ConnectionString' of 'TelemetryOptions.TelemetryOptions(string?, string)'	CollabsKus.BlazorWebAssembly	D:\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\TelemetryService.cs	70		
