@@ -1755,3 +1755,56 @@ Looks like the URL has changed
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+This isn't quite right 
+the vault uses a different scheme for request body 
+2. IP Vault /api/vault
+Method	Path	Description	Body
+GET	/api/vault	List entries	—
+GET	/api/vault/:id	Get entry + meta	—
+POST	/api/vault	Create entry	{ "payload": "…" }
+PUT	/api/vault/:id	Overwrite (IP-locked)	{ "payload": "…" }
+PATCH	/api/vault/:id	Append (IP-locked)	{ "payload": "…" }
+DELETE	/api/vault/:id	Delete (IP-locked)	—
