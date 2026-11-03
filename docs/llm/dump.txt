@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 11/03/2026 16:02:29
+Generated: 11/03/2026 16:12:48
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -7752,7 +7752,7 @@ internal static class OptionsGuard
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Settings\RefreshOptions.cs
 SIZE: 1.03 KB
-MODIFIED: 11/03/2026 16:01:33
+MODIFIED: 11/03/2026 16:12:03
 ================================================================================
 
 namespace CollabsKus.BlazorWebAssembly.Settings;
@@ -7775,9 +7775,9 @@ public sealed class RefreshOptions : IAppOptions
 
    public IEnumerable<string> Validate()
    {
-      if (ClockTickMilliseconds is < 20 or > 60000)
+      if (ClockTickMilliseconds is < 50 or > 60000)
       {
-         yield return "ClockTickMilliseconds must be between 20 and 60000.";
+         yield return "ClockTickMilliseconds must be between 50 and 60000.";
       }
 
       if (ClockSyncCheckMinutes is < 1 or > 1440)
@@ -7907,7 +7907,7 @@ MODIFIED: 04/24/2026 11:35:31
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\wwwroot\appsettings.json
 SIZE: 1.66 KB
-MODIFIED: 11/03/2026 15:52:52
+MODIFIED: 11/03/2026 16:11:50
 ================================================================================
 
 {
@@ -7924,7 +7924,7 @@ MODIFIED: 11/03/2026 15:52:52
       "ClockOffsetCacheMinutes": 60
    },
    "Refresh": {
-      "ClockTickMilliseconds": 20,
+      "ClockTickMilliseconds": 200,
       "ClockSyncCheckMinutes": 15,
       "CalendarCheckMinutes": 15
    },
@@ -7945,7 +7945,7 @@ MODIFIED: 11/03/2026 15:52:52
       "VaultUrl": "https://my-api.2w7sp317.workers.dev/api/vault",
       "PageUrl": "https://collabskus.github.io",
       "UserAgentLabel": "Blazor WebAssembly",
-      "MaxContentLength": 1000
+      "MaxContentLength": 300
    },
    "Blog": {
       "ManifestPath": "blog/manifest.json",
@@ -17706,7 +17706,7 @@ MODIFIED: 11/03/2026 15:49:29
 
 
 ===============================================================================
-EXPORT COMPLETED: 11/03/2026 16:02:59
+EXPORT COMPLETED: 11/03/2026 16:13:21
 Total Files Exported: 115
 Output File: .\docs\llm\dump.txt
 ===============================================================================
