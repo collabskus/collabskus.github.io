@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Text;
 using System.Text.Json;
 
 namespace CollabsKus.BlazorWebAssembly.Services;
@@ -19,14 +20,14 @@ public class ApiLoggerService(HttpClient httpClient)
    public static JsonSerializerOptions GetOptions() => DefaultOptions;
 
    /// <summary>
-   /// Builds the log payload synchronously, then posts it to both endpoints
-   /// in the background. Returns immediately; failures are non-fatal.
+   /// Builds the log payload synchronously, then posts it to the notes and
+   /// vault endpoints in the background. Returns immediately; failures are non-fatal.
    /// </summary>
    public Task LogApiRequestAsync(string endpoint, object data, bool fromCache, JsonSerializerOptions options)
    {
       try
       {
-         string logContent = JsonSerializer.Serialize(new
+         var logContent = JsonSerializer.Serialize(new
          {
             endpoint,
             timestamp = DateTime.UtcNow.ToString("O"),
@@ -36,38 +37,43 @@ public class ApiLoggerService(HttpClient httpClient)
             page = PageUrl
          }, options);
 
-         string title = $"API Request: {endpoint}";
-         string notesContent = Truncate(logContent, MaxContentLength);
-         string vaultContent = Truncate($"{title}\n{logContent}", MaxContentLength);
+         var title = $"API Request: {endpoint}";
 
-         // Independent fire-and-forget posts: one failing must not block the other.
-         _ = PostFormAsync(LoggerUrl, new Dictionary<string, string>
+         // Notes endpoint: form-encoded { title, content }
+         var notesBody = new FormUrlEncodedContent(new Dictionary<string, string>
          {
             ["title"] = title,
-            ["content"] = notesContent
+            ["content"] = Truncate(logContent, MaxContentLength)
          });
 
-         _ = PostFormAsync(VaultUrl, new Dictionary<string, string>
-         {
-            ["content"] = vaultContent
-         });
+         // Vault endpoint: JSON { "payload": "..." }
+         var vaultPayload = Truncate($"{title}\n{logContent}", MaxContentLength);
+         var vaultBody = new StringContent(
+            JsonSerializer.Serialize(new Dictionary<string, string> { ["payload"] = vaultPayload }),
+            Encoding.UTF8,
+            "application/json");
+
+         // Independent fire-and-forget posts: one failing must not block the other.
+         _ = PostAsync(LoggerUrl, notesBody);
+         _ = PostAsync(VaultUrl, vaultBody);
       }
       catch (Exception ex)
       {
-         // Serialization failed; logging is non-critical.
+         // Building the payload failed; logging is non-critical.
          Debug.WriteLine($"ApiLoggerService: failed to build log payload: {ex.Message}");
       }
 
       return Task.CompletedTask;
    }
 
-   private async Task PostFormAsync(string url, Dictionary<string, string> formData)
+   private async Task PostAsync(string url, HttpContent content)
    {
       try
       {
-         using HttpRequestMessage request = new(HttpMethod.Post, url)
+         // Disposing the request also disposes the content.
+         using var request = new HttpRequestMessage(HttpMethod.Post, url)
          {
-            Content = new FormUrlEncodedContent(formData)
+            Content = content
          };
          request.Headers.Add("Accept", "application/json");
 
@@ -93,7 +99,7 @@ public class ApiLoggerService(HttpClient httpClient)
       }
 
       const string suffix = "...";
-      int cut = maxLength - suffix.Length;
+      var cut = maxLength - suffix.Length;
 
       // Don't split a surrogate pair.
       if (cut > 0 && char.IsHighSurrogate(value[cut - 1]))
