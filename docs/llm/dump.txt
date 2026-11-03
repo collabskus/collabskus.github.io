@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 11/03/2026 11:59:32
+Generated: 11/03/2026 12:31:26
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -1253,10 +1253,14 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   +---Services
 |   |       ApiLoggerService.cs
 |   |       BlogService.cs
+|   |       ITelemetryService.cs
 |   |       KathmanduCalendarService.cs
 |   |       MoonPhaseService.cs
 |   |       SolarPositionService.cs
+|   |       TelemetryLoggerProvider.cs
+|   |       TelemetryOptions.cs
 |   |       TelemetryService.cs
+|   |       TelemetrySeverity.cs
 |   |       
 |   \---wwwroot
 |       |   .nojekyll
@@ -1281,8 +1285,11 @@ D:\DEV\PERSONAL\COLLABSKUS
 |       |           2026-07-15-good-morning.md
 |       |           hello-world.md
 |       |           
-|       \---css
-|               app.css
+|       +---css
+|       |       app.css
+|       |       
+|       \---js
+|               telemetry.js
 |               
 +---CollabsKus.PlaywrightTests
 |   |   BlogTests.cs
@@ -2012,8 +2019,12 @@ D:\DEV\PERSONAL\COLLABSKUS
 |           KathmanduCalendarServiceTests.cs
 |           MoonPhaseServiceTests.cs
 |           SolarPositionServiceTests.cs
+|           TelemetryLoggerProviderTests.cs
+|           TelemetryOptionsTests.cs
 |           
 +---docs
+|   |   telemetry.md
+|   |   
 |   \---llm
 |           claude-conversation.md
 |           claude.md
@@ -2968,11 +2979,9 @@ MODIFIED: 02/08/2026 15:46:02
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\App.razor
-SIZE: 0.52 KB
-MODIFIED: 11/03/2026 11:57:29
+SIZE: 0.46 KB
+MODIFIED: 11/03/2026 12:26:40
 ================================================================================
-
-@inject CollabsKus.BlazorWebAssembly.Services.TelemetryService Telemetry
 
 <Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
@@ -5440,15 +5449,16 @@ MODIFIED: 02/08/2026 10:27:06
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Program.cs
-SIZE: 2.93 KB
-MODIFIED: 11/03/2026 11:57:17
+SIZE: 1.94 KB
+MODIFIED: 11/03/2026 12:26:40
 ================================================================================
 
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.JSInterop;
 using CollabsKus.BlazorWebAssembly;
 using CollabsKus.BlazorWebAssembly.Services;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.Logging;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -5456,56 +5466,44 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-// Register our services
 builder.Services.AddScoped<KathmanduCalendarService>();
 builder.Services.AddScoped<MoonPhaseService>();
 builder.Services.AddSingleton<SolarPositionService>();
 builder.Services.AddScoped<ApiLoggerService>();
 builder.Services.AddScoped<BlogService>();
-builder.Services.AddScoped<TelemetryService>();
+
+builder.Services.AddSingleton(new TelemetryOptions(
+   builder.Configuration[TelemetryOptions.ConnectionStringKey],
+   builder.HostEnvironment.Environment));
+builder.Services.AddSingleton<ITelemetryService, TelemetryService>();
+builder.Services.AddSingleton<ILoggerProvider, TelemetryLoggerProvider>();
 
 var host = builder.Build();
 
-// ── Application Insights bootstrap ───────────────────────────────────────────
-// Push the connection string from appsettings.json into the JS SDK loaded in
-// index.html. The snippet queues calls until boot completes, so anything that
-// fires before this point (including the initial page view auto-tracked by
-// the snippet) gets the right endpoint once boot runs.
-var connectionString = builder.Configuration["ApplicationInsights:ConnectionString"];
-var telemetry = host.Services.GetRequiredService<TelemetryService>();
-await telemetry.BootAsync(connectionString);
+var telemetry = host.Services.GetRequiredService<ITelemetryService>();
+_ = telemetry.InitializeAsync();
 
-// ── SPA navigation tracking ──────────────────────────────────────────────────
-// The snippet auto-tracks the initial page view; Blazor's client-side route
-// changes are not browser navigations, so we hook LocationChanged and call
-// trackPageView manually.
-var nav = host.Services.GetRequiredService<Microsoft.AspNetCore.Components.NavigationManager>();
-nav.LocationChanged += (sender, args) =>
-{
-   // Fire-and-forget — TrackPageViewAsync swallows its own exceptions.
-   _ = telemetry.TrackPageViewAsync(name: null, uri: args.Location);
-};
+var navigation = host.Services.GetRequiredService<NavigationManager>();
+navigation.LocationChanged += (_, e) => _ = telemetry.TrackPageViewAsync(null, e.Location);
 
-// ── Unhandled-exception reporting ────────────────────────────────────────────
-// Catches anything raised on the WASM main thread that nothing else handles.
-AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
+AppDomain.CurrentDomain.UnhandledException += (_, e) =>
 {
-   if (args.ExceptionObject is Exception ex)
+   if (e.ExceptionObject is Exception ex)
    {
       _ = telemetry.TrackExceptionAsync(ex, new Dictionary<string, string>
-        {
-            { "source", "AppDomain.UnhandledException" },
-            { "isTerminating", args.IsTerminating.ToString() }
-        });
+      {
+         ["source"] = "AppDomain.UnhandledException",
+         ["isTerminating"] = e.IsTerminating.ToString()
+      });
    }
 };
 
-TaskScheduler.UnobservedTaskException += (sender, args) =>
+TaskScheduler.UnobservedTaskException += (_, e) =>
 {
-   _ = telemetry.TrackExceptionAsync(args.Exception, new Dictionary<string, string>
-    {
-        { "source", "TaskScheduler.UnobservedTaskException" }
-    });
+   _ = telemetry.TrackExceptionAsync(e.Exception, new Dictionary<string, string>
+   {
+      ["source"] = "TaskScheduler.UnobservedTaskException"
+   });
 };
 
 await host.RunAsync();
@@ -5753,6 +5751,31 @@ public class BlogService(HttpClient httpClient)
 
       return (front, body);
    }
+}
+
+
+
+================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\ITelemetryService.cs
+SIZE: 0.56 KB
+MODIFIED: 11/03/2026 12:26:40
+================================================================================
+
+namespace CollabsKus.BlazorWebAssembly.Services;
+
+public interface ITelemetryService
+{
+   Task InitializeAsync();
+
+   Task TrackPageViewAsync(string? name, string? uri);
+
+   Task TrackEventAsync(string name, IReadOnlyDictionary<string, string>? properties = null);
+
+   Task TrackExceptionAsync(Exception exception, IReadOnlyDictionary<string, string>? properties = null);
+
+   Task TrackTraceAsync(string message, TelemetrySeverity severity = TelemetrySeverity.Information, IReadOnlyDictionary<string, string>? properties = null);
+
+   Task FlushAsync();
 }
 
 
@@ -6533,91 +6556,169 @@ public class SolarPositionService
 
 
 ================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\TelemetryLoggerProvider.cs
+SIZE: 1.6 KB
+MODIFIED: 11/03/2026 12:26:40
+================================================================================
+
+using Microsoft.Extensions.Logging;
+
+namespace CollabsKus.BlazorWebAssembly.Services;
+
+public sealed class TelemetryLoggerProvider(ITelemetryService telemetry) : ILoggerProvider
+{
+   public ILogger CreateLogger(string categoryName) => new TelemetryLogger(categoryName, telemetry);
+
+   public void Dispose()
+   {
+   }
+
+   private sealed class TelemetryLogger(string categoryName, ITelemetryService telemetry) : ILogger
+   {
+      public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
+
+      public bool IsEnabled(LogLevel logLevel) => logLevel is >= LogLevel.Error and < LogLevel.None;
+
+      public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+      {
+         if (!IsEnabled(logLevel))
+         {
+            return;
+         }
+
+         var properties = new Dictionary<string, string>
+         {
+            ["category"] = categoryName,
+            ["logLevel"] = logLevel.ToString(),
+            ["eventId"] = eventId.Id.ToString(System.Globalization.CultureInfo.InvariantCulture),
+            ["message"] = formatter(state, exception)
+         };
+
+         _ = exception is not null
+            ? telemetry.TrackExceptionAsync(exception, properties)
+            : telemetry.TrackTraceAsync(properties["message"], ToSeverity(logLevel), properties);
+      }
+
+      private static TelemetrySeverity ToSeverity(LogLevel logLevel) => logLevel switch
+      {
+         LogLevel.Critical => TelemetrySeverity.Critical,
+         _ => TelemetrySeverity.Error
+      };
+   }
+}
+
+
+
+================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\TelemetryOptions.cs
+SIZE: 0.3 KB
+MODIFIED: 11/03/2026 12:26:40
+================================================================================
+
+namespace CollabsKus.BlazorWebAssembly.Services;
+
+public sealed record TelemetryOptions(string? ConnectionString, string Environment)
+{
+   public const string ConnectionStringKey = "ApplicationInsights:ConnectionString";
+
+   public bool IsEnabled => !string.IsNullOrWhiteSpace(ConnectionString);
+}
+
+
+
+================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\TelemetryService.cs
-SIZE: 2.19 KB
-MODIFIED: 11/03/2026 11:57:02
+SIZE: 2.07 KB
+MODIFIED: 11/03/2026 12:26:40
 ================================================================================
 
 using Microsoft.JSInterop;
 
 namespace CollabsKus.BlazorWebAssembly.Services;
 
-/// <summary>
-/// Thin wrapper around the Application Insights JavaScript SDK loaded in index.html.
-/// All methods are fire-and-forget: telemetry failures must never break the app.
-/// </summary>
-public class TelemetryService(IJSRuntime jsRuntime)
+public sealed class TelemetryService : ITelemetryService, IAsyncDisposable
 {
-   private bool _booted;
+   private const string ModulePath = "./js/telemetry.js";
 
-   /// <summary>
-   /// Pass the connection string to the JS SDK. Called once from Program.cs
-   /// after the WebAssemblyHost is built and configuration is available.
-   /// </summary>
-   public async Task BootAsync(string? connectionString)
+   private readonly TelemetryOptions _options;
+   private readonly Lazy<Task<IJSObjectReference>> _module;
+
+   public TelemetryService(IJSRuntime jsRuntime, TelemetryOptions options)
    {
-      if (_booted) return;
-      if (string.IsNullOrWhiteSpace(connectionString)) return;
+      _options = options;
+      _module = new Lazy<Task<IJSObjectReference>>(
+         () => jsRuntime.InvokeAsync<IJSObjectReference>("import", ModulePath).AsTask());
+   }
+
+   public Task InitializeAsync() =>
+      InvokeAsync("init", _options.ConnectionString, _options.Environment);
+
+   public Task TrackPageViewAsync(string? name, string? uri) =>
+      InvokeAsync("trackPageView", name, uri);
+
+   public Task TrackEventAsync(string name, IReadOnlyDictionary<string, string>? properties = null) =>
+      InvokeAsync("trackEvent", name, properties);
+
+   public Task TrackExceptionAsync(Exception exception, IReadOnlyDictionary<string, string>? properties = null) =>
+      InvokeAsync("trackException", exception.Message, exception.ToString(), exception.GetType().FullName, properties);
+
+   public Task TrackTraceAsync(string message, TelemetrySeverity severity = TelemetrySeverity.Information, IReadOnlyDictionary<string, string>? properties = null) =>
+      InvokeAsync("trackTrace", message, (int)severity, properties);
+
+   public Task FlushAsync() => InvokeAsync("flush");
+
+   public async ValueTask DisposeAsync()
+   {
+      if (!_module.IsValueCreated)
+      {
+         return;
+      }
+
       try
       {
-         await jsRuntime.InvokeVoidAsync("appInsights.boot", connectionString);
-         _booted = true;
+         var module = await _module.Value;
+         await module.DisposeAsync();
       }
       catch
       {
-         // Silent — telemetry is non-critical.
       }
    }
 
-   public async Task TrackEventAsync(string name, IDictionary<string, string>? properties = null)
+   private async Task InvokeAsync(string identifier, params object?[] args)
    {
-      try
+      if (!_options.IsEnabled)
       {
-         await jsRuntime.InvokeVoidAsync("appInsights.trackEvent", name, properties);
+         return;
       }
-      catch { }
-   }
 
-   public async Task TrackPageViewAsync(string? name, string? uri)
-   {
       try
       {
-         await jsRuntime.InvokeVoidAsync("appInsights.trackPageView", name, uri);
+         var module = await _module.Value;
+         await module.InvokeVoidAsync(identifier, args);
       }
-      catch { }
+      catch
+      {
+      }
    }
+}
 
-   public async Task TrackExceptionAsync(Exception ex, IDictionary<string, string>? properties = null)
-   {
-      try
-      {
-         await jsRuntime.InvokeVoidAsync(
-             "appInsights.trackException",
-             ex.Message,
-             ex.ToString(),
-             properties);
-      }
-      catch { }
-   }
 
-   public async Task TrackTraceAsync(string message, int severityLevel = 1, IDictionary<string, string>? properties = null)
-   {
-      // Severity: 0=Verbose, 1=Information, 2=Warning, 3=Error, 4=Critical
-      try
-      {
-         await jsRuntime.InvokeVoidAsync("appInsights.trackTrace", message, severityLevel, properties);
-      }
-      catch { }
-   }
 
-   public async Task FlushAsync()
-   {
-      try
-      {
-         await jsRuntime.InvokeVoidAsync("appInsights.flush");
-      }
-      catch { }
-   }
+================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\Services\TelemetrySeverity.cs
+SIZE: 0.17 KB
+MODIFIED: 11/03/2026 12:26:40
+================================================================================
+
+namespace CollabsKus.BlazorWebAssembly.Services;
+
+public enum TelemetrySeverity
+{
+   Verbose = 0,
+   Information = 1,
+   Warning = 2,
+   Error = 3,
+   Critical = 4
 }
 
 
@@ -6810,8 +6911,8 @@ body {
 
 ================================================================================
 FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\wwwroot\index.html
-SIZE: 19.16 KB
-MODIFIED: 11/03/2026 11:56:16
+SIZE: 12.72 KB
+MODIFIED: 11/03/2026 12:18:59
 ================================================================================
 
 <!DOCTYPE html>
@@ -6828,57 +6929,6 @@ MODIFIED: 11/03/2026 11:56:16
    <link href="manifest.webmanifest" rel="manifest" />
    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
-
-   <!--
-     Application Insights JavaScript SDK (official snippet).
-     Loaded in <head> BEFORE Blazor so it can capture the WASM
-     download as a dependency and the initial page view.
-     The connection string is an ingestion key, not a secret —
-     it is designed to be sent to browsers.
-   -->
-   <script type="text/javascript">!(function (cfg) {
-            function e() { cfg.onInit && cfg.onInit(n) }
-            var x, w, D, t, E, n, C = window, O = document, b = C.location, q = "script", I = "ingestionendpoint", L = "disableExceptionTracking", j = "ai.device.";
-            "instrumentationKey" [(t = "crossOrigin")] && "POST" === (E = "POST") && (cfg.endpointUrl && (cfg.endpointUrl = cfg.endpointUrl.replace(/^http:/, "https:")));
-            var s = (cfg.sv || cfg.version || "8"), S = cfg.useXhr, T = C.AwaUserContext;
-            (n = C[(D = "appInsightsSDK") + (cfg.name || "")] = C[D + (cfg.name || "")] || {
-                initialize: !0, queue: [], sv: s, version: 2, config: cfg
-            }),
-                (function (n) {
-                    var i = "https://js.monitor.azure.com/scripts/b/ai." + n.sv + ".gbl.min.js";
-                    n.queue && 0 === n.queue.length && (n.queue.push(function () {
-                        n.core && n.core._notifyInternalMessage && n.core._notifyInternalMessage(400, "Endpoint url if needed will be overridden by setting connectionString")
-                    }),
-                        function (n, i, t) {
-                            var e, a = O, l = a.createElement(q);
-                            l.src = i; t && (l.integrity = t);
-                            l.crossOrigin = "anonymous";
-                            n.ld < 0 ? a.getElementsByTagName("head")[0].appendChild(l) : setTimeout(function () { a.getElementsByTagName(q)[0].parentNode.appendChild(l) }, n.ld || 0);
-                            try { l.onload = e } catch (s) { }
-                        }(n, cfg.src || i, cfg.cr));
-                    try { (n.cookie = O.cookie) } catch (h) { }
-                    function p(e) { for (; e.length;) !function (i) { n[i] = function () { var e = arguments; n.queue.push(function () { n[i].apply(n, e) }) } }(e.pop()) }
-                    var u = "track", c = "TrackPage", f = "TrackEvent";
-                    p([u + "Event", u + "PageView", u + "Exception", u + "Trace", u + "DependencyData", u + "Metric", u + c + "View", "start" + c + "View", "start" + c + "View", "stop" + c + "View", "start" + f, "stop" + f, "addTelemetryInitializer", "setAuthenticatedUserContext", "clearAuthenticatedUserContext", "flush"]);
-                    n.SeverityLevel = { Verbose: 0, Information: 1, Warning: 2, Error: 3, Critical: 4 };
-                    var d = (cfg.extensionConfig || {}).ApplicationInsightsAnalytics || {};
-                    if (!0 !== cfg[L] && !0 !== d[L]) {
-                        p(["_" + (x = "onerror")]);
-                        var g = C[x];
-                        C[x] = function (e, i, a, t, r) {
-                            var s = g && g(e, i, a, t, r);
-                            return !0 !== s && n["_" + x]({ message: e, url: i, lineNumber: a, columnNumber: t, error: r, evt: C.event }), s
-                        };
-                        cfg.autoExceptionInstrumented = !0
-                    }
-                })(n)
-        })({
-            // Connection string is set at runtime by Blazor in Program.cs via
-            // window.appInsights.boot(connectionString). We pass an empty one
-            // here so the snippet initialises; the real value arrives before
-            // any telemetry call (we queue everything until boot completes).
-            connectionString: ""
-        });</script>
 </head>
 
 <body>
@@ -6912,80 +6962,7 @@ MODIFIED: 11/03/2026 11:56:16
             }
         }(window.location));</script>
 
-   <script>// ── Application Insights wrapper ─────────────────────────────────────
-        // Blazor calls window.appInsights.boot(connectionString) from Program.cs
-        // once configuration is loaded. The snippet above already queues calls,
-        // so anything that fires before boot is replayed once the SDK is ready.
-        window.appInsights = {
-            _booted: false,
-            _connectionString: null,
-
-            boot: function (connectionString) {
-                if (this._booted) return;
-                if (!connectionString) {
-                    console.warn('appInsights.boot: no connection string supplied; telemetry disabled.');
-                    return;
-                }
-                this._connectionString = connectionString;
-                var sdk = window.appInsightsSDK;
-                if (!sdk) {
-                    console.warn('appInsights.boot: SDK not present.');
-                    return;
-                }
-                // Update config so the snippet uses the real endpoint.
-                sdk.config.connectionString = connectionString;
-                // Track the initial page view (the snippet auto-tracks only
-                // after the script tag finishes downloading; this is safe
-                // either way because the SDK dedupes).
-                try { sdk.trackPageView(); } catch (e) { }
-                this._booted = true;
-            },
-
-            trackEvent: function (name, properties) {
-                var sdk = window.appInsightsSDK;
-                if (!sdk) return;
-                try {
-                    sdk.trackEvent({ name: name }, properties || undefined);
-                } catch (e) { /* swallow */ }
-            },
-
-            trackPageView: function (name, uri) {
-                var sdk = window.appInsightsSDK;
-                if (!sdk) return;
-                try {
-                    var pv = {};
-                    if (name) pv.name = name;
-                    if (uri) pv.uri = uri;
-                    sdk.trackPageView(pv);
-                } catch (e) { /* swallow */ }
-            },
-
-            trackException: function (message, stack, properties) {
-                var sdk = window.appInsightsSDK;
-                if (!sdk) return;
-                try {
-                    var err = new Error(message || 'Unknown error');
-                    if (stack) err.stack = stack;
-                    sdk.trackException({ exception: err }, properties || undefined);
-                } catch (e) { /* swallow */ }
-            },
-
-            trackTrace: function (message, severity, properties) {
-                var sdk = window.appInsightsSDK;
-                if (!sdk) return;
-                try {
-                    sdk.trackTrace({ message: message, severityLevel: severity }, properties || undefined);
-                } catch (e) { /* swallow */ }
-            },
-
-            flush: function () {
-                var sdk = window.appInsightsSDK;
-                if (!sdk) return;
-                try { sdk.flush(); } catch (e) { /* swallow */ }
-            }
-        };
-
-        // ── Unified visibility tracking (Page Visibility API + IntersectionObserver) ──
+   <script>// ── Unified visibility tracking (Page Visibility API + IntersectionObserver) ──
         window.visibilityTracker = {
             _observers: {},
             _dotNetRef: null,
@@ -7222,6 +7199,130 @@ MODIFIED: 11/03/2026 11:56:16
 </body>
 
 </html>
+
+
+
+================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.BlazorWebAssembly\wwwroot\js\telemetry.js
+SIZE: 3.43 KB
+MODIFIED: 11/03/2026 12:26:40
+================================================================================
+
+const sdkUrl = "https://js.monitor.azure.com/scripts/b/ai.3.gbl.min.js";
+const cloudRole = "collabskus-web";
+const maxQueueLength = 250;
+
+const State = Object.freeze({ Idle: "idle", Loading: "loading", Ready: "ready", Disabled: "disabled" });
+
+let state = State.Idle;
+let sdk = null;
+let queue = [];
+
+function loadScript(src) {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = src;
+        script.async = true;
+        script.crossOrigin = "anonymous";
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error(`Failed to load ${src}`));
+        document.head.appendChild(script);
+    });
+}
+
+function disable(reason) {
+    state = State.Disabled;
+    queue = [];
+    console.warn(`Telemetry disabled: ${reason}`);
+}
+
+function execute(action) {
+    try {
+        action(sdk);
+    } catch (error) {
+        console.warn("Telemetry call failed", error);
+    }
+}
+
+function enqueue(action) {
+    if (state === State.Ready) {
+        execute(action);
+    } else if (state !== State.Disabled && queue.length < maxQueueLength) {
+        queue.push(action);
+    }
+}
+
+async function start(connectionString, environment) {
+    try {
+        await loadScript(sdkUrl);
+        const ns = window.Microsoft && window.Microsoft.ApplicationInsights;
+        if (!ns || typeof ns.ApplicationInsights !== "function") {
+            throw new Error("Application Insights SDK namespace not found");
+        }
+        sdk = new ns.ApplicationInsights({
+            config: {
+                connectionString: connectionString,
+                enableAutoRouteTracking: false
+            }
+        });
+        sdk.addTelemetryInitializer(envelope => {
+            envelope.tags = envelope.tags || {};
+            envelope.tags["ai.cloud.role"] = cloudRole;
+            envelope.data = envelope.data || {};
+            envelope.data.environment = environment;
+        });
+        sdk.loadAppInsights();
+        sdk.trackPageView();
+        state = State.Ready;
+        const pending = queue;
+        queue = [];
+        pending.forEach(execute);
+    } catch (error) {
+        disable(error.message);
+    }
+}
+
+export function init(connectionString, environment) {
+    if (state !== State.Idle) {
+        return;
+    }
+    if (!connectionString) {
+        disable("no connection string configured");
+        return;
+    }
+    state = State.Loading;
+    start(connectionString, environment || "Production");
+}
+
+export function trackPageView(name, uri) {
+    enqueue(s => {
+        const pageView = {};
+        if (name) pageView.name = name;
+        if (uri) pageView.uri = uri;
+        s.trackPageView(pageView);
+    });
+}
+
+export function trackEvent(name, properties) {
+    enqueue(s => s.trackEvent({ name: name }, properties || undefined));
+}
+
+export function trackException(message, stack, typeName, properties) {
+    enqueue(s => {
+        const error = new Error(message || "Unknown error");
+        if (typeName) error.name = typeName;
+        if (stack) error.stack = stack;
+        s.trackException({ exception: error, severityLevel: 3 }, properties || undefined);
+    });
+}
+
+export function trackTrace(message, severityLevel, properties) {
+    enqueue(s => s.trackTrace({ message: message, severityLevel: severityLevel }, properties || undefined));
+}
+
+export function flush() {
+    enqueue(s => s.flush());
+}
 
 
 
@@ -8831,6 +8932,169 @@ public class SolarPositionServiceTests
 
 
 ================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.Tests\Services\TelemetryLoggerProviderTests.cs
+SIZE: 4.19 KB
+MODIFIED: 11/03/2026 12:26:40
+================================================================================
+
+using CollabsKus.BlazorWebAssembly.Services;
+using Microsoft.Extensions.Logging;
+
+namespace CollabsKus.Tests.Services;
+
+public class TelemetryLoggerProviderTests
+{
+   [Test]
+   [Arguments(LogLevel.Trace)]
+   [Arguments(LogLevel.Debug)]
+   [Arguments(LogLevel.Information)]
+   [Arguments(LogLevel.Warning)]
+   [Arguments(LogLevel.None)]
+   public async Task IsEnabled_BelowError_ReturnsFalse(LogLevel level)
+   {
+      var logger = new TelemetryLoggerProvider(new RecordingTelemetryService()).CreateLogger("Test");
+      await Assert.That(logger.IsEnabled(level)).IsFalse();
+   }
+
+   [Test]
+   [Arguments(LogLevel.Error)]
+   [Arguments(LogLevel.Critical)]
+   public async Task IsEnabled_ErrorOrAbove_ReturnsTrue(LogLevel level)
+   {
+      var logger = new TelemetryLoggerProvider(new RecordingTelemetryService()).CreateLogger("Test");
+      await Assert.That(logger.IsEnabled(level)).IsTrue();
+   }
+
+   [Test]
+   public async Task Log_WarningLevel_SendsNothing()
+   {
+      var telemetry = new RecordingTelemetryService();
+      var logger = new TelemetryLoggerProvider(telemetry).CreateLogger("Test");
+
+      logger.LogWarning("ignored");
+
+      await Assert.That(telemetry.Exceptions.Count).IsEqualTo(0);
+      await Assert.That(telemetry.Traces.Count).IsEqualTo(0);
+   }
+
+   [Test]
+   public async Task Log_ErrorWithException_TracksException()
+   {
+      var telemetry = new RecordingTelemetryService();
+      var logger = new TelemetryLoggerProvider(telemetry).CreateLogger("Some.Category");
+      var exception = new InvalidOperationException("boom");
+
+      logger.LogError(exception, "failed");
+
+      await Assert.That(telemetry.Exceptions.Count).IsEqualTo(1);
+      await Assert.That(telemetry.Traces.Count).IsEqualTo(0);
+      await Assert.That(ReferenceEquals(telemetry.Exceptions[0].Exception, exception)).IsTrue();
+      await Assert.That(telemetry.Exceptions[0].Properties!["category"]).IsEqualTo("Some.Category");
+      await Assert.That(telemetry.Exceptions[0].Properties!["logLevel"]).IsEqualTo("Error");
+      await Assert.That(telemetry.Exceptions[0].Properties!["message"]).IsEqualTo("failed");
+   }
+
+   [Test]
+   public async Task Log_CriticalWithoutException_TracksCriticalTrace()
+   {
+      var telemetry = new RecordingTelemetryService();
+      var logger = new TelemetryLoggerProvider(telemetry).CreateLogger("Test");
+
+      logger.LogCritical("fatal");
+
+      await Assert.That(telemetry.Exceptions.Count).IsEqualTo(0);
+      await Assert.That(telemetry.Traces.Count).IsEqualTo(1);
+      await Assert.That(telemetry.Traces[0].Message).IsEqualTo("fatal");
+      await Assert.That(telemetry.Traces[0].Severity).IsEqualTo(TelemetrySeverity.Critical);
+   }
+
+   [Test]
+   public async Task Log_ErrorWithoutException_TracksErrorTrace()
+   {
+      var telemetry = new RecordingTelemetryService();
+      var logger = new TelemetryLoggerProvider(telemetry).CreateLogger("Test");
+
+      logger.LogError("bad");
+
+      await Assert.That(telemetry.Traces.Count).IsEqualTo(1);
+      await Assert.That(telemetry.Traces[0].Severity).IsEqualTo(TelemetrySeverity.Error);
+   }
+
+   private sealed class RecordingTelemetryService : ITelemetryService
+   {
+      public List<(Exception Exception, IReadOnlyDictionary<string, string>? Properties)> Exceptions { get; } = [];
+
+      public List<(string Message, TelemetrySeverity Severity)> Traces { get; } = [];
+
+      public Task InitializeAsync() => Task.CompletedTask;
+
+      public Task TrackPageViewAsync(string? name, string? uri) => Task.CompletedTask;
+
+      public Task TrackEventAsync(string name, IReadOnlyDictionary<string, string>? properties = null) => Task.CompletedTask;
+
+      public Task TrackExceptionAsync(Exception exception, IReadOnlyDictionary<string, string>? properties = null)
+      {
+         Exceptions.Add((exception, properties));
+         return Task.CompletedTask;
+      }
+
+      public Task TrackTraceAsync(string message, TelemetrySeverity severity = TelemetrySeverity.Information, IReadOnlyDictionary<string, string>? properties = null)
+      {
+         Traces.Add((message, severity));
+         return Task.CompletedTask;
+      }
+
+      public Task FlushAsync() => Task.CompletedTask;
+   }
+}
+
+
+
+================================================================================
+FILE: :\DEV\personal\collabskus\CollabsKus.Tests\Services\TelemetryOptionsTests.cs
+SIZE: 1.08 KB
+MODIFIED: 11/03/2026 12:26:40
+================================================================================
+
+using CollabsKus.BlazorWebAssembly.Services;
+
+namespace CollabsKus.Tests.Services;
+
+public class TelemetryOptionsTests
+{
+   [Test]
+   public async Task IsEnabled_NullConnectionString_ReturnsFalse()
+   {
+      var options = new TelemetryOptions(null, "Production");
+      await Assert.That(options.IsEnabled).IsFalse();
+   }
+
+   [Test]
+   [Arguments("")]
+   [Arguments("   ")]
+   public async Task IsEnabled_BlankConnectionString_ReturnsFalse(string connectionString)
+   {
+      var options = new TelemetryOptions(connectionString, "Production");
+      await Assert.That(options.IsEnabled).IsFalse();
+   }
+
+   [Test]
+   public async Task IsEnabled_ConnectionStringPresent_ReturnsTrue()
+   {
+      var options = new TelemetryOptions("InstrumentationKey=00000000-0000-0000-0000-000000000000", "Production");
+      await Assert.That(options.IsEnabled).IsTrue();
+   }
+
+   [Test]
+   public async Task ConnectionStringKey_MatchesAppSettingsPath()
+   {
+      await Assert.That(TelemetryOptions.ConnectionStringKey).IsEqualTo("ApplicationInsights:ConnectionString");
+   }
+}
+
+
+
+================================================================================
 FILE: :\DEV\personal\collabskus\Directory.Build.props
 SIZE: 0.68 KB
 MODIFIED: 04/24/2026 10:57:59
@@ -8917,7 +9181,7 @@ MODIFIED: 11/03/2026 11:53:36
 
 
 ===============================================================================
-EXPORT COMPLETED: 11/03/2026 11:59:50
-Total Files Exported: 64
+EXPORT COMPLETED: 11/03/2026 12:32:07
+Total Files Exported: 71
 Output File: .\docs\llm\dump.txt
 ===============================================================================
