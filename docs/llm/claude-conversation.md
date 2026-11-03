@@ -2918,3 +2918,16 @@ Claude finished the response
 15:44:25:077	  CollabsKus.Tests -> D:\DEV\personal\collabskus\CollabsKus.Tests\bin\Debug\net10.0\CollabsKus.Tests.dll
 15:44:25:296	========== Rebuild All: 3 succeeded, 0 failed, 0 skipped ==========
 15:44:25:296	========== Rebuild completed at 3:44 PM and took 30.561 seconds ==========
+15:49:12:527	Build started at 3:49 PM...
+15:49:12:893	========== Build: 0 succeeded, 0 failed, 3 up-to-date, 0 skipped ==========
+15:49:12:893	========== Build completed at 3:49 PM and took 00.495 seconds ==========
+11:46:47:117	Log level is set to Informational (Default).
+11:46:49:646	Connected to test environment '< Local Windows Environment >'
+15:49:09:618	Test data store opened in 7.429 sec.
+15:49:14:306	Starting test discovery for requested test run
+15:49:14:761	========== Starting test discovery ==========
+15:49:14:896	Starting discovery for 2 sources.
+15:49:21:786	========== Test discovery finished: 176 Tests found in 7 sec ==========
+15:49:22:705	========== Starting test run ==========
+15:50:38:140	The active Test Run Attachments Processing was aborted.
+15:50:38:205	========== Test run finished: 176 Tests (146 Passed, 30 Failed, 0 Skipped) run in 1.2 min ==========
