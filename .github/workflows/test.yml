@@ -54,7 +54,7 @@ jobs:
         run: dotnet build CollabsKus.PlaywrightTests/CollabsKus.PlaywrightTests.csproj
 
       - name: Install Playwright browsers
-        run: pwsh CollabsKus.PlaywrightTests/bin/Debug/net10.0/playwright.ps1 install --with-deps chromium
+        run: pwsh CollabsKus.PlaywrightTests/bin/Debug/net11.0/playwright.ps1 install --with-deps chromium
 
       # Start the Kestrel dev server in the background with --no-build (already built above),
       # then wait up to 60 s for it to respond. Setting BASE_URL tells the test class not to
