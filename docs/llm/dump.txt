@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 11/10/2026 15:01:33
+Generated: 11/10/2026 15:05:26
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -3974,7 +3974,7 @@ jobs:
 ================================================================================
 FILE: :\DEV\personal\collabskus\.github\workflows\test.yml
 SIZE: 2.19 KB
-MODIFIED: 11/10/2026 14:58:12
+MODIFIED: 11/10/2026 15:04:58
 ================================================================================
 
 name: Tests
@@ -4021,7 +4021,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: '11.0.x'
 
       - name: Install wasm-tools workload
         run: dotnet workload install wasm-tools
@@ -19117,7 +19117,7 @@ MODIFIED: 11/03/2026 15:49:29
 
 
 ===============================================================================
-EXPORT COMPLETED: 11/10/2026 15:02:15
+EXPORT COMPLETED: 11/10/2026 15:05:56
 Total Files Exported: 115
 Output File: .\docs\llm\dump.txt
 ===============================================================================
