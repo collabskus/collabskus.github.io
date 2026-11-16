@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 11/11/2026 14:53:37
+Generated: 11/16/2026 15:10:44
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -717,6 +717,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |   Microsoft.Extensions.Configuration.Abstractions.dll
 |   |   |       |   Microsoft.Extensions.Configuration.Binder.dll
 |   |   |       |   Microsoft.Extensions.Configuration.dll
+|   |   |       |   Microsoft.Extensions.Configuration.EnvironmentVariables.dll
 |   |   |       |   Microsoft.Extensions.Configuration.FileExtensions.dll
 |   |   |       |   Microsoft.Extensions.Configuration.Json.dll
 |   |   |       |   Microsoft.Extensions.DependencyInjection.Abstractions.dll
@@ -727,6 +728,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |   Microsoft.Extensions.FileProviders.Physical.dll
 |   |   |       |   Microsoft.Extensions.FileSystemGlobbing.dll
 |   |   |       |   Microsoft.Extensions.Hosting.Abstractions.dll
+|   |   |       |   Microsoft.Extensions.Localization.Abstractions.dll
 |   |   |       |   Microsoft.Extensions.Logging.Abstractions.dll
 |   |   |       |   Microsoft.Extensions.Logging.dll
 |   |   |       |   Microsoft.Extensions.Options.ConfigurationExtensions.dll
@@ -914,8 +916,6 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |           |   service-worker.js.gz
 |   |   |           |   
 |   |   |           \---_framework
-|   |   |                   blazor.webassembly.js
-|   |   |                   blazor.webassembly.js.gz
 |   |   |                   dotnet.js
 |   |   |                   dotnet.js.gz
 |   |   |                   Microsoft.DotNet.HotReload.WebAssembly.Browser.ltv7xfboaf.wasm
@@ -1501,7 +1501,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       0aij7dlkbq-{0}-1rhs3zumed-1rhs3zumed.gz
 |   |   |       |       0b9a84guqz-{0}-issto093zc-issto093zc.gz
 |   |   |       |       0i5zp19l9f-{0}-n3mw830utk-n3mw830utk.gz
-|   |   |       |       0pdg4vk9gb-{0}-i5mjgcdtbw-i5mjgcdtbw.gz
+|   |   |       |       0pdg4vk9gb-{0}-9rpw4ifbct-9rpw4ifbct.gz
 |   |   |       |       16gifuey71-{0}-5lgyv9xn0b-5lgyv9xn0b.gz
 |   |   |       |       1c3qkw0w51-{0}-bqt2i35hya-bqt2i35hya.gz
 |   |   |       |       1deyn67vgu-{0}-v9l6hoop95-v9l6hoop95.gz
@@ -1511,20 +1511,20 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       1xp43werw0-{0}-cden59mmah-cden59mmah.gz
 |   |   |       |       1xr9rauwnd-{0}-20mnkxh81v-20mnkxh81v.gz
 |   |   |       |       23gn20t81g-{0}-e0zfden0su-e0zfden0su.gz
-|   |   |       |       2c3hm7nll0-{0}-cr950nu066-cr950nu066.gz
-|   |   |       |       2mau3pzxk9-{0}-1wvhxsan2e-1wvhxsan2e.gz
+|   |   |       |       2c3hm7nll0-{0}-g6renuo6ud-g6renuo6ud.gz
+|   |   |       |       2mau3pzxk9-{0}-wcqyr45rut-wcqyr45rut.gz
 |   |   |       |       2zxgs4tsnx-{0}-wvv4updlri-wvv4updlri.gz
 |   |   |       |       3eoqy7gj56-{0}-x13qrcnytc-x13qrcnytc.gz
-|   |   |       |       3fggfcmk2o-{0}-3eygfmr7k7-3eygfmr7k7.gz
+|   |   |       |       3fggfcmk2o-{0}-srumns6rnf-srumns6rnf.gz
 |   |   |       |       3p6j8oeurv-{0}-k995wshqjs-k995wshqjs.gz
-|   |   |       |       3rlo0yi078-{0}-w3qd1tpl0e-w3qd1tpl0e.gz
+|   |   |       |       3rlo0yi078-{0}-ldl9n57ejg-ldl9n57ejg.gz
 |   |   |       |       3uswc3e8aj-{0}-punqig44zl-punqig44zl.gz
 |   |   |       |       3xa9xiqtht-{0}-4ww3vzh0qu-4ww3vzh0qu.gz
-|   |   |       |       3ysh8s79pg-{0}-f9acv1zsfd-f9acv1zsfd.gz
+|   |   |       |       3ysh8s79pg-{0}-hu75ojzlh3-hu75ojzlh3.gz
 |   |   |       |       3zuozzmu06-{0}-wavmo5w73l-wavmo5w73l.gz
 |   |   |       |       42amuoer10-{0}-63biykq5zy-63biykq5zy.gz
 |   |   |       |       482vz1t6u5-{0}-fz33mzlcvb-fz33mzlcvb.gz
-|   |   |       |       48a7wdie62-{0}-f6agwobtp4-f6agwobtp4.gz
+|   |   |       |       48a7wdie62-{0}-r4jikqj266-r4jikqj266.gz
 |   |   |       |       4a1xwh1opt-{0}-jn2lli2d0w-jn2lli2d0w.gz
 |   |   |       |       4hp7kz1aqc-{0}-mk5brvcn26-mk5brvcn26.gz
 |   |   |       |       4lndbx6r8b-{0}-6cr5dhj6ft-6cr5dhj6ft.gz
@@ -1535,7 +1535,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       5ufjppm8nw-{0}-jkr3410s9z-jkr3410s9z.gz
 |   |   |       |       6nuhangpnp-{0}-ugxo1k3sqb-ugxo1k3sqb.gz
 |   |   |       |       6whpssxz8a-{0}-sluvyrihbu-sluvyrihbu.gz
-|   |   |       |       6xlui7z80c-{0}-rvrn50cnx9-rvrn50cnx9.gz
+|   |   |       |       6xlui7z80c-{0}-44tczavxny-44tczavxny.gz
 |   |   |       |       76sgz3y7r0-{0}-2ortabmjec-2ortabmjec.gz
 |   |   |       |       7967rqizn0-{0}-7lsumcpq6l-7lsumcpq6l.gz
 |   |   |       |       7fuwygelwp-{0}-scmk0sllom-scmk0sllom.gz
@@ -1567,10 +1567,10 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       ayu8i58got-{0}-nbp7w77b68-nbp7w77b68.gz
 |   |   |       |       b14kjmb9vd-{0}-s4zwszxfmp-s4zwszxfmp.gz
 |   |   |       |       b9rfaqky48-{0}-z70c9476z7-z70c9476z7.gz
-|   |   |       |       bjnh5cvtwt-{0}-hc57ng8k2i-hc57ng8k2i.gz
+|   |   |       |       bjnh5cvtwt-{0}-8dnb0sugn7-8dnb0sugn7.gz
 |   |   |       |       bw9mqwopwi-{0}-klyjsqs37e-klyjsqs37e.gz
 |   |   |       |       cht8da2ukq-{0}-qmeb5lbjkh-qmeb5lbjkh.gz
-|   |   |       |       chz8ud0via-{0}-o5mp4tlpjw-o5mp4tlpjw.gz
+|   |   |       |       chz8ud0via-{0}-cib096z7rw-cib096z7rw.gz
 |   |   |       |       cm69mjq17w-{0}-4twwn3qfsb-4twwn3qfsb.gz
 |   |   |       |       cn1msecvsu-{0}-fz90iktqd6-fz90iktqd6.gz
 |   |   |       |       cxjh98o2yi-{0}-k41dg2oy4w-k41dg2oy4w.gz
@@ -1578,16 +1578,16 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       d3xctdbsm8-{0}-noiytmvos5-noiytmvos5.gz
 |   |   |       |       d4e2tqfm2s-{0}-wxc1i6x8wl-wxc1i6x8wl.gz
 |   |   |       |       d88qnt9z0r-{0}-97w21dt5mi-97w21dt5mi.gz
-|   |   |       |       dfreyn5klh-{0}-barn6987g7-barn6987g7.gz
+|   |   |       |       dfreyn5klh-{0}-bwab33dao6-bwab33dao6.gz
 |   |   |       |       dkj70biooi-{0}-c7tmrl7o78-c7tmrl7o78.gz
 |   |   |       |       dmdeonll3k-{0}-dgudlqqov0-dgudlqqov0.gz
 |   |   |       |       dt9uy83tyq-{0}-lc2coeb9zo-lc2coeb9zo.gz
 |   |   |       |       dynhy1cwn3-{0}-co8az3jtr9-co8az3jtr9.gz
 |   |   |       |       egrzhey92b-{0}-verm800txi-verm800txi.gz
-|   |   |       |       eho75k9ooj-{0}-bohhpowqmt-bohhpowqmt.gz
+|   |   |       |       eho75k9ooj-{0}-w0ssh3ovoz-w0ssh3ovoz.gz
 |   |   |       |       eina7s2dje-{0}-fh0sc2wmvp-fh0sc2wmvp.gz
 |   |   |       |       emar7ojs7b-{0}-b4q1biewgn-b4q1biewgn.gz
-|   |   |       |       fm7tmgkhvw-{0}-paz0hgkxyx-paz0hgkxyx.gz
+|   |   |       |       fm7tmgkhvw-{0}-3t3dmrnfil-3t3dmrnfil.gz
 |   |   |       |       fpqlfqrs4y-{0}-utvux904of-utvux904of.gz
 |   |   |       |       fxjqvkvbjh-{0}-en1u953gmw-en1u953gmw.gz
 |   |   |       |       ggnarkks1w-{0}-b3m2dkom2n-b3m2dkom2n.gz
@@ -1598,19 +1598,20 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       hgqrv5guzs-{0}-v2wl2ofnv0-v2wl2ofnv0.gz
 |   |   |       |       hrjml8rnq5-{0}-5mztpustxn-5mztpustxn.gz
 |   |   |       |       hvoxex7kkn-{0}-y9dv3vqaru-y9dv3vqaru.gz
-|   |   |       |       hy9mv8x1ap-{0}-cv7qxu2rie-cv7qxu2rie.gz
+|   |   |       |       hy9mv8x1ap-{0}-acdxe6oajt-acdxe6oajt.gz
 |   |   |       |       i5ajtya2i1-{0}-x9soo596wt-x9soo596wt.gz
 |   |   |       |       i9f8699y30-{0}-gtk4obwfrf-gtk4obwfrf.gz
 |   |   |       |       ij6nso3rd7-{0}-27dj2avfu5-27dj2avfu5.gz
 |   |   |       |       ik6mm6dbgz-{0}-vmfz9vnzaj-vmfz9vnzaj.gz
 |   |   |       |       inao2hh3rp-{0}-tj2sa9zr5x-tj2sa9zr5x.gz
 |   |   |       |       itn8yd70j8-{0}-dcl9hzdsug-dcl9hzdsug.gz
-|   |   |       |       ix9yfubrnc-{0}-wiadr0c2am-wiadr0c2am.gz
+|   |   |       |       ix9yfubrnc-{0}-j13cm1in97-j13cm1in97.gz
 |   |   |       |       j1a4bdn024-{0}-psyi3umkjj-psyi3umkjj.gz
 |   |   |       |       j9iy674wxo-{0}-6mn4ataiep-6mn4ataiep.gz
 |   |   |       |       jixqjhk6y3-{0}-0gje76o1ka-0gje76o1ka.gz
 |   |   |       |       jn0pjnv7jl-{0}-tqcydyowiz-tqcydyowiz.gz
 |   |   |       |       jolpzi1eqv-{0}-uvcxdfqzxu-uvcxdfqzxu.gz
+|   |   |       |       jpsg8p4gww-{0}-cx1izde5gg-cx1izde5gg.gz
 |   |   |       |       jt7625x2vc-{0}-sz4ghvrgd1-sz4ghvrgd1.gz
 |   |   |       |       jwj0rbu6vc-{0}-rycc9dq23j-rycc9dq23j.gz
 |   |   |       |       jxz3uzjirz-{0}-kdu78a74gj-kdu78a74gj.gz
@@ -1621,8 +1622,8 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       kz9p261qc5-{0}-9ocfasplqd-9ocfasplqd.gz
 |   |   |       |       l3vbqzhj1w-{0}-wkzlyf0kf5-wkzlyf0kf5.gz
 |   |   |       |       l7rbbbd4fi-{0}-tie9daveb3-tie9daveb3.gz
-|   |   |       |       lbxpns34i1-{0}-3srgkm2aj0-3srgkm2aj0.gz
-|   |   |       |       lh59ob944f-{0}-ul5kt7g077-ul5kt7g077.gz
+|   |   |       |       lbxpns34i1-{0}-h06an5551r-h06an5551r.gz
+|   |   |       |       lh59ob944f-{0}-ugozk1p02w-ugozk1p02w.gz
 |   |   |       |       lj3msr1lhw-{0}-silvgrpf2n-silvgrpf2n.gz
 |   |   |       |       ljeibr96ow-{0}-3qtycdw0wr-3qtycdw0wr.gz
 |   |   |       |       lm00a84zr9-{0}-zf4sy4xuv3-zf4sy4xuv3.gz
@@ -1633,6 +1634,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       mefb0ohm8q-{0}-2y1slkljkm-2y1slkljkm.gz
 |   |   |       |       mjzkqnyo95-{0}-ad1pxu81mf-ad1pxu81mf.gz
 |   |   |       |       mkanczbhy7-{0}-3k06dva2yo-3k06dva2yo.gz
+|   |   |       |       mnv90xlaa3-{0}-z0vgmhrln1-z0vgmhrln1.gz
 |   |   |       |       mq4v6cv0a4-{0}-xt514l75el-xt514l75el.gz
 |   |   |       |       mq9do0tmk1-{0}-p9qk64mjqw-p9qk64mjqw.gz
 |   |   |       |       n35jvnr825-{0}-ba0qfp8hvu-ba0qfp8hvu.gz
@@ -1659,7 +1661,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       pzqxcw519k-{0}-xtl39bnlne-xtl39bnlne.gz
 |   |   |       |       q3154k5biw-{0}-pn8lsdyqsi-pn8lsdyqsi.gz
 |   |   |       |       q4p940erp4-{0}-mjledzavap-mjledzavap.gz
-|   |   |       |       qapwvyh3s0-{0}-9b75mb1ejz-9b75mb1ejz.gz
+|   |   |       |       qapwvyh3s0-{0}-o6f8spojkm-o6f8spojkm.gz
 |   |   |       |       qd7fer2fo0-{0}-wgi8vt4vkq-wgi8vt4vkq.gz
 |   |   |       |       qitdg1tdwz-{0}-re89t4b7m5-re89t4b7m5.gz
 |   |   |       |       qm96gcrzfw-{0}-62obb2odzi-62obb2odzi.gz
@@ -1681,25 +1683,25 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       smng6u0rbk-{0}-sx8ta3t370-sx8ta3t370.gz
 |   |   |       |       st7tx8vokm-{0}-gyn70opcq7-gyn70opcq7.gz
 |   |   |       |       sugokdc00a-{0}-cbm5cx4n9i-cbm5cx4n9i.gz
-|   |   |       |       svb8xodzcv-{0}-bj9dawk3c4-bj9dawk3c4.gz
+|   |   |       |       svb8xodzcv-{0}-wpf2e66y5e-wpf2e66y5e.gz
 |   |   |       |       sy44tf32kn-{0}-59rukqv3sj-59rukqv3sj.gz
 |   |   |       |       syt0dqw1ux-{0}-5nl8kmfy1r-5nl8kmfy1r.gz
 |   |   |       |       t2kz3thrps-{0}-uyfhwbfd13-uyfhwbfd13.gz
 |   |   |       |       t9kyxruzq6-{0}-c08o99d5vs-c08o99d5vs.gz
 |   |   |       |       tbjuh26x5v-{0}-obpjv2xpwl-obpjv2xpwl.gz
-|   |   |       |       tcd8qxaqk5-{0}-snot7ppyf0-snot7ppyf0.gz
-|   |   |       |       to3gdc9v7t-{0}-7pbie1upmj-7pbie1upmj.gz
+|   |   |       |       tcd8qxaqk5-{0}-3v7h08qab2-3v7h08qab2.gz
+|   |   |       |       to3gdc9v7t-{0}-dd1hyeex4f-dd1hyeex4f.gz
 |   |   |       |       tqvssf1e25-{0}-8nsenkuiw1-8nsenkuiw1.gz
 |   |   |       |       tr29skqe6k-{0}-ty0izun4ef-ty0izun4ef.gz
-|   |   |       |       tx163lbqko-{0}-s8zekf2yhc-s8zekf2yhc.gz
+|   |   |       |       tx163lbqko-{0}-56talnw6fw-56talnw6fw.gz
 |   |   |       |       tzrr6pqzvj-{0}-bw93k8orhp-bw93k8orhp.gz
 |   |   |       |       u4isgfmkku-{0}-j4w1bzn28f-j4w1bzn28f.gz
-|   |   |       |       u71ga3liwe-{0}-hwsgttgi0n-hwsgttgi0n.gz
+|   |   |       |       u71ga3liwe-{0}-sy3zn47g40-sy3zn47g40.gz
 |   |   |       |       ubrqv4m86z-{0}-v8t1a4cu19-v8t1a4cu19.gz
 |   |   |       |       uhrx7xxvvp-{0}-egon9m5hzh-egon9m5hzh.gz
-|   |   |       |       umouci7rgc-{0}-csm1zja4b8-csm1zja4b8.gz
+|   |   |       |       umouci7rgc-{0}-46os95nnpm-46os95nnpm.gz
 |   |   |       |       umwqcj788f-{0}-02fc3z4z55-02fc3z4z55.gz
-|   |   |       |       v1r6c947cj-{0}-a7x6awovm2-a7x6awovm2.gz
+|   |   |       |       v1r6c947cj-{0}-72mifddv5o-72mifddv5o.gz
 |   |   |       |       v2oy4w573b-{0}-g5sh2mqcdn-g5sh2mqcdn.gz
 |   |   |       |       v3b7u7how3-{0}-opp3lj2zbn-opp3lj2zbn.gz
 |   |   |       |       v4otg6irbm-{0}-vzy23y3uzd-vzy23y3uzd.gz
@@ -1709,11 +1711,12 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       w3jaqn3h4o-{0}-avrxlytgzn-avrxlytgzn.gz
 |   |   |       |       w3ur6j80u7-{0}-0golvgzk7y-0golvgzk7y.gz
 |   |   |       |       wuimozunwv-{0}-lhk304sl0o-lhk304sl0o.gz
-|   |   |       |       x3ikudnee4-{0}-23qmhb85wt-23qmhb85wt.gz
+|   |   |       |       x3ikudnee4-{0}-u7otwlpigp-u7otwlpigp.gz
 |   |   |       |       x54bdp6f69-{0}-7vpa9c5ub5-7vpa9c5ub5.gz
 |   |   |       |       x57r4b36iz-{0}-h0en30vv0c-h0en30vv0c.gz
+|   |   |       |       xf0qnn73p1-{0}-31oo3lfiw4-31oo3lfiw4.gz
 |   |   |       |       xf1qqu3s0v-{0}-iecsbmkurv-iecsbmkurv.gz
-|   |   |       |       xn58q07e15-{0}-281y7lzkza-281y7lzkza.gz
+|   |   |       |       xn58q07e15-{0}-3y05m210dk-3y05m210dk.gz
 |   |   |       |       y27ilh7k6y-{0}-ivr0xvsc6z-ivr0xvsc6z.gz
 |   |   |       |       y722oc08fd-{0}-gapebxrttj-gapebxrttj.gz
 |   |   |       |       y740klzyfn-{0}-nqt6nbrn32-nqt6nbrn32.gz
@@ -1789,6 +1792,11 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       service-worker.js.build
 |   |   |       |       
 |   |   |       +---staticwebassets
+|   |   |       |   \---fx
+|   |   |       |       \---Microsoft.AspNetCore.Components.WebAssembly
+|   |   |       |           \---_framework
+|   |   |       |                   blazor.webassembly.js
+|   |   |       |                   
 |   |   |       +---tmp-webcil
 |   |   |       \---webcil
 |   |   |               CollabsKus.BlazorWebAssembly.wasm
@@ -1804,6 +1812,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |               Microsoft.Extensions.Caching.Abstractions.wasm
 |   |   |               Microsoft.Extensions.Configuration.Abstractions.wasm
 |   |   |               Microsoft.Extensions.Configuration.Binder.wasm
+|   |   |               Microsoft.Extensions.Configuration.EnvironmentVariables.wasm
 |   |   |               Microsoft.Extensions.Configuration.FileExtensions.wasm
 |   |   |               Microsoft.Extensions.Configuration.Json.wasm
 |   |   |               Microsoft.Extensions.Configuration.wasm
@@ -1815,6 +1824,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |               Microsoft.Extensions.FileProviders.Physical.wasm
 |   |   |               Microsoft.Extensions.FileSystemGlobbing.wasm
 |   |   |               Microsoft.Extensions.Hosting.Abstractions.wasm
+|   |   |               Microsoft.Extensions.Localization.Abstractions.wasm
 |   |   |               Microsoft.Extensions.Logging.Abstractions.wasm
 |   |   |               Microsoft.Extensions.Logging.wasm
 |   |   |               Microsoft.Extensions.Options.ConfigurationExtensions.wasm
@@ -2724,6 +2734,10 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |   |       |       Microsoft.Testing.Platform.resources.dll
 |   |   |       |       
+|   |   |       +---Log
+|   |   |       |       CollabsKus.PlaywrightTests_net11.0_x64_261116200822826.diag
+|   |   |       |       CollabsKus.PlaywrightTests_net11.0_x64_261116201025874.diag
+|   |   |       |       
 |   |   |       +---nl
 |   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
 |   |   |       |       
@@ -3189,6 +3203,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |   Microsoft.DiaSymReader.dll
 |   |   |       |   Microsoft.Extensions.Configuration.Binder.dll
 |   |   |       |   Microsoft.Extensions.Configuration.dll
+|   |   |       |   Microsoft.Extensions.Configuration.EnvironmentVariables.dll
 |   |   |       |   Microsoft.Extensions.Configuration.FileExtensions.dll
 |   |   |       |   Microsoft.Extensions.Configuration.Json.dll
 |   |   |       |   Microsoft.Extensions.DependencyInjection.dll
@@ -3196,6 +3211,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |   Microsoft.Extensions.Diagnostics.dll
 |   |   |       |   Microsoft.Extensions.FileProviders.Physical.dll
 |   |   |       |   Microsoft.Extensions.FileSystemGlobbing.dll
+|   |   |       |   Microsoft.Extensions.Localization.Abstractions.dll
 |   |   |       |   Microsoft.Extensions.Logging.dll
 |   |   |       |   Microsoft.Extensions.Options.ConfigurationExtensions.dll
 |   |   |       |   Microsoft.Extensions.Validation.dll
@@ -3268,6 +3284,10 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
 |   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
 |   |   |       |       Microsoft.Testing.Platform.resources.dll
+|   |   |       |       
+|   |   |       +---Log
+|   |   |       |       CollabsKus.Tests_net11.0_x64_261116200822890.diag
+|   |   |       |       CollabsKus.Tests_net11.0_x64_261116201025863.diag
 |   |   |       |       
 |   |   |       +---nl
 |   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
@@ -12905,7 +12925,7 @@ MODIFIED: 04/24/2026 11:06:21
 ================================================================================
 FILE: :\DEV\personal\collabskus\Directory.Packages.props
 SIZE: 0.54 KB
-MODIFIED: 11/10/2026 15:01:02
+MODIFIED: 11/16/2026 15:09:03
 ================================================================================
 
 <Project>
@@ -12916,7 +12936,7 @@ MODIFIED: 11/10/2026 15:01:02
     <PackageVersion Include="Markdig" Version="1.6.0" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="11.0.0" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="11.0.0" />
-    <PackageVersion Include="TUnit" Version="1.81.16" />
+    <PackageVersion Include="TUnit" Version="1.85.7" />
     <PackageVersion Include="Microsoft.Playwright" Version="1.64.1" />
   </ItemGroup>
 </Project>
@@ -19117,7 +19137,7 @@ MODIFIED: 11/03/2026 15:49:29
 
 
 ===============================================================================
-EXPORT COMPLETED: 11/11/2026 14:53:59
+EXPORT COMPLETED: 11/16/2026 15:11:09
 Total Files Exported: 115
 Output File: .\docs\llm\dump.txt
 ===============================================================================
