@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 11/20/2026 23:28:18
+Generated: 11/20/2026 23:37:13
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -20,6 +20,7 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   Directory.Build.targets
 |   Directory.Packages.props
 |   Export.ps1
+|   gitbook-docs.yaml
 |   LICENSE.txt
 |   PROJECT_SUMMARY.md
 |   README.md
@@ -9608,8 +9609,35 @@ MODIFIED: 11/16/2026 15:09:03
 </Project>
 
 
+================================================================================
+FILE: :\DEV\personal\collabskus\gitbook-docs.yaml
+SIZE: 0.4 KB
+MODIFIED: 11/20/2026 23:36:11
+================================================================================
+
+$schema: https://api.gitbook.com/gitbook-docs.yaml
+version: 1
+site:
+  title: CollabsKus
+  structure:
+    - type: space
+      key: space-docs
+      title: Documentation
+      path: docs
+      default: true
+      content:
+        directory: ./docs
+    - type: space
+      key: space-blog
+      title: Blog
+      path: blog
+      content:
+        directory: ./CollabsKus.BlazorWebAssembly/wwwroot/blog/posts
+
+
+
 ===============================================================================
-EXPORT COMPLETED: 11/20/2026 23:28:24
-Total Files Exported: 111
+EXPORT COMPLETED: 11/20/2026 23:37:18
+Total Files Exported: 112
 Output File: .\docs\llm\dump.txt
 ===============================================================================
