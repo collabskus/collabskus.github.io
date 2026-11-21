@@ -1,7 +1,7 @@
 
 ===============================================================================
 ASP.NET PROJECT EXPORT
-Generated: 11/20/2026 23:21:54
+Generated: 11/20/2026 23:24:32
 Project Path: D:\DEV\personal\collabskus
 ===============================================================================
 
@@ -689,238 +689,8 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |   |               WindowsBase.pulybckt2x.wasm.gz
 |   |   |   |               
 |   |   |   \---net11.0
-|   |   |       |   CollabsKus.BlazorWebAssembly.dll
-|   |   |       |   CollabsKus.BlazorWebAssembly.pdb
-|   |   |       |   CollabsKus.BlazorWebAssembly.runtimeconfig.dev.json
-|   |   |       |   CollabsKus.BlazorWebAssembly.runtimeconfig.json
-|   |   |       |   CollabsKus.BlazorWebAssembly.staticwebassets.endpoints.json
-|   |   |       |   CollabsKus.BlazorWebAssembly.staticwebassets.runtime.json
-|   |   |       |   dotnet.js
-|   |   |       |   dotnet.js.map
-|   |   |       |   dotnet.native.js
-|   |   |       |   dotnet.native.wasm
-|   |   |       |   dotnet.runtime.js
-|   |   |       |   dotnet.runtime.js.map
-|   |   |       |   icudt_CJK.dat
-|   |   |       |   icudt_EFIGS.dat
-|   |   |       |   icudt_no_CJK.dat
-|   |   |       |   Markdig.dll
-|   |   |       |   Microsoft.AspNetCore.Authorization.dll
-|   |   |       |   Microsoft.AspNetCore.Components.dll
-|   |   |       |   Microsoft.AspNetCore.Components.Forms.dll
-|   |   |       |   Microsoft.AspNetCore.Components.Web.dll
-|   |   |       |   Microsoft.AspNetCore.Components.WebAssembly.dll
-|   |   |       |   Microsoft.AspNetCore.Metadata.dll
-|   |   |       |   Microsoft.CSharp.dll
-|   |   |       |   Microsoft.DotNet.HotReload.WebAssembly.Browser.dll
-|   |   |       |   Microsoft.Extensions.Caching.Abstractions.dll
-|   |   |       |   Microsoft.Extensions.Configuration.Abstractions.dll
-|   |   |       |   Microsoft.Extensions.Configuration.Binder.dll
-|   |   |       |   Microsoft.Extensions.Configuration.dll
-|   |   |       |   Microsoft.Extensions.Configuration.EnvironmentVariables.dll
-|   |   |       |   Microsoft.Extensions.Configuration.FileExtensions.dll
-|   |   |       |   Microsoft.Extensions.Configuration.Json.dll
-|   |   |       |   Microsoft.Extensions.DependencyInjection.Abstractions.dll
-|   |   |       |   Microsoft.Extensions.DependencyInjection.dll
-|   |   |       |   Microsoft.Extensions.Diagnostics.Abstractions.dll
-|   |   |       |   Microsoft.Extensions.Diagnostics.dll
-|   |   |       |   Microsoft.Extensions.FileProviders.Abstractions.dll
-|   |   |       |   Microsoft.Extensions.FileProviders.Physical.dll
-|   |   |       |   Microsoft.Extensions.FileSystemGlobbing.dll
-|   |   |       |   Microsoft.Extensions.Hosting.Abstractions.dll
-|   |   |       |   Microsoft.Extensions.Localization.Abstractions.dll
-|   |   |       |   Microsoft.Extensions.Logging.Abstractions.dll
-|   |   |       |   Microsoft.Extensions.Logging.dll
-|   |   |       |   Microsoft.Extensions.Options.ConfigurationExtensions.dll
-|   |   |       |   Microsoft.Extensions.Options.dll
-|   |   |       |   Microsoft.Extensions.Primitives.dll
-|   |   |       |   Microsoft.Extensions.Validation.dll
-|   |   |       |   Microsoft.JSInterop.dll
-|   |   |       |   Microsoft.JSInterop.WebAssembly.dll
-|   |   |       |   Microsoft.VisualBasic.Core.dll
-|   |   |       |   Microsoft.VisualBasic.dll
-|   |   |       |   Microsoft.Win32.Primitives.dll
-|   |   |       |   Microsoft.Win32.Registry.dll
-|   |   |       |   mscorlib.dll
-|   |   |       |   netstandard.dll
-|   |   |       |   System.AppContext.dll
-|   |   |       |   System.Buffers.dll
-|   |   |       |   System.Collections.Concurrent.dll
-|   |   |       |   System.Collections.dll
-|   |   |       |   System.Collections.Immutable.dll
-|   |   |       |   System.Collections.NonGeneric.dll
-|   |   |       |   System.Collections.Specialized.dll
-|   |   |       |   System.ComponentModel.Annotations.dll
-|   |   |       |   System.ComponentModel.DataAnnotations.dll
-|   |   |       |   System.ComponentModel.dll
-|   |   |       |   System.ComponentModel.EventBasedAsync.dll
-|   |   |       |   System.ComponentModel.Primitives.dll
-|   |   |       |   System.ComponentModel.TypeConverter.dll
-|   |   |       |   System.Configuration.dll
-|   |   |       |   System.Console.dll
-|   |   |       |   System.Core.dll
-|   |   |       |   System.Data.Common.dll
-|   |   |       |   System.Data.DataSetExtensions.dll
-|   |   |       |   System.Data.dll
-|   |   |       |   System.Diagnostics.Contracts.dll
-|   |   |       |   System.Diagnostics.Debug.dll
-|   |   |       |   System.Diagnostics.DiagnosticSource.dll
-|   |   |       |   System.Diagnostics.FileVersionInfo.dll
-|   |   |       |   System.Diagnostics.Process.dll
-|   |   |       |   System.Diagnostics.StackTrace.dll
-|   |   |       |   System.Diagnostics.TextWriterTraceListener.dll
-|   |   |       |   System.Diagnostics.Tools.dll
-|   |   |       |   System.Diagnostics.TraceSource.dll
-|   |   |       |   System.Diagnostics.Tracing.dll
-|   |   |       |   System.dll
-|   |   |       |   System.Drawing.dll
-|   |   |       |   System.Drawing.Primitives.dll
-|   |   |       |   System.Dynamic.Runtime.dll
-|   |   |       |   System.Formats.Asn1.dll
-|   |   |       |   System.Formats.Tar.dll
-|   |   |       |   System.Globalization.Calendars.dll
-|   |   |       |   System.Globalization.dll
-|   |   |       |   System.Globalization.Extensions.dll
-|   |   |       |   System.IO.Compression.Brotli.dll
-|   |   |       |   System.IO.Compression.dll
-|   |   |       |   System.IO.Compression.FileSystem.dll
-|   |   |       |   System.IO.Compression.ZipFile.dll
-|   |   |       |   System.IO.dll
-|   |   |       |   System.IO.FileSystem.AccessControl.dll
-|   |   |       |   System.IO.FileSystem.dll
-|   |   |       |   System.IO.FileSystem.DriveInfo.dll
-|   |   |       |   System.IO.FileSystem.Primitives.dll
-|   |   |       |   System.IO.FileSystem.Watcher.dll
-|   |   |       |   System.IO.IsolatedStorage.dll
-|   |   |       |   System.IO.MemoryMappedFiles.dll
-|   |   |       |   System.IO.Pipelines.dll
-|   |   |       |   System.IO.Pipes.AccessControl.dll
-|   |   |       |   System.IO.Pipes.dll
-|   |   |       |   System.IO.UnmanagedMemoryStream.dll
-|   |   |       |   System.Linq.AsyncEnumerable.dll
-|   |   |       |   System.Linq.dll
-|   |   |       |   System.Linq.Expressions.dll
-|   |   |       |   System.Linq.Parallel.dll
-|   |   |       |   System.Linq.Queryable.dll
-|   |   |       |   System.Memory.dll
-|   |   |       |   System.Net.dll
-|   |   |       |   System.Net.Http.dll
-|   |   |       |   System.Net.Http.Json.dll
-|   |   |       |   System.Net.HttpListener.dll
-|   |   |       |   System.Net.Mail.dll
-|   |   |       |   System.Net.NameResolution.dll
-|   |   |       |   System.Net.NetworkInformation.dll
-|   |   |       |   System.Net.Ping.dll
-|   |   |       |   System.Net.Primitives.dll
-|   |   |       |   System.Net.Quic.dll
-|   |   |       |   System.Net.Requests.dll
-|   |   |       |   System.Net.Security.dll
-|   |   |       |   System.Net.ServerSentEvents.dll
-|   |   |       |   System.Net.ServicePoint.dll
-|   |   |       |   System.Net.Sockets.dll
-|   |   |       |   System.Net.WebClient.dll
-|   |   |       |   System.Net.WebHeaderCollection.dll
-|   |   |       |   System.Net.WebProxy.dll
-|   |   |       |   System.Net.WebSockets.Client.dll
-|   |   |       |   System.Net.WebSockets.dll
-|   |   |       |   System.Numerics.dll
-|   |   |       |   System.Numerics.Vectors.dll
-|   |   |       |   System.ObjectModel.dll
-|   |   |       |   System.Private.CoreLib.dll
-|   |   |       |   System.Private.DataContractSerialization.dll
-|   |   |       |   System.Private.Uri.dll
-|   |   |       |   System.Private.Xml.dll
-|   |   |       |   System.Private.Xml.Linq.dll
-|   |   |       |   System.Reflection.DispatchProxy.dll
-|   |   |       |   System.Reflection.dll
-|   |   |       |   System.Reflection.Emit.dll
-|   |   |       |   System.Reflection.Emit.ILGeneration.dll
-|   |   |       |   System.Reflection.Emit.Lightweight.dll
-|   |   |       |   System.Reflection.Extensions.dll
-|   |   |       |   System.Reflection.Metadata.dll
-|   |   |       |   System.Reflection.Primitives.dll
-|   |   |       |   System.Reflection.TypeExtensions.dll
-|   |   |       |   System.Resources.Reader.dll
-|   |   |       |   System.Resources.ResourceManager.dll
-|   |   |       |   System.Resources.Writer.dll
-|   |   |       |   System.Runtime.CompilerServices.Unsafe.dll
-|   |   |       |   System.Runtime.CompilerServices.VisualC.dll
-|   |   |       |   System.Runtime.dll
-|   |   |       |   System.Runtime.Extensions.dll
-|   |   |       |   System.Runtime.Handles.dll
-|   |   |       |   System.Runtime.InteropServices.dll
-|   |   |       |   System.Runtime.InteropServices.JavaScript.dll
-|   |   |       |   System.Runtime.InteropServices.RuntimeInformation.dll
-|   |   |       |   System.Runtime.Intrinsics.dll
-|   |   |       |   System.Runtime.Loader.dll
-|   |   |       |   System.Runtime.Numerics.dll
-|   |   |       |   System.Runtime.Serialization.dll
-|   |   |       |   System.Runtime.Serialization.Formatters.dll
-|   |   |       |   System.Runtime.Serialization.Json.dll
-|   |   |       |   System.Runtime.Serialization.Primitives.dll
-|   |   |       |   System.Runtime.Serialization.Xml.dll
-|   |   |       |   System.Security.AccessControl.dll
-|   |   |       |   System.Security.Claims.dll
-|   |   |       |   System.Security.Cryptography.Algorithms.dll
-|   |   |       |   System.Security.Cryptography.Cng.dll
-|   |   |       |   System.Security.Cryptography.Csp.dll
-|   |   |       |   System.Security.Cryptography.dll
-|   |   |       |   System.Security.Cryptography.Encoding.dll
-|   |   |       |   System.Security.Cryptography.OpenSsl.dll
-|   |   |       |   System.Security.Cryptography.Primitives.dll
-|   |   |       |   System.Security.Cryptography.X509Certificates.dll
-|   |   |       |   System.Security.dll
-|   |   |       |   System.Security.Principal.dll
-|   |   |       |   System.Security.Principal.Windows.dll
-|   |   |       |   System.Security.SecureString.dll
-|   |   |       |   System.ServiceModel.Web.dll
-|   |   |       |   System.ServiceProcess.dll
-|   |   |       |   System.Text.Encoding.CodePages.dll
-|   |   |       |   System.Text.Encoding.dll
-|   |   |       |   System.Text.Encoding.Extensions.dll
-|   |   |       |   System.Text.Encodings.Web.dll
-|   |   |       |   System.Text.Json.dll
-|   |   |       |   System.Text.RegularExpressions.dll
-|   |   |       |   System.Threading.AccessControl.dll
-|   |   |       |   System.Threading.Channels.dll
-|   |   |       |   System.Threading.dll
-|   |   |       |   System.Threading.Overlapped.dll
-|   |   |       |   System.Threading.Tasks.Dataflow.dll
-|   |   |       |   System.Threading.Tasks.dll
-|   |   |       |   System.Threading.Tasks.Extensions.dll
-|   |   |       |   System.Threading.Tasks.Parallel.dll
-|   |   |       |   System.Threading.Thread.dll
-|   |   |       |   System.Threading.ThreadPool.dll
-|   |   |       |   System.Threading.Timer.dll
-|   |   |       |   System.Transactions.dll
-|   |   |       |   System.Transactions.Local.dll
-|   |   |       |   System.ValueTuple.dll
-|   |   |       |   System.Web.dll
-|   |   |       |   System.Web.HttpUtility.dll
-|   |   |       |   System.Windows.dll
-|   |   |       |   System.Xml.dll
-|   |   |       |   System.Xml.Linq.dll
-|   |   |       |   System.Xml.ReaderWriter.dll
-|   |   |       |   System.Xml.Serialization.dll
-|   |   |       |   System.Xml.XDocument.dll
-|   |   |       |   System.Xml.XmlDocument.dll
-|   |   |       |   System.Xml.XmlSerializer.dll
-|   |   |       |   System.Xml.XPath.dll
-|   |   |       |   System.Xml.XPath.XDocument.dll
-|   |   |       |   WindowsBase.dll
-|   |   |       |   
 |   |   |       \---wwwroot
-|   |   |           |   service-worker-assets.js
-|   |   |           |   service-worker-assets.js.gz
-|   |   |           |   service-worker.js
-|   |   |           |   service-worker.js.gz
-|   |   |           |   
 |   |   |           \---_framework
-|   |   |                   dotnet.js
-|   |   |                   dotnet.js.gz
-|   |   |                   Microsoft.DotNet.HotReload.WebAssembly.Browser.ltv7xfboaf.wasm
-|   |   |                   Microsoft.DotNet.HotReload.WebAssembly.Browser.ltv7xfboaf.wasm.gz
-|   |   |                   
 |   |   \---Release
 |   |       \---net10.0
 |   +---Components
@@ -1465,277 +1235,14 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |   |           
 |   |   |   \---net11.0
 |   |   |       |   .NETCoreApp,Version=v11.0.AssemblyAttributes.cs
-|   |   |       |   blazor.build.boot-extension.json
-|   |   |       |   CollabsK.82AA2576.Up2Date
-|   |   |       |   CollabsKus.BlazorWebAssembly.AssemblyInfo.cs
-|   |   |       |   CollabsKus.BlazorWebAssembly.AssemblyInfoInputs.cache
 |   |   |       |   CollabsKus.BlazorWebAssembly.assets.cache
-|   |   |       |   CollabsKus.BlazorWebAssembly.csproj.AssemblyReference.cache
-|   |   |       |   CollabsKus.BlazorWebAssembly.csproj.CoreCompileInputs.cache
 |   |   |       |   CollabsKus.BlazorWebAssembly.csproj.FileListAbsolute.txt
-|   |   |       |   CollabsKus.BlazorWebAssembly.dll
-|   |   |       |   CollabsKus.BlazorWebAssembly.GeneratedMSBuildEditorConfig.editorconfig
-|   |   |       |   CollabsKus.BlazorWebAssembly.genruntimeconfig.cache
 |   |   |       |   CollabsKus.BlazorWebAssembly.GlobalUsings.g.cs
-|   |   |       |   CollabsKus.BlazorWebAssembly.MvcApplicationPartsAssemblyInfo.cache
-|   |   |       |   CollabsKus.BlazorWebAssembly.pdb
-|   |   |       |   CollabsKus.BlazorWebAssembly.sourcelink.json
-|   |   |       |   dotnet.js
 |   |   |       |   rbcswa.dswa.cache.json
-|   |   |       |   rjimswa.dswa.cache.json
-|   |   |       |   rjsmcshtml.dswa.cache.json
-|   |   |       |   rjsmrazor.dswa.cache.json
-|   |   |       |   rpswa.dswa.cache.json
-|   |   |       |   staticwebassets.build.endpoints.json
-|   |   |       |   staticwebassets.build.json
-|   |   |       |   staticwebassets.build.json.cache
-|   |   |       |   staticwebassets.development.json
 |   |   |       |   staticwebassets.references.upToDateCheck.txt
 |   |   |       |   staticwebassets.removed.txt
-|   |   |       |   staticwebassets.upToDateCheck.txt
-|   |   |       |   swae.build.ex.cache
-|   |   |       |   wasm-bootjson-build.complete.stamp
-|   |   |       |   wasm-bootjson-build.stamp
 |   |   |       |   
 |   |   |       +---compressed
-|   |   |       |       0aij7dlkbq-{0}-1rhs3zumed-1rhs3zumed.gz
-|   |   |       |       0b9a84guqz-{0}-issto093zc-issto093zc.gz
-|   |   |       |       0i5zp19l9f-{0}-n3mw830utk-n3mw830utk.gz
-|   |   |       |       0pdg4vk9gb-{0}-9rpw4ifbct-9rpw4ifbct.gz
-|   |   |       |       16gifuey71-{0}-5lgyv9xn0b-5lgyv9xn0b.gz
-|   |   |       |       1c3qkw0w51-{0}-bqt2i35hya-bqt2i35hya.gz
-|   |   |       |       1deyn67vgu-{0}-v9l6hoop95-v9l6hoop95.gz
-|   |   |       |       1hfmv7gg6t-{0}-fy2yd6l86x-fy2yd6l86x.gz
-|   |   |       |       1vj8id7xo8-{0}-34ebpqfxjg-34ebpqfxjg.gz
-|   |   |       |       1w7yt2r47n-{0}-3hku9dt0vu-3hku9dt0vu.gz
-|   |   |       |       1xp43werw0-{0}-cden59mmah-cden59mmah.gz
-|   |   |       |       1xr9rauwnd-{0}-20mnkxh81v-20mnkxh81v.gz
-|   |   |       |       23gn20t81g-{0}-e0zfden0su-e0zfden0su.gz
-|   |   |       |       2c3hm7nll0-{0}-g6renuo6ud-g6renuo6ud.gz
-|   |   |       |       2mau3pzxk9-{0}-wcqyr45rut-wcqyr45rut.gz
-|   |   |       |       2zxgs4tsnx-{0}-wvv4updlri-wvv4updlri.gz
-|   |   |       |       3eoqy7gj56-{0}-x13qrcnytc-x13qrcnytc.gz
-|   |   |       |       3fggfcmk2o-{0}-srumns6rnf-srumns6rnf.gz
-|   |   |       |       3p6j8oeurv-{0}-k995wshqjs-k995wshqjs.gz
-|   |   |       |       3rlo0yi078-{0}-ldl9n57ejg-ldl9n57ejg.gz
-|   |   |       |       3uswc3e8aj-{0}-punqig44zl-punqig44zl.gz
-|   |   |       |       3xa9xiqtht-{0}-4ww3vzh0qu-4ww3vzh0qu.gz
-|   |   |       |       3ysh8s79pg-{0}-hu75ojzlh3-hu75ojzlh3.gz
-|   |   |       |       3zuozzmu06-{0}-wavmo5w73l-wavmo5w73l.gz
-|   |   |       |       42amuoer10-{0}-63biykq5zy-63biykq5zy.gz
-|   |   |       |       482vz1t6u5-{0}-fz33mzlcvb-fz33mzlcvb.gz
-|   |   |       |       48a7wdie62-{0}-r4jikqj266-r4jikqj266.gz
-|   |   |       |       4a1xwh1opt-{0}-jn2lli2d0w-jn2lli2d0w.gz
-|   |   |       |       4hp7kz1aqc-{0}-mk5brvcn26-mk5brvcn26.gz
-|   |   |       |       4lndbx6r8b-{0}-6cr5dhj6ft-6cr5dhj6ft.gz
-|   |   |       |       4q9cyo6cet-{0}-odr4hy4bza-odr4hy4bza.gz
-|   |   |       |       4t6a1lr6t8-{0}-u6k98s0hvt-u6k98s0hvt.gz
-|   |   |       |       5cnr4xr9te-{0}-hrryvx0dt3-hrryvx0dt3.gz
-|   |   |       |       5rhz1leae5-{0}-285h6coz0g-285h6coz0g.gz
-|   |   |       |       5ufjppm8nw-{0}-jkr3410s9z-jkr3410s9z.gz
-|   |   |       |       6nuhangpnp-{0}-ugxo1k3sqb-ugxo1k3sqb.gz
-|   |   |       |       6whpssxz8a-{0}-sluvyrihbu-sluvyrihbu.gz
-|   |   |       |       6xlui7z80c-{0}-44tczavxny-44tczavxny.gz
-|   |   |       |       76sgz3y7r0-{0}-2ortabmjec-2ortabmjec.gz
-|   |   |       |       7967rqizn0-{0}-7lsumcpq6l-7lsumcpq6l.gz
-|   |   |       |       7fuwygelwp-{0}-scmk0sllom-scmk0sllom.gz
-|   |   |       |       7l3shkfepc-{0}-4opp3obsdc-4opp3obsdc.gz
-|   |   |       |       7nn9fpv65m-{0}-6lka1uke1h-6lka1uke1h.gz
-|   |   |       |       7tt61wg4wq-{0}-rflrbq684v-rflrbq684v.gz
-|   |   |       |       7uot4e7ghq-{0}-85s81dt8ah-85s81dt8ah.gz
-|   |   |       |       7uq918b0og-{0}-kfm9yuy100-kfm9yuy100.gz
-|   |   |       |       7wytu84599-{0}-vt96jj889x-vt96jj889x.gz
-|   |   |       |       7yz0958mzh-{0}-zhm2cphi9n-zhm2cphi9n.gz
-|   |   |       |       82c2n9uinj-{0}-qyqh186u4r-qyqh186u4r.gz
-|   |   |       |       83y9upbsnb-{0}-vb2y1bjgj2-vb2y1bjgj2.gz
-|   |   |       |       8chs9vu16m-{0}-jp1diug9uq-jp1diug9uq.gz
-|   |   |       |       8d61d8q44u-{0}-mte0a1pd5n-mte0a1pd5n.gz
-|   |   |       |       8k4aq19pkd-{0}-4naydz1lda-4naydz1lda.gz
-|   |   |       |       8ny7mgk3z7-{0}-lhwe0p8dkk-lhwe0p8dkk.gz
-|   |   |       |       91qwxv6asw-{0}-4e6cnvzxii-4e6cnvzxii.gz
-|   |   |       |       92rpvtaziv-{0}-pu5tmfe9ry-pu5tmfe9ry.gz
-|   |   |       |       979bo53kk4-{0}-0kg93tq43j-0kg93tq43j.gz
-|   |   |       |       9p71x1po7t-{0}-tchfgznwy8-tchfgznwy8.gz
-|   |   |       |       9q56eowf4b-{0}-5okepy1b7g-5okepy1b7g.gz
-|   |   |       |       9tux14sxgs-{0}-pr0qxfqtua-pr0qxfqtua.gz
-|   |   |       |       a4oh0skw8v-{0}-x4ni8ean3v-x4ni8ean3v.gz
-|   |   |       |       a70qdg1j3k-{0}-xyuimhy3ww-xyuimhy3ww.gz
-|   |   |       |       a7v2zz8wr7-{0}-9lyl53lq8c-9lyl53lq8c.gz
-|   |   |       |       ah5fpsui61-{0}-axpino88we-axpino88we.gz
-|   |   |       |       aqm116bf2p-{0}-kq11xbrjuo-kq11xbrjuo.gz
-|   |   |       |       aqs7tspe4z-{0}-citkvlllzc-citkvlllzc.gz
-|   |   |       |       ayu8i58got-{0}-nbp7w77b68-nbp7w77b68.gz
-|   |   |       |       b14kjmb9vd-{0}-s4zwszxfmp-s4zwszxfmp.gz
-|   |   |       |       b9rfaqky48-{0}-z70c9476z7-z70c9476z7.gz
-|   |   |       |       bjnh5cvtwt-{0}-8dnb0sugn7-8dnb0sugn7.gz
-|   |   |       |       bw9mqwopwi-{0}-klyjsqs37e-klyjsqs37e.gz
-|   |   |       |       cht8da2ukq-{0}-qmeb5lbjkh-qmeb5lbjkh.gz
-|   |   |       |       chz8ud0via-{0}-cib096z7rw-cib096z7rw.gz
-|   |   |       |       cm69mjq17w-{0}-4twwn3qfsb-4twwn3qfsb.gz
-|   |   |       |       cn1msecvsu-{0}-fz90iktqd6-fz90iktqd6.gz
-|   |   |       |       cxjh98o2yi-{0}-k41dg2oy4w-k41dg2oy4w.gz
-|   |   |       |       d07juxbuh3-{0}-yx5lbk3szr-yx5lbk3szr.gz
-|   |   |       |       d3xctdbsm8-{0}-noiytmvos5-noiytmvos5.gz
-|   |   |       |       d4e2tqfm2s-{0}-wxc1i6x8wl-wxc1i6x8wl.gz
-|   |   |       |       d88qnt9z0r-{0}-97w21dt5mi-97w21dt5mi.gz
-|   |   |       |       dfreyn5klh-{0}-bwab33dao6-bwab33dao6.gz
-|   |   |       |       dkj70biooi-{0}-c7tmrl7o78-c7tmrl7o78.gz
-|   |   |       |       dmdeonll3k-{0}-dgudlqqov0-dgudlqqov0.gz
-|   |   |       |       dt9uy83tyq-{0}-lc2coeb9zo-lc2coeb9zo.gz
-|   |   |       |       dynhy1cwn3-{0}-co8az3jtr9-co8az3jtr9.gz
-|   |   |       |       egrzhey92b-{0}-verm800txi-verm800txi.gz
-|   |   |       |       eho75k9ooj-{0}-w0ssh3ovoz-w0ssh3ovoz.gz
-|   |   |       |       eina7s2dje-{0}-fh0sc2wmvp-fh0sc2wmvp.gz
-|   |   |       |       emar7ojs7b-{0}-b4q1biewgn-b4q1biewgn.gz
-|   |   |       |       fm7tmgkhvw-{0}-3t3dmrnfil-3t3dmrnfil.gz
-|   |   |       |       fpqlfqrs4y-{0}-utvux904of-utvux904of.gz
-|   |   |       |       fxjqvkvbjh-{0}-en1u953gmw-en1u953gmw.gz
-|   |   |       |       ggnarkks1w-{0}-b3m2dkom2n-b3m2dkom2n.gz
-|   |   |       |       gh73yn216j-{0}-tqz3qu0dvk-tqz3qu0dvk.gz
-|   |   |       |       h1y6b5mt0i-{0}-rd8tbegpxn-rd8tbegpxn.gz
-|   |   |       |       h2wzv8iut0-{0}-iw4g18zh5w-iw4g18zh5w.gz
-|   |   |       |       h3nih8h9ur-{0}-maodw0zvaq-maodw0zvaq.gz
-|   |   |       |       hgqrv5guzs-{0}-v2wl2ofnv0-v2wl2ofnv0.gz
-|   |   |       |       hrjml8rnq5-{0}-5mztpustxn-5mztpustxn.gz
-|   |   |       |       hvoxex7kkn-{0}-y9dv3vqaru-y9dv3vqaru.gz
-|   |   |       |       hy9mv8x1ap-{0}-acdxe6oajt-acdxe6oajt.gz
-|   |   |       |       i5ajtya2i1-{0}-x9soo596wt-x9soo596wt.gz
-|   |   |       |       i9f8699y30-{0}-gtk4obwfrf-gtk4obwfrf.gz
-|   |   |       |       ij6nso3rd7-{0}-27dj2avfu5-27dj2avfu5.gz
-|   |   |       |       ik6mm6dbgz-{0}-vmfz9vnzaj-vmfz9vnzaj.gz
-|   |   |       |       inao2hh3rp-{0}-tj2sa9zr5x-tj2sa9zr5x.gz
-|   |   |       |       itn8yd70j8-{0}-dcl9hzdsug-dcl9hzdsug.gz
-|   |   |       |       ix9yfubrnc-{0}-j13cm1in97-j13cm1in97.gz
-|   |   |       |       j1a4bdn024-{0}-psyi3umkjj-psyi3umkjj.gz
-|   |   |       |       j9iy674wxo-{0}-6mn4ataiep-6mn4ataiep.gz
-|   |   |       |       jixqjhk6y3-{0}-0gje76o1ka-0gje76o1ka.gz
-|   |   |       |       jn0pjnv7jl-{0}-tqcydyowiz-tqcydyowiz.gz
-|   |   |       |       jolpzi1eqv-{0}-uvcxdfqzxu-uvcxdfqzxu.gz
-|   |   |       |       jpsg8p4gww-{0}-cx1izde5gg-cx1izde5gg.gz
-|   |   |       |       jt7625x2vc-{0}-sz4ghvrgd1-sz4ghvrgd1.gz
-|   |   |       |       jwj0rbu6vc-{0}-rycc9dq23j-rycc9dq23j.gz
-|   |   |       |       jxz3uzjirz-{0}-kdu78a74gj-kdu78a74gj.gz
-|   |   |       |       jycfrnn7vn-{0}-20cmrdo2bo-20cmrdo2bo.gz
-|   |   |       |       kc2kjq7hjt-{0}-5jthgzyw5m-5jthgzyw5m.gz
-|   |   |       |       kg2rqbsgux-{0}-s3uaucuyu9-s3uaucuyu9.gz
-|   |   |       |       kmbcczlmqv-{0}-en41szi0ab-en41szi0ab.gz
-|   |   |       |       kz9p261qc5-{0}-9ocfasplqd-9ocfasplqd.gz
-|   |   |       |       l3vbqzhj1w-{0}-wkzlyf0kf5-wkzlyf0kf5.gz
-|   |   |       |       l7rbbbd4fi-{0}-tie9daveb3-tie9daveb3.gz
-|   |   |       |       lbxpns34i1-{0}-h06an5551r-h06an5551r.gz
-|   |   |       |       lh59ob944f-{0}-ugozk1p02w-ugozk1p02w.gz
-|   |   |       |       lj3msr1lhw-{0}-silvgrpf2n-silvgrpf2n.gz
-|   |   |       |       ljeibr96ow-{0}-3qtycdw0wr-3qtycdw0wr.gz
-|   |   |       |       lm00a84zr9-{0}-zf4sy4xuv3-zf4sy4xuv3.gz
-|   |   |       |       m38lsux7xe-{0}-lnjussi7qj-lnjussi7qj.gz
-|   |   |       |       m9tnclcpzs-{0}-b94e91wdpi-b94e91wdpi.gz
-|   |   |       |       ma12pfusa9-{0}-fu89p45z7v-fu89p45z7v.gz
-|   |   |       |       md54ewsqhe-{0}-wn9dhhrvrn-wn9dhhrvrn.gz
-|   |   |       |       mefb0ohm8q-{0}-2y1slkljkm-2y1slkljkm.gz
-|   |   |       |       mjzkqnyo95-{0}-ad1pxu81mf-ad1pxu81mf.gz
-|   |   |       |       mkanczbhy7-{0}-3k06dva2yo-3k06dva2yo.gz
-|   |   |       |       mnv90xlaa3-{0}-z0vgmhrln1-z0vgmhrln1.gz
-|   |   |       |       mq4v6cv0a4-{0}-xt514l75el-xt514l75el.gz
-|   |   |       |       mq9do0tmk1-{0}-p9qk64mjqw-p9qk64mjqw.gz
-|   |   |       |       n35jvnr825-{0}-ba0qfp8hvu-ba0qfp8hvu.gz
-|   |   |       |       nb5ocalx9l-{0}-gqgu2rt6xn-gqgu2rt6xn.gz
-|   |   |       |       nhzrlx2glb-{0}-0r7pscf5u4-0r7pscf5u4.gz
-|   |   |       |       njnlmbjta1-{0}-kj1g36kkmg-kj1g36kkmg.gz
-|   |   |       |       nl1aipmkh9-{0}-eglsbm093j-eglsbm093j.gz
-|   |   |       |       nu8bj35gu6-{0}-4i33lta79t-4i33lta79t.gz
-|   |   |       |       nwswlbpy0n-{0}-qaz87sy4tt-qaz87sy4tt.gz
-|   |   |       |       nykrlsg925-{0}-xstzkl8thi-xstzkl8thi.gz
-|   |   |       |       o4ouppfb1v-{0}-nyx7rr8fg8-nyx7rr8fg8.gz
-|   |   |       |       o9idfdlzbe-{0}-ucibclsw86-ucibclsw86.gz
-|   |   |       |       ofz52f4csx-{0}-dlm873fi9n-dlm873fi9n.gz
-|   |   |       |       onj7928xfn-{0}-c2r4b1jfkl-c2r4b1jfkl.gz
-|   |   |       |       ot0usvebgs-{0}-tlye01cwdk-tlye01cwdk.gz
-|   |   |       |       p6fc2t1yj0-{0}-2gnm43o499-2gnm43o499.gz
-|   |   |       |       pactsv2pac-{0}-yub4h79uz0-yub4h79uz0.gz
-|   |   |       |       pdaotioiej-{0}-9j1l9lir7m-9j1l9lir7m.gz
-|   |   |       |       pehuqocd4z-{0}-6fwpq17y7d-6fwpq17y7d.gz
-|   |   |       |       pq1zwub8zu-{0}-new9ysn0km-new9ysn0km.gz
-|   |   |       |       prwyqf4e4y-{0}-kj1g36kkmg-kj1g36kkmg.gz
-|   |   |       |       pwmpgrqg76-{0}-qy1njmr2fl-qy1njmr2fl.gz
-|   |   |       |       px0hxgqwjv-{0}-e47x8wtek8-e47x8wtek8.gz
-|   |   |       |       pzqxcw519k-{0}-xtl39bnlne-xtl39bnlne.gz
-|   |   |       |       q3154k5biw-{0}-pn8lsdyqsi-pn8lsdyqsi.gz
-|   |   |       |       q4p940erp4-{0}-mjledzavap-mjledzavap.gz
-|   |   |       |       qapwvyh3s0-{0}-o6f8spojkm-o6f8spojkm.gz
-|   |   |       |       qd7fer2fo0-{0}-wgi8vt4vkq-wgi8vt4vkq.gz
-|   |   |       |       qitdg1tdwz-{0}-re89t4b7m5-re89t4b7m5.gz
-|   |   |       |       qm96gcrzfw-{0}-62obb2odzi-62obb2odzi.gz
-|   |   |       |       qp8xb91mke-{0}-hanopjymx7-hanopjymx7.gz
-|   |   |       |       qpigde0uj3-{0}-7u1q1wl1do-7u1q1wl1do.gz
-|   |   |       |       qrladpjydh-{0}-l0he6zyypw-l0he6zyypw.gz
-|   |   |       |       qw6a1rjkfw-{0}-e01ehmqnbq-e01ehmqnbq.gz
-|   |   |       |       r4rebp7gpj-{0}-ppvmrbz86k-ppvmrbz86k.gz
-|   |   |       |       r5mxpt4af1-{0}-vb7jl7kjxx-vb7jl7kjxx.gz
-|   |   |       |       r7iwe6j80q-{0}-z9o1qrzv6q-z9o1qrzv6q.gz
-|   |   |       |       re35fox2fu-{0}-yqw8e0e66k-yqw8e0e66k.gz
-|   |   |       |       rvatkh4pgl-{0}-32wcyi3j0v-32wcyi3j0v.gz
-|   |   |       |       rvnwck3x6r-{0}-s32a1m1goq-s32a1m1goq.gz
-|   |   |       |       rvq1o4eg87-{0}-anx05bvtue-anx05bvtue.gz
-|   |   |       |       rz1wdlv1vz-{0}-ioxxbrvbrc-ioxxbrvbrc.gz
-|   |   |       |       s1p644hvvv-{0}-p1bwsbnf8h-p1bwsbnf8h.gz
-|   |   |       |       shcfb7e268-{0}-w9x69tmvfu-w9x69tmvfu.gz
-|   |   |       |       skxx5aeblm-{0}-bivwtb0v3y-bivwtb0v3y.gz
-|   |   |       |       smng6u0rbk-{0}-sx8ta3t370-sx8ta3t370.gz
-|   |   |       |       st7tx8vokm-{0}-gyn70opcq7-gyn70opcq7.gz
-|   |   |       |       sugokdc00a-{0}-cbm5cx4n9i-cbm5cx4n9i.gz
-|   |   |       |       svb8xodzcv-{0}-wpf2e66y5e-wpf2e66y5e.gz
-|   |   |       |       sy44tf32kn-{0}-59rukqv3sj-59rukqv3sj.gz
-|   |   |       |       syt0dqw1ux-{0}-5nl8kmfy1r-5nl8kmfy1r.gz
-|   |   |       |       t2kz3thrps-{0}-uyfhwbfd13-uyfhwbfd13.gz
-|   |   |       |       t9kyxruzq6-{0}-c08o99d5vs-c08o99d5vs.gz
-|   |   |       |       tbjuh26x5v-{0}-obpjv2xpwl-obpjv2xpwl.gz
-|   |   |       |       tcd8qxaqk5-{0}-3v7h08qab2-3v7h08qab2.gz
-|   |   |       |       to3gdc9v7t-{0}-dd1hyeex4f-dd1hyeex4f.gz
-|   |   |       |       tqvssf1e25-{0}-8nsenkuiw1-8nsenkuiw1.gz
-|   |   |       |       tr29skqe6k-{0}-ty0izun4ef-ty0izun4ef.gz
-|   |   |       |       tx163lbqko-{0}-56talnw6fw-56talnw6fw.gz
-|   |   |       |       tzrr6pqzvj-{0}-bw93k8orhp-bw93k8orhp.gz
-|   |   |       |       u4isgfmkku-{0}-j4w1bzn28f-j4w1bzn28f.gz
-|   |   |       |       u71ga3liwe-{0}-sy3zn47g40-sy3zn47g40.gz
-|   |   |       |       ubrqv4m86z-{0}-v8t1a4cu19-v8t1a4cu19.gz
-|   |   |       |       uhrx7xxvvp-{0}-egon9m5hzh-egon9m5hzh.gz
-|   |   |       |       umouci7rgc-{0}-46os95nnpm-46os95nnpm.gz
-|   |   |       |       umwqcj788f-{0}-02fc3z4z55-02fc3z4z55.gz
-|   |   |       |       v1r6c947cj-{0}-72mifddv5o-72mifddv5o.gz
-|   |   |       |       v2oy4w573b-{0}-g5sh2mqcdn-g5sh2mqcdn.gz
-|   |   |       |       v3b7u7how3-{0}-opp3lj2zbn-opp3lj2zbn.gz
-|   |   |       |       v4otg6irbm-{0}-vzy23y3uzd-vzy23y3uzd.gz
-|   |   |       |       v91nowyy5o-{0}-varkygmqpc-varkygmqpc.gz
-|   |   |       |       vknov21m65-{0}-ltv7xfboaf-ltv7xfboaf.gz
-|   |   |       |       w18a0z22d2-{0}-h55bq0nk5s-h55bq0nk5s.gz
-|   |   |       |       w3jaqn3h4o-{0}-avrxlytgzn-avrxlytgzn.gz
-|   |   |       |       w3ur6j80u7-{0}-0golvgzk7y-0golvgzk7y.gz
-|   |   |       |       wuimozunwv-{0}-lhk304sl0o-lhk304sl0o.gz
-|   |   |       |       x3ikudnee4-{0}-u7otwlpigp-u7otwlpigp.gz
-|   |   |       |       x54bdp6f69-{0}-7vpa9c5ub5-7vpa9c5ub5.gz
-|   |   |       |       x57r4b36iz-{0}-h0en30vv0c-h0en30vv0c.gz
-|   |   |       |       xf0qnn73p1-{0}-31oo3lfiw4-31oo3lfiw4.gz
-|   |   |       |       xf1qqu3s0v-{0}-iecsbmkurv-iecsbmkurv.gz
-|   |   |       |       xn58q07e15-{0}-3y05m210dk-3y05m210dk.gz
-|   |   |       |       y27ilh7k6y-{0}-ivr0xvsc6z-ivr0xvsc6z.gz
-|   |   |       |       y722oc08fd-{0}-gapebxrttj-gapebxrttj.gz
-|   |   |       |       y740klzyfn-{0}-nqt6nbrn32-nqt6nbrn32.gz
-|   |   |       |       yj8lpnn9qk-{0}-wwlbs0vwsq-wwlbs0vwsq.gz
-|   |   |       |       ys509c6f4a-{0}-oir35l1zu5-oir35l1zu5.gz
-|   |   |       |       yux0c36fre-{0}-hg6ny6lbl4-hg6ny6lbl4.gz
-|   |   |       |       yuy45fmp39-{0}-c1vzk9j1mj-c1vzk9j1mj.gz
-|   |   |       |       z3kywnf2ze-{0}-aj7pi0mjg2-aj7pi0mjg2.gz
-|   |   |       |       z4pr54r9h7-{0}-fhfgntluxv-fhfgntluxv.gz
-|   |   |       |       z5zg6rhd9m-{0}-lthadgv4h5-lthadgv4h5.gz
-|   |   |       |       z7t7gxwpc8-{0}-iqneteaoxs-iqneteaoxs.gz
-|   |   |       |       z9jaz14k01-{0}-4nyqwmf7vi-4nyqwmf7vi.gz
-|   |   |       |       zbrj40yyd9-{0}-zra07ht1fn-zra07ht1fn.gz
-|   |   |       |       zcx365lyhk-{0}-c1mx5n5sjo-c1mx5n5sjo.gz
-|   |   |       |       zd6enrk8dw-{0}-wh2npalni6-wh2npalni6.gz
-|   |   |       |       zku9fjt8cp-{0}-pu7zcao7p4-pu7zcao7p4.gz
-|   |   |       |       zs35d5qkiu-{0}-yxi3pter98-yxi3pter98.gz
-|   |   |       |       zu1a9lmycu-{0}-3dl2nctyqn-3dl2nctyqn.gz
-|   |   |       |       
 |   |   |       +---fx
 |   |   |       |   \---CollabsKus.BlazorWebAssembly
 |   |   |       |       \---_framework
@@ -1750,47 +1257,15 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |               icudt_no_CJK.dat
 |   |   |       |               
 |   |   |       +---hotreload
-|   |   |       |       browser-tools-key.private.json
-|   |   |       |       browser-tools-key.public.json
-|   |   |       |       Microsoft.DotNet.HotReload.WebAssembly.Browser.dll
-|   |   |       |       Microsoft.NET.Sdk.WebAssembly.HotReload.BrowserTools.Config.js
-|   |   |       |       Microsoft.NET.Sdk.WebAssembly.HotReload.BrowserTools.js
-|   |   |       |       Microsoft.NET.Sdk.WebAssembly.HotReload.lib.module.js
-|   |   |       |       
 |   |   |       +---ref
-|   |   |       |       CollabsKus.BlazorWebAssembly.dll
-|   |   |       |       
 |   |   |       +---refint
-|   |   |       |       CollabsKus.BlazorWebAssembly.dll
-|   |   |       |       
 |   |   |       +---scopedcss
-|   |   |       |   |   scopedcss.cache
-|   |   |       |   |   
 |   |   |       |   +---bundle
-|   |   |       |   |       CollabsKus.BlazorWebAssembly.styles.css
-|   |   |       |   |       
 |   |   |       |   +---Components
-|   |   |       |   |       CalendarGrid.razor.rz.scp.css
-|   |   |       |   |       DateCards.razor.rz.scp.css
-|   |   |       |   |       MoonDisplay.razor.rz.scp.css
-|   |   |       |   |       Sundisplay.razor.rz.scp.css
-|   |   |       |   |       TimeDisplay.razor.rz.scp.css
-|   |   |       |   |       
 |   |   |       |   +---Layout
-|   |   |       |   |       MainLayout.razor.rz.scp.css
-|   |   |       |   |       
 |   |   |       |   +---Pages
-|   |   |       |   |       BlogDetail.razor.rz.scp.css
-|   |   |       |   |       BlogList.razor.rz.scp.css
-|   |   |       |   |       Home.razor.rz.scp.css
-|   |   |       |   |       
 |   |   |       |   \---projectbundle
-|   |   |       |           CollabsKus.BlazorWebAssembly.bundle.scp.css
-|   |   |       |           
 |   |   |       +---service-worker
-|   |   |       |       service-worker-assets.js.build
-|   |   |       |       service-worker.js.build
-|   |   |       |       
 |   |   |       +---staticwebassets
 |   |   |       |   \---fx
 |   |   |       |       \---Microsoft.AspNetCore.Components.WebAssembly
@@ -1799,212 +1274,6 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |       |                   
 |   |   |       +---tmp-webcil
 |   |   |       \---webcil
-|   |   |               CollabsKus.BlazorWebAssembly.wasm
-|   |   |               Markdig.wasm
-|   |   |               Microsoft.AspNetCore.Authorization.wasm
-|   |   |               Microsoft.AspNetCore.Components.Forms.wasm
-|   |   |               Microsoft.AspNetCore.Components.wasm
-|   |   |               Microsoft.AspNetCore.Components.Web.wasm
-|   |   |               Microsoft.AspNetCore.Components.WebAssembly.wasm
-|   |   |               Microsoft.AspNetCore.Metadata.wasm
-|   |   |               Microsoft.CSharp.wasm
-|   |   |               Microsoft.DotNet.HotReload.WebAssembly.Browser.wasm
-|   |   |               Microsoft.Extensions.Caching.Abstractions.wasm
-|   |   |               Microsoft.Extensions.Configuration.Abstractions.wasm
-|   |   |               Microsoft.Extensions.Configuration.Binder.wasm
-|   |   |               Microsoft.Extensions.Configuration.EnvironmentVariables.wasm
-|   |   |               Microsoft.Extensions.Configuration.FileExtensions.wasm
-|   |   |               Microsoft.Extensions.Configuration.Json.wasm
-|   |   |               Microsoft.Extensions.Configuration.wasm
-|   |   |               Microsoft.Extensions.DependencyInjection.Abstractions.wasm
-|   |   |               Microsoft.Extensions.DependencyInjection.wasm
-|   |   |               Microsoft.Extensions.Diagnostics.Abstractions.wasm
-|   |   |               Microsoft.Extensions.Diagnostics.wasm
-|   |   |               Microsoft.Extensions.FileProviders.Abstractions.wasm
-|   |   |               Microsoft.Extensions.FileProviders.Physical.wasm
-|   |   |               Microsoft.Extensions.FileSystemGlobbing.wasm
-|   |   |               Microsoft.Extensions.Hosting.Abstractions.wasm
-|   |   |               Microsoft.Extensions.Localization.Abstractions.wasm
-|   |   |               Microsoft.Extensions.Logging.Abstractions.wasm
-|   |   |               Microsoft.Extensions.Logging.wasm
-|   |   |               Microsoft.Extensions.Options.ConfigurationExtensions.wasm
-|   |   |               Microsoft.Extensions.Options.wasm
-|   |   |               Microsoft.Extensions.Primitives.wasm
-|   |   |               Microsoft.Extensions.Validation.wasm
-|   |   |               Microsoft.JSInterop.wasm
-|   |   |               Microsoft.JSInterop.WebAssembly.wasm
-|   |   |               Microsoft.VisualBasic.Core.wasm
-|   |   |               Microsoft.VisualBasic.wasm
-|   |   |               Microsoft.Win32.Primitives.wasm
-|   |   |               Microsoft.Win32.Registry.wasm
-|   |   |               mscorlib.wasm
-|   |   |               netstandard.wasm
-|   |   |               System.AppContext.wasm
-|   |   |               System.Buffers.wasm
-|   |   |               System.Collections.Concurrent.wasm
-|   |   |               System.Collections.Immutable.wasm
-|   |   |               System.Collections.NonGeneric.wasm
-|   |   |               System.Collections.Specialized.wasm
-|   |   |               System.Collections.wasm
-|   |   |               System.ComponentModel.Annotations.wasm
-|   |   |               System.ComponentModel.DataAnnotations.wasm
-|   |   |               System.ComponentModel.EventBasedAsync.wasm
-|   |   |               System.ComponentModel.Primitives.wasm
-|   |   |               System.ComponentModel.TypeConverter.wasm
-|   |   |               System.ComponentModel.wasm
-|   |   |               System.Configuration.wasm
-|   |   |               System.Console.wasm
-|   |   |               System.Core.wasm
-|   |   |               System.Data.Common.wasm
-|   |   |               System.Data.DataSetExtensions.wasm
-|   |   |               System.Data.wasm
-|   |   |               System.Diagnostics.Contracts.wasm
-|   |   |               System.Diagnostics.Debug.wasm
-|   |   |               System.Diagnostics.DiagnosticSource.wasm
-|   |   |               System.Diagnostics.FileVersionInfo.wasm
-|   |   |               System.Diagnostics.Process.wasm
-|   |   |               System.Diagnostics.StackTrace.wasm
-|   |   |               System.Diagnostics.TextWriterTraceListener.wasm
-|   |   |               System.Diagnostics.Tools.wasm
-|   |   |               System.Diagnostics.TraceSource.wasm
-|   |   |               System.Diagnostics.Tracing.wasm
-|   |   |               System.Drawing.Primitives.wasm
-|   |   |               System.Drawing.wasm
-|   |   |               System.Dynamic.Runtime.wasm
-|   |   |               System.Formats.Asn1.wasm
-|   |   |               System.Formats.Tar.wasm
-|   |   |               System.Globalization.Calendars.wasm
-|   |   |               System.Globalization.Extensions.wasm
-|   |   |               System.Globalization.wasm
-|   |   |               System.IO.Compression.Brotli.wasm
-|   |   |               System.IO.Compression.FileSystem.wasm
-|   |   |               System.IO.Compression.wasm
-|   |   |               System.IO.Compression.ZipFile.wasm
-|   |   |               System.IO.FileSystem.AccessControl.wasm
-|   |   |               System.IO.FileSystem.DriveInfo.wasm
-|   |   |               System.IO.FileSystem.Primitives.wasm
-|   |   |               System.IO.FileSystem.wasm
-|   |   |               System.IO.FileSystem.Watcher.wasm
-|   |   |               System.IO.IsolatedStorage.wasm
-|   |   |               System.IO.MemoryMappedFiles.wasm
-|   |   |               System.IO.Pipelines.wasm
-|   |   |               System.IO.Pipes.AccessControl.wasm
-|   |   |               System.IO.Pipes.wasm
-|   |   |               System.IO.UnmanagedMemoryStream.wasm
-|   |   |               System.IO.wasm
-|   |   |               System.Linq.AsyncEnumerable.wasm
-|   |   |               System.Linq.Expressions.wasm
-|   |   |               System.Linq.Parallel.wasm
-|   |   |               System.Linq.Queryable.wasm
-|   |   |               System.Linq.wasm
-|   |   |               System.Memory.wasm
-|   |   |               System.Net.Http.Json.wasm
-|   |   |               System.Net.Http.wasm
-|   |   |               System.Net.HttpListener.wasm
-|   |   |               System.Net.Mail.wasm
-|   |   |               System.Net.NameResolution.wasm
-|   |   |               System.Net.NetworkInformation.wasm
-|   |   |               System.Net.Ping.wasm
-|   |   |               System.Net.Primitives.wasm
-|   |   |               System.Net.Quic.wasm
-|   |   |               System.Net.Requests.wasm
-|   |   |               System.Net.Security.wasm
-|   |   |               System.Net.ServerSentEvents.wasm
-|   |   |               System.Net.ServicePoint.wasm
-|   |   |               System.Net.Sockets.wasm
-|   |   |               System.Net.wasm
-|   |   |               System.Net.WebClient.wasm
-|   |   |               System.Net.WebHeaderCollection.wasm
-|   |   |               System.Net.WebProxy.wasm
-|   |   |               System.Net.WebSockets.Client.wasm
-|   |   |               System.Net.WebSockets.wasm
-|   |   |               System.Numerics.Vectors.wasm
-|   |   |               System.Numerics.wasm
-|   |   |               System.ObjectModel.wasm
-|   |   |               System.Private.CoreLib.wasm
-|   |   |               System.Private.DataContractSerialization.wasm
-|   |   |               System.Private.Uri.wasm
-|   |   |               System.Private.Xml.Linq.wasm
-|   |   |               System.Private.Xml.wasm
-|   |   |               System.Reflection.DispatchProxy.wasm
-|   |   |               System.Reflection.Emit.ILGeneration.wasm
-|   |   |               System.Reflection.Emit.Lightweight.wasm
-|   |   |               System.Reflection.Emit.wasm
-|   |   |               System.Reflection.Extensions.wasm
-|   |   |               System.Reflection.Metadata.wasm
-|   |   |               System.Reflection.Primitives.wasm
-|   |   |               System.Reflection.TypeExtensions.wasm
-|   |   |               System.Reflection.wasm
-|   |   |               System.Resources.Reader.wasm
-|   |   |               System.Resources.ResourceManager.wasm
-|   |   |               System.Resources.Writer.wasm
-|   |   |               System.Runtime.CompilerServices.Unsafe.wasm
-|   |   |               System.Runtime.CompilerServices.VisualC.wasm
-|   |   |               System.Runtime.Extensions.wasm
-|   |   |               System.Runtime.Handles.wasm
-|   |   |               System.Runtime.InteropServices.JavaScript.wasm
-|   |   |               System.Runtime.InteropServices.RuntimeInformation.wasm
-|   |   |               System.Runtime.InteropServices.wasm
-|   |   |               System.Runtime.Intrinsics.wasm
-|   |   |               System.Runtime.Loader.wasm
-|   |   |               System.Runtime.Numerics.wasm
-|   |   |               System.Runtime.Serialization.Formatters.wasm
-|   |   |               System.Runtime.Serialization.Json.wasm
-|   |   |               System.Runtime.Serialization.Primitives.wasm
-|   |   |               System.Runtime.Serialization.wasm
-|   |   |               System.Runtime.Serialization.Xml.wasm
-|   |   |               System.Runtime.wasm
-|   |   |               System.Security.AccessControl.wasm
-|   |   |               System.Security.Claims.wasm
-|   |   |               System.Security.Cryptography.Algorithms.wasm
-|   |   |               System.Security.Cryptography.Cng.wasm
-|   |   |               System.Security.Cryptography.Csp.wasm
-|   |   |               System.Security.Cryptography.Encoding.wasm
-|   |   |               System.Security.Cryptography.OpenSsl.wasm
-|   |   |               System.Security.Cryptography.Primitives.wasm
-|   |   |               System.Security.Cryptography.wasm
-|   |   |               System.Security.Cryptography.X509Certificates.wasm
-|   |   |               System.Security.Principal.wasm
-|   |   |               System.Security.Principal.Windows.wasm
-|   |   |               System.Security.SecureString.wasm
-|   |   |               System.Security.wasm
-|   |   |               System.ServiceModel.Web.wasm
-|   |   |               System.ServiceProcess.wasm
-|   |   |               System.Text.Encoding.CodePages.wasm
-|   |   |               System.Text.Encoding.Extensions.wasm
-|   |   |               System.Text.Encoding.wasm
-|   |   |               System.Text.Encodings.Web.wasm
-|   |   |               System.Text.Json.wasm
-|   |   |               System.Text.RegularExpressions.wasm
-|   |   |               System.Threading.AccessControl.wasm
-|   |   |               System.Threading.Channels.wasm
-|   |   |               System.Threading.Overlapped.wasm
-|   |   |               System.Threading.Tasks.Dataflow.wasm
-|   |   |               System.Threading.Tasks.Extensions.wasm
-|   |   |               System.Threading.Tasks.Parallel.wasm
-|   |   |               System.Threading.Tasks.wasm
-|   |   |               System.Threading.Thread.wasm
-|   |   |               System.Threading.ThreadPool.wasm
-|   |   |               System.Threading.Timer.wasm
-|   |   |               System.Threading.wasm
-|   |   |               System.Transactions.Local.wasm
-|   |   |               System.Transactions.wasm
-|   |   |               System.ValueTuple.wasm
-|   |   |               System.wasm
-|   |   |               System.Web.HttpUtility.wasm
-|   |   |               System.Web.wasm
-|   |   |               System.Windows.wasm
-|   |   |               System.Xml.Linq.wasm
-|   |   |               System.Xml.ReaderWriter.wasm
-|   |   |               System.Xml.Serialization.wasm
-|   |   |               System.Xml.wasm
-|   |   |               System.Xml.XDocument.wasm
-|   |   |               System.Xml.XmlDocument.wasm
-|   |   |               System.Xml.XmlSerializer.wasm
-|   |   |               System.Xml.XPath.wasm
-|   |   |               System.Xml.XPath.XDocument.wasm
-|   |   |               WindowsBase.wasm
-|   |   |               
 |   |   \---Release
 |   |       \---net10.0
 |   |           |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
@@ -2480,376 +1749,69 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |   |           Microsoft.Testing.Platform.resources.dll
 |   |   |   |           
 |   |   |   \---net11.0
-|   |   |       |   CollabsKus.PlaywrightTests.deps.json
-|   |   |       |   CollabsKus.PlaywrightTests.dll
-|   |   |       |   CollabsKus.PlaywrightTests.exe
-|   |   |       |   CollabsKus.PlaywrightTests.pdb
-|   |   |       |   CollabsKus.PlaywrightTests.runtimeconfig.dev.json
-|   |   |       |   CollabsKus.PlaywrightTests.runtimeconfig.json
-|   |   |       |   Microsoft.ApplicationInsights.dll
-|   |   |       |   Microsoft.Bcl.AsyncInterfaces.dll
-|   |   |       |   Microsoft.CodeCoverage.Core.dll
-|   |   |       |   Microsoft.CodeCoverage.Instrumentation.Core.dll
-|   |   |       |   Microsoft.CodeCoverage.Instrumentation.dll
-|   |   |       |   Microsoft.CodeCoverage.Interprocess.dll
-|   |   |       |   Microsoft.DiaSymReader.dll
-|   |   |       |   Microsoft.Extensions.DependencyModel.dll
-|   |   |       |   Microsoft.Playwright.dll
-|   |   |       |   Microsoft.Testing.Extensions.CodeCoverage.dll
-|   |   |       |   Microsoft.Testing.Extensions.MSBuild.dll
-|   |   |       |   Microsoft.Testing.Extensions.Telemetry.dll
-|   |   |       |   Microsoft.Testing.Extensions.TrxReport.Abstractions.dll
-|   |   |       |   Microsoft.Testing.Extensions.TrxReport.dll
-|   |   |       |   Microsoft.Testing.Platform.dll
-|   |   |       |   Microsoft.VisualStudio.CodeCoverage.Shim.dll
-|   |   |       |   Mono.Cecil.dll
-|   |   |       |   Mono.Cecil.Mdb.dll
-|   |   |       |   Mono.Cecil.Pdb.dll
-|   |   |       |   Mono.Cecil.Rocks.dll
-|   |   |       |   playwright.ps1
-|   |   |       |   TUnit.Assertions.dll
-|   |   |       |   TUnit.Core.dll
-|   |   |       |   TUnit.dll
-|   |   |       |   TUnit.Engine.dll
-|   |   |       |   
 |   |   |       +---.playwright
 |   |   |       |   +---node
-|   |   |       |   |   |   LICENSE
-|   |   |       |   |   |   
 |   |   |       |   |   \---win32_x64
-|   |   |       |   |           node.exe
-|   |   |       |   |           
 |   |   |       |   \---package
-|   |   |       |       |   browsers.json
-|   |   |       |       |   cli.js
-|   |   |       |       |   index.d.ts
-|   |   |       |       |   index.js
-|   |   |       |       |   index.mjs
-|   |   |       |       |   LICENSE
-|   |   |       |       |   NOTICE
-|   |   |       |       |   package.json
-|   |   |       |       |   README.md
-|   |   |       |       |   ThirdPartyNotices.txt
-|   |   |       |       |   
 |   |   |       |       +---bin
-|   |   |       |       |       install_media_pack.ps1
-|   |   |       |       |       install_webkit_wsl.ps1
-|   |   |       |       |       reinstall_chrome_beta_linux.sh
-|   |   |       |       |       reinstall_chrome_beta_mac.sh
-|   |   |       |       |       reinstall_chrome_beta_win.ps1
-|   |   |       |       |       reinstall_chrome_stable_linux.sh
-|   |   |       |       |       reinstall_chrome_stable_mac.sh
-|   |   |       |       |       reinstall_chrome_stable_win.ps1
-|   |   |       |       |       reinstall_msedge_beta_linux.sh
-|   |   |       |       |       reinstall_msedge_beta_mac.sh
-|   |   |       |       |       reinstall_msedge_beta_win.ps1
-|   |   |       |       |       reinstall_msedge_dev_linux.sh
-|   |   |       |       |       reinstall_msedge_dev_mac.sh
-|   |   |       |       |       reinstall_msedge_dev_win.ps1
-|   |   |       |       |       reinstall_msedge_stable_linux.sh
-|   |   |       |       |       reinstall_msedge_stable_mac.sh
-|   |   |       |       |       reinstall_msedge_stable_win.ps1
-|   |   |       |       |       
 |   |   |       |       +---lib
-|   |   |       |       |   |   bootstrap.js
-|   |   |       |       |   |   coreBundle.js
-|   |   |       |       |   |   package.js
-|   |   |       |       |   |   serverRegistry.js
-|   |   |       |       |   |   serverRegistry.js.LICENSE
-|   |   |       |       |   |   utilsBundle.js
-|   |   |       |       |   |   utilsBundle.js.LICENSE
-|   |   |       |       |   |   webp_codec.LICENSE
-|   |   |       |       |   |   webp_codec.wasm
-|   |   |       |       |   |   xdg-open
-|   |   |       |       |   |   
 |   |   |       |       |   +---entry
-|   |   |       |       |   |       cliDaemon.js
-|   |   |       |       |   |       dashboardApp.js
-|   |   |       |       |   |       mcp.js
-|   |   |       |       |   |       oopBrowserDownload.js
-|   |   |       |       |   |       
 |   |   |       |       |   +---server
 |   |   |       |       |   |   +---chromium
-|   |   |       |       |   |   |       appIcon.png
-|   |   |       |       |   |   |       
 |   |   |       |       |   |   \---electron
-|   |   |       |       |   |           loader.js
-|   |   |       |       |   |           
 |   |   |       |       |   +---tools
 |   |   |       |       |   |   +---cli-client
-|   |   |       |       |   |   |       channelSessions.js
-|   |   |       |       |   |   |       cli.js
-|   |   |       |       |   |   |       help.json
-|   |   |       |       |   |   |       minimist.js
-|   |   |       |       |   |   |       output.js
-|   |   |       |       |   |   |       program.js
-|   |   |       |       |   |   |       registry.js
-|   |   |       |       |   |   |       session.js
-|   |   |       |       |   |   |       
 |   |   |       |       |   |   +---dashboard
-|   |   |       |       |   |   |       appIcon.png
-|   |   |       |       |   |   |       
 |   |   |       |       |   |   +---skills
 |   |   |       |       |   |   |   +---playwright-cli
-|   |   |       |       |   |   |   |   |   SKILL.md
-|   |   |       |       |   |   |   |   |   
 |   |   |       |       |   |   |   |   \---references
-|   |   |       |       |   |   |   |           element-attributes.md
-|   |   |       |       |   |   |   |           playwright-tests.md
-|   |   |       |       |   |   |   |           pr-attachments.md
-|   |   |       |       |   |   |   |           request-mocking.md
-|   |   |       |       |   |   |   |           running-code.md
-|   |   |       |       |   |   |   |           session-management.md
-|   |   |       |       |   |   |   |           storage-state.md
-|   |   |       |       |   |   |   |           test-generation.md
-|   |   |       |       |   |   |   |           tracing.md
-|   |   |       |       |   |   |   |           video-recording.md
-|   |   |       |       |   |   |   |           
 |   |   |       |       |   |   |   +---playwright-component-testing
-|   |   |       |       |   |   |   |   |   SKILL.md
-|   |   |       |       |   |   |   |   |   
 |   |   |       |       |   |   |   |   \---references
-|   |   |       |       |   |   |   |           gallery-spec.md
-|   |   |       |       |   |   |   |           migration.md
-|   |   |       |       |   |   |   |           react.md
-|   |   |       |       |   |   |   |           typing.md
-|   |   |       |       |   |   |   |           vue.md
-|   |   |       |       |   |   |   |           
 |   |   |       |       |   |   |   \---playwright-trace
-|   |   |       |       |   |   |           SKILL.md
-|   |   |       |       |   |   |           
 |   |   |       |       |   |   \---utils
-|   |   |       |       |   |           extension.js
-|   |   |       |       |   |           socketConnection.js
-|   |   |       |       |   |           
 |   |   |       |       |   \---vite
 |   |   |       |       |       +---dashboard
-|   |   |       |       |       |   |   index.html
-|   |   |       |       |       |   |   playwright-logo.svg
-|   |   |       |       |       |   |   
 |   |   |       |       |       |   \---assets
-|   |   |       |       |       |           codeMirrorModule--QdMvsKi.css
-|   |   |       |       |       |           codeMirrorModule-CQ8RZGBm.js
-|   |   |       |       |       |           codicon-DCmgc-ay.ttf
-|   |   |       |       |       |           firefox-1bWoP6pv.svg
-|   |   |       |       |       |           firefox-beta-k3eOH_eK.svg
-|   |   |       |       |       |           firefox-nightly-Cp5nfeDT.svg
-|   |   |       |       |       |           index-AwgwcYie.css
-|   |   |       |       |       |           index-hRvO4yU2.js
-|   |   |       |       |       |           safari-na3_-uQk.svg
-|   |   |       |       |       |           
 |   |   |       |       |       +---htmlReport
-|   |   |       |       |       |       index.html
-|   |   |       |       |       |       report.css
-|   |   |       |       |       |       report.js
-|   |   |       |       |       |       
 |   |   |       |       |       +---recorder
-|   |   |       |       |       |   |   index.html
-|   |   |       |       |       |   |   playwright-logo.svg
-|   |   |       |       |       |   |   
 |   |   |       |       |       |   \---assets
-|   |   |       |       |       |           codeMirrorModule--QdMvsKi.css
-|   |   |       |       |       |           codeMirrorModule-DK72OMRi.js
-|   |   |       |       |       |           codicon-DCmgc-ay.ttf
-|   |   |       |       |       |           index-BZpYJZ-P.css
-|   |   |       |       |       |           index-Cn0mmDuv.js
-|   |   |       |       |       |           
 |   |   |       |       |       \---traceViewer
-|   |   |       |       |           |   codeMirrorModule.-QdMvsKi.css
-|   |   |       |       |           |   codicon.DCmgc-ay.ttf
-|   |   |       |       |           |   defaultSettingsView.C8BeHuxd.css
-|   |   |       |       |           |   index.B_TqY17P.css
-|   |   |       |       |           |   index.html
-|   |   |       |       |           |   index.oNry3Hjv.js
-|   |   |       |       |           |   manifest.webmanifest
-|   |   |       |       |           |   playwright-logo.svg
-|   |   |       |       |           |   snapshot.B_Jk1wbt.js
-|   |   |       |       |           |   snapshot.html
-|   |   |       |       |           |   sw.bundle.js
-|   |   |       |       |           |   uiMode.CyMfwkXJ.css
-|   |   |       |       |           |   uiMode.CYwC_gH1.js
-|   |   |       |       |           |   uiMode.html
-|   |   |       |       |           |   xtermModule.kHJ-D0s7.css
-|   |   |       |       |           |   
 |   |   |       |       |           \---assets
-|   |   |       |       |                   codeMirrorModule-BEB2e8M3.js
-|   |   |       |       |                   defaultSettingsView-D-g2vrvf.js
-|   |   |       |       |                   urlMatch-L3liM589.js
-|   |   |       |       |                   xtermModule-B794rD2Z.js
-|   |   |       |       |                   
 |   |   |       |       \---types
-|   |   |       |               protocol.d.ts
-|   |   |       |               structs.d.ts
-|   |   |       |               types.d.ts
-|   |   |       |               
 |   |   |       +---cs
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---de
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---es
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---fr
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---hu
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       
 |   |   |       +---it
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---ja
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---ko
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---Log
 |   |   |       |       CollabsKus.PlaywrightTests_net11.0_x64_261116200822826.diag
 |   |   |       |       CollabsKus.PlaywrightTests_net11.0_x64_261116201025874.diag
 |   |   |       |       
 |   |   |       +---nl
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       
 |   |   |       +---pl
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---pt-BR
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---pt-PT
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       
 |   |   |       +---ru
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---runtimes
 |   |   |       |   +---linux-musl-x64
 |   |   |       |   |   \---native
-|   |   |       |   |           Cov_x64.config
-|   |   |       |   |           libCoverageInstrumentationMethod.so
-|   |   |       |   |           libInstrumentationEngine.so
-|   |   |       |   |           
 |   |   |       |   +---linux-x64
 |   |   |       |   |   \---native
-|   |   |       |   |           Cov_x64.config
-|   |   |       |   |           libCoverageInstrumentationMethod.so
-|   |   |       |   |           libInstrumentationEngine.so
-|   |   |       |   |           
 |   |   |       |   +---osx-x64
 |   |   |       |   |   \---native
-|   |   |       |   |           Cov_x64.config
-|   |   |       |   |           libCoverageInstrumentationMethod.dylib
-|   |   |       |   |           libInstrumentationEngine.dylib
-|   |   |       |   |           
 |   |   |       |   +---win-arm64
 |   |   |       |   |   \---native
-|   |   |       |   |           CodeCoverageMessages.dll
-|   |   |       |   |           covrun32.dll
-|   |   |       |   |           covrun64.dll
-|   |   |       |   |           covrunarm64.dll
-|   |   |       |   |           Cov_arm64.config
-|   |   |       |   |           Cov_x64.config
-|   |   |       |   |           Cov_x86.config
-|   |   |       |   |           MicrosoftInstrumentationEngine_arm64.dll
-|   |   |       |   |           MicrosoftInstrumentationEngine_x64.dll
-|   |   |       |   |           MicrosoftInstrumentationEngine_x86.dll
-|   |   |       |   |           msdia140.dll
-|   |   |       |   |           
 |   |   |       |   +---win-x64
 |   |   |       |   |   \---native
-|   |   |       |   |           CodeCoverageMessages.dll
-|   |   |       |   |           covrun32.dll
-|   |   |       |   |           covrun64.dll
-|   |   |       |   |           covrunarm64.dll
-|   |   |       |   |           Cov_arm64.config
-|   |   |       |   |           Cov_x64.config
-|   |   |       |   |           Cov_x86.config
-|   |   |       |   |           MicrosoftInstrumentationEngine_arm64.dll
-|   |   |       |   |           MicrosoftInstrumentationEngine_x64.dll
-|   |   |       |   |           MicrosoftInstrumentationEngine_x86.dll
-|   |   |       |   |           msdia140.dll
-|   |   |       |   |           
 |   |   |       |   \---win-x86
 |   |   |       |       \---native
-|   |   |       |               CodeCoverageMessages.dll
-|   |   |       |               covrun32.dll
-|   |   |       |               covrun64.dll
-|   |   |       |               covrunarm64.dll
-|   |   |       |               Cov_arm64.config
-|   |   |       |               Cov_x64.config
-|   |   |       |               Cov_x86.config
-|   |   |       |               MicrosoftInstrumentationEngine_arm64.dll
-|   |   |       |               MicrosoftInstrumentationEngine_x64.dll
-|   |   |       |               MicrosoftInstrumentationEngine_x86.dll
-|   |   |       |               msdia140.dll
-|   |   |       |               
 |   |   |       +---sv
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       
 |   |   |       +---tr
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---zh-Hans
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       \---zh-Hant
-|   |   |               Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |               Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |               Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |               Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |               Microsoft.Testing.Platform.resources.dll
-|   |   |               
 |   |   \---Release
 |   |       \---net10.0
 |   +---obj
@@ -2890,30 +1852,12 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |   \---net11.0
 |   |   |       |   .NETCoreApp,Version=v11.0.AssemblyAttributes.cs
 |   |   |       |   apphost.exe
-|   |   |       |   CollabsK.677A1748.Up2Date
-|   |   |       |   CollabsKus.PlaywrightTests.AssemblyInfo.cs
-|   |   |       |   CollabsKus.PlaywrightTests.AssemblyInfoInputs.cache
 |   |   |       |   CollabsKus.PlaywrightTests.assets.cache
-|   |   |       |   CollabsKus.PlaywrightTests.csproj.AssemblyReference.cache
-|   |   |       |   CollabsKus.PlaywrightTests.csproj.CoreCompileInputs.cache
 |   |   |       |   CollabsKus.PlaywrightTests.csproj.FileListAbsolute.txt
-|   |   |       |   CollabsKus.PlaywrightTests.dll
-|   |   |       |   CollabsKus.PlaywrightTests.genautoregisteredextensionsinputcache.cache
-|   |   |       |   CollabsKus.PlaywrightTests.GeneratedMSBuildEditorConfig.editorconfig
-|   |   |       |   CollabsKus.PlaywrightTests.genruntimeconfig.cache
-|   |   |       |   CollabsKus.PlaywrightTests.gentestingplatformentrypointinputcache.cache
 |   |   |       |   CollabsKus.PlaywrightTests.GlobalUsings.g.cs
-|   |   |       |   CollabsKus.PlaywrightTests.pdb
-|   |   |       |   CollabsKus.PlaywrightTests.sourcelink.json
-|   |   |       |   MicrosoftTestingPlatformEntryPoint.cs
-|   |   |       |   SelfRegisteredExtensions.cs
 |   |   |       |   
 |   |   |       +---ref
-|   |   |       |       CollabsKus.PlaywrightTests.dll
-|   |   |       |       
 |   |   |       \---refint
-|   |   |               CollabsKus.PlaywrightTests.dll
-|   |   |               
 |   |   \---Release
 |   |       \---net10.0
 |   |           |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
@@ -3175,235 +2119,41 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |   |           Microsoft.Testing.Platform.resources.dll
 |   |   |   |           
 |   |   |   \---net11.0
-|   |   |       |   .msCoverageExtensionSourceRootsMapping_CollabsKus.Tests
-|   |   |       |   CollabsKus.BlazorWebAssembly.dll
-|   |   |       |   CollabsKus.BlazorWebAssembly.pdb
-|   |   |       |   CollabsKus.BlazorWebAssembly.runtimeconfig.dev.json
-|   |   |       |   CollabsKus.BlazorWebAssembly.runtimeconfig.json
-|   |   |       |   CollabsKus.BlazorWebAssembly.staticwebassets.endpoints.json
-|   |   |       |   CollabsKus.BlazorWebAssembly.staticwebassets.runtime.json
-|   |   |       |   CollabsKus.Tests.deps.json
-|   |   |       |   CollabsKus.Tests.dll
-|   |   |       |   CollabsKus.Tests.exe
-|   |   |       |   CollabsKus.Tests.pdb
-|   |   |       |   CollabsKus.Tests.runtimeconfig.dev.json
-|   |   |       |   CollabsKus.Tests.runtimeconfig.json
-|   |   |       |   Markdig.dll
-|   |   |       |   Microsoft.ApplicationInsights.dll
-|   |   |       |   Microsoft.AspNetCore.Authorization.dll
-|   |   |       |   Microsoft.AspNetCore.Components.dll
-|   |   |       |   Microsoft.AspNetCore.Components.Forms.dll
-|   |   |       |   Microsoft.AspNetCore.Components.Web.dll
-|   |   |       |   Microsoft.AspNetCore.Components.WebAssembly.dll
-|   |   |       |   Microsoft.AspNetCore.Metadata.dll
-|   |   |       |   Microsoft.CodeCoverage.Core.dll
-|   |   |       |   Microsoft.CodeCoverage.Instrumentation.Core.dll
-|   |   |       |   Microsoft.CodeCoverage.Instrumentation.dll
-|   |   |       |   Microsoft.CodeCoverage.Interprocess.dll
-|   |   |       |   Microsoft.DiaSymReader.dll
-|   |   |       |   Microsoft.Extensions.Configuration.Binder.dll
-|   |   |       |   Microsoft.Extensions.Configuration.dll
-|   |   |       |   Microsoft.Extensions.Configuration.EnvironmentVariables.dll
-|   |   |       |   Microsoft.Extensions.Configuration.FileExtensions.dll
-|   |   |       |   Microsoft.Extensions.Configuration.Json.dll
-|   |   |       |   Microsoft.Extensions.DependencyInjection.dll
-|   |   |       |   Microsoft.Extensions.DependencyModel.dll
-|   |   |       |   Microsoft.Extensions.Diagnostics.dll
-|   |   |       |   Microsoft.Extensions.FileProviders.Physical.dll
-|   |   |       |   Microsoft.Extensions.FileSystemGlobbing.dll
-|   |   |       |   Microsoft.Extensions.Localization.Abstractions.dll
-|   |   |       |   Microsoft.Extensions.Logging.dll
-|   |   |       |   Microsoft.Extensions.Options.ConfigurationExtensions.dll
-|   |   |       |   Microsoft.Extensions.Validation.dll
-|   |   |       |   Microsoft.JSInterop.dll
-|   |   |       |   Microsoft.JSInterop.WebAssembly.dll
-|   |   |       |   Microsoft.Testing.Extensions.CodeCoverage.dll
-|   |   |       |   Microsoft.Testing.Extensions.MSBuild.dll
-|   |   |       |   Microsoft.Testing.Extensions.Telemetry.dll
-|   |   |       |   Microsoft.Testing.Extensions.TrxReport.Abstractions.dll
-|   |   |       |   Microsoft.Testing.Extensions.TrxReport.dll
-|   |   |       |   Microsoft.Testing.Platform.dll
-|   |   |       |   Microsoft.VisualStudio.CodeCoverage.Shim.dll
-|   |   |       |   Mono.Cecil.dll
-|   |   |       |   Mono.Cecil.Mdb.dll
-|   |   |       |   Mono.Cecil.Pdb.dll
-|   |   |       |   Mono.Cecil.Rocks.dll
-|   |   |       |   TUnit.Assertions.dll
-|   |   |       |   TUnit.Core.dll
-|   |   |       |   TUnit.dll
-|   |   |       |   TUnit.Engine.dll
-|   |   |       |   
 |   |   |       +---cs
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---de
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---es
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---fr
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---hu
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       
 |   |   |       +---it
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---ja
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---ko
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---Log
 |   |   |       |       CollabsKus.Tests_net11.0_x64_261116200822890.diag
 |   |   |       |       CollabsKus.Tests_net11.0_x64_261116201025863.diag
 |   |   |       |       
 |   |   |       +---nl
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       
 |   |   |       +---pl
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---pt-BR
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---pt-PT
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       
 |   |   |       +---ru
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---runtimes
 |   |   |       |   +---linux-musl-x64
 |   |   |       |   |   \---native
-|   |   |       |   |           Cov_x64.config
-|   |   |       |   |           libCoverageInstrumentationMethod.so
-|   |   |       |   |           libInstrumentationEngine.so
-|   |   |       |   |           
 |   |   |       |   +---linux-x64
 |   |   |       |   |   \---native
-|   |   |       |   |           Cov_x64.config
-|   |   |       |   |           libCoverageInstrumentationMethod.so
-|   |   |       |   |           libInstrumentationEngine.so
-|   |   |       |   |           
 |   |   |       |   +---osx-x64
 |   |   |       |   |   \---native
-|   |   |       |   |           Cov_x64.config
-|   |   |       |   |           libCoverageInstrumentationMethod.dylib
-|   |   |       |   |           libInstrumentationEngine.dylib
-|   |   |       |   |           
 |   |   |       |   +---win-arm64
 |   |   |       |   |   \---native
-|   |   |       |   |           CodeCoverageMessages.dll
-|   |   |       |   |           covrun32.dll
-|   |   |       |   |           covrun64.dll
-|   |   |       |   |           covrunarm64.dll
-|   |   |       |   |           Cov_arm64.config
-|   |   |       |   |           Cov_x64.config
-|   |   |       |   |           Cov_x86.config
-|   |   |       |   |           MicrosoftInstrumentationEngine_arm64.dll
-|   |   |       |   |           MicrosoftInstrumentationEngine_x64.dll
-|   |   |       |   |           MicrosoftInstrumentationEngine_x86.dll
-|   |   |       |   |           msdia140.dll
-|   |   |       |   |           
 |   |   |       |   +---win-x64
 |   |   |       |   |   \---native
-|   |   |       |   |           CodeCoverageMessages.dll
-|   |   |       |   |           covrun32.dll
-|   |   |       |   |           covrun64.dll
-|   |   |       |   |           covrunarm64.dll
-|   |   |       |   |           Cov_arm64.config
-|   |   |       |   |           Cov_x64.config
-|   |   |       |   |           Cov_x86.config
-|   |   |       |   |           MicrosoftInstrumentationEngine_arm64.dll
-|   |   |       |   |           MicrosoftInstrumentationEngine_x64.dll
-|   |   |       |   |           MicrosoftInstrumentationEngine_x86.dll
-|   |   |       |   |           msdia140.dll
-|   |   |       |   |           
 |   |   |       |   \---win-x86
 |   |   |       |       \---native
-|   |   |       |               CodeCoverageMessages.dll
-|   |   |       |               covrun32.dll
-|   |   |       |               covrun64.dll
-|   |   |       |               covrunarm64.dll
-|   |   |       |               Cov_arm64.config
-|   |   |       |               Cov_x64.config
-|   |   |       |               Cov_x86.config
-|   |   |       |               MicrosoftInstrumentationEngine_arm64.dll
-|   |   |       |               MicrosoftInstrumentationEngine_x64.dll
-|   |   |       |               MicrosoftInstrumentationEngine_x86.dll
-|   |   |       |               msdia140.dll
-|   |   |       |               
 |   |   |       +---sv
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       
 |   |   |       +---TestData
-|   |   |       |       appsettings.json
-|   |   |       |       
 |   |   |       +---tr
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       +---zh-Hans
-|   |   |       |       Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |       |       Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |       |       Microsoft.Testing.Platform.resources.dll
-|   |   |       |       
 |   |   |       \---zh-Hant
-|   |   |               Microsoft.Testing.Extensions.CodeCoverage.resources.dll
-|   |   |               Microsoft.Testing.Extensions.MSBuild.resources.dll
-|   |   |               Microsoft.Testing.Extensions.Telemetry.resources.dll
-|   |   |               Microsoft.Testing.Extensions.TrxReport.resources.dll
-|   |   |               Microsoft.Testing.Platform.resources.dll
-|   |   |               
 |   |   \---Release
 |   |       \---net10.0
 |   +---Models
@@ -3447,30 +2197,12 @@ D:\DEV\PERSONAL\COLLABSKUS
 |   |   |   \---net11.0
 |   |   |       |   .NETCoreApp,Version=v11.0.AssemblyAttributes.cs
 |   |   |       |   apphost.exe
-|   |   |       |   CollabsK.C140B4C8.Up2Date
-|   |   |       |   CollabsKus.Tests.AssemblyInfo.cs
-|   |   |       |   CollabsKus.Tests.AssemblyInfoInputs.cache
 |   |   |       |   CollabsKus.Tests.assets.cache
-|   |   |       |   CollabsKus.Tests.csproj.AssemblyReference.cache
-|   |   |       |   CollabsKus.Tests.csproj.CoreCompileInputs.cache
 |   |   |       |   CollabsKus.Tests.csproj.FileListAbsolute.txt
-|   |   |       |   CollabsKus.Tests.dll
-|   |   |       |   CollabsKus.Tests.genautoregisteredextensionsinputcache.cache
-|   |   |       |   CollabsKus.Tests.GeneratedMSBuildEditorConfig.editorconfig
-|   |   |       |   CollabsKus.Tests.genruntimeconfig.cache
-|   |   |       |   CollabsKus.Tests.gentestingplatformentrypointinputcache.cache
 |   |   |       |   CollabsKus.Tests.GlobalUsings.g.cs
-|   |   |       |   CollabsKus.Tests.pdb
-|   |   |       |   CollabsKus.Tests.sourcelink.json
-|   |   |       |   MicrosoftTestingPlatformEntryPoint.cs
-|   |   |       |   SelfRegisteredExtensions.cs
 |   |   |       |   
 |   |   |       +---ref
-|   |   |       |       CollabsKus.Tests.dll
-|   |   |       |       
 |   |   |       \---refint
-|   |   |               CollabsKus.Tests.dll
-|   |   |               
 |   |   \---Release
 |   |       \---net10.0
 |   |           |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
@@ -19137,7 +17869,7 @@ MODIFIED: 11/03/2026 15:49:29
 
 
 ===============================================================================
-EXPORT COMPLETED: 11/20/2026 23:22:19
+EXPORT COMPLETED: 11/20/2026 23:25:01
 Total Files Exported: 115
 Output File: .\docs\llm\dump.txt
 ===============================================================================
